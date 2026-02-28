@@ -6,10 +6,10 @@
   <title>MORESCUE</title>
   <style>
     /* ==========================================================================
-       MORESCUE Dynamic Theme - Styles & Animations
+       MORESCUE Dynamic Theme - Refined & Elegant Design
        ========================================================================== */
     html { scroll-behavior: smooth; }
-    body { margin: 0; padding: 0; }
+    body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     .mo-section { scroll-margin-top: 80px; }
 
     /* スマホ・PCの改行制御クラス */
@@ -17,20 +17,26 @@
     @media (max-width: 768px) { .sp-only { display: block !important; } .pc-only { display: none !important; } }
 
     :root {
-      --mo-navy: #1a2b4c;
-      --mo-navy-dark: #0f1a30;
-      --mo-orange: #ff5100;
-      --mo-blue: #0056b3;
-      --mo-light: #f4f7fb;
+      --mo-navy: #162440;
+      --mo-navy-dark: #0d1526;
+      --mo-orange: #f25511;
+      --mo-blue: #235fac;
+      --mo-light: #f8f9fa;
       --mo-white: #ffffff;
-      --mo-text: #333333;
+      --mo-text: #4a4a4a;
       --mo-grad-navy: linear-gradient(135deg, var(--mo-navy-dark) 0%, var(--mo-navy) 100%);
-      --mo-grad-orange: linear-gradient(135deg, #ff8c00 0%, var(--mo-orange) 100%);
+      --mo-grad-orange: linear-gradient(135deg, #f77a45 0%, var(--mo-orange) 100%);
+      /* 繊細なシャドウ定義 */
+      --mo-shadow-soft: 0 15px 40px rgba(0, 0, 0, 0.04);
+      --mo-shadow-hover: 0 20px 50px rgba(0, 0, 0, 0.08);
     }
     
-    .morescue-dynamic-theme { font-family: 'Helvetica Neue', 'Noto Sans JP', sans-serif; color: var(--mo-text); background: var(--mo-white); line-height: 1.6; overflow-x: hidden; padding-bottom: 0; }
-    .mo-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; position: relative; }
-    .mo-section { padding: 120px 0; position: relative; overflow: hidden; }
+    .morescue-dynamic-theme { 
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', sans-serif; 
+      color: var(--mo-text); background: var(--mo-white); line-height: 1.8; overflow-x: hidden; padding-bottom: 0; letter-spacing: 0.03em;
+    }
+    .mo-container { max-width: 1080px; margin: 0 auto; padding: 0 20px; position: relative; }
+    .mo-section { padding: 140px 0; position: relative; overflow: hidden; }
     .text-center { text-align: center; } 
     .text-white { color: var(--mo-white) !important; }
     .responsive-img { width: 100%; height: auto; display: block; }
@@ -38,418 +44,413 @@
 
     /* 背景・テクスチャ */
     .mo-bg-navy { background-color: var(--mo-navy); }
-    .mo-bg-navy-texture { background: var(--mo-navy-dark) url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIiBvcGFjaXR5PSIwLjA1Ij48cGF0aCBkPSJNMjAgMjBMMCAwSDQwTDIwIDIwWk0yMCAyMEw0MCA0MEgwTDIwIDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg=='); color: var(--mo-white); }
-    .mo-bg-light-texture { background: var(--mo-light) url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIiBvcGFjaXR5PSIwLjA1Ij48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIxIiBmaWxsPSIjMWEyYjRjIi8+PC9zdmc+'); }
+    .mo-bg-navy-texture { background: var(--mo-navy-dark) url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIiBvcGFjaXR5PSIwLjAyIj48cGF0aCBkPSJNMjAgMjBMMCAwSDQwTDIwIDIwWk0yMCAyMEw0MCA0MEgwTDIwIDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg=='); color: var(--mo-white); }
+    .mo-bg-light-texture { background: var(--mo-light); }
     .mo-bg-navy-gradient { background: var(--mo-grad-navy); color: var(--mo-white); }
 
     /* タイポグラフィ & ハイライト */
-    .mo-section-title { font-size: 2.8em; font-weight: 900; margin-bottom: 50px; line-height: 1.2; color: var(--mo-navy); letter-spacing: -1px; }
+    .mo-section-title { font-size: 2.6em; font-weight: 800; margin-bottom: 50px; line-height: 1.3; color: var(--mo-navy); letter-spacing: 0.05em; }
     .mo-text-blue { color: var(--mo-blue); font-weight: bold; } 
     
-    .mo-highlight-orange, .mo-highlight-glow { position: relative; display: inline-block; padding: 2px 5px; z-index: 1; font-weight: bold; }
-    .mo-highlight-orange::after { content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 30%; z-index: -1; opacity: 0.8; background: var(--mo-orange); }
+    .mo-highlight-orange, .mo-highlight-glow { position: relative; display: inline-block; padding: 0 5px; z-index: 1; font-weight: bold; }
+    .mo-highlight-orange::after { content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 30%; z-index: -1; opacity: 0.5; background: var(--mo-orange); border-radius: 2px; }
     .mo-highlight-glow { color: var(--mo-orange); }
 
     /* アニメーション定義 */
     .animate-impact { display: inline-block; opacity: 0; }
-    .fade-in-trigger.is-visible .animate-impact { animation: bounce-in 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards; }
-    @keyframes bounce-in { 0% { opacity: 0; transform: scale(3); } 50% { opacity: 1; transform: scale(0.9); } 70% { transform: scale(1.1); } 100% { opacity: 1; transform: scale(1); } }
+    .fade-in-trigger.is-visible .animate-impact { animation: bounce-in 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    @keyframes bounce-in { 0% { opacity: 0; transform: scale(1.5); } 100% { opacity: 1; transform: scale(1); } }
 
-    .animate-slide-up, .animate-fade-in-up { opacity: 0; transform: translateY(50px); }
-    .fade-in-trigger.is-visible .animate-slide-up, .fade-in-trigger.is-visible .animate-fade-in-up { transition: all 0.8s ease-out; opacity: 1; transform: translateY(0); }
+    .animate-slide-up, .animate-fade-in-up { opacity: 0; transform: translateY(40px); }
+    .fade-in-trigger.is-visible .animate-slide-up, .fade-in-trigger.is-visible .animate-fade-in-up { transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); opacity: 1; transform: translateY(0); }
     
-    .animate-slide-right { opacity: 0; transform: translateX(-50px); }
-    .fade-in-trigger.is-visible .animate-slide-right { transition: all 0.8s ease-out; opacity: 1; transform: translateX(0); }
-    .animate-slide-left { opacity: 0; transform: translateX(50px); }
-    .fade-in-trigger.is-visible .animate-slide-left { transition: all 0.8s ease-out; opacity: 1; transform: translateX(0); }
+    .animate-slide-right { opacity: 0; transform: translateX(-40px); }
+    .fade-in-trigger.is-visible .animate-slide-right { transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); opacity: 1; transform: translateX(0); }
     
-    .animate-scale-in { opacity: 0; transform: scale(0.8); }
-    .fade-in-trigger.is-visible .animate-scale-in { transition: all 0.8s ease-out; opacity: 1; transform: scale(1); }
-
-    .animate-zoom-in { opacity: 0; transform: scale(0.5); }
-    .fade-in-trigger.is-visible .animate-zoom-in { transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 1; transform: scale(1); }
+    .animate-zoom-in { opacity: 0; transform: scale(0.9); }
+    .fade-in-trigger.is-visible .animate-zoom-in { transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1); opacity: 1; transform: scale(1); }
     
-    .animate-zoom-in-slow { transform: scale(1.2); transition: transform 10s ease-out; }
+    .animate-zoom-in-slow { transform: scale(1.1); transition: transform 12s ease-out; }
     .fade-in-trigger.is-visible .animate-zoom-in-slow { transform: scale(1); }
 
-    .animate-pulse-btn { animation: pulse-btn 2s infinite; } 
-    @keyframes pulse-btn { 0% { transform: scale(1); } 50% { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255,81,0,0.5); } 100% { transform: scale(1); } }
+    .animate-float { animation: float-img 5s ease-in-out infinite; }
+    @keyframes float-img { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
 
-    .animate-float { animation: float-img 4s ease-in-out infinite; }
-    @keyframes float-img { 0% { transform: translateY(0px); } 50% { transform: translateY(-30px); } 100% { transform: translateY(0px); } }
-
-    .animate-poyon { animation: poyon 2.5s infinite; transform-origin: bottom center; }
+    .animate-poyon { animation: poyon 3s infinite; transform-origin: bottom center; }
     @keyframes poyon {
       0%, 100% { transform: scale(1, 1) translateY(0); }
-      10% { transform: scale(1.05, 0.95) translateY(0); }
-      25% { transform: scale(0.95, 1.05) translateY(-10px); box-shadow: 0 15px 25px rgba(255,81,0,0.3); }
-      40% { transform: scale(1.02, 0.98) translateY(0); box-shadow: 0 5px 15px rgba(255,81,0,0.5); }
-      55% { transform: scale(0.98, 1.02) translateY(-4px); }
+      10% { transform: scale(1.02, 0.98) translateY(0); }
+      25% { transform: scale(0.98, 1.02) translateY(-8px); box-shadow: 0 15px 30px rgba(242, 85, 17, 0.2); }
+      40% { transform: scale(1.01, 0.99) translateY(0); box-shadow: 0 5px 15px rgba(242, 85, 17, 0.3); }
+      55% { transform: scale(0.99, 1.01) translateY(-3px); }
       70% { transform: scale(1, 1) translateY(0); }
     }
 
     /* ヘッダー＆マーキー */
-    .mo-sticky-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    .mo-header { position: relative; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1001; }
+    .mo-sticky-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 1px 15px rgba(0,0,0,0.05); }
+    .mo-header { position: relative; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); z-index: 1001; border-bottom: 1px solid rgba(0,0,0,0.03); }
     .mo-header-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 15px 20px; }
     
-    .mo-logo img { height: 35px; width: auto; display: block; transition: opacity 0.3s; }
+    .mo-logo img { height: 32px; width: auto; display: block; transition: opacity 0.3s; }
     .mo-logo:hover img { opacity: 0.7; }
     
     .mo-nav { display: flex; align-items: center; }
-    .mo-nav a { margin-left: 25px; text-decoration: none; color: var(--mo-navy); font-weight: bold; font-size: 0.9em; transition: all 0.3s; }
+    .mo-nav a { margin-left: 30px; text-decoration: none; color: var(--mo-navy); font-weight: 600; font-size: 0.9em; transition: color 0.3s; letter-spacing: 0.05em; }
     .mo-nav a:hover { color: var(--mo-orange); }
-    .mo-nav-btn { background: var(--mo-grad-orange); color: #fff !important; padding: 10px 20px; border-radius: 30px; box-shadow: 0 4px 15px rgba(255,81,0,0.3); }
+    .mo-nav-btn { background: var(--mo-grad-orange); color: #fff !important; padding: 10px 24px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 15px rgba(242, 85, 17, 0.3); transition: transform 0.3s; }
+    .mo-nav-btn:hover { transform: translateY(-2px); }
     .mo-menu-toggle { display: none; }
 
     .mo-bg-orange-marquee { background-color: var(--mo-orange); color: #fff; position: relative; z-index: 1000; }
-    .marquee-container { padding: 10px 0; overflow: hidden; white-space: nowrap; }
-    .marquee-content { display: inline-block; animation: marquee 35s linear infinite; font-weight: bold; font-size: 1.1em; letter-spacing: 2px; }
+    .marquee-container { padding: 8px 0; overflow: hidden; white-space: nowrap; }
+    .marquee-content { display: inline-block; animation: marquee 40s linear infinite; font-weight: 600; font-size: 1rem; letter-spacing: 0.1em; }
     .marquee-content span { padding-right: 40px; }
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ヒーローセクション */
     .mo-hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; padding-bottom: 50px; background-color: var(--mo-light); }
     .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-    .mo-hero-bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center; animation: hero-pan 20s ease-in-out infinite alternate; }
+    .mo-hero-bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center; animation: hero-pan 25s ease-in-out infinite alternate; }
     .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; z-index: 2; pointer-events: none; }
     
     .mo-hero-container { position: relative; z-index: 3; display: flex; justify-content: flex-start; width: 100%; max-width: 1100px; margin: 0 auto; }
     
     .mo-hero-text { 
       background: rgba(255, 255, 255, 0.7); 
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 50px 30px; 
-      border-radius: 20px; 
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.6); 
-      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      padding: 50px 35px; 
+      border-radius: 24px; 
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(255,255,255,0.7); 
+      border: 1px solid rgba(255,255,255,0.4);
       text-align: center; 
-      max-width: 360px; 
-      width: 100%; 
-      margin-left: 20px; 
+      max-width: 380px; width: 100%; margin-left: 20px; 
     }
     
-    .mo-hero-catch { font-size: 2em; font-weight: 900; line-height: 1.3; color: var(--mo-navy); margin-bottom: 15px; letter-spacing: -1px; }
+    .mo-hero-catch { font-size: 2.2em; font-weight: 800; line-height: 1.35; color: var(--mo-navy); margin-bottom: 15px; letter-spacing: -0.02em; }
     .mo-hero-catch span { display: inline-block; }
-    .mo-hero-subcatch { font-size: 1.1em; font-weight: bold; color: var(--mo-orange); margin-bottom: 20px; }
-    .mo-hero-desc { font-size: 0.95em; margin-bottom: 30px; font-weight: 500; line-height: 1.6; }
+    .mo-hero-subcatch { font-size: 1.15em; font-weight: 700; color: var(--mo-orange); margin-bottom: 25px; }
+    .mo-hero-desc { font-size: 0.95em; margin-bottom: 35px; font-weight: 500; line-height: 1.7; color: #555; }
     
     .mo-hero-badge { 
-      display: inline-block; padding: 12px 30px; font-size: 1.1em; font-weight: 900; 
+      display: inline-block; padding: 14px 35px; font-size: 1.15em; font-weight: 800; 
       border-radius: 50px; line-height: 1.4; text-align: center;
-      background: var(--mo-grad-orange); color: #fff; box-shadow: 0 10px 30px rgba(255,81,0,0.4); 
+      background: var(--mo-grad-orange); color: #fff; box-shadow: 0 10px 25px rgba(242, 85, 17, 0.3); 
     }
 
-    @keyframes hero-pan { 
-      0% { transform: scale(1); } 
-      100% { transform: scale(1.1); } 
-    }
+    @keyframes hero-pan { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
 
     /* 【3】 お悩み共感セクション */
-    #about { 
-      position: relative; z-index: 5;
-      background: var(--mo-navy-dark) url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIiBvcGFjaXR5PSIwLjA1Ij48cGF0aCBkPSJNMjAgMjBMMCAwSDQwTDIwIDIwWk0yMCAyMEw0MCA0MEgwTDIwIDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg=='); 
-      padding: 120px 0; 
-      margin-top: 0;
+    #about { position: relative; z-index: 5; padding: 140px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .overlap-grid { display: flex; gap: 30px; margin-top: 70px; position: relative; z-index: 10; }
+    
+    .mo-card { 
+      flex: 1; background: var(--mo-navy); border: 1px solid rgba(255,255,255,0.05); 
+      padding: 50px 35px; border-radius: 24px; position: relative; overflow: hidden; 
+      transition: all 0.4s ease; display: flex; flex-direction: column; 
     }
-    .overlap-grid { display: flex; gap: 30px; margin-top: 60px; position: relative; z-index: 10; }
+    .mo-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.15); }
+    .mo-card-number { font-size: 5em; font-weight: 800; color: rgba(255,255,255,0.05); position: absolute; top: -15px; left: 20px; line-height: 1; }
     
-    .mo-card { flex: 1; background: var(--mo-navy); border: 2px solid rgba(255,255,255,0.1); padding: 50px 30px; border-radius: 20px; position: relative; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; }
-    .mo-card:hover { transform: translateY(-15px); border-color: var(--mo-orange); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-    .mo-card-number { font-size: 5em; font-weight: 900; color: rgba(255,255,255,0.1); position: absolute; top: -20px; left: 20px; line-height: 1; }
-    
-    .mo-card h3 { font-size: 1.5em; margin-bottom: 15px; color: #fff; position: relative; z-index: 1; }
-    .mo-card p { position: relative; z-index: 1; color: #fff; flex-grow: 1; }
+    .mo-card h3 { font-size: 1.4em; margin-bottom: 15px; color: #fff; position: relative; z-index: 1; font-weight: 700; letter-spacing: 0.05em; }
+    .mo-card p { position: relative; z-index: 1; color: rgba(255,255,255,0.8); flex-grow: 1; font-weight: 400; }
 
     /* 【4】 解決策・特許構造セクション */
-    .mo-structure-section { 
-      position: relative; z-index: 4; 
-      background: #fff;
-      padding: 120px 0;
-      margin-top: 0; 
-    }
-    .mo-structure-diagram-wrap { position: relative; max-width: 900px; margin: 60px auto 0; padding: 50px 0; }
+    .mo-structure-section { position: relative; z-index: 4; background: #fff; padding: 140px 0; }
+    .mo-structure-diagram-wrap { position: relative; max-width: 900px; margin: 80px auto 0; padding: 50px 0; }
     .mo-center-pants { position: relative; z-index: 2; max-width: 500px; margin: 0 auto; }
     
-    .mo-pants-img { border: none; background: transparent; filter: drop-shadow(0 30px 50px rgba(26,43,76,0.2)); }
+    .mo-pants-img { border: none; background: transparent; filter: drop-shadow(0 20px 40px rgba(22, 36, 64, 0.15)); }
     
-    .mo-pulse-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; border: 2px solid var(--mo-blue); border-radius: 50%; opacity: 0; z-index: -1; }
-    .fade-in-trigger.is-visible .mo-pulse-circle { animation: pulse-ring 3s infinite; }
-    @keyframes pulse-ring { 0% { width: 300px; height: 300px; opacity: 0.8; } 100% { width: 600px; height: 600px; opacity: 0; } }
+    .mo-pulse-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; border: 1px solid rgba(35, 95, 172, 0.3); border-radius: 50%; opacity: 0; z-index: -1; }
+    .fade-in-trigger.is-visible .mo-pulse-circle { animation: pulse-ring 4s infinite cubic-bezier(0.25, 1, 0.5, 1); }
+    @keyframes pulse-ring { 0% { width: 300px; height: 300px; opacity: 0.5; } 100% { width: 600px; height: 600px; opacity: 0; } }
     
     .mo-pop-item { position: absolute; z-index: 3; width: 280px; opacity: 0; }
     .pop-left-top { top: 0; left: -80px; } .pop-right-top { top: 0; right: -80px; } .pop-bottom { bottom: -80px; left: 50%; transform: translateX(-50%); width: 320px; }
-    .pop-line { height: 2px; background: var(--mo-orange); width: 80px; position: absolute; top: 50%; z-index: -1; }
+    .pop-line { height: 1px; background: var(--mo-orange); width: 80px; position: absolute; top: 50%; z-index: -1; }
     .pop-left-top .pop-line { right: -60px; } .pop-right-top .pop-line { left: -60px; }
-    .pop-line-vertical { width: 2px; height: 60px; background: var(--mo-orange); margin: 0 auto 10px; }
-    .pop-content { background: var(--mo-navy); padding: 25px 20px; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); border: 3px solid var(--mo-orange); text-align: center; }
-    .pop-content h3 { color: var(--mo-orange); font-size: 1.2em; margin-bottom: 10px; font-weight: 900; }
-    .pop-content p { font-size: 0.95em; margin: 0; color: #fff; line-height: 1.5; }
+    .pop-line-vertical { width: 1px; height: 60px; background: var(--mo-orange); margin: 0 auto 10px; }
     
-    .fade-in-trigger.is-visible .animate-pop-in { transition: all 0.8s cubic-bezier(0.25, 1.5, 0.5, 1); opacity: 1; }
+    .pop-content { background: var(--mo-white); padding: 30px 25px; border-radius: 20px; box-shadow: var(--mo-shadow-soft); border: 1px solid rgba(0,0,0,0.03); text-align: center; }
+    .pop-content h3 { color: var(--mo-orange); font-size: 1.15em; margin-bottom: 10px; font-weight: 800; letter-spacing: 0.05em; }
+    .pop-content p { font-size: 0.9em; margin: 0; color: var(--mo-text); line-height: 1.6; }
+    
+    .fade-in-trigger.is-visible .animate-pop-in { transition: all 1s cubic-bezier(0.25, 1.5, 0.5, 1); opacity: 1; }
     .fade-in-trigger.is-visible .pop-left-top { transform: translateX(0); } .fade-in-trigger.is-visible .pop-right-top { transform: translateX(0); } .fade-in-trigger.is-visible .pop-bottom { transform: translateX(-50%) translateY(0); }
 
     /* 【5】 技術・機能深掘り */
-    #features { 
-      padding: 120px 0;
-      background: var(--mo-light) url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIiBvcGFjaXR5PSIwLjA1Ij48cGF0aCBkPSJNMjAgMjBMMCAwSDQwTDIwIDIwWk0yMCAyMEw0MCA0MEgwTDIwIDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg=='); 
+    #features { padding: 140px 0; }
+    .mo-feature-cards { display: flex; gap: 30px; margin-top: 70px; }
+    .mo-feature-card { flex: 1; background: #fff; padding: 50px 35px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); text-align: center; position: relative; overflow: hidden; transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.02); }
+    .mo-feature-card:hover { transform: translateY(-10px); box-shadow: var(--mo-shadow-hover); }
+    
+    /* 修正：画像ではなく青丸アイコンに */
+    .feature-icon-box { 
+      width: 90px; height: 90px; background-color: var(--mo-blue); border-radius: 50%; 
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; 
+      box-shadow: 0 10px 25px rgba(35, 95, 172, 0.2); transition: transform 0.4s; 
     }
-    .mo-feature-cards { display: flex; gap: 30px; margin-top: 60px; }
-    .mo-feature-card { flex: 1; background: #fff; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; position: relative; overflow: hidden; transition: transform 0.3s; }
-    .mo-feature-card:hover { transform: translateY(-15px); }
-    .feature-icon-box { width: 100px; height: 100px; background: var(--mo-navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; box-shadow: 0 10px 20px rgba(26,43,76,0.2); transition: transform 0.3s; }
-    .mo-feature-card:hover .feature-icon-box { transform: scale(1.1) rotate(5deg); }
-    .feature-icon-box img { width: 50px; }
-    .mo-feature-title { font-size: 1.3em; color: var(--mo-navy); margin-bottom: 15px; font-weight: 900; line-height: 1.4; }
-    .mo-feature-desc { font-size: 0.95em; line-height: 1.6; }
+    .mo-feature-card:hover .feature-icon-box { transform: scale(1.05); }
+    
+    .mo-feature-title { font-size: 1.3em; color: var(--mo-navy); margin-bottom: 15px; font-weight: 800; line-height: 1.4; letter-spacing: 0.02em; }
+    .mo-feature-desc { font-size: 0.95em; line-height: 1.7; color: #555; }
 
     /* 専門家・レビュー */
-    .mo-expert-box { display: flex; align-items: stretch; gap: 50px; background: #fff; padding: 50px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
-    .mo-expert-img-wrap { flex: 0 0 300px; position: relative; overflow: hidden; border-radius: 20px; }
+    .mo-expert-box { display: flex; align-items: stretch; gap: 60px; background: #fff; padding: 60px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.02); }
+    .mo-expert-img-wrap { flex: 0 0 320px; position: relative; overflow: hidden; border-radius: 20px; }
     .mo-expert-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .mo-expert-deco { position: absolute; top: 10px; left: 10px; width: calc(100% - 20px); height: calc(100% - 20px); border: 2px solid rgba(255,255,255,0.8); border-radius: 15px; z-index: 1; }
     .mo-expert-text { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-    .mo-expert-title { font-size: 1.8em; color: var(--mo-navy); font-weight: 900; margin-bottom: 20px; line-height: 1.3; }
-    .mo-expert-name { font-weight: bold; color: var(--mo-navy); margin-top: 20px; text-align: right; }
+    .mo-expert-title { font-size: 1.7em; color: var(--mo-navy); font-weight: 800; margin-bottom: 25px; line-height: 1.4; }
+    .mo-expert-text p { color: #555; font-size: 1.05em; }
+    /* 修正：テキスト変更 */
+    .mo-expert-name { font-weight: 700; color: var(--mo-navy); margin-top: 25px; text-align: right; font-size: 0.95em; }
     
-    .mo-review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
-    .mo-review-item { background: var(--mo-navy); color: #fff; padding: 30px; border-radius: 15px; position: relative; transition: transform 0.3s; }
-    .mo-review-item:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
-    .mo-review-item::after { content: '”'; position: absolute; top: -20px; right: 20px; font-size: 5em; color: rgba(255,255,255,0.1); font-family: serif; }
-    .mo-stars { color: var(--mo-orange); letter-spacing: 2px; margin-bottom: 0; }
+    .mo-review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+    .mo-review-item { background: var(--mo-navy); color: #fff; padding: 40px 30px; border-radius: 20px; position: relative; transition: all 0.4s ease; }
+    .mo-review-item:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .mo-review-item::after { content: '”'; position: absolute; top: -10px; right: 20px; font-size: 5em; color: rgba(255,255,255,0.05); font-family: serif; line-height: 1; }
+    .mo-stars { color: var(--mo-orange); letter-spacing: 3px; margin-bottom: 0; font-size: 1.1em; }
     
-    .mo-review-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-    .mo-review-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; background: #fff; border: 2px solid var(--mo-orange); }
+    .mo-review-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .mo-review-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
 
     /* 【9】 スペック・サイズ（タブ切り替え） */
-    .mo-spec-tabs { display: flex; gap: 20px; justify-content: center; margin-bottom: 40px; }
+    #size { padding: 140px 0; }
+    .mo-spec-tabs { display: flex; gap: 20px; justify-content: center; margin: 0 auto 50px; max-width: 600px; }
     .mo-spec-tab { 
-      flex: 1; max-width: 220px; text-align: center; cursor: pointer; 
-      opacity: 0.6; transition: all 0.3s; border: 2px solid transparent; 
-      border-radius: 15px; padding: 15px; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+      flex: 1; text-align: center; cursor: pointer; 
+      opacity: 0.5; transition: all 0.4s ease; border: 1px solid transparent; 
+      border-radius: 20px; padding: 20px 15px; background: transparent; 
     }
-    .mo-spec-tab.is-active { opacity: 1; border-color: var(--mo-orange); box-shadow: 0 10px 25px rgba(255,81,0,0.15); transform: translateY(-5px); }
+    .mo-spec-tab.is-active { opacity: 1; background: #fff; box-shadow: var(--mo-shadow-soft); border-color: rgba(0,0,0,0.03); transform: translateY(-5px); }
     
-    .mo-spec-tab img { 
-      width: 100%; height: auto; margin-bottom: 10px; 
-      background: transparent; border: none;
-      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15)); 
-    }
-    .mo-spec-tab span { font-weight: bold; color: var(--mo-navy); display: block; font-size: 1.1em; }
+    .mo-spec-tab img { width: 100%; max-width: 150px; height: auto; margin: 0 auto 15px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
+    .mo-spec-tab span { font-weight: 700; color: var(--mo-navy); display: block; font-size: 1.1em; }
     
-    .mo-spec-content { display: none; animation: fadeIn 0.5s; background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .mo-spec-content { display: none; animation: fadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1); background: #fff; padding: 50px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); border: 1px solid rgba(0,0,0,0.02); }
     .mo-spec-content.is-active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
     .mo-table { width: 100%; border-collapse: collapse; overflow: hidden; table-layout: fixed; }
-    .mo-table th { background: var(--mo-navy); color: #fff; padding: 15px; border-radius: 5px 5px 0 0; width: 50%; } 
-    .mo-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: bold; }
+    .mo-table th { background: var(--mo-navy); color: #fff; padding: 18px 15px; border-radius: 8px 8px 0 0; width: 50%; font-weight: 600; letter-spacing: 0.05em; } 
+    .mo-table td { padding: 18px 15px; border-bottom: 1px solid #f0f0f0; text-align: center; font-weight: 500; color: #444; }
     
-    .mo-materials { margin-top: 30px; font-size: 1.1em; background: var(--mo-light); padding: 20px; border-radius: 10px; }
+    .mo-materials { margin-top: 40px; font-size: 1.05em; background: var(--mo-light); padding: 30px; border-radius: 16px; color: #555; }
+    .mo-materials p { margin-bottom: 8px; }
+    .mo-materials p:last-child { margin-bottom: 0; }
+    .mo-materials strong { color: var(--mo-navy); display: inline-block; width: 140px; }
 
     /* 【10】 FAQ */
-    .mo-faq-item { margin-bottom: 15px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-    .mo-faq-item summary { padding: 20px; font-weight: bold; background: #fff; cursor: pointer; position: relative; color: var(--mo-navy); transition: all 0.3s; }
+    .mo-faq-item { margin-bottom: 15px; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); }
+    .mo-faq-item summary { padding: 25px 30px; font-weight: 700; background: #fff; cursor: pointer; position: relative; color: var(--mo-navy); transition: all 0.3s; font-size: 1.05em; }
     .mo-faq-item summary:hover { color: var(--mo-orange); }
-    .mo-faq-item summary::after { content: '+'; position: absolute; right: 20px; font-size: 1.5em; color: var(--mo-orange); }
-    .mo-faq-item[open] summary::after { content: '-'; color: var(--mo-navy); }
-    .mo-faq-answer { padding: 20px; background: var(--mo-light); color: var(--mo-text); border-top: 1px solid #eee; }
+    .mo-faq-item summary::after { content: '+'; position: absolute; right: 30px; font-size: 1.5em; color: var(--mo-orange); font-weight: 400; transition: transform 0.3s; }
+    .mo-faq-item[open] summary::after { transform: rotate(45deg); }
+    .mo-faq-answer { padding: 25px 30px; background: #fafafa; color: #555; border-top: 1px solid #f0f0f0; line-height: 1.7; }
 
-    /* 購入セクション */
-    .mo-buy-box { background: var(--mo-white); padding: 60px; border-radius: 30px; max-width: 900px; margin: 50px auto 0; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
-    .mo-buy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
-    .mo-buy-item { background: var(--mo-light); padding: 20px; border-radius: 15px; text-align: center; }
-    .mo-buy-item img { width: 100%; max-width: 140px; margin: 0 auto 15px; display: block; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
-    .mo-buy-item h4 { color: var(--mo-navy); font-size: 1.1em; margin-bottom: 15px; font-weight: bold; }
-    .mo-color-btns { display: flex; flex-direction: column; gap: 10px; }
-    .mo-color-btn { display: block; padding: 12px; border-radius: 8px; color: #fff !important; text-decoration: none; font-weight: bold; font-size: 0.9em; transition: opacity 0.3s; }
-    .mo-color-btn:hover { opacity: 0.8; }
-    .btn-darkgray { background-color: #555555; }
-    .btn-darkblue { background-color: #1a2b4c; }
+    /* 修正：購入セクション（カード高さ統一・レイアウト洗練化） */
+    .mo-buy-box { background: var(--mo-white); padding: 70px; border-radius: 32px; max-width: 900px; margin: 50px auto 0; box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
+    
+    /* 修正：2列のグリッドにして中央寄せ */
+    .mo-buy-grid { display: grid; grid-template-columns: repeat(2, 320px); justify-content: center; gap: 40px; margin-bottom: 40px; }
+    
+    /* 修正：カードをFlexにし、高さを揃える */
+    .mo-buy-item { background: var(--mo-light); padding: 40px 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); transition: transform 0.3s; }
+    .mo-buy-item:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
+    .mo-buy-item img { height: 160px; width: auto; object-fit: contain; margin: 0 auto 25px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); }
+    .mo-buy-item h4 { color: var(--mo-navy); font-size: 1.2em; margin-bottom: 25px; font-weight: 800; letter-spacing: 0.05em; }
+    
+    /* 修正：ボタン群を一番下に押し下げる */
+    .mo-color-btns { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
+    .mo-color-btn { display: block; padding: 14px; border-radius: 10px; color: #fff !important; text-decoration: none; font-weight: bold; font-size: 0.95em; transition: all 0.3s; letter-spacing: 0.05em; }
+    .mo-color-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+    
+    /* 修正：ボタンの色をブラックとブルーに変更 */
+    .btn-black { background-color: #222222; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    .btn-blue { background-color: #235fac; box-shadow: 0 4px 15px rgba(35, 95, 172, 0.3); }
 
     /* フッター */
-    .mo-footer { background: var(--mo-navy-dark); color: rgba(255,255,255,0.8); padding: 60px 0 160px 0; font-size: 0.95em; }
-    .mo-footer-logo img { height: 40px; margin: 0 auto 15px; display: block; filter: brightness(0) invert(1); }
-    .mo-footer-company { margin-bottom: 15px; }
-    .mo-footer-info { margin-bottom: 20px; }
-    .mo-footer-link { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s; }
+    .mo-footer { background: var(--mo-navy-dark); color: rgba(255,255,255,0.7); padding: 80px 0 160px 0; font-size: 0.9em; }
+    .mo-footer-logo img { height: 35px; margin: 0 auto 20px; display: block; filter: brightness(0) invert(1); opacity: 0.9; }
+    .mo-footer-company { margin-bottom: 20px; }
+    .mo-footer-info { margin-bottom: 30px; }
+    .mo-footer-link { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; letter-spacing: 0.05em; }
     .mo-footer-link:hover { color: #fff; }
-    .mo-footer-separator { margin: 0 10px; color: rgba(255,255,255,0.5); }
-    .mo-copyright { color: rgba(255,255,255,0.6); font-size: 0.85em; }
+    .mo-footer-separator { margin: 0 15px; color: rgba(255,255,255,0.3); }
+    .mo-copyright { color: rgba(255,255,255,0.4); font-size: 0.85em; letter-spacing: 0.05em; }
 
     /* 追従カートボタン */
+    /* 修正：メニュー展開時は非表示にする処理 */
     .fixed-bottom-wrapper {
       position: fixed; bottom: 30px; left: 0; width: 100%; z-index: 9999;
       display: flex; justify-content: center; pointer-events: none;
       opacity: 0; visibility: hidden;
-      transform: translateY(50px); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: translateY(50px); transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .fixed-bottom-wrapper.is-visible { 
       transform: translateY(0); opacity: 1; visibility: visible; 
     }
     body.is-menu-open .fixed-bottom-wrapper {
-      opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;
+      opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; transform: translateY(50px) !important;
     }
     
     .combined-buy-btn {
       pointer-events: auto; display: inline-flex; align-items: center;
       background: var(--mo-grad-orange); color: #fff; 
       padding: 8px 30px 8px 15px;
-      border-radius: 50px; text-decoration: none; box-shadow: 0 10px 30px rgba(255,81,0,0.5);
+      border-radius: 50px; text-decoration: none; box-shadow: 0 15px 35px rgba(242, 85, 17, 0.4);
+      transition: transform 0.3s;
     }
+    .combined-buy-btn:hover { transform: translateY(-3px); }
     
     .pants-icon { 
-      width: 45px; height: 45px; 
-      background: transparent; border: none; border-radius: 0; 
-      margin-right: 15px; margin-left: 0; margin-top: 0; margin-bottom: 0;
-      flex-shrink: 0; 
-      display: flex; align-items: center; justify-content: center;
+      width: 45px; height: 45px; background: transparent; border: none; border-radius: 0; 
+      margin-right: 15px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
       filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2)); 
     }
     .pants-icon img { width: 100%; height: auto; object-fit: contain; }
-    .combined-buy-btn .btn-text { font-weight: bold; font-size: 1.3em; letter-spacing: 1px; }
+    .combined-buy-btn .btn-text { font-weight: 800; font-size: 1.2em; letter-spacing: 0.05em; }
 
     /* ==========================================================================
        【SP】スマートフォン用レスポンシブ微調整
        ========================================================================== */
     @media (max-width: 768px) {
       .morescue-dynamic-theme { font-size: 15px; }
-
-      .mo-section-title { font-size: 1.8rem; margin-bottom: 30px; letter-spacing: 0; }
+      .mo-section { padding: 100px 0; }
+      .mo-section-title { font-size: 1.8rem; margin-bottom: 40px; letter-spacing: 0.02em; }
 
       .mo-logo img { height: 26px; }
       
+      /* 修正：メニュー開閉ボタン（＋）のスムーズな回転アニメーション */
       .mo-menu-toggle { 
-        display: block; font-size: 2.5em; cursor: pointer; color: var(--mo-navy); 
-        font-weight: bold; line-height: 1; width: 40px; text-align: center; 
-        position: relative; z-index: 10000; transition: transform 0.3s ease; 
+        display: block; font-size: 2.8em; cursor: pointer; color: var(--mo-navy); 
+        font-weight: 300; line-height: 1; width: 40px; text-align: center; 
+        position: relative; z-index: 10000; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
       }
       .mo-menu-toggle.is-active { transform: rotate(45deg); color: var(--mo-navy); }
       
       .mo-nav { 
         display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-        background: rgba(255,255,255,0.98); backdrop-filter: blur(15px);
+        background: rgba(255,255,255,0.98); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
         flex-direction: column; justify-content: center; align-items: center; 
         padding: 20px; z-index: 9999; box-sizing: border-box;
       }
-      .mo-nav.is-open { display: flex; }
-      .mo-nav a { margin: 20px 0; font-size: 1.3rem; text-align: center; margin-left: 0; }
-      .mo-nav-btn { margin-top: 20px; font-size: 1.2rem; padding: 15px 40px; }
+      .mo-nav.is-open { display: flex; animation: fadeInMenu 0.4s ease forwards; }
+      @keyframes fadeInMenu { from { opacity: 0; } to { opacity: 1; } }
+      
+      .mo-nav a { margin: 20px 0; font-size: 1.2rem; text-align: center; margin-left: 0; letter-spacing: 0.1em; }
+      .mo-nav-btn { margin-top: 30px; font-size: 1.1rem; padding: 15px 40px; }
 
-      .marquee-container { padding: 3px 0; }
-      .marquee-content { font-size: 0.65rem; letter-spacing: 1px; }
+      .marquee-container { padding: 4px 0; }
+      .marquee-content { font-size: 0.7rem; letter-spacing: 1px; }
       .marquee-content span { padding-right: 20px; }
 
-      /* ヒーローセクション */
-      .mo-hero { height: auto; min-height: 85vh; padding: 110px 5% 60px; }
-      .mo-hero-container { justify-content: center; }
+      /* 修正：SPファーストビューのカードを小さく・横長に */
+      .mo-hero { height: auto; min-height: 85vh; padding: 100px 5% 60px; }
+      .mo-hero-container { justify-content: center; align-items: center; }
       
       .mo-hero-text { 
-        margin: 0 auto; text-align: center; 
-        padding: 15px 25px; 
-        background: rgba(255, 255, 255, 0.7); 
-        max-width: 92%; 
+        margin: 0 auto; padding: 25px 20px; 
+        background: rgba(255, 255, 255, 0.8); border-radius: 16px; 
+        max-width: 95%; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
       }
       
-      .mo-hero-catch { font-size: 1.25rem; line-height: 1.35; text-align: center; margin-bottom: 10px; }
-      .mo-hero-catch span { display: inline; text-align: center; margin-left: 0 !important; }
+      .mo-hero-catch { font-size: 1.4rem; line-height: 1.4; margin-bottom: 15px; }
+      .mo-hero-catch span { display: inline; margin-left: 0 !important; }
+      .mo-hero-subcatch { font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; }
+      .mo-hero-desc { font-size: 0.85rem; margin-bottom: 25px; line-height: 1.5; }
+      .mo-hero-badge { font-size: 0.9rem; padding: 10px 20px; border-radius: 30px; }
       
-      .mo-hero-subcatch { font-size: 0.85rem; line-height: 1.4; margin-bottom: 12px; }
-      .mo-hero-desc { font-size: 0.75rem; margin-bottom: 15px; line-height: 1.4; }
-      
-      .mo-hero-badge { font-size: 0.85rem; padding: 8px 16px; border-radius: 30px; }
-      
-      .mo-hero-bg-anim {
-        background-size: cover; background-position: top center;
+      .mo-hero-bg-img {
         animation: hero-pan-sp 20s ease-in-out infinite alternate;
       }
-      @keyframes hero-pan-sp { 
-        0% { transform: scale(1); } 
-        100% { transform: scale(1.08); } 
-      }
+      @keyframes hero-pan-sp { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
       .mo-hero-overlay { background: transparent; display: none; }
 
-      #about {
-        padding: 80px 0 120px; margin-top: 0;
-      }
-      .mo-lead-text { font-size: 1rem; margin-bottom: 30px; }
-      .overlap-grid { flex-direction: column; gap: 30px; margin-top: 40px; } 
-      .mo-card { padding: 40px 25px; }
-      .mo-card h3 { font-size: 1.25rem; }
-      .mo-card p { font-size: 0.95rem; }
+      #about { padding: 100px 0; }
+      .mo-lead-text { font-size: 1.05rem; margin-bottom: 40px; }
+      .overlap-grid { flex-direction: column; gap: 20px; margin-top: 40px; } 
+      .mo-card { padding: 40px 30px; border-radius: 20px; }
+      .mo-card h3 { font-size: 1.3rem; }
+      .mo-card p { font-size: 0.95rem; line-height: 1.6; }
 
-      .mo-structure-section { padding: 60px 0 100px; margin-top: 0; }
-      .mo-structure-sub { font-size: 0.8rem !important; line-height: 1.3 !important; margin-top: 10px !important; display: block !important; }
-      
-      .mo-structure-diagram-wrap { padding: 0; margin-top: 20px; } 
-      .mo-center-pants { max-width: 280px; } 
+      .mo-structure-section { padding: 100px 0; }
+      .mo-structure-sub { font-size: 0.8rem !important; line-height: 1.4 !important; margin-top: 15px !important; display: block !important; }
+      .mo-structure-diagram-wrap { padding: 0; margin-top: 40px; } 
+      .mo-center-pants { max-width: 260px; } 
       .mo-pop-item { position: relative; top: auto; left: auto; right: auto; bottom: auto; width: 100%; margin-bottom: 15px; transform: none !important; opacity: 1 !important; } 
       .pop-line, .pop-line-vertical { display: none; } .mo-pulse-circle { display: none; }
-      .pop-content { padding: 20px 15px; }
+      .pop-content { padding: 25px 20px; border-radius: 16px; }
       .pop-content h3 { font-size: 1.1rem; }
       .pop-content p { font-size: 0.9rem; }
       
-      #features { padding: 80px 0; }
+      #features { padding: 100px 0; }
       .mo-feature-cards {
         display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
-        gap: 15px; padding-bottom: 20px; -webkit-overflow-scrolling: touch; margin-top: 10px;
-        padding-left: 20px; padding-right: 20px;
-        margin-left: -20px; margin-right: -20px;
+        gap: 15px; padding-bottom: 30px; -webkit-overflow-scrolling: touch; margin-top: 20px;
+        padding-left: 20px; padding-right: 20px; margin-left: -20px; margin-right: -20px;
       }
-      .mo-feature-cards::-webkit-scrollbar { height: 4px; }
-      .mo-feature-cards::-webkit-scrollbar-thumb { background: var(--mo-orange); border-radius: 10px; }
-      .mo-feature-card { flex: 0 0 80%; scroll-snap-align: center; margin-bottom: 0; padding: 30px 20px; }
+      .mo-feature-cards::-webkit-scrollbar { height: 3px; }
+      .mo-feature-cards::-webkit-scrollbar-thumb { background: rgba(242, 85, 17, 0.5); border-radius: 10px; }
+      .mo-feature-card { flex: 0 0 85%; scroll-snap-align: center; margin-bottom: 0; padding: 40px 25px; border-radius: 20px; }
       .mo-feature-title { font-size: 1.15rem; }
       .mo-feature-desc { font-size: 0.9rem; }
+      .feature-icon-box { width: 70px; height: 70px; margin-bottom: 25px; }
       
-      .mo-expert-box { flex-direction: column; gap: 20px; padding: 30px 20px; } 
-      .mo-expert-img-wrap { flex: auto; width: 100%; max-width: 250px; margin: 0 auto; }
-      .mo-expert-title { font-size: 1.4rem; }
-      .mo-expert-text p { font-size: 0.95rem; }
-      .mo-expert-name { font-size: 0.9rem; }
+      .mo-expert-box { flex-direction: column; gap: 30px; padding: 40px 25px; border-radius: 20px; } 
+      .mo-expert-img-wrap { flex: auto; width: 100%; max-width: 240px; margin: 0 auto; }
+      .mo-expert-title { font-size: 1.4rem; text-align: center; }
+      .mo-expert-text p { font-size: 0.95rem; line-height: 1.6; }
+      .mo-expert-name { font-size: 0.85rem; }
       
       .mo-review-grid {
         display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
-        gap: 15px; padding-bottom: 20px; -webkit-overflow-scrolling: touch; margin-top: 10px;
-        padding-left: 20px; padding-right: 20px;
-        margin-left: -20px; margin-right: -20px;
+        gap: 15px; padding-bottom: 30px; -webkit-overflow-scrolling: touch; margin-top: 20px;
+        padding-left: 20px; padding-right: 20px; margin-left: -20px; margin-right: -20px;
       }
-      .mo-review-grid::-webkit-scrollbar { height: 4px; }
-      .mo-review-grid::-webkit-scrollbar-thumb { background: var(--mo-orange); border-radius: 10px; }
-      .mo-review-item { flex: 0 0 80%; scroll-snap-align: center; margin-bottom: 0; padding: 25px 20px; }
-      .mo-review-item p { font-size: 0.95rem; }
+      .mo-review-grid::-webkit-scrollbar { height: 3px; }
+      .mo-review-grid::-webkit-scrollbar-thumb { background: rgba(242, 85, 17, 0.5); border-radius: 10px; }
+      .mo-review-item { flex: 0 0 85%; scroll-snap-align: center; margin-bottom: 0; padding: 35px 25px; border-radius: 20px; }
+      .mo-review-item p { font-size: 0.95rem; line-height: 1.6; }
       
-      #size { padding: 80px 0; }
-      .mo-spec-tabs { gap: 10px; margin-bottom: 20px; }
-      .mo-spec-tab { padding: 10px 5px; border-radius: 10px; }
-      .mo-spec-tab span { font-size: 0.8rem; letter-spacing: -0.5px; }
-      .mo-spec-content { padding: 20px 15px; }
-      .mo-table th, .mo-table td { padding: 10px 5px; font-size: 0.85rem; }
-      .mo-materials { font-size: 0.9rem; padding: 15px; margin-top: 20px; }
+      #size { padding: 100px 0; }
+      .mo-spec-tabs { gap: 10px; margin-bottom: 30px; }
+      .mo-spec-tab { padding: 15px 10px; border-radius: 16px; }
+      .mo-spec-tab img { max-width: 100px; }
+      .mo-spec-tab span { font-size: 0.85rem; letter-spacing: 0; }
+      .mo-spec-content { padding: 30px 20px; border-radius: 20px; }
+      .mo-table th, .mo-table td { padding: 12px 10px; font-size: 0.85rem; }
+      .mo-materials { font-size: 0.85rem; padding: 20px; margin-top: 25px; border-radius: 12px; }
+      .mo-materials strong { width: 100%; margin-bottom: 2px; }
 
-      #faq { padding-top: 40px; }
+      #faq { padding-top: 0; }
       .mo-faq-wrap { margin-left: -20px; margin-right: -20px; }
-      .mo-faq-item { border-radius: 0; border-left: none; border-right: none; border-bottom: 1px solid #eee; box-shadow: none; margin-bottom: 0; }
-      .mo-faq-item summary { font-size: 1rem; padding: 15px 20px; }
-      .mo-faq-answer { font-size: 0.95rem; padding: 15px 20px; }
+      .mo-faq-item { border-radius: 0; border-left: none; border-right: none; border-bottom: 1px solid #f0f0f0; box-shadow: none; margin-bottom: 0; }
+      .mo-faq-item summary { font-size: 1rem; padding: 20px; }
+      .mo-faq-answer { font-size: 0.9rem; padding: 20px; }
       
-      #buy { padding: 80px 0; }
-      .mo-buy-box { padding: 40px 20px; }
-      .mo-buy-grid { grid-template-columns: 1fr; gap: 15px; }
-      .mo-buy-item { padding: 20px 15px; }
-      .mo-color-btns { flex-direction: row; }
-      .mo-color-btn { flex: 1; padding: 10px; font-size: 0.85em; }
+      #buy { padding: 100px 0; }
+      .mo-buy-box { padding: 50px 25px; border-radius: 24px; }
+      .mo-buy-box h3 { font-size: 1.25rem; }
+      
+      /* 修正：SP購入グリッドを1列に */
+      .mo-buy-grid { grid-template-columns: 1fr; gap: 20px; }
+      .mo-buy-item { padding: 30px 20px; }
+      .mo-buy-item img { height: 130px; }
+      /* SP時はボタンを横並びにする */
+      .mo-color-btns { flex-direction: row; gap: 10px; }
+      .mo-color-btn { flex: 1; padding: 14px 10px; font-size: 0.85em; }
 
-      .mo-footer { padding: 50px 0 120px 0; }
-      .mo-footer-logo img { height: 30px; }
-      .mo-footer-company { font-size: 0.95em; }
-      .mo-footer-info { font-size: 0.85em; }
-      .mo-copyright { font-size: 0.75em; }
+      .mo-footer { padding: 60px 0 140px 0; }
+      .mo-footer-logo img { height: 28px; }
+      .mo-footer-company { font-size: 0.9em; }
+      .mo-footer-info { font-size: 0.8em; }
+      .mo-copyright { font-size: 0.7em; }
 
-      .combined-buy-btn { padding: 6px 20px 6px 10px; }
-      .pants-icon { width: 35px; height: 35px; margin-left: 0; margin-right: 10px; }
-      .combined-buy-btn .btn-text { font-size: 1.05rem; }
+      /* SPカートボタン微調整 */
+      .combined-buy-btn { padding: 8px 25px 8px 12px; }
+      .pants-icon { width: 35px; height: 35px; margin-right: 12px; }
+      .combined-buy-btn .btn-text { font-size: 1.1rem; }
     }
   </style>
 </head>
@@ -593,23 +594,17 @@
         
         <div class="mo-feature-cards">
           <div class="mo-feature-card animate-slide-up" style="animation-delay: 0.3s;">
-            <div class="feature-icon-box">
-              <img src="https://placehold.co/100x100/1a2b4c/ffffff?text=Shield" alt="抗菌">
-            </div>
+            <div class="feature-icon-box"></div>
             <h3 class="mo-feature-title">01. 抗菌防臭加工</h3>
             <p class="mo-feature-desc">SEK認証の抗菌防臭加工。菌の増殖を抑え、ニオイを元から防ぎます。<span class="mo-highlight-glow">夕方まで清潔感を保ちます。</span></p>
           </div>
           <div class="mo-feature-card animate-slide-up" style="animation-delay: 0.5s;">
-            <div class="feature-icon-box">
-              <img src="https://placehold.co/100x100/ff6b00/ffffff?text=Wind" alt="速乾">
-            </div>
+            <div class="feature-icon-box"></div>
             <h3 class="mo-feature-title">02. スピード速乾</h3>
             <p class="mo-feature-desc">濡れてもサラサラ。洗濯後の乾きもスピーディ。<span class="mo-highlight-glow">一般的な生地の約1.6倍の速乾スピード。</span></p>
           </div>
           <div class="mo-feature-card animate-slide-up" style="animation-delay: 0.7s;">
-            <div class="feature-icon-box">
-              <img src="https://placehold.co/100x100/1a2b4c/ffffff?text=Drop" alt="吸水">
-            </div>
+            <div class="feature-icon-box"></div>
             <h3 class="mo-feature-title">03. 1秒吸水</h3>
             <p class="mo-feature-desc">股間部分は<span class="mo-highlight-glow">約9倍の吸水スピード。</span></p>
           </div>
@@ -668,10 +663,6 @@
               <img src="2-bl.png" alt="ボクサータイプ">
               <span>ボクサータイプ</span>
             </div>
-            <div class="mo-spec-tab" data-target="spec-knit">
-              <img src="2-bl.png" alt="ニットタイプ">
-              <span>ニットタイプ</span>
-            </div>
             <div class="mo-spec-tab" data-target="spec-trunks">
               <img src="1-gy.png" alt="トランクスタイプ">
               <span>トランクスタイプ</span>
@@ -691,23 +682,8 @@
               </table>
               <div class="mo-materials">
                 <p><strong>【素材】</strong>身生地・サポーター：ポリエステル65%・綿35%</p>
-                <p><strong>【カラー】</strong>グレー / コイアオ（濃青）</p>
-              </div>
-            </div>
-
-            <div id="spec-knit" class="mo-spec-content">
-              <table class="mo-table">
-                <thead><tr><th>ニット(適応胴囲)</th><th>ウエスト(平置き)</th></tr></thead>
-                <tbody>
-                  <tr><td>M (76〜84cm)</td><td>34.0cm</td></tr>
-                  <tr><td>L (84〜94cm)</td><td>36.0cm</td></tr>
-                  <tr><td>XL (94〜104cm)</td><td>38.0cm</td></tr>
-                  <tr><td>2XL (98〜108cm)</td><td>40.0cm</td></tr>
-                </tbody>
-              </table>
-              <div class="mo-materials">
-                <p><strong>【素材】</strong>身生地：綿100%（例）</p>
-                <p><strong>【カラー】</strong>ブラック / ネイビー</p>
+                <p><strong>【カラー】</strong>ブラック / ブルー</p>
+                <p><strong>【尿漏れ対応レベル】</strong>約10cc（※数滴〜チビり程度の軽微な尿漏れ）</p>
               </div>
             </div>
 
@@ -723,7 +699,8 @@
               </table>
               <div class="mo-materials">
                 <p><strong>【素材】</strong>身生地：ポリエステル100%（例）</p>
-                <p><strong>【カラー】</strong>チェック柄 / ストライプ</p>
+                <p><strong>【カラー】</strong>ブラック / ブルー</p>
+                <p><strong>【尿漏れ対応レベル】</strong>約10cc（※数滴〜チビり程度の軽微な尿漏れ）</p>
               </div>
             </div>
           </div>
@@ -731,7 +708,7 @@
       </div>
     </section>
 
-    <section id="faq" class="mo-section fade-in-trigger" style="padding-top: 60px;">
+    <section id="faq" class="mo-section fade-in-trigger" style="padding-top: 0;">
       <div class="mo-container">
         <div class="animate-slide-up" style="max-width: 800px; margin: 0 auto;">
           <h2 class="mo-section-title text-center">よくある質問</h2>
@@ -752,37 +729,30 @@
         </h2>
         
         <div class="mo-buy-box animate-zoom-in" style="animation-delay: 0.5s;">
-          <p style="color: var(--mo-orange); font-weight: bold; margin-bottom: 30px;">※「まとめ買い」が人気です。</p>
+          <p style="color: var(--mo-orange); font-weight: bold; margin-bottom: 40px; font-size: 1.1em;">※「まとめ買い」が人気です。</p>
           
           <div class="mo-buy-grid">
             <div class="mo-buy-item">
               <img src="2-bl.png" alt="ボクサータイプ">
               <h4>ボクサータイプ</h4>
               <div class="mo-color-btns">
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-darkgray">ダークグレー</a>
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-darkblue">ダークブルー</a>
+                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-black">ブラック</a>
+                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-blue">ブルー</a>
               </div>
             </div>
-            <div class="mo-buy-item">
-              <img src="2-bl.png" alt="ニットタイプ">
-              <h4>ニットタイプ</h4>
-              <div class="mo-color-btns">
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-darkgray">ダークグレー</a>
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-darkblue">ダークブルー</a>
-              </div>
-            </div>
+            
             <div class="mo-buy-item">
               <img src="1-gy.png" alt="トランクスタイプ">
               <h4>トランクスタイプ</h4>
               <div class="mo-color-btns">
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-darkgray">ダークグレー</a>
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-darkblue">ダークブルー</a>
+                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-black">ブラック</a>
+                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-blue">ブルー</a>
               </div>
             </div>
           </div>
           
-          <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 30px;">
-            <p style="font-weight: bold; color: var(--mo-navy);">全国の量販店でもお取り扱い中</p>
+          <div style="margin-top: 50px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 30px;">
+            <p style="font-weight: bold; color: var(--mo-navy); font-size: 1.1em;">全国の量販店でもお取り扱い中</p>
           </div>
         </div>
       </div>
