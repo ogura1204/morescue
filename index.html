@@ -81,7 +81,7 @@
       70% { transform: scale(1, 1) translateY(0); }
     }
 
-    /* 修正：本格的なタイポグラフィーアニメーション */
+    /* タイポグラフィーアニメーション */
     .typo-line { display: block; }
     .typo-char { 
       display: inline-block; 
@@ -136,9 +136,8 @@
       max-width: 440px; width: 100%; margin-left: 20px; 
     }
     
-    /* 修正：「部分の左端合わせ */
     .mo-hero-catch { font-size: 2.2em; font-weight: 800; line-height: 1.35; color: var(--mo-navy); margin-bottom: 15px; letter-spacing: -0.02em; }
-    .mo-hero-catch .typo-line:first-child { margin-left: -0.45em; }
+    .mo-hero-catch .typo-line:first-child { margin-left: -0.45em; } /* PC左揃え時のツラ合わせ */
     
     .mo-hero-subcatch { font-size: 1.15em; font-weight: 700; color: var(--mo-orange); margin-bottom: 25px; line-height: 1.5; }
     .mo-hero-desc { font-size: 0.95em; margin-bottom: 35px; font-weight: 500; line-height: 1.7; color: #333; }
@@ -258,7 +257,6 @@
     .mo-level-bar span.active { background: var(--mo-grad-orange); box-shadow: 0 2px 6px rgba(242, 85, 17, 0.3); }
     .mo-level-text { font-weight: 800; color: var(--mo-orange); font-size: 0.9em; letter-spacing: 0.05em; margin-top: 5px; }
 
-    /* 修正：テキストの最適化 */
     .mo-table-wrap { border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
     .mo-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
     .mo-table th { background: var(--mo-navy); color: #fff; padding: 18px 15px; width: 50%; font-weight: 600; letter-spacing: 0.05em; border-right: 1px solid rgba(255,255,255,0.1); } 
@@ -382,23 +380,24 @@
       .marquee-content { font-size: 0.6rem; letter-spacing: 1px; }
       .marquee-content span { padding-right: 20px; }
 
-      /* 修正：SPファーストビューを画面いっぱい、左寄せに */
-      .mo-hero { height: 100vh; min-height: 100svh; padding: 60px 0 0 0; align-items: center; }
-      .mo-hero-container { justify-content: center; align-items: center; padding: 0 10px; width: 100%; }
+      /* 修正：SPファーストビューを画面いっぱい、上寄りに配置 */
+      .mo-hero { height: 100vh; min-height: 100svh; padding: 85px 0 0 0; align-items: flex-start; }
+      .mo-hero-container { justify-content: center; align-items: flex-start; padding: 0 10px; width: 100%; }
       
+      /* 修正：SP時のカードを小さく、余白を削る。左揃え、中央寄せ */
       .mo-hero-text { 
-        margin: 0; padding: 20px; 
+        margin: 0; padding: 15px 15px 20px; 
         background: rgba(255, 255, 255, 0.7); border-radius: 16px; 
         max-width: 96%; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        text-align: left; /* SP時も左揃え */
+        text-align: center; 
       }
       
-      /* 修正：「ツラ合わせ */
-      .mo-hero-catch { font-size: 1.4rem; line-height: 1.4; text-align: left; margin-bottom: 15px; }
-      .mo-hero-catch .typo-line:first-child { margin-left: -0.45em; }
+      /* 修正：SP時の改行とセンター揃えの設定（ネガティブマージン解除） */
+      .mo-hero-catch { font-size: 1.4rem; line-height: 1.4; text-align: center; margin-bottom: 15px; }
+      .mo-hero-catch .typo-line:first-child { margin-left: 0 !important; }
       
       .mo-hero-subcatch { font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; }
-      .mo-hero-desc { font-size: 0.85rem; margin-bottom: 25px; line-height: 1.5; }
+      .mo-hero-desc { font-size: 0.85rem; margin-bottom: 20px; line-height: 1.5; }
       .mo-hero-badge { font-size: 0.9rem; padding: 10px 20px; border-radius: 30px; display: inline-block; }
       
       .mo-hero-bg-img { animation: hero-pan-sp 20s ease-in-out infinite alternate; }
@@ -423,7 +422,6 @@
       .pop-content p { font-size: 0.9rem; }
       
       #features { padding: 100px 0; }
-      /* 修正：次のカードが見えるようにflex-basisを調整 */
       .mo-feature-cards {
         display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
         gap: 15px; padding-bottom: 30px; -webkit-overflow-scrolling: touch; margin-top: 20px;
@@ -892,7 +890,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       
-      // タイポグラフィーアニメーション（1文字ずつ美しくフェードイン）
+      // タイポグラフィーアニメーション（ぼかし付きで1文字ずつ表示）
       const typoCatch = document.getElementById('js-typo-catch');
       if (typoCatch) {
         const lines = typoCatch.querySelectorAll('.typo-line');
@@ -904,8 +902,7 @@
             const span = document.createElement('span');
             span.textContent = text[i];
             span.className = 'typo-char';
-            // 1文字ごとに0.06秒ずつ遅延させる（流れるようなアニメーション）
-            span.style.animationDelay = (0.2 + delayCounter * 0.06) + 's';
+            span.style.animationDelay = (0.2 + delayCounter * 0.05) + 's';
             line.appendChild(span);
             delayCounter++;
           }
