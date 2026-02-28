@@ -26,7 +26,6 @@
       --mo-text: #4a4a4a;
       --mo-grad-navy: linear-gradient(135deg, var(--mo-navy-dark) 0%, var(--mo-navy) 100%);
       --mo-grad-orange: linear-gradient(135deg, #f77a45 0%, var(--mo-orange) 100%);
-      /* 繊細なシャドウ定義 */
       --mo-shadow-soft: 0 15px 40px rgba(0, 0, 0, 0.04);
       --mo-shadow-hover: 0 20px 50px rgba(0, 0, 0, 0.08);
     }
@@ -179,7 +178,7 @@
     .fade-in-trigger.is-visible .pop-left-top { transform: translateX(0); } .fade-in-trigger.is-visible .pop-right-top { transform: translateX(0); } .fade-in-trigger.is-visible .pop-bottom { transform: translateX(-50%) translateY(0); }
 
     /* 【5】 技術・機能深掘り */
-    #features { padding: 140px 0; }
+    #features { padding: 140px 0; background: var(--mo-light); }
     .mo-feature-cards { display: flex; gap: 30px; margin-top: 70px; }
     .mo-feature-card { flex: 1; background: #fff; padding: 50px 35px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); text-align: center; position: relative; overflow: hidden; transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.02); }
     .mo-feature-card:hover { transform: translateY(-10px); box-shadow: var(--mo-shadow-hover); }
@@ -212,22 +211,35 @@
     .mo-review-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
     .mo-review-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
 
-    /* 【9】 スペック・サイズ（タブ・表・リストの美装化） */
+    /* 【9】 スペック・サイズ（レイアウトの大幅刷新） */
     #size { padding: 140px 0; }
-    .mo-spec-tabs { display: flex; gap: 20px; justify-content: center; margin: 0 auto 50px; max-width: 600px; }
+    .mo-spec-tabs { display: flex; gap: 15px; justify-content: center; margin: 0 auto 50px; max-width: 500px; }
     .mo-spec-tab { 
       flex: 1; text-align: center; cursor: pointer; 
-      opacity: 0.5; transition: all 0.4s ease; border: 1px solid transparent; 
-      border-radius: 20px; padding: 20px 15px; background: transparent; 
+      opacity: 0.6; transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.05); 
+      border-radius: 50px; padding: 15px 25px; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.02); 
     }
-    .mo-spec-tab.is-active { opacity: 1; background: #fff; box-shadow: var(--mo-shadow-soft); border-color: rgba(0,0,0,0.03); transform: translateY(-5px); }
+    .mo-spec-tab.is-active { opacity: 1; background: var(--mo-navy); border-color: var(--mo-navy); box-shadow: 0 10px 25px rgba(22, 36, 64, 0.2); transform: translateY(-3px); }
+    .mo-spec-tab span { font-weight: 700; color: var(--mo-navy); display: block; font-size: 1.1em; transition: color 0.3s; }
+    .mo-spec-tab.is-active span { color: #fff; }
     
-    .mo-spec-tab img { width: 100%; max-width: 150px; height: auto; margin: 0 auto 15px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
-    .mo-spec-tab span { font-weight: 700; color: var(--mo-navy); display: block; font-size: 1.1em; }
-    
-    .mo-spec-content { display: none; animation: fadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1); background: #fff; padding: 50px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); border: 1px solid rgba(0,0,0,0.02); }
+    .mo-spec-content { display: none; animation: fadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
     .mo-spec-content.is-active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* コンテンツを横並びに */
+    .mo-spec-visual-flex { display: flex; gap: 50px; align-items: flex-start; background: #fff; padding: 50px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); border: 1px solid rgba(0,0,0,0.02); }
+    .mo-spec-img-box { flex: 0 0 320px; display: flex; flex-direction: column; justify-content: center; }
+    .mo-spec-img-box img { width: 100%; height: auto; max-width: 280px; margin: 0 auto 30px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1)); }
+    .mo-spec-info-box { flex: 1; }
+
+    /* レベルインジケーター */
+    .mo-level-indicator { background: var(--mo-light); padding: 25px 20px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; }
+    .mo-level-label { font-weight: 700; color: var(--mo-navy); font-size: 0.9em; letter-spacing: 0.05em; }
+    .mo-level-bar { display: flex; gap: 4px; width: 100%; max-width: 260px; }
+    .mo-level-bar span { flex: 1; height: 12px; background: #d0d5dc; border-radius: 3px; transition: all 0.3s; }
+    .mo-level-bar span.active { background: var(--mo-grad-orange); box-shadow: 0 2px 6px rgba(242, 85, 17, 0.3); }
+    .mo-level-text { font-weight: 800; color: var(--mo-orange); font-size: 0.9em; letter-spacing: 0.05em; margin-top: 5px; }
 
     /* テーブルの角丸とデザイン */
     .mo-table-wrap { border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
@@ -238,18 +250,12 @@
     .mo-table tr:last-child td { border-bottom: none; }
     
     /* DLリスト形式の美しいスペック詳細 */
-    .mo-spec-details { margin-top: 30px; background: var(--mo-light); padding: 35px 40px; border-radius: 16px; }
+    .mo-spec-details { margin-top: 30px; background: var(--mo-light); padding: 30px 40px; border-radius: 16px; }
     .mo-spec-details dl { margin: 0; display: flex; flex-wrap: wrap; }
     .mo-spec-details dt { width: 30%; font-weight: 700; color: var(--mo-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.05); letter-spacing: 0.05em; }
     .mo-spec-details dd { width: 70%; margin: 0; padding: 16px 0; color: #555; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; }
-    .mo-spec-details dt:last-of-type, .mo-spec-details dd:last-of-type { border-bottom: none; }
-
-    /* 10段階レベルインジケーター */
-    .mo-level-indicator { display: flex; align-items: center; gap: 15px; width: 100%; }
-    .mo-level-bar { display: flex; gap: 6px; flex: 1; max-width: 240px; }
-    .mo-level-bar span { flex: 1; height: 14px; background: #e0e5ec; border-radius: 3px; transition: all 0.3s; }
-    .mo-level-bar span.active { background: var(--mo-grad-orange); box-shadow: 0 2px 6px rgba(242, 85, 17, 0.3); }
-    .mo-level-text { font-weight: 800; color: var(--mo-orange); font-size: 0.95em; letter-spacing: 0.05em; }
+    .mo-spec-details dt:last-of-type, .mo-spec-details dd:last-of-type { border-bottom: none; padding-bottom: 0; }
+    .mo-spec-details dt:first-of-type, .mo-spec-details dd:first-of-type { padding-top: 0; }
 
     /* 【10】 FAQ */
     .mo-faq-item { margin-bottom: 15px; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); }
@@ -259,9 +265,8 @@
     .mo-faq-item[open] summary::after { transform: rotate(45deg); }
     .mo-faq-answer { padding: 25px 30px; background: #fafafa; color: #555; border-top: 1px solid #f0f0f0; line-height: 1.7; }
 
-    /* 修正：購入セクション（2列中央配置・高さ統一） */
+    /* 購入セクション */
     .mo-buy-box { background: var(--mo-white); padding: 70px; border-radius: 32px; max-width: 900px; margin: 50px auto 0; box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
-    
     .mo-buy-grid { display: grid; grid-template-columns: repeat(2, 320px); justify-content: center; gap: 40px; margin-bottom: 40px; }
     
     .mo-buy-item { background: var(--mo-light); padding: 40px 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); transition: transform 0.3s; }
@@ -272,7 +277,6 @@
     .mo-color-btns { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
     .mo-color-btn { display: block; padding: 14px; border-radius: 10px; color: #fff !important; text-decoration: none; font-weight: bold; font-size: 0.95em; transition: all 0.3s; letter-spacing: 0.05em; }
     .mo-color-btn:hover { opacity: 0.9; transform: translateY(-2px); }
-    
     .btn-black { background-color: #222222; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
     .btn-blue { background-color: #235fac; box-shadow: 0 4px 15px rgba(35, 95, 172, 0.3); }
 
@@ -417,13 +421,16 @@
       .mo-review-item { flex: 0 0 85%; scroll-snap-align: center; margin-bottom: 0; padding: 35px 25px; border-radius: 20px; }
       .mo-review-item p { font-size: 0.95rem; line-height: 1.6; }
       
-      /* SPスペック表のDLリスト調整 */
+      /* SPスペック表のレイアウト調整 */
       #size { padding: 100px 0; }
       .mo-spec-tabs { gap: 10px; margin-bottom: 30px; }
-      .mo-spec-tab { padding: 15px 10px; border-radius: 16px; }
-      .mo-spec-tab img { max-width: 100px; }
-      .mo-spec-tab span { font-size: 0.85rem; letter-spacing: 0; }
+      .mo-spec-tab { padding: 15px 10px; border-radius: 50px; }
+      .mo-spec-tab span { font-size: 0.9rem; letter-spacing: 0; }
+      
       .mo-spec-content { padding: 30px 20px; border-radius: 20px; }
+      .mo-spec-visual-flex { flex-direction: column; gap: 30px; padding: 30px 20px; }
+      .mo-spec-img-box { width: 100%; flex: auto; }
+      
       .mo-table th, .mo-table td { padding: 12px 10px; font-size: 0.85rem; }
       
       .mo-spec-details { padding: 25px 20px; }
@@ -442,7 +449,6 @@
       
       #buy { padding: 100px 0; }
       .mo-buy-box { padding: 50px 25px; border-radius: 24px; }
-      .mo-buy-box h3 { font-size: 1.25rem; }
       
       .mo-buy-grid { grid-template-columns: 1fr; gap: 20px; }
       .mo-buy-item { padding: 30px 20px; }
@@ -574,15 +580,15 @@
           <div class="mo-pop-item pop-left-top animate-pop-in" style="animation-delay: 1s;">
             <div class="pop-line"></div>
             <div class="pop-content">
-              <h3>特許取得済 立体構造</h3>
-              <p>股間を優しく包み込む独自の3Dパターン設計。<br>究極のフィット感。</p>
+              <h3>立体構造</h3>
+              <p>股間を優しく包み込む独自の3Dパターン設計。<br>究極のフィット感。<span style="display:block; font-size:0.85em; margin-top:5px; color:var(--mo-navy); font-weight:bold;">（特許取得済）</span></p>
             </div>
           </div>
           <div class="mo-pop-item pop-right-top animate-pop-in" style="animation-delay: 1.2s;">
             <div class="pop-line"></div>
             <div class="pop-content">
-              <h3>意匠登録済 スマート設計</h3>
-              <p>外見からは吸水機能があるとは一切気づかれない<br>シルエット。</p>
+              <h3>スマート設計</h3>
+              <p>外見からは吸水機能があるとは一切気づかれない<br>シルエット。<span style="display:block; font-size:0.85em; margin-top:5px; color:var(--mo-navy); font-weight:bold;">（意匠登録済）</span></p>
             </div>
           </div>
           <div class="mo-pop-item pop-bottom animate-pop-in" style="animation-delay: 1.4s;">
@@ -614,7 +620,7 @@
           <div class="mo-feature-card animate-slide-up" style="animation-delay: 0.7s;">
             <div class="feature-icon-box"></div>
             <h3 class="mo-feature-title">03. 1秒吸水</h3>
-            <p class="mo-feature-desc">股間部分は<span class="mo-highlight-glow">約9倍の吸水スピード。</span></p>
+            <p class="mo-feature-desc">股間内側部分は、一般的なポリエステル生地に比べ、<span class="mo-highlight-glow">約9倍の吸水スピード。</span></p>
           </div>
         </div>
       </div>
@@ -668,77 +674,86 @@
           
           <div class="mo-spec-tabs" id="js-spec-tabs">
             <div class="mo-spec-tab is-active" data-target="spec-boxer">
-              <img src="2-bl.png" alt="ボクサータイプ">
               <span>ボクサータイプ</span>
             </div>
             <div class="mo-spec-tab" data-target="spec-trunks">
-              <img src="1-gy.png" alt="トランクスタイプ">
               <span>トランクスタイプ</span>
             </div>
           </div>
 
           <div class="mo-spec-content-wrap">
             <div id="spec-boxer" class="mo-spec-content is-active">
-              <div class="mo-table-wrap">
-                <table class="mo-table">
-                  <thead><tr><th>ボクサー(適応胴囲)</th><th>ウエスト(平置き)</th></tr></thead>
-                  <tbody>
-                    <tr><td>M (76〜84cm)</td><td>33.0cm</td></tr>
-                    <tr><td>L (84〜94cm)</td><td>35.0cm</td></tr>
-                    <tr><td>XL (94〜104cm)</td><td>37.0cm</td></tr>
-                    <tr><td>2XL (98〜108cm)</td><td>39.0cm</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="mo-spec-details">
-                <dl>
-                  <dt>素材</dt>
-                  <dd>身生地・サポーター：ポリエステル65%・綿35%</dd>
-                  <dt>カラー</dt>
-                  <dd>ブラック / ブルー</dd>
-                  <dt>尿漏れ対応レベル</dt>
-                  <dd>
-                    <div class="mo-level-indicator">
-                      <div class="mo-level-bar">
-                        <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
-                      </div>
-                      <span class="mo-level-text">MAX（約10cc）</span>
+              <div class="mo-spec-visual-flex">
+                <div class="mo-spec-img-box">
+                  <img src="2-bl.png" alt="ボクサータイプ">
+                  <div class="mo-level-indicator">
+                    <span class="mo-level-label">尿漏れ対応レベル</span>
+                    <div class="mo-level-bar">
+                      <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
                     </div>
-                  </dd>
-                </dl>
+                    <span class="mo-level-text">MAX（約10cc）</span>
+                  </div>
+                </div>
+                <div class="mo-spec-info-box">
+                  <div class="mo-table-wrap">
+                    <table class="mo-table">
+                      <thead><tr><th>ボクサー(適応胴囲)</th><th>ウエスト(平置き)</th></tr></thead>
+                      <tbody>
+                        <tr><td>M (76〜84cm)</td><td>33.0cm</td></tr>
+                        <tr><td>L (84〜94cm)</td><td>35.0cm</td></tr>
+                        <tr><td>XL (94〜104cm)</td><td>37.0cm</td></tr>
+                        <tr><td>2XL (98〜108cm)</td><td>39.0cm</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="mo-spec-details">
+                    <dl>
+                      <dt>素材</dt>
+                      <dd>身生地・サポーター：ポリエステル65%・綿35%</dd>
+                      <dt>カラー</dt>
+                      <dd>ブラック / ブルー</dd>
+                    </dl>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div id="spec-trunks" class="mo-spec-content">
-              <div class="mo-table-wrap">
-                <table class="mo-table">
-                  <thead><tr><th>トランクス(適応胴囲)</th><th>ウエスト(平置き)</th></tr></thead>
-                  <tbody>
-                    <tr><td>M (76〜84cm)</td><td>35.0cm</td></tr>
-                    <tr><td>L (84〜94cm)</td><td>37.0cm</td></tr>
-                    <tr><td>XL (94〜104cm)</td><td>39.0cm</td></tr>
-                    <tr><td>2XL (98〜108cm)</td><td>41.0cm</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="mo-spec-details">
-                <dl>
-                  <dt>素材</dt>
-                  <dd>身生地：ポリエステル100%（例）</dd>
-                  <dt>カラー</dt>
-                  <dd>ブラック / ブルー</dd>
-                  <dt>尿漏れ対応レベル</dt>
-                  <dd>
-                    <div class="mo-level-indicator">
-                      <div class="mo-level-bar">
-                        <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span><span></span>
-                      </div>
-                      <span class="mo-level-text">レベル8（軽度）</span>
+              <div class="mo-spec-visual-flex">
+                <div class="mo-spec-img-box">
+                  <img src="1-gy.png" alt="トランクスタイプ">
+                  <div class="mo-level-indicator">
+                    <span class="mo-level-label">尿漏れ対応レベル</span>
+                    <div class="mo-level-bar">
+                      <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span><span></span>
                     </div>
-                  </dd>
-                </dl>
+                    <span class="mo-level-text">レベル8（軽度）</span>
+                  </div>
+                </div>
+                <div class="mo-spec-info-box">
+                  <div class="mo-table-wrap">
+                    <table class="mo-table">
+                      <thead><tr><th>トランクス(適応胴囲)</th><th>ウエスト(平置き)</th></tr></thead>
+                      <tbody>
+                        <tr><td>M (76〜84cm)</td><td>35.0cm</td></tr>
+                        <tr><td>L (84〜94cm)</td><td>37.0cm</td></tr>
+                        <tr><td>XL (94〜104cm)</td><td>39.0cm</td></tr>
+                        <tr><td>2XL (98〜108cm)</td><td>41.0cm</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="mo-spec-details">
+                    <dl>
+                      <dt>素材</dt>
+                      <dd>身生地：ポリエステル100%（例）</dd>
+                      <dt>カラー</dt>
+                      <dd>ブラック / ブルー</dd>
+                    </dl>
+                  </div>
+                </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -765,8 +780,6 @@
         </h2>
         
         <div class="mo-buy-box animate-zoom-in" style="animation-delay: 0.5s;">
-          <p style="color: var(--mo-orange); font-weight: bold; margin-bottom: 40px; font-size: 1.1em;">※「まとめ買い」が人気です。</p>
-          
           <div class="mo-buy-grid">
             <div class="mo-buy-item">
               <img src="2-bl.png" alt="ボクサータイプ">
@@ -788,7 +801,8 @@
           </div>
           
           <div style="margin-top: 50px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 30px;">
-            <p style="font-weight: bold; color: var(--mo-navy); font-size: 1.1em;">全国の量販店でもお取り扱い中</p>
+            <p style="font-weight: bold; color: var(--mo-navy); font-size: 1.1em; margin-bottom: 10px;">全国の量販店でもお取り扱い中</p>
+            <p style="color: var(--mo-orange); font-weight: bold; font-size: 1em; margin: 0;">※「まとめ買い」が人気です。</p>
           </div>
         </div>
       </div>
