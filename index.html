@@ -118,8 +118,8 @@
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ヒーローセクション */
-    .mo-hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; padding-bottom: 50px; background-color: var(--mo-light); }
-    .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+    .mo-hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; background-color: var(--mo-light); }
+    .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden; }
     .mo-hero-bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center; animation: hero-pan 25s ease-in-out infinite alternate; }
     .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; z-index: 2; pointer-events: none; }
     
@@ -137,7 +137,7 @@
     }
     
     .mo-hero-catch { font-size: 2.2em; font-weight: 800; line-height: 1.35; color: var(--mo-navy); margin-bottom: 15px; letter-spacing: -0.02em; }
-    .mo-hero-catch .typo-line:first-child { margin-left: -0.45em; }
+    .mo-hero-catch .typo-line:first-child { margin-left: -0.45em; } 
     
     .mo-hero-subcatch { font-size: 1.15em; font-weight: 700; color: var(--mo-orange); margin-bottom: 25px; line-height: 1.5; }
     .mo-hero-desc { font-size: 0.95em; margin-bottom: 35px; font-weight: 500; line-height: 1.7; color: #333; }
@@ -380,11 +380,16 @@
       .marquee-content { font-size: 0.6rem; letter-spacing: 1px; }
       .marquee-content span { padding-right: 20px; }
 
-      /* 修正：SPファーストビューを100svhの画面いっぱいに。ヘッダー考慮の完全中央配置 */
-      .mo-hero { height: 100svh; min-height: 100svh; padding: 65px 0 0 0; align-items: center; }
-      .mo-hero-container { justify-content: center; align-items: center; padding: 0 10px; width: 100%; }
+      /* 修正：SPファーストビューJSで固定するためここでは100vhをセット、はみ出し禁止 */
+      .mo-hero { height: 100vh; padding: 0; align-items: flex-start; overflow: hidden; }
+      .mo-hero-bg { overflow: hidden; }
+      /* 修正：画像のバンッというリサイズを防ぎ、少し引いた位置へ */
+      .mo-hero-bg-img { animation: none !important; transform: scale(1) !important; object-position: center top; }
+      .mo-hero-overlay { background: transparent; display: none; }
+
+      /* 修正：SPのテキストカードをヘッダー避けの中央に配置 */
+      .mo-hero-container { justify-content: center; align-items: center; padding: 0 10px; width: 100%; margin-top: 70px; }
       
-      /* 修正：SP時のカードを左揃え・極小化・横長に */
       .mo-hero-text { 
         margin: 0; padding: 15px 20px; 
         background: rgba(255, 255, 255, 0.7); border-radius: 16px; 
@@ -398,10 +403,6 @@
       .mo-hero-subcatch { font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; }
       .mo-hero-desc { font-size: 0.85rem; margin-bottom: 25px; line-height: 1.5; }
       .mo-hero-badge { font-size: 0.9rem; padding: 10px 20px; border-radius: 30px; display: inline-block; }
-      
-      /* 修正：アニメーション（バンッという動き）を解除し等倍表示 */
-      .mo-hero-bg-img { animation: none; }
-      .mo-hero-overlay { background: transparent; display: none; }
 
       #about { padding: 100px 0; }
       .mo-lead-text { font-size: 1.05rem; margin-bottom: 40px; }
@@ -495,6 +496,7 @@
       .mo-footer-info { font-size: 0.8em; }
       .mo-copyright { font-size: 0.7em; }
 
+      /* 見切れ防止にbottomを上げる */
       .fixed-bottom-wrapper { bottom: 45px; }
       .combined-buy-btn { padding: 8px 25px 8px 12px; }
       .pants-icon { width: 35px; height: 35px; margin-right: 12px; }
@@ -537,7 +539,7 @@
       </div>
     </div>
 
-    <section class="mo-hero fade-in-trigger">
+    <section class="mo-hero fade-in-trigger" id="js-hero-section">
       <div class="mo-hero-bg">
         <img src="./1st.jpg" alt="背景画像" class="mo-hero-bg-img">
       </div>
@@ -889,6 +891,29 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       
+      // SP表示時のスクロールによるファーストビュー画像のガタつき防止処理
+      const setHeroHeight = () => {
+        const hero = document.getElementById('js-hero-section');
+        if (hero) {
+          if (window.innerWidth <= 768) {
+            // SP時は画面高さの約85%に固定し、画像を少し引きで美しく見せる
+            hero.style.height = (window.innerHeight * 0.85) + 'px';
+            hero.style.minHeight = 'auto';
+          } else {
+            hero.style.height = '';
+            hero.style.minHeight = '100vh';
+          }
+        }
+      };
+      setHeroHeight();
+      let vhWindowWidth = window.innerWidth;
+      window.addEventListener('resize', () => {
+        if (window.innerWidth !== vhWindowWidth) {
+          vhWindowWidth = window.innerWidth;
+          setHeroHeight();
+        }
+      });
+
       // タイポグラフィーアニメーション（1文字ずつフェード＆スライドイン）
       const typoCatch = document.getElementById('js-typo-catch');
       if (typoCatch) {
