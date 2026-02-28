@@ -81,18 +81,26 @@
       70% { transform: scale(1, 1) translateY(0); }
     }
 
-    /* タイポグラフィーアニメーション（1文字ずつ表示）用のクラス */
+    /* 修正：本格的なタイポグラフィーアニメーション */
     .typo-line { display: block; }
-    .typo-char { display: inline-block; opacity: 0; transform: translateY(15px); }
-    .fade-in-trigger.is-visible .typo-char { animation: typo-fade-in 0.5s forwards cubic-bezier(0.25, 1, 0.5, 1); }
-    @keyframes typo-fade-in { to { opacity: 1; transform: translateY(0); } }
+    .typo-char { 
+      display: inline-block; 
+      opacity: 0; 
+      transform: translateY(12px) scale(0.96); 
+      filter: blur(4px); 
+    }
+    .fade-in-trigger.is-visible .typo-char { 
+      animation: typo-reveal 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards; 
+    }
+    @keyframes typo-reveal { 
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } 
+    }
 
     /* ヘッダー＆マーキー */
     .mo-sticky-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 10001; box-shadow: 0 1px 15px rgba(0,0,0,0.05); }
     .mo-header { position: relative; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); z-index: 10002; border-bottom: 1px solid rgba(0,0,0,0.03); }
     .mo-header-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 15px 20px; }
     
-    /* 修正：PC時のロゴマークを大きく */
     .mo-logo img { height: 45px; width: auto; display: block; transition: opacity 0.3s; }
     .mo-logo:hover img { opacity: 0.7; }
     
@@ -128,7 +136,10 @@
       max-width: 440px; width: 100%; margin-left: 20px; 
     }
     
+    /* 修正：「部分の左端合わせ */
     .mo-hero-catch { font-size: 2.2em; font-weight: 800; line-height: 1.35; color: var(--mo-navy); margin-bottom: 15px; letter-spacing: -0.02em; }
+    .mo-hero-catch .typo-line:first-child { margin-left: -0.45em; }
+    
     .mo-hero-subcatch { font-size: 1.15em; font-weight: 700; color: var(--mo-orange); margin-bottom: 25px; line-height: 1.5; }
     .mo-hero-desc { font-size: 0.95em; margin-bottom: 35px; font-weight: 500; line-height: 1.7; color: #333; }
     
@@ -145,12 +156,12 @@
     .overlap-grid { display: flex; gap: 30px; margin-top: 70px; position: relative; z-index: 10; }
     
     .mo-card { 
-      flex: 1; background: var(--mo-navy); border: 1px solid rgba(255,255,255,0.05); 
+      flex: 1; background: var(--mo-navy); border: 1px solid rgba(255,255,255,0.15); 
       padding: 50px 35px; border-radius: 24px; position: relative; overflow: hidden; 
       transition: all 0.4s ease; display: flex; flex-direction: column; 
       box-shadow: 0 15px 30px rgba(0,0,0,0.3);
     }
-    .mo-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.15); }
+    .mo-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.3); }
     .mo-card-number { font-size: 5em; font-weight: 800; color: rgba(255,255,255,0.05); position: absolute; top: -15px; left: 20px; line-height: 1; }
     
     .mo-card h3 { font-size: 1.4em; margin-bottom: 15px; color: #fff; position: relative; z-index: 1; font-weight: 700; letter-spacing: 0.05em; }
@@ -173,14 +184,8 @@
     .pop-left-top .pop-line { right: -60px; } .pop-right-top .pop-line { left: -60px; }
     .pop-line-vertical { width: 1px; height: 60px; background: var(--mo-orange); margin: 0 auto 10px; }
     
-    /* 修正：ホバー時のオレンジ枠線追加 */
-    .pop-content { 
-      background: var(--mo-white); padding: 30px 25px; border-radius: 20px; 
-      box-shadow: var(--mo-shadow-hover); border: 2px solid transparent; 
-      text-align: center; transition: all 0.3s ease;
-    }
+    .pop-content { background: var(--mo-white); padding: 30px 25px; border-radius: 20px; box-shadow: var(--mo-shadow-hover); border: 2px solid transparent; text-align: center; transition: all 0.3s ease; }
     .pop-content:hover { border-color: var(--mo-orange); transform: translateY(-5px); box-shadow: 0 25px 50px rgba(242, 85, 17, 0.15); }
-    
     .pop-content h3 { color: var(--mo-orange); font-size: 1.15em; margin-bottom: 10px; font-weight: 800; letter-spacing: 0.05em; }
     .pop-content p { font-size: 0.9em; margin: 0; color: var(--mo-text); line-height: 1.6; }
     
@@ -191,7 +196,6 @@
     #features { padding: 140px 0; background: var(--mo-light); }
     .mo-feature-cards { display: flex; gap: 30px; margin-top: 70px; }
     
-    /* 修正：画像レイアウト対応とホバー時の枠線 */
     .mo-feature-card { 
       flex: 1; background: #fff; border-radius: 24px; 
       box-shadow: var(--mo-shadow-hover); text-align: center; position: relative; 
@@ -200,7 +204,6 @@
     }
     .mo-feature-card:hover { transform: translateY(-10px); border-color: var(--mo-orange); box-shadow: 0 30px 60px rgba(242, 85, 17, 0.15); }
     
-    /* 修正：上半分の画像エリア */
     .mo-feature-img { width: 100%; height: 200px; background-color: #e0e5ec; overflow: hidden; }
     .mo-feature-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
     .mo-feature-card:hover .mo-feature-img img { transform: scale(1.05); }
@@ -227,7 +230,7 @@
     .mo-review-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
     .mo-review-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
 
-    /* 【9】 スペック・サイズ（ズレ防止対応） */
+    /* 【9】 スペック・サイズ */
     #size { padding: 140px 0; }
     .mo-spec-tabs { display: flex; gap: 15px; justify-content: center; margin: 0 auto 50px; max-width: 500px; }
     .mo-spec-tab { 
@@ -244,12 +247,8 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
     .mo-spec-visual-flex { display: flex; gap: 50px; align-items: flex-start; background: #fff; padding: 50px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); border: 1px solid rgba(0,0,0,0.02); }
-    
-    /* 修正：画像エリアの高さを確保してガタつきを防止 */
     .mo-spec-img-box { flex: 0 0 320px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; min-height: 400px; }
-    /* 高さを固定して画像切り替え時の揺れをなくす */
     .mo-spec-img-box img { height: 280px; width: auto; object-fit: contain; margin: 0 auto 30px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1)); transition: opacity 0.3s; }
-    
     .mo-spec-info-box { flex: 1; }
 
     .mo-level-indicator { background: var(--mo-light); padding: 25px 20px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; }
@@ -259,6 +258,7 @@
     .mo-level-bar span.active { background: var(--mo-grad-orange); box-shadow: 0 2px 6px rgba(242, 85, 17, 0.3); }
     .mo-level-text { font-weight: 800; color: var(--mo-orange); font-size: 0.9em; letter-spacing: 0.05em; margin-top: 5px; }
 
+    /* 修正：テキストの最適化 */
     .mo-table-wrap { border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
     .mo-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
     .mo-table th { background: var(--mo-navy); color: #fff; padding: 18px 15px; width: 50%; font-weight: 600; letter-spacing: 0.05em; border-right: 1px solid rgba(255,255,255,0.1); } 
@@ -356,12 +356,10 @@
       .mo-section { padding: 100px 0; }
       .mo-section-title { font-size: 1.8rem; margin-bottom: 40px; letter-spacing: 0.02em; }
 
-      /* 修正：ロゴを大きめに */
       .mo-logo img { height: 36px; }
       
-      /* 修正：タップ枠線削除、回転アニメーション */
       .mo-menu-toggle { 
-        display: block; font-size: 3em; cursor: pointer; color: var(--mo-navy); 
+        display: block; font-size: 2.8em; cursor: pointer; color: var(--mo-navy); 
         font-weight: 300; line-height: 1; width: 40px; text-align: center; 
         position: relative; z-index: 10000; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
         -webkit-tap-highlight-color: transparent; outline: none; user-select: none;
@@ -380,12 +378,11 @@
       .mo-nav a { margin: 12px 0; font-size: 1.1rem; text-align: center; margin-left: 0; letter-spacing: 0.1em; }
       .mo-nav-btn { margin-top: 20px; font-size: 1.1rem; padding: 12px 40px; }
 
-      /* マーキーの高さを半分に */
       .marquee-container { padding: 2px 0; }
       .marquee-content { font-size: 0.6rem; letter-spacing: 1px; }
       .marquee-content span { padding-right: 20px; }
 
-      /* 修正：SPファーストビューを画面いっぱいに、カードは左寄せ・横長に */
+      /* 修正：SPファーストビューを画面いっぱい、左寄せに */
       .mo-hero { height: 100vh; min-height: 100svh; padding: 60px 0 0 0; align-items: center; }
       .mo-hero-container { justify-content: center; align-items: center; padding: 0 10px; width: 100%; }
       
@@ -396,12 +393,13 @@
         text-align: left; /* SP時も左揃え */
       }
       
-      .mo-hero-catch { font-size: 1.3rem; line-height: 1.4; margin-bottom: 12px; }
-      .mo-hero-catch span { display: inline; margin-left: 0 !important; }
-      .mo-hero-subcatch { font-size: 0.9rem; line-height: 1.4; margin-bottom: 12px; }
-      .mo-hero-desc { font-size: 0.75rem; margin-bottom: 15px; line-height: 1.5; }
+      /* 修正：「ツラ合わせ */
+      .mo-hero-catch { font-size: 1.4rem; line-height: 1.4; text-align: left; margin-bottom: 15px; }
+      .mo-hero-catch .typo-line:first-child { margin-left: -0.45em; }
       
-      .mo-hero-badge { font-size: 0.85rem; padding: 10px 20px; border-radius: 30px; display: inline-block; }
+      .mo-hero-subcatch { font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; }
+      .mo-hero-desc { font-size: 0.85rem; margin-bottom: 25px; line-height: 1.5; }
+      .mo-hero-badge { font-size: 0.9rem; padding: 10px 20px; border-radius: 30px; display: inline-block; }
       
       .mo-hero-bg-img { animation: hero-pan-sp 20s ease-in-out infinite alternate; }
       @keyframes hero-pan-sp { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
@@ -425,6 +423,7 @@
       .pop-content p { font-size: 0.9rem; }
       
       #features { padding: 100px 0; }
+      /* 修正：次のカードが見えるようにflex-basisを調整 */
       .mo-feature-cards {
         display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
         gap: 15px; padding-bottom: 30px; -webkit-overflow-scrolling: touch; margin-top: 20px;
@@ -432,7 +431,8 @@
       }
       .mo-feature-cards::-webkit-scrollbar { height: 3px; }
       .mo-feature-cards::-webkit-scrollbar-thumb { background: rgba(242, 85, 17, 0.5); border-radius: 10px; }
-      .mo-feature-card { flex: 0 0 75%; scroll-snap-align: center; margin-bottom: 0; border-radius: 20px; }
+      .mo-feature-card { flex: 0 0 75%; scroll-snap-align: center; margin-bottom: 0; border-radius: 20px; padding: 0; }
+      
       .mo-feature-img { height: 160px; }
       .mo-feature-text-wrap { padding: 25px 20px; }
       .mo-feature-title { font-size: 1.1rem; }
@@ -454,7 +454,6 @@
       .mo-review-item { flex: 0 0 75%; scroll-snap-align: center; margin-bottom: 0; padding: 30px 20px; border-radius: 20px; }
       .mo-review-item p { font-size: 0.9rem; line-height: 1.6; }
       
-      /* SPスペック表のレイアウト調整 */
       #size { padding: 100px 0; }
       .mo-spec-tabs { gap: 10px; margin-bottom: 30px; }
       .mo-spec-tab { padding: 15px 10px; border-radius: 50px; }
@@ -463,7 +462,6 @@
       .mo-spec-content { padding: 25px 15px; border-radius: 20px; }
       .mo-spec-visual-flex { flex-direction: column; gap: 20px; padding: 20px 15px; }
       
-      /* 画像エリアのmin-heightを調整しズレ防止 */
       .mo-spec-img-box { width: 100%; flex: auto; min-height: 250px; justify-content: center; }
       .mo-spec-img-box img { height: 160px; margin-bottom: 15px; } 
       
@@ -486,7 +484,6 @@
       #buy { padding: 100px 0; }
       .mo-buy-box { padding: 40px 15px; border-radius: 24px; }
       
-      /* SP購入カードを2カラム（横並び）にする */
       .mo-buy-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .mo-buy-item { padding: 20px 10px; border-radius: 16px; justify-content: space-between; }
       .mo-buy-item img { height: 90px; margin-bottom: 15px; }
@@ -501,7 +498,6 @@
       .mo-footer-info { font-size: 0.8em; }
       .mo-copyright { font-size: 0.7em; }
 
-      /* 追従ボタンのアニメーション見切れ対応としてbottomを上げる */
       .fixed-bottom-wrapper { bottom: 45px; }
       .combined-buy-btn { padding: 8px 25px 8px 12px; }
       .pants-icon { width: 35px; height: 35px; margin-right: 12px; }
@@ -562,7 +558,7 @@
           </p>
           
           <div class="mo-hero-desc animate-fade-in-up" style="animation-delay: 1.3s;">
-            <p>ズボンへの尿ジミ、気になるニオイをレスキュー。<br class="pc-only">特許取得の立体構造で、普通のパンツと変わらないスマートさと、<br class="pc-only">究極の履き心地を両立。</p>
+            <p>ズボンへの尿ジミ、気になるニオイをレスキュー。特許取得の立体構造で、普通のパンツと変わらないスマートさと、究極の履き心地を両立。</p>
           </div>
           
           <div class="animate-fade-in-up" style="animation-delay: 1.6s;">
@@ -752,7 +748,7 @@
                 <div class="mo-spec-info-box">
                   <div class="mo-table-wrap">
                     <table class="mo-table">
-                      <thead><tr><th>ボクサー(適応胴囲)</th><th>ウエスト(平置き)</th></tr></thead>
+                      <thead><tr><th>適応胴囲</th><th>ウエスト(平置き)</th></tr></thead>
                       <tbody>
                         <tr><td>M (76〜84cm)</td><td>33.0cm</td></tr>
                         <tr><td>L (84〜94cm)</td><td>35.0cm</td></tr>
@@ -788,7 +784,7 @@
                 <div class="mo-spec-info-box">
                   <div class="mo-table-wrap">
                     <table class="mo-table">
-                      <thead><tr><th>トランクス(適応胴囲)</th><th>ウエスト(平置き)</th></tr></thead>
+                      <thead><tr><th>適応胴囲</th><th>ウエスト(平置き)</th></tr></thead>
                       <tbody>
                         <tr><td>M (76〜84cm)</td><td>35.0cm</td></tr>
                         <tr><td>L (84〜94cm)</td><td>37.0cm</td></tr>
@@ -800,7 +796,7 @@
                   <div class="mo-spec-details">
                     <dl>
                       <dt>素材</dt>
-                      <dd>身生地：ポリエステル100%（例）</dd>
+                      <dd>身生地：ポリエステル100%</dd>
                       <dt>カラー</dt>
                       <dd>ブラック / ブルー</dd>
                     </dl>
@@ -895,20 +891,21 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // メインキャッチコピーのタイポグラフィーアニメーション
+      
+      // タイポグラフィーアニメーション（1文字ずつ美しくフェードイン）
       const typoCatch = document.getElementById('js-typo-catch');
       if (typoCatch) {
         const lines = typoCatch.querySelectorAll('.typo-line');
         let delayCounter = 0;
         lines.forEach(line => {
           const text = line.textContent;
-          line.textContent = ''; // 元のテキストをクリア
+          line.textContent = ''; 
           for (let i = 0; i < text.length; i++) {
             const span = document.createElement('span');
             span.textContent = text[i];
             span.className = 'typo-char';
-            // 1文字ごとに0.05秒ずつ遅延させる
-            span.style.animationDelay = (0.2 + delayCounter * 0.05) + 's';
+            // 1文字ごとに0.06秒ずつ遅延させる（流れるようなアニメーション）
+            span.style.animationDelay = (0.2 + delayCounter * 0.06) + 's';
             line.appendChild(span);
             delayCounter++;
           }
