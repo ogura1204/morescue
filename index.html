@@ -108,10 +108,9 @@
     .marquee-content span { padding-right: 40px; }
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* ヒーローセクション（1カラム化・背景画像変更） */
+    /* ヒーローセクション */
     .mo-hero { height: 95vh; min-height: 700px; display: flex; align-items: center; position: relative; margin-top: 0; overflow: hidden; padding-top: 110px; }
     
-    /* 修正：ゆっくり動く背景アニメーション（PC用） */
     .mo-hero-bg-anim { 
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
       background-size: cover; background-position: center center; 
@@ -135,7 +134,7 @@
     .mo-btn-primary { background: var(--mo-grad-orange); color: #fff; box-shadow: 0 10px 30px rgba(255,81,0,0.4); }
     .mo-btn-primary:hover { color: #fff; }
 
-    /* 【3】 お悩み共感セクション（上下斜めカット） */
+    /* 【3】 お悩み共感セクション */
     #about { 
       position: relative; z-index: 5;
       background: var(--mo-navy-dark) url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIiBvcGFjaXR5PSIwLjA1Ij48cGF0aCBkPSJNMjAgMjBMMCAwSDQwTDIwIDIwWk0yMCAyMEw0MCA0MEgwTDIwIDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg=='); 
@@ -281,22 +280,33 @@
     .combined-buy-btn .btn-text { font-weight: bold; font-size: 1.3em; letter-spacing: 1px; }
 
     /* ==========================================================================
-       レスポンシブ微調整（SP）
+       【SP】スマートフォン用レスポンシブ微調整（フォントサイズ・バランス最適化）
        ========================================================================== */
     @media (max-width: 768px) {
-      .mo-logo img { height: 28px; }
+      /* 全体的にフォントサイズを縮小し、美しいバランスに */
+      .morescue-dynamic-theme { font-size: 15px; }
+
+      /* セクションタイトル */
+      .mo-section-title { font-size: 1.8rem; margin-bottom: 30px; letter-spacing: 0; }
+
+      .mo-logo img { height: 26px; }
       .mo-menu-toggle { display: block; font-size: 2em; cursor: pointer; color: var(--mo-navy); font-weight: bold; line-height: 1; }
       .mo-nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; flex-direction: column; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top: 1px solid #eee; }
       .mo-nav.is-open { display: flex; }
       .mo-nav a { margin: 15px 0; font-size: 1.1em; text-align: center; }
       
-      .mo-hero { height: auto; padding: 140px 5% 100px; }
+      /* ヒーローセクションのサイズ・改行バランス */
+      .mo-hero { height: auto; padding: 130px 5% 80px; }
       .mo-hero-text { margin: 0 auto; text-align: center; }
-      .mo-hero-catch { font-size: 2.2em; letter-spacing: 0; text-align: center; }
-      .mo-hero-catch span { display: inline-block; text-align: left; }
-      .mo-hero-subcatch { font-size: 1.2em; white-space: normal; }
       
-      /* 修正：SP時は全体を見せるようにcoverで配置し、ゆっくりアニメーション */
+      .mo-hero-catch { font-size: 1.9rem; line-height: 1.35; text-align: center; margin-bottom: 20px; }
+      /* 「あ、っ」の変な寄りを防止し、自然な中央揃えに */
+      .mo-hero-catch span { display: inline; text-align: center; margin-left: 0 !important; }
+      
+      .mo-hero-subcatch { font-size: 1.15rem; line-height: 1.4; margin-bottom: 25px; }
+      .mo-hero-desc { font-size: 0.95rem; margin-bottom: 30px; }
+      .mo-btn { font-size: 1.1rem; padding: 15px 35px; }
+      
       .mo-hero-bg-anim {
         background-size: cover; background-position: top center;
         animation: hero-pan-sp 20s ease-in-out infinite alternate;
@@ -305,45 +315,82 @@
         0% { transform: scale(1); } 
         100% { transform: scale(1.08); } 
       }
-      /* SP時グラデーションの調整 */
       .mo-hero-overlay { background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0.2) 100%); }
 
       #about {
         clip-path: polygon(0 6vw, 100% 0, 100% calc(100% - 6vw), 0 100%);
-        padding: 100px 0 140px; margin-top: -5vw;
+        padding: 80px 0 120px; margin-top: -5vw;
       }
-      .overlap-grid { flex-direction: column; gap: 40px; } 
+      .mo-lead-text { font-size: 1rem; margin-bottom: 30px; }
+      .overlap-grid { flex-direction: column; gap: 30px; margin-top: 40px; } 
+      .mo-card { padding: 40px 25px; }
+      .mo-card h3 { font-size: 1.25rem; }
+      .mo-card p { font-size: 0.95rem; }
 
-      .mo-structure-section { padding: 80px 0 120px; margin-top: -6vw; }
-      .mo-structure-sub { font-size: 0.55em !important; line-height: 1.2 !important; margin-top: 5px !important; }
+      /* 特殊構造のSP改行余白とフォントサイズ縮小 */
+      .mo-structure-section { padding: 60px 0 100px; margin-top: -6vw; }
+      .mo-structure-sub { font-size: 0.8rem !important; line-height: 1.3 !important; margin-top: 10px !important; display: block !important; }
       
-      .mo-structure-diagram-wrap { padding: 0; margin-top: 30px; } .mo-center-pants { max-width: 300px; } 
-      .mo-pop-item { position: relative; top: auto; left: auto; right: auto; bottom: auto; width: 100%; margin-bottom: 20px; transform: none !important; opacity: 1 !important; } .pop-line, .pop-line-vertical { display: none; } .mo-pulse-circle { display: none; }
+      .mo-structure-diagram-wrap { padding: 0; margin-top: 20px; } 
+      .mo-center-pants { max-width: 280px; } 
+      .mo-pop-item { position: relative; top: auto; left: auto; right: auto; bottom: auto; width: 100%; margin-bottom: 15px; transform: none !important; opacity: 1 !important; } 
+      .pop-line, .pop-line-vertical { display: none; } .mo-pulse-circle { display: none; }
+      .pop-content { padding: 20px 15px; }
+      .pop-content h3 { font-size: 1.1rem; }
+      .pop-content p { font-size: 0.9rem; }
       
+      /* 3つのこだわり：横スライド化 */
+      #features { padding: 80px 0; }
       .mo-feature-cards {
         display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
-        gap: 15px; padding-bottom: 20px; -webkit-overflow-scrolling: touch;
+        gap: 15px; padding-bottom: 20px; -webkit-overflow-scrolling: touch; margin-top: 40px;
       }
       .mo-feature-cards::-webkit-scrollbar { height: 6px; }
       .mo-feature-cards::-webkit-scrollbar-thumb { background: var(--mo-orange); border-radius: 10px; }
-      .mo-feature-card { flex: 0 0 85%; scroll-snap-align: center; margin-bottom: 0; }
+      .mo-feature-card { flex: 0 0 85%; scroll-snap-align: center; margin-bottom: 0; padding: 30px 20px; }
+      .mo-feature-title { font-size: 1.15rem; }
+      .mo-feature-desc { font-size: 0.9rem; }
       
-      .mo-expert-box { flex-direction: column; gap: 30px; } .mo-expert-img-wrap { flex: auto; width: 100%; max-width: 300px; margin: 0 auto; }
+      .mo-expert-box { flex-direction: column; gap: 20px; padding: 30px 20px; } 
+      .mo-expert-img-wrap { flex: auto; width: 100%; max-width: 250px; margin: 0 auto; }
+      .mo-expert-title { font-size: 1.4rem; }
+      .mo-expert-text p { font-size: 0.95rem; }
+      .mo-expert-name { font-size: 0.9rem; }
       
-      .mo-spec-tabs { gap: 10px; }
-      .mo-spec-tab { padding: 10px; }
-      .mo-spec-tab span { font-size: 0.9em; }
+      .mo-review-grid { margin-top: 30px; gap: 20px; }
+      .mo-review-item { padding: 25px 20px; }
+      .mo-review-item p { font-size: 0.95rem; }
+      
+      /* SPタブレイアウト */
+      #size { padding: 80px 0; }
+      .mo-spec-tabs { gap: 10px; margin-bottom: 20px; }
+      .mo-spec-tab { padding: 10px 5px; border-radius: 10px; }
+      .mo-spec-tab span { font-size: 0.8rem; letter-spacing: -0.5px; }
       .mo-spec-content { padding: 20px 15px; }
+      .mo-table th, .mo-table td { padding: 10px 5px; font-size: 0.85rem; }
+      .mo-materials { font-size: 0.9rem; padding: 15px; margin-top: 20px; }
 
+      #faq { padding-top: 40px; }
       .mo-faq-wrap { margin-left: -20px; margin-right: -20px; }
-      .mo-faq-item { border-radius: 0; border-left: none; border-right: none; border-bottom: 1px solid #eee; box-shadow: none; }
+      .mo-faq-item { border-radius: 0; border-left: none; border-right: none; border-bottom: 1px solid #eee; box-shadow: none; margin-bottom: 0; }
+      .mo-faq-item summary { font-size: 1rem; padding: 15px 20px; }
+      .mo-faq-answer { font-size: 0.95rem; padding: 15px 20px; }
       
-      .mo-footer-logo img { height: 32px; }
-      .mo-footer-info { font-size: 0.9em; }
+      #buy { padding: 80px 0; }
+      .mo-buy-box { padding: 40px 20px; }
+      .mo-buy-box h3 { font-size: 1.2rem; }
+      .mo-buy-box p { font-size: 0.95rem; }
 
+      .mo-footer { padding: 50px 0 120px 0; }
+      .mo-footer-logo img { height: 30px; }
+      .mo-footer-company { font-size: 0.95em; }
+      .mo-footer-info { font-size: 0.85em; }
+      .mo-copyright { font-size: 0.75em; }
+
+      /* スマホ時の追従ボタン縮小 */
       .combined-buy-btn { padding: 6px 20px 6px 10px; }
       .pants-icon { width: 35px; height: 35px; margin-left: 0; margin-right: 10px; }
-      .combined-buy-btn .btn-text { font-size: 1.1em; }
+      .combined-buy-btn .btn-text { font-size: 1.05rem; }
     }
   </style>
 </head>
@@ -524,21 +571,21 @@
         <div class="mo-review-grid">
           <div class="mo-review-item animate-slide-up" style="animation-delay: 0.2s;">
             <div class="mo-review-header">
-              <img src="https://api.dicebear.com/9.x/micah/svg?seed=Jack&amp;mouth=smile&amp;backgroundColor=transparent" alt="お客様" class="mo-review-avatar">
+              <img src="https://api.dicebear.com/9.x/micah/svg?seed=Jack&mouth=smile&backgroundColor=transparent" alt="お客様" class="mo-review-avatar">
               <div class="mo-stars">★★★★★</div>
             </div>
             <p>「機能性が非常に良い。穿きやすく、見た目も普通のパンツなのでジムの着替えも安心です。」</p>
           </div>
           <div class="mo-review-item animate-slide-up" style="animation-delay: 0.4s;">
             <div class="mo-review-header">
-              <img src="https://api.dicebear.com/9.x/micah/svg?seed=Leo&amp;mouth=smile&amp;backgroundColor=transparent" alt="お客様" class="mo-review-avatar">
+              <img src="https://api.dicebear.com/9.x/micah/svg?seed=Leo&mouth=smile&backgroundColor=transparent" alt="お客様" class="mo-review-avatar">
               <div class="mo-stars">★★★★★</div>
             </div>
             <p>「穿いているという安心感のおかげで、外出が心から楽しめるようになりました。」</p>
           </div>
           <div class="mo-review-item animate-slide-up" style="animation-delay: 0.6s;">
             <div class="mo-review-header">
-              <img src="https://api.dicebear.com/9.x/micah/svg?seed=Sam&amp;mouth=smile&amp;backgroundColor=transparent" alt="お客様" class="mo-review-avatar">
+              <img src="https://api.dicebear.com/9.x/micah/svg?seed=Sam&mouth=smile&backgroundColor=transparent" alt="お客様" class="mo-review-avatar">
               <div class="mo-stars">★★★★☆</div>
             </div>
             <p>「吸汗速乾のおかげで夏場でもベタつかず、洗濯してもすぐ乾くので助かります。」</p>
@@ -550,7 +597,7 @@
     <section id="size" class="mo-section mo-bg-light-texture fade-in-trigger">
       <div class="mo-container">
         <div class="animate-slide-up" style="max-width: 900px; margin: 0 auto;">
-          <h2 class="mo-section-title text-center" style="font-size: 2.5em; margin-bottom: 40px;">スペック</h2>
+          <h2 class="mo-section-title text-center">スペック</h2>
           
           <div class="mo-spec-tabs" id="js-spec-tabs">
             <div class="mo-spec-tab is-active" data-target="spec-boxer">
@@ -620,10 +667,10 @@
       </div>
     </section>
 
-    <section id="faq" class="mo-section fade-in-trigger" style="padding-top: 60px;">
+    <section id="faq" class="mo-section fade-in-trigger">
       <div class="mo-container">
         <div class="animate-slide-up" style="max-width: 800px; margin: 0 auto;">
-          <h2 class="mo-section-title text-center" style="font-size: 2.5em; margin-bottom: 40px;">よくある質問</h2>
+          <h2 class="mo-section-title text-center">よくある質問</h2>
           <div class="mo-faq-wrap">
             <details class="mo-faq-item"><summary>見た目でバレませんか？</summary><p class="mo-faq-answer">普通のニットトランクスと同じデザインで気づかれません。</p></details>
             <details class="mo-faq-item"><summary>どこで買えますか？</summary><p class="mo-faq-answer">楽天市場のほか、お近くの量販店にてお求めいただけます。</p></details>
