@@ -90,7 +90,7 @@
 
     /* ヘッダー＆マーキー */
     .mo-sticky-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    .mo-header { position: relative; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); }
+    .mo-header { position: relative; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1001; }
     .mo-header-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 15px 20px; }
     
     .mo-logo img { height: 35px; width: auto; display: block; transition: opacity 0.3s; }
@@ -102,7 +102,7 @@
     .mo-nav-btn { background: var(--mo-grad-orange); color: #fff !important; padding: 10px 20px; border-radius: 30px; box-shadow: 0 4px 15px rgba(255,81,0,0.3); }
     .mo-menu-toggle { display: none; }
 
-    .mo-bg-orange-marquee { background-color: var(--mo-orange); color: #fff; }
+    .mo-bg-orange-marquee { background-color: var(--mo-orange); color: #fff; position: relative; z-index: 1000; }
     .marquee-container { padding: 10px 0; overflow: hidden; white-space: nowrap; }
     .marquee-content { display: inline-block; animation: marquee 35s linear infinite; font-weight: bold; font-size: 1.1em; letter-spacing: 2px; }
     .marquee-content span { padding-right: 40px; }
@@ -184,9 +184,6 @@
       padding: 120px 0;
       background: var(--mo-light) url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIiBvcGFjaXR5PSIwLjA1Ij48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIxIiBmaWxsPSIjMWEyYjRjIi8+PC9zdmc+'); 
     }
-    /* スワイプ案内のテキスト（PCでは非表示） */
-    .mo-swipe-hint { display: none; text-align: center; font-size: 0.85rem; color: rgba(26, 43, 76, 0.6); margin-bottom: 10px; }
-
     .mo-feature-cards { display: flex; gap: 30px; margin-top: 60px; }
     .mo-feature-card { flex: 1; background: #fff; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; position: relative; overflow: hidden; transition: transform 0.3s; }
     .mo-feature-card:hover { transform: translateY(-15px); }
@@ -222,7 +219,13 @@
       border-radius: 15px; padding: 15px; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
     }
     .mo-spec-tab.is-active { opacity: 1; border-color: var(--mo-orange); box-shadow: 0 10px 25px rgba(255,81,0,0.15); transform: translateY(-5px); }
-    .mo-spec-tab img { width: 100%; height: auto; border-radius: 10px; margin-bottom: 10px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
+    
+    /* 修正：タブ内画像の透明対応 */
+    .mo-spec-tab img { 
+      width: 100%; height: auto; margin-bottom: 10px; 
+      background: transparent; border: none;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15)); 
+    }
     .mo-spec-tab span { font-weight: bold; color: var(--mo-navy); display: block; font-size: 1.1em; }
     
     .mo-spec-content { display: none; animation: fadeIn 0.5s; background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
@@ -283,7 +286,7 @@
     .combined-buy-btn .btn-text { font-weight: bold; font-size: 1.3em; letter-spacing: 1px; }
 
     /* ==========================================================================
-       【SP】スマートフォン用レスポンシブ微調整（フォントサイズ・バランス・横スワイプ）
+       【SP】スマートフォン用レスポンシブ微調整
        ========================================================================== */
     @media (max-width: 768px) {
       .morescue-dynamic-theme { font-size: 15px; }
@@ -292,15 +295,24 @@
 
       .mo-logo img { height: 26px; }
       .mo-menu-toggle { display: block; font-size: 2em; cursor: pointer; color: var(--mo-navy); font-weight: bold; line-height: 1; }
-      .mo-nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; flex-direction: column; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top: 1px solid #eee; }
-      .mo-nav.is-open { display: flex; }
-      .mo-nav a { margin: 15px 0; font-size: 1.1em; text-align: center; }
       
-      /* マーキー高さ半分化 */
-      .marquee-container { padding: 5px 0; }
-      .marquee-content { font-size: 0.85rem; }
+      /* 修正：メニューを全画面・中央揃えのモダンデザインに */
+      .mo-nav { 
+        display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+        background: rgba(255,255,255,0.98); backdrop-filter: blur(15px);
+        flex-direction: column; justify-content: center; align-items: center; 
+        padding: 20px; z-index: 1000; box-sizing: border-box;
+      }
+      .mo-nav.is-open { display: flex; }
+      .mo-nav a { margin: 20px 0; font-size: 1.3rem; text-align: center; margin-left: 0; }
+      .mo-nav-btn { margin-top: 20px; font-size: 1.2rem; padding: 15px 40px; }
+      
+      /* 修正：マーキーの高さをさらに半減 */
+      .marquee-container { padding: 3px 0; }
+      .marquee-content { font-size: 0.65rem; letter-spacing: 1px; }
+      .marquee-content span { padding-right: 20px; }
 
-      .mo-hero { height: auto; padding: 130px 5% 80px; }
+      .mo-hero { height: auto; padding: 110px 5% 80px; }
       .mo-hero-text { margin: 0 auto; text-align: center; }
       
       .mo-hero-catch { font-size: 1.9rem; line-height: 1.35; text-align: center; margin-bottom: 20px; }
@@ -341,21 +353,16 @@
       .pop-content h3 { font-size: 1.1rem; }
       .pop-content p { font-size: 0.9rem; }
       
-      /* スワイプヒント表示 */
-      .mo-swipe-hint { display: block; }
-
       /* 3つのこだわり：横スライド化 */
       #features { padding: 80px 0; }
       .mo-feature-cards {
         display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
         gap: 15px; padding-bottom: 20px; -webkit-overflow-scrolling: touch; margin-top: 10px;
-        /* コンテナのpaddingを打ち消し、両端までスクロールできるようにする */
         padding-left: 20px; padding-right: 20px;
         margin-left: -20px; margin-right: -20px;
       }
       .mo-feature-cards::-webkit-scrollbar { height: 4px; }
       .mo-feature-cards::-webkit-scrollbar-thumb { background: var(--mo-orange); border-radius: 10px; }
-      /* 80%にすることで、次のカードが画面の右端に少し見切れるようにする */
       .mo-feature-card { flex: 0 0 80%; scroll-snap-align: center; margin-bottom: 0; padding: 30px 20px; }
       .mo-feature-title { font-size: 1.15rem; }
       .mo-feature-desc { font-size: 0.9rem; }
@@ -366,7 +373,7 @@
       .mo-expert-text p { font-size: 0.95rem; }
       .mo-expert-name { font-size: 0.9rem; }
       
-      /* レビュー：横スライド化 */
+      /* 修正：レビューも横スライド化 */
       .mo-review-grid {
         display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
         gap: 15px; padding-bottom: 20px; -webkit-overflow-scrolling: touch; margin-top: 10px;
@@ -375,10 +382,10 @@
       }
       .mo-review-grid::-webkit-scrollbar { height: 4px; }
       .mo-review-grid::-webkit-scrollbar-thumb { background: var(--mo-orange); border-radius: 10px; }
-      /* ここも80%でチラ見せ */
       .mo-review-item { flex: 0 0 80%; scroll-snap-align: center; margin-bottom: 0; padding: 25px 20px; }
       .mo-review-item p { font-size: 0.95rem; }
       
+      /* SPタブレイアウト */
       #size { padding: 80px 0; }
       .mo-spec-tabs { gap: 10px; margin-bottom: 20px; }
       .mo-spec-tab { padding: 10px 5px; border-radius: 10px; }
@@ -473,7 +480,7 @@
     <section id="about" class="mo-section mo-bg-navy-texture fade-in-trigger">
       <div class="mo-container">
         <h2 class="mo-section-title text-center text-white animate-slide-up">
-          誰にも言えない「あ、っ」の瞬間、<br>ありませんか？
+          誰にも言えない<br class="sp-only">「あ、っ」の瞬間、<br>ありませんか？
         </h2>
         <p class="mo-lead-text text-center text-white animate-fade-in-up" style="animation-delay: 0.3s; margin-bottom: 50px;">
           実は、<span class="mo-highlight-orange">3人に1人の男性</span>が悩んでいます。
@@ -543,7 +550,6 @@
       <div class="mo-container">
         <h2 class="mo-section-title text-center animate-slide-up">快適さと清潔さを守る<br>「3つのこだわり」</h2>
         
-        <div class="mo-swipe-hint sp-only"><span>← スワイプできます →</span></div>
         <div class="mo-feature-cards">
           <div class="mo-feature-card animate-slide-up" style="animation-delay: 0.3s;">
             <div class="feature-icon-box">
@@ -585,7 +591,6 @@
         </div>
 
         <h2 class="mo-section-title text-center" style="margin-top: 100px;">REVIEW</h2>
-        <div class="mo-swipe-hint sp-only" style="margin-top: -30px; margin-bottom: 10px;"><span>← スワイプできます →</span></div>
         <div class="mo-review-grid">
           <div class="mo-review-item animate-slide-up" style="animation-delay: 0.2s;">
             <div class="mo-review-header">
@@ -619,15 +624,15 @@
           
           <div class="mo-spec-tabs" id="js-spec-tabs">
             <div class="mo-spec-tab is-active" data-target="spec-boxer">
-              <img src="https://placehold.co/400x400/e0e5ec/1a2b4c?text=Boxer" alt="ボクサータイプ">
+              <img src="2-bl.png" alt="ボクサータイプ">
               <span>ボクサータイプ</span>
             </div>
             <div class="mo-spec-tab" data-target="spec-knit">
-              <img src="https://placehold.co/400x400/e0e5ec/1a2b4c?text=Knit" alt="ニットタイプ">
+              <img src="2-bl.png" alt="ニットタイプ">
               <span>ニットタイプ</span>
             </div>
             <div class="mo-spec-tab" data-target="spec-trunks">
-              <img src="https://placehold.co/400x400/e0e5ec/1a2b4c?text=Trunks" alt="トランクスタイプ">
+              <img src="1-gy.png" alt="トランクスタイプ">
               <span>トランクスタイプ</span>
             </div>
           </div>
@@ -685,7 +690,7 @@
       </div>
     </section>
 
-    <section id="faq" class="mo-section fade-in-trigger">
+    <section id="faq" class="mo-section fade-in-trigger" style="padding-top: 60px;">
       <div class="mo-container">
         <div class="animate-slide-up" style="max-width: 800px; margin: 0 auto;">
           <h2 class="mo-section-title text-center">よくある質問</h2>
@@ -753,7 +758,7 @@
       if(menuToggle && nav) {
         menuToggle.addEventListener('click', () => {
           nav.classList.toggle('is-open');
-          menuToggle.textContent = nav.classList.contains('is-open') ? '−' : '＋';
+          menuToggle.textContent = nav.classList.contains('is-open') ? '×' : '＋';
         });
         nav.querySelectorAll('a').forEach(link => {
           link.addEventListener('click', () => {
