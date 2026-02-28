@@ -100,16 +100,7 @@
     .mo-nav a { margin-left: 25px; text-decoration: none; color: var(--mo-navy); font-weight: bold; font-size: 0.9em; transition: all 0.3s; }
     .mo-nav a:hover { color: var(--mo-orange); }
     .mo-nav-btn { background: var(--mo-grad-orange); color: #fff !important; padding: 10px 20px; border-radius: 30px; box-shadow: 0 4px 15px rgba(255,81,0,0.3); }
-    
-    /* 修正：メニュー開閉ボタンのアニメーション設定 */
-    .mo-menu-toggle { 
-      display: none; font-size: 2.2em; cursor: pointer; color: var(--mo-navy); 
-      font-weight: bold; line-height: 1; width: 30px; text-align: center;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-      user-select: none;
-    }
-    /* is-activeクラスが付いた時に45度回転して「×」になる */
-    .mo-menu-toggle.is-active { transform: rotate(45deg); color: var(--mo-orange); }
+    .mo-menu-toggle { display: none; }
 
     .mo-bg-orange-marquee { background-color: var(--mo-orange); color: #fff; position: relative; z-index: 1000; }
     .marquee-container { padding: 10px 0; overflow: hidden; white-space: nowrap; }
@@ -117,45 +108,35 @@
     .marquee-content span { padding-right: 40px; }
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* ヒーローセクション（カードスタイル化） */
-    .mo-hero { height: 95vh; min-height: 700px; display: flex; align-items: center; position: relative; margin-top: 0; overflow: hidden; padding-top: 110px; background-color: var(--mo-light); }
+    /* 修正：ヒーローセクション（imgタグで背景を確実に表示） */
+    .mo-hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; padding-bottom: 50px; background-color: var(--mo-light); }
+    .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+    .mo-hero-bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center; animation: hero-pan 20s ease-in-out infinite alternate; }
+    .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.3); z-index: 2; pointer-events: none; }
     
-    /* 修正：パスを確実な相対パス（./1st.jpg）に変更、リピートなし等を追加 */
-    .mo-hero-bg-anim { 
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-      background-size: cover; background-position: center center; background-repeat: no-repeat;
-      z-index: -2; 
-      animation: hero-pan-pc 25s ease-in-out infinite alternate;
-    }
-    @keyframes hero-pan-pc { 
-      0% { transform: scale(1) translateY(0); } 
-      100% { transform: scale(1.1) translateY(-3%); } 
-    }
-    
-    .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0) 100%); z-index: -1; pointer-events: none; }
-    
-    .mo-hero-flex { width: 100%; padding: 60px 0; }
+    .mo-hero-container { position: relative; z-index: 3; display: flex; justify-content: center; width: 100%; }
     
     /* テキストエリア（Glassmorphismカード） */
     .mo-hero-text { 
-      max-width: 500px; z-index: 2; position: relative; 
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(10px);
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      border: 1px solid rgba(255,255,255,0.5);
+      background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
+      padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.6);
+      text-align: center; max-width: 600px; width: 100%; margin: 0 20px;
     }
     
-    .mo-hero-catch { font-size: 2.8em; font-weight: 900; line-height: 1.2; color: var(--mo-navy); margin-bottom: 15px; letter-spacing: -1px; }
+    .mo-hero-catch { font-size: 2.5em; font-weight: 900; line-height: 1.3; color: var(--mo-navy); margin-bottom: 15px; letter-spacing: -1px; }
+    .mo-hero-catch span { display: inline-block; }
     .mo-hero-subcatch { font-size: 1.3em; font-weight: bold; color: var(--mo-orange); margin-bottom: 25px; }
-    .mo-hero-desc { font-size: 1em; margin-bottom: 30px; font-weight: 500; line-height: 1.6; }
+    .mo-hero-desc { font-size: 1.05em; margin-bottom: 30px; font-weight: 500; line-height: 1.6; }
     
-    /* 修正：購入ボタンを実績バッジに変更（リンクなし） */
     .mo-hero-badge { 
       display: inline-block; padding: 15px 40px; font-size: 1.3em; font-weight: 900; 
       border-radius: 50px; line-height: 1.4; text-align: center;
       background: var(--mo-grad-orange); color: #fff; box-shadow: 0 10px 30px rgba(255,81,0,0.4); 
+    }
+
+    @keyframes hero-pan { 
+      0% { transform: scale(1); } 
+      100% { transform: scale(1.1); } 
     }
 
     /* 【3】 お悩み共感セクション */
@@ -270,7 +251,9 @@
     .mo-faq-answer { padding: 20px; background: var(--mo-light); color: var(--mo-text); border-top: 1px solid #eee; }
 
     /* 購入セクション */
+    /* 修正：デザイン崩れ防止のため .mo-btn-large を明記 */
     .mo-buy-box { background: var(--mo-white); padding: 60px; border-radius: 30px; max-width: 800px; margin: 50px auto 0; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+    .mo-btn-large { padding: 22px 60px !important; font-size: 1.5em !important; }
 
     /* フッター */
     .mo-footer { background: var(--mo-navy-dark); color: rgba(255,255,255,0.8); padding: 60px 0 160px 0; font-size: 0.95em; }
@@ -318,14 +301,14 @@
 
       .mo-logo img { height: 26px; }
       
-      /* 修正：メニュー開閉ボタンをアニメーションで「＋/×」切り替え */
-      .mo-menu-toggle { display: block; font-size: 2.2em; }
+      /* 修正：メニュー開閉ボタン（z-index最前面に） */
+      .mo-menu-toggle { display: block; font-size: 2.5em; cursor: pointer; color: var(--mo-navy); font-weight: bold; line-height: 1; width: 40px; text-align: center; position: relative; z-index: 10000; }
       
       .mo-nav { 
         display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
         background: rgba(255,255,255,0.98); backdrop-filter: blur(15px);
         flex-direction: column; justify-content: center; align-items: center; 
-        padding: 20px; z-index: 1000; box-sizing: border-box;
+        padding: 20px; z-index: 9999; box-sizing: border-box;
       }
       .mo-nav.is-open { display: flex; }
       .mo-nav a { margin: 20px 0; font-size: 1.3rem; text-align: center; margin-left: 0; }
@@ -336,12 +319,12 @@
       .marquee-content span { padding-right: 20px; }
 
       /* 修正：SPファーストビューのカードをさらに小さく調整 */
-      .mo-hero { height: auto; padding: 110px 5% 80px; }
+      .mo-hero { height: auto; min-height: 80vh; padding: 110px 5% 60px; }
       .mo-hero-text { 
         margin: 0 auto; text-align: center; 
-        padding: 25px 15px; /* 余白をさらに小さく */
+        padding: 25px 15px; 
         background: rgba(255, 255, 255, 0.85); border-radius: 12px; 
-        max-width: 90%; /* 幅をギュッと絞る */
+        max-width: 90%;
       }
       
       .mo-hero-catch { font-size: 1.6rem; line-height: 1.35; text-align: center; margin-bottom: 12px; }
@@ -350,18 +333,7 @@
       .mo-hero-subcatch { font-size: 1rem; line-height: 1.4; margin-bottom: 15px; }
       .mo-hero-desc { font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4; }
       
-      /* 修正：ボタンを実績バッジに変更し、小さめに調整 */
       .mo-hero-badge { font-size: 1.1rem; padding: 12px 25px; border-radius: 30px; }
-      
-      .mo-hero-bg-anim {
-        background-size: cover; background-position: top center;
-        animation: hero-pan-sp 20s ease-in-out infinite alternate;
-      }
-      @keyframes hero-pan-sp { 
-        0% { transform: scale(1); } 
-        100% { transform: scale(1.08); } 
-      }
-      .mo-hero-overlay { background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%); }
 
       #about {
         clip-path: polygon(0 6vw, 100% 0, 100% calc(100% - 6vw), 0 100%);
@@ -432,6 +404,9 @@
       .mo-buy-box { padding: 40px 20px; }
       .mo-buy-box h3 { font-size: 1.2rem; }
       .mo-buy-box p { font-size: 0.95rem; }
+      
+      /* 修正：購入ボタン崩れ防止のSP専用設定 */
+      .mo-btn-large { font-size: 1.3rem !important; padding: 18px 40px !important; }
 
       .mo-footer { padding: 50px 0 120px 0; }
       .mo-footer-logo img { height: 30px; }
@@ -481,10 +456,12 @@
     </div>
 
     <section class="mo-hero fade-in-trigger">
-      <div class="mo-hero-bg-anim" style="background-image: url('./1st.jpg'); background-color: #f4f7fb;"></div>
+      <div class="mo-hero-bg">
+        <img src="1st.jpg" alt="背景画像" class="mo-hero-bg-img">
+      </div>
       <div class="mo-hero-overlay"></div>
       
-      <div class="mo-container" style="position: relative; z-index: 2; width: 100%;">
+      <div class="mo-container mo-hero-container">
         <div class="mo-hero-text">
           <h2 class="mo-hero-catch">
             <span class="animate-impact line-1" style="margin-left: -0.4em;">「あ、っ」と思った</span><br>
@@ -783,32 +760,28 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // 修正：SPメニュー制御（＋/×アニメーション切り替え）
+      // SPメニュー制御（＋/×切り替え）
       const menuToggle = document.getElementById('js-menu-toggle');
       const nav = document.getElementById('js-nav');
 
-      const openMenu = () => {
-        nav.classList.add('is-open');
-        menuToggle.classList.add('is-active'); // 十字を回転させるクラスを追加
-        document.body.style.overflow = 'hidden';
-      };
-      const closeMenu = () => {
-        nav.classList.remove('is-open');
-        menuToggle.classList.remove('is-active'); // 回転をもとに戻す
-        document.body.style.overflow = '';
-      };
-
       if(menuToggle && nav) {
         menuToggle.addEventListener('click', () => {
+          nav.classList.toggle('is-open');
           if (nav.classList.contains('is-open')) {
-            closeMenu();
+            menuToggle.textContent = '×';
+            document.body.style.overflow = 'hidden';
           } else {
-            openMenu();
+            menuToggle.textContent = '＋';
+            document.body.style.overflow = '';
           }
         });
         
         nav.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', closeMenu);
+          link.addEventListener('click', () => {
+            nav.classList.remove('is-open');
+            menuToggle.textContent = '＋';
+            document.body.style.overflow = '';
+          });
         });
       }
 
