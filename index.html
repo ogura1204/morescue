@@ -108,29 +108,29 @@
     .marquee-content span { padding-right: 40px; }
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* 修正：ヒーローセクション（imgタグで背景を確実に表示） */
+    /* ヒーローセクション */
     .mo-hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; padding-bottom: 50px; background-color: var(--mo-light); }
     .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
     .mo-hero-bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center; animation: hero-pan 20s ease-in-out infinite alternate; }
-    /* 修正：写真の上の白色を削除 */
     .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; z-index: 2; pointer-events: none; }
     
-    .mo-hero-container { position: relative; z-index: 3; display: flex; justify-content: center; width: 100%; }
+    /* 修正：PC時は左寄せ（flex-start）に設定 */
+    .mo-hero-container { position: relative; z-index: 3; display: flex; justify-content: flex-start; width: 100%; max-width: 1100px; margin: 0 auto; }
     
-    /* 修正：テキストエリア（Glassmorphismカード）縮小 */
     .mo-hero-text { 
       background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
-      padding: 20px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.6);
-      text-align: center; max-width: 320px; width: 100%; margin: 0 20px;
+      padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.6);
+      text-align: center; max-width: 450px; width: 100%; 
+      margin-left: 20px; /* 左側に余白を持たせる */
     }
     
-    .mo-hero-catch { font-size: 1.5em; font-weight: 900; line-height: 1.3; color: var(--mo-navy); margin-bottom: 10px; letter-spacing: -1px; }
+    .mo-hero-catch { font-size: 2.2em; font-weight: 900; line-height: 1.3; color: var(--mo-navy); margin-bottom: 15px; letter-spacing: -1px; }
     .mo-hero-catch span { display: inline-block; }
-    .mo-hero-subcatch { font-size: 1em; font-weight: bold; color: var(--mo-orange); margin-bottom: 15px; }
-    .mo-hero-desc { font-size: 0.9em; margin-bottom: 20px; font-weight: 500; line-height: 1.6; }
+    .mo-hero-subcatch { font-size: 1.2em; font-weight: bold; color: var(--mo-orange); margin-bottom: 20px; }
+    .mo-hero-desc { font-size: 1em; margin-bottom: 30px; font-weight: 500; line-height: 1.6; }
     
     .mo-hero-badge { 
-      display: inline-block; padding: 10px 20px; font-size: 1em; font-weight: 900; 
+      display: inline-block; padding: 15px 40px; font-size: 1.2em; font-weight: 900; 
       border-radius: 50px; line-height: 1.4; text-align: center;
       background: var(--mo-grad-orange); color: #fff; box-shadow: 0 10px 30px rgba(255,81,0,0.4); 
     }
@@ -141,7 +141,6 @@
     }
 
     /* 【3】 お悩み共感セクション */
-    /* 修正：下側の斜めカットを水平に修正 */
     #about { 
       position: relative; z-index: 5;
       background: var(--mo-navy-dark) url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIiBvcGFjaXR5PSIwLjA1Ij48cGF0aCBkPSJNMjAgMjBMMCAwSDQwTDIwIDIwWk0yMCAyMEw0MCA0MEgwTDIwIDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg=='); 
@@ -158,7 +157,6 @@
     .mo-card p { position: relative; z-index: 1; color: #fff; flex-grow: 1; }
 
     /* 【4】 解決策・特許構造セクション */
-    /* 修正：斜めカット削除に伴う水平デザイン調整 */
     .mo-structure-section { 
       position: relative; z-index: 4; 
       background: #fff;
@@ -226,7 +224,12 @@
       border-radius: 15px; padding: 15px; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
     }
     .mo-spec-tab.is-active { opacity: 1; border-color: var(--mo-orange); box-shadow: 0 10px 25px rgba(255,81,0,0.15); transform: translateY(-5px); }
-    .mo-spec-tab img { width: 100%; height: auto; border-radius: 10px; margin-bottom: 10px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
+    
+    .mo-spec-tab img { 
+      width: 100%; height: auto; margin-bottom: 10px; 
+      background: transparent; border: none;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15)); 
+    }
     .mo-spec-tab span { font-weight: bold; color: var(--mo-navy); display: block; font-size: 1.1em; }
     
     .mo-spec-content { display: none; animation: fadeIn 0.5s; background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
@@ -262,12 +265,20 @@
     .mo-copyright { color: rgba(255,255,255,0.6); font-size: 0.85em; }
 
     /* 追従カートボタン */
+    /* 修正：初期状態を完全に透明・非表示にし、上にはねるスペースを確保 */
     .fixed-bottom-wrapper {
-      position: fixed; bottom: 20px; left: 0; width: 100%; z-index: 9999;
+      position: fixed; bottom: 30px; left: 0; width: 100%; z-index: 9999;
       display: flex; justify-content: center; pointer-events: none;
-      transform: translateY(150%); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0; visibility: hidden;
+      transform: translateY(50px); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    .fixed-bottom-wrapper.is-visible { transform: translateY(0); }
+    .fixed-bottom-wrapper.is-visible { 
+      transform: translateY(0); opacity: 1; visibility: visible; 
+    }
+    /* メニュー開閉時は追従ボタンを消す */
+    body.is-menu-open .fixed-bottom-wrapper {
+      opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;
+    }
     
     .combined-buy-btn {
       pointer-events: auto; display: inline-flex; align-items: center;
@@ -297,10 +308,13 @@
 
       .mo-logo img { height: 26px; }
       
-      /* 修正：アニメーション対応のSPメニューボタン */
-      .mo-menu-toggle { display: block; font-size: 2.2em; cursor: pointer; color: var(--mo-navy); font-weight: bold; line-height: 1; transition: transform 0.3s; position: relative; z-index: 10000; }
-      /* メニューが開いているときはクルッと回転 */
-      .mo-menu-toggle.is-active { transform: rotate(45deg); color: var(--mo-orange); }
+      /* 修正：メニュー開閉ボタン（＋）のスムーズな回転アニメーション */
+      .mo-menu-toggle { 
+        display: block; font-size: 2.5em; cursor: pointer; color: var(--mo-navy); 
+        font-weight: bold; line-height: 1; width: 40px; text-align: center; 
+        position: relative; z-index: 10000; transition: transform 0.3s ease; 
+      }
+      .mo-menu-toggle.is-active { transform: rotate(45deg); color: var(--mo-navy); }
       
       .mo-nav { 
         display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
@@ -316,22 +330,25 @@
       .marquee-content { font-size: 0.65rem; letter-spacing: 1px; }
       .marquee-content span { padding-right: 20px; }
 
-      /* 修正：SPファーストビューのカードをさらに小さく調整 */
-      .mo-hero { height: auto; min-height: 80vh; padding: 110px 5% 60px; }
+      /* 修正：SPファーストビューの中央配置とカード縮小 */
+      .mo-hero { height: auto; min-height: 85vh; padding: 110px 5% 60px; }
+      
+      /* 中央寄せにオーバーライド */
+      .mo-hero-container { justify-content: center; }
+      
       .mo-hero-text { 
         margin: 0 auto; text-align: center; 
-        padding: 15px; /* 余白を最小限に */
-        background: rgba(255, 255, 255, 0.85); border-radius: 12px; 
-        max-width: 90%;
+        padding: 15px 15px; 
+        background: rgba(255, 255, 255, 0.85); border-radius: 15px; 
+        max-width: 85%;
       }
       
-      .mo-hero-catch { font-size: 1.2rem; line-height: 1.35; text-align: center; margin-bottom: 12px; }
+      .mo-hero-catch { font-size: 1.4rem; line-height: 1.35; text-align: center; margin-bottom: 12px; }
       .mo-hero-catch span { display: inline; text-align: center; margin-left: 0 !important; }
       
       .mo-hero-subcatch { font-size: 0.9rem; line-height: 1.4; margin-bottom: 15px; }
       .mo-hero-desc { font-size: 0.8rem; margin-bottom: 20px; line-height: 1.4; }
       
-      /* バッジも小さめに調整 */
       .mo-hero-badge { font-size: 0.9rem; padding: 10px 20px; border-radius: 30px; }
       
       .mo-hero-bg-anim {
@@ -342,12 +359,11 @@
         0% { transform: scale(1); } 
         100% { transform: scale(1.08); } 
       }
-      .mo-hero-overlay { background: rgba(255,255,255,0.3); }
+      /* 修正：SP時も写真の上の白色を無くす */
+      .mo-hero-overlay { background: transparent; display: none; }
 
-      /* 修正：斜めカット削除に伴う水平デザイン調整 */
       #about {
-        padding: 80px 0; 
-        margin-top: 0;
+        padding: 80px 0 120px; margin-top: 0;
       }
       .mo-lead-text { font-size: 1rem; margin-bottom: 30px; }
       .overlap-grid { flex-direction: column; gap: 30px; margin-top: 40px; } 
@@ -355,11 +371,7 @@
       .mo-card h3 { font-size: 1.25rem; }
       .mo-card p { font-size: 0.95rem; }
 
-      /* 修正：斜めカット削除に伴う水平デザイン調整 */
-      .mo-structure-section { 
-        padding: 80px 0; 
-        margin-top: 0; 
-      }
+      .mo-structure-section { padding: 60px 0 100px; margin-top: 0; }
       .mo-structure-sub { font-size: 0.8rem !important; line-height: 1.3 !important; margin-top: 10px !important; display: block !important; }
       
       .mo-structure-diagram-wrap { padding: 0; margin-top: 20px; } 
@@ -419,7 +431,7 @@
       .mo-buy-box h3 { font-size: 1.2rem; }
       .mo-buy-box p { font-size: 0.95rem; }
       
-      /* ボタンデザイン崩れのSP専用復元設定 */
+      /* 下部の購入ボタンデザイン崩れの復元 */
       .mo-btn-large { font-size: 1.3rem !important; padding: 18px 40px !important; }
 
       .mo-footer { padding: 50px 0 120px 0; }
@@ -428,6 +440,7 @@
       .mo-footer-info { font-size: 0.85em; }
       .mo-copyright { font-size: 0.75em; }
 
+      /* 追従カートボタンのスマホ用サイズ調整 */
       .combined-buy-btn { padding: 6px 20px 6px 10px; }
       .pants-icon { width: 35px; height: 35px; margin-left: 0; margin-right: 10px; }
       .combined-buy-btn .btn-text { font-size: 1.05rem; }
@@ -462,7 +475,7 @@
           <span>「あ、っ」と思ったその瞬間を、無かったことに。&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <span>「あ、っ」と思ったその瞬間を、無かったことに。&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <span>「あ、っ」と思ったその瞬間を、無かったことに。&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <span>「あ、っ`と思ったその瞬間を、無かったことに。&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span>「あ、っ」と思ったその瞬間を、無かったことに。&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <span>「あ、っ」と思ったその瞬間を、無かったことに。&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <span>「あ、っ」と思ったその瞬間を、無かったことに。&nbsp;&nbsp;&nbsp;&nbsp;</span>
         </div>
@@ -774,32 +787,30 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // 修正：SPメニュー制御（くるっと回転アニメーション切り替え）
+      // 修正：SPメニュー制御（文字の書き換えを削除し、CSSのみで回転させる）
       const menuToggle = document.getElementById('js-menu-toggle');
       const nav = document.getElementById('js-nav');
 
       if(menuToggle && nav) {
         menuToggle.addEventListener('click', () => {
-          nav.classList.toggle('is-open'); // メニュー開閉
-          menuToggle.classList.toggle('is-active'); // クラス付与で回転アニメーション
+          nav.classList.toggle('is-open'); 
+          menuToggle.classList.toggle('is-active'); 
+          
+          // メニュー展開時に body にクラスを付け、追従ボタンを非表示にする
+          document.body.classList.toggle('is-menu-open');
           
           if (nav.classList.contains('is-open')) {
-            // 開いたときは文字を「×」にし、背景スクロールロック
-            setTimeout(() => { menuToggle.textContent = '×'; }, 100); 
             document.body.style.overflow = 'hidden';
           } else {
-            // 閉じたときは文字を「＋」に戻し、スクロールロック解除
-            setTimeout(() => { menuToggle.textContent = '＋'; }, 100);
             document.body.style.overflow = '';
           }
         });
         
-        // リンククリック時にも閉じる
         nav.querySelectorAll('a').forEach(link => {
           link.addEventListener('click', () => {
             nav.classList.remove('is-open');
             menuToggle.classList.remove('is-active');
-            setTimeout(() => { menuToggle.textContent = '＋'; }, 100);
+            document.body.classList.remove('is-menu-open');
             document.body.style.overflow = '';
           });
         });
@@ -833,6 +844,7 @@
       // 追従カートボタンの表示ロジック
       const bottomBar = document.getElementById('js-bottom-bar');
       const toggleBottomElems = () => {
+        // スクロール量が400pxを超えたら表示
         if (window.scrollY > 400) {
           if(bottomBar) bottomBar.classList.add('is-visible');
         } else {
