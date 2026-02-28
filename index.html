@@ -26,8 +26,9 @@
       --mo-text: #4a4a4a;
       --mo-grad-navy: linear-gradient(135deg, var(--mo-navy-dark) 0%, var(--mo-navy) 100%);
       --mo-grad-orange: linear-gradient(135deg, #f77a45 0%, var(--mo-orange) 100%);
-      --mo-shadow-soft: 0 15px 40px rgba(0, 0, 0, 0.04);
-      --mo-shadow-hover: 0 20px 50px rgba(0, 0, 0, 0.08);
+      /* カードを浮き上がらせるシャドウ */
+      --mo-shadow-soft: 0 15px 40px rgba(0, 0, 0, 0.08);
+      --mo-shadow-hover: 0 20px 50px rgba(0, 0, 0, 0.15);
     }
     
     .morescue-dynamic-theme { 
@@ -86,8 +87,9 @@
     }
 
     /* ヘッダー＆マーキー */
-    .mo-sticky-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 1px 15px rgba(0,0,0,0.05); }
-    .mo-header { position: relative; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); z-index: 1001; border-bottom: 1px solid rgba(0,0,0,0.03); }
+    /* 修正：ヘッダーのz-indexを上げ、メニューと被らないように独立させる */
+    .mo-sticky-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 10001; box-shadow: 0 1px 15px rgba(0,0,0,0.05); }
+    .mo-header { position: relative; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); z-index: 10002; border-bottom: 1px solid rgba(0,0,0,0.03); }
     .mo-header-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 15px 20px; }
     
     .mo-logo img { height: 32px; width: auto; display: block; transition: opacity 0.3s; }
@@ -99,38 +101,40 @@
     .mo-nav-btn { background: var(--mo-grad-orange); color: #fff !important; padding: 10px 24px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 15px rgba(242, 85, 17, 0.3); transition: transform 0.3s; }
     .mo-nav-btn:hover { transform: translateY(-2px); }
     
-    /* タップ時の四角いハイライト枠を消す */
+    /* タップ枠線を消し、スムーズな回転アニメーションを設定 */
     .mo-menu-toggle { display: none; -webkit-tap-highlight-color: transparent; outline: none; }
 
-    .mo-bg-orange-marquee { background-color: var(--mo-orange); color: #fff; position: relative; z-index: 1000; }
+    .mo-bg-orange-marquee { background-color: var(--mo-orange); color: #fff; position: relative; z-index: 10000; }
     .marquee-container { padding: 8px 0; overflow: hidden; white-space: nowrap; }
     .marquee-content { display: inline-block; animation: marquee 40s linear infinite; font-weight: 600; font-size: 1rem; letter-spacing: 0.1em; }
     .marquee-content span { padding-right: 40px; }
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ヒーローセクション */
-    .mo-hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; padding-bottom: 50px; background-color: var(--mo-light); }
+    .mo-hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; background-color: var(--mo-light); }
     .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
     .mo-hero-bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center; animation: hero-pan 25s ease-in-out infinite alternate; }
+    /* 白色オーバーレイは完全に透明に */
     .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; z-index: 2; pointer-events: none; }
     
     .mo-hero-container { position: relative; z-index: 3; display: flex; justify-content: flex-start; width: 100%; max-width: 1100px; margin: 0 auto; }
     
+    /* PC時：左寄せ・縦長の美しい透過ガラスカード */
     .mo-hero-text { 
       background: rgba(255, 255, 255, 0.7); 
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       padding: 50px 35px; 
       border-radius: 24px; 
-      box-shadow: 0 15px 40px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(255,255,255,0.7); 
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.7); 
       border: 1px solid rgba(255,255,255,0.4);
-      text-align: center; 
-      max-width: 380px; width: 100%; margin-left: 20px; 
+      text-align: left; /* PC時は左揃え */
+      max-width: 380px; width: 100%; margin-left: 5%; 
     }
     
     .mo-hero-catch { font-size: 2.2em; font-weight: 800; line-height: 1.35; color: var(--mo-navy); margin-bottom: 15px; letter-spacing: -0.02em; }
     .mo-hero-catch span { display: inline-block; }
     .mo-hero-subcatch { font-size: 1.15em; font-weight: 700; color: var(--mo-orange); margin-bottom: 25px; }
-    .mo-hero-desc { font-size: 0.95em; margin-bottom: 35px; font-weight: 500; line-height: 1.7; color: #555; }
+    .mo-hero-desc { font-size: 0.95em; margin-bottom: 35px; font-weight: 500; line-height: 1.7; color: #333; }
     
     .mo-hero-badge { 
       display: inline-block; padding: 14px 35px; font-size: 1.15em; font-weight: 800; 
@@ -144,12 +148,14 @@
     #about { position: relative; z-index: 5; padding: 140px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
     .overlap-grid { display: flex; gap: 30px; margin-top: 70px; position: relative; z-index: 10; }
     
+    /* 修正：カードの縁取りと影を強めて目立たせる */
     .mo-card { 
-      flex: 1; background: var(--mo-navy); border: 1px solid rgba(255,255,255,0.05); 
+      flex: 1; background: var(--mo-navy); border: 1px solid rgba(255,255,255,0.15); 
       padding: 50px 35px; border-radius: 24px; position: relative; overflow: hidden; 
       transition: all 0.4s ease; display: flex; flex-direction: column; 
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
     }
-    .mo-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.15); }
+    .mo-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.3); }
     .mo-card-number { font-size: 5em; font-weight: 800; color: rgba(255,255,255,0.05); position: absolute; top: -15px; left: 20px; line-height: 1; }
     
     .mo-card h3 { font-size: 1.4em; margin-bottom: 15px; color: #fff; position: relative; z-index: 1; font-weight: 700; letter-spacing: 0.05em; }
@@ -172,12 +178,8 @@
     .pop-left-top .pop-line { right: -60px; } .pop-right-top .pop-line { left: -60px; }
     .pop-line-vertical { width: 1px; height: 60px; background: var(--mo-orange); margin: 0 auto 10px; }
     
-    /* 修正：カードの影とボーダーを強めて目立たせる */
-    .pop-content { 
-      background: var(--mo-white); padding: 30px 25px; border-radius: 20px; 
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.08); 
-      text-align: center; 
-    }
+    /* 修正：ポップアップカードの目立ち具合を強化 */
+    .pop-content { background: var(--mo-white); padding: 30px 25px; border-radius: 20px; box-shadow: var(--mo-shadow-hover); border: 1px solid rgba(0,0,0,0.06); text-align: center; }
     .pop-content h3 { color: var(--mo-orange); font-size: 1.15em; margin-bottom: 10px; font-weight: 800; letter-spacing: 0.05em; }
     .pop-content p { font-size: 0.9em; margin: 0; color: var(--mo-text); line-height: 1.6; }
     
@@ -188,13 +190,13 @@
     #features { padding: 140px 0; background: var(--mo-light); }
     .mo-feature-cards { display: flex; gap: 30px; margin-top: 70px; }
     
-    /* 修正：カードの影とボーダーを強めて目立たせる */
+    /* 修正：カードの影とボーダーを強める */
     .mo-feature-card { 
       flex: 1; background: #fff; padding: 50px 35px; border-radius: 24px; 
-      box-shadow: 0 20px 40px rgba(0,0,0,0.06); text-align: center; position: relative; 
+      box-shadow: var(--mo-shadow-hover); text-align: center; position: relative; 
       overflow: hidden; transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.05); 
     }
-    .mo-feature-card:hover { transform: translateY(-10px); box-shadow: var(--mo-shadow-hover); }
+    .mo-feature-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
     
     .feature-icon-box { 
       width: 90px; height: 90px; background-color: var(--mo-blue); border-radius: 50%; 
@@ -216,8 +218,8 @@
     .mo-expert-name { font-weight: 700; color: var(--mo-navy); margin-top: 25px; text-align: right; font-size: 0.95em; }
     
     .mo-review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
-    .mo-review-item { background: var(--mo-navy); color: #fff; padding: 40px 30px; border-radius: 20px; position: relative; transition: all 0.4s ease; }
-    .mo-review-item:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .mo-review-item { background: var(--mo-navy); color: #fff; padding: 40px 30px; border-radius: 20px; position: relative; transition: all 0.4s ease; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    .mo-review-item:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
     .mo-review-item::after { content: '”'; position: absolute; top: -10px; right: 20px; font-size: 5em; color: rgba(255,255,255,0.05); font-family: serif; line-height: 1; }
     .mo-stars { color: var(--mo-orange); letter-spacing: 3px; margin-bottom: 0; font-size: 1.1em; }
     
@@ -226,28 +228,25 @@
 
     /* 【9】 スペック・サイズ */
     #size { padding: 140px 0; }
-    .mo-spec-tabs { display: flex; gap: 20px; justify-content: center; margin: 0 auto 50px; max-width: 600px; }
+    .mo-spec-tabs { display: flex; gap: 15px; justify-content: center; margin: 0 auto 50px; max-width: 500px; }
     .mo-spec-tab { 
       flex: 1; text-align: center; cursor: pointer; 
-      opacity: 0.5; transition: all 0.4s ease; border: 1px solid transparent; 
-      border-radius: 20px; padding: 20px 15px; background: transparent; 
+      opacity: 0.6; transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.05); 
+      border-radius: 50px; padding: 15px 25px; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.02); 
     }
-    .mo-spec-tab.is-active { opacity: 1; background: #fff; box-shadow: var(--mo-shadow-soft); border-color: rgba(0,0,0,0.03); transform: translateY(-5px); }
+    .mo-spec-tab.is-active { opacity: 1; background: var(--mo-navy); border-color: var(--mo-navy); box-shadow: 0 10px 25px rgba(22, 36, 64, 0.2); transform: translateY(-3px); }
+    .mo-spec-tab span { font-weight: 700; color: var(--mo-navy); display: block; font-size: 1.1em; transition: color 0.3s; }
+    .mo-spec-tab.is-active span { color: #fff; }
     
-    .mo-spec-tab img { width: 100%; max-width: 150px; height: auto; margin: 0 auto 15px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
-    .mo-spec-tab span { font-weight: 700; color: var(--mo-navy); display: block; font-size: 1.1em; }
-    
-    .mo-spec-content { display: none; animation: fadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1); background: #fff; padding: 50px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); border: 1px solid rgba(0,0,0,0.02); }
+    .mo-spec-content { display: none; animation: fadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
     .mo-spec-content.is-active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* コンテンツを横並びに */
     .mo-spec-visual-flex { display: flex; gap: 50px; align-items: flex-start; background: #fff; padding: 50px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); border: 1px solid rgba(0,0,0,0.02); }
     .mo-spec-img-box { flex: 0 0 320px; display: flex; flex-direction: column; justify-content: center; }
-    .mo-spec-img-box img { width: 100%; height: auto; max-width: 280px; margin: 0 auto 30px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1)); }
+    .mo-spec-img-box img { width: 100%; height: auto; max-width: 280px; margin: 0 auto 30px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1)); transition: opacity 0.3s; }
     .mo-spec-info-box { flex: 1; }
 
-    /* レベルインジケーター */
     .mo-level-indicator { background: var(--mo-light); padding: 25px 20px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; }
     .mo-level-label { font-weight: 700; color: var(--mo-navy); font-size: 0.9em; letter-spacing: 0.05em; }
     .mo-level-bar { display: flex; gap: 4px; width: 100%; max-width: 260px; }
@@ -255,7 +254,6 @@
     .mo-level-bar span.active { background: var(--mo-grad-orange); box-shadow: 0 2px 6px rgba(242, 85, 17, 0.3); }
     .mo-level-text { font-weight: 800; color: var(--mo-orange); font-size: 0.9em; letter-spacing: 0.05em; margin-top: 5px; }
 
-    /* テーブルの角丸とデザイン */
     .mo-table-wrap { border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
     .mo-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
     .mo-table th { background: var(--mo-navy); color: #fff; padding: 18px 15px; width: 50%; font-weight: 600; letter-spacing: 0.05em; border-right: 1px solid rgba(255,255,255,0.1); } 
@@ -263,7 +261,6 @@
     .mo-table td { padding: 18px 15px; border-bottom: 1px solid #f0f0f0; text-align: center; font-weight: 500; color: #444; background: #fff; }
     .mo-table tr:last-child td { border-bottom: none; }
     
-    /* DLリスト形式の美しいスペック詳細 */
     .mo-spec-details { margin-top: 30px; background: var(--mo-light); padding: 30px 40px; border-radius: 16px; }
     .mo-spec-details dl { margin: 0; display: flex; flex-wrap: wrap; }
     .mo-spec-details dt { width: 30%; font-weight: 700; color: var(--mo-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.05); letter-spacing: 0.05em; }
@@ -280,21 +277,31 @@
     .mo-faq-answer { padding: 25px 30px; background: #fafafa; color: #555; border-top: 1px solid #f0f0f0; line-height: 1.7; }
 
     /* 購入セクション */
-    .mo-buy-box { background: var(--mo-white); padding: 70px; border-radius: 32px; max-width: 900px; margin: 50px auto 0; box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
-    
+    .mo-buy-box { background: var(--mo-white); padding: 70px; border-radius: 32px; max-width: 900px; margin: 0 auto; box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
     .mo-buy-grid { display: grid; grid-template-columns: repeat(2, 320px); justify-content: center; gap: 40px; margin-bottom: 40px; }
     
-    .mo-buy-item { background: var(--mo-light); padding: 40px 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); transition: transform 0.3s; }
+    .mo-buy-item { background: var(--mo-light); padding: 40px 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); transition: transform 0.3s; }
     .mo-buy-item:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
-    .mo-buy-item img { height: 160px; width: auto; object-fit: contain; margin: 0 auto 25px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); }
+    .mo-buy-item img { height: 160px; width: auto; object-fit: contain; margin: 0 auto 25px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); transition: opacity 0.3s; }
     .mo-buy-item h4 { color: var(--mo-navy); font-size: 1.2em; margin-bottom: 25px; font-weight: 800; letter-spacing: 0.05em; }
     
-    .mo-color-btns { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
-    .mo-color-btn { display: block; padding: 14px; border-radius: 10px; color: #fff !important; text-decoration: none; font-weight: bold; font-size: 0.95em; transition: all 0.3s; letter-spacing: 0.05em; }
-    .mo-color-btn:hover { opacity: 0.9; transform: translateY(-2px); }
-    
-    .btn-black { background-color: #222222; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-    .btn-blue { background-color: #235fac; box-shadow: 0 4px 15px rgba(35, 95, 172, 0.3); }
+    /* 丸いカラーチップのデザイン */
+    .mo-color-chips { display: flex; gap: 15px; justify-content: center; margin-bottom: 25px; }
+    .color-chip { 
+      width: 32px; height: 32px; border-radius: 50%; border: 3px solid transparent; 
+      cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 0; outline: none;
+    }
+    .color-chip:hover { transform: scale(1.1); }
+    .color-chip.active { border-color: var(--mo-orange); transform: scale(1.15); box-shadow: 0 4px 12px rgba(242, 85, 17, 0.4); }
+    .chip-black { background-color: #222222; }
+    .chip-blue { background-color: #235fac; }
+
+    .mo-buy-action-btn { 
+      width: 100%; display: block; padding: 15px 0; border-radius: 50px; 
+      background: var(--mo-grad-orange); color: #fff !important; font-weight: bold; font-size: 1.1em;
+      text-decoration: none; box-shadow: 0 8px 20px rgba(242, 85, 17, 0.3); transition: transform 0.3s; margin-top: auto;
+    }
+    .mo-buy-action-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(242, 85, 17, 0.4); }
 
     /* フッター */
     .mo-footer { background: var(--mo-navy-dark); color: rgba(255,255,255,0.7); padding: 80px 0 160px 0; font-size: 0.9em; }
@@ -316,6 +323,7 @@
     .fixed-bottom-wrapper.is-visible { 
       transform: translateY(0); opacity: 1; visibility: visible; 
     }
+    /* メニュー展開時は強制非表示 */
     body.is-menu-open .fixed-bottom-wrapper {
       opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; transform: translateY(50px) !important;
     }
@@ -345,9 +353,10 @@
       .mo-section { padding: 100px 0; }
       .mo-section-title { font-size: 1.8rem; margin-bottom: 40px; letter-spacing: 0.02em; }
 
-      .mo-logo img { height: 26px; }
+      /* ロゴを少し大きく */
+      .mo-logo img { height: 32px; }
       
-      /* 修正：タップ枠線削除、回転アニメーション */
+      /* SPメニューボタン（タップ時の四角い枠を消す） */
       .mo-menu-toggle { 
         display: block; font-size: 2.8em; cursor: pointer; color: var(--mo-navy); 
         font-weight: 300; line-height: 1; width: 40px; text-align: center; 
@@ -356,42 +365,44 @@
       }
       .mo-menu-toggle.is-active { transform: rotate(45deg); color: var(--mo-navy); }
       
+      /* メニュー展開時もロゴが隠れないようにtop位置をヘッダー下に */
       .mo-nav { 
-        display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+        display: none; position: fixed; top: 60px; left: 0; width: 100vw; height: calc(100vh - 60px); 
         background: rgba(255,255,255,0.98); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
         flex-direction: column; justify-content: center; align-items: center; 
-        padding: 20px; z-index: 9999; box-sizing: border-box;
+        padding: 20px; z-index: 999; box-sizing: border-box;
       }
-      .mo-nav.is-open { display: flex; animation: fadeInMenu 0.4s ease forwards; }
+      .mo-nav.is-open { display: flex; animation: fadeInMenu 0.3s ease forwards; }
       @keyframes fadeInMenu { from { opacity: 0; } to { opacity: 1; } }
       
-      .mo-nav a { margin: 20px 0; font-size: 1.2rem; text-align: center; margin-left: 0; letter-spacing: 0.1em; }
-      .mo-nav-btn { margin-top: 30px; font-size: 1.1rem; padding: 15px 40px; }
+      /* メニューの余白を詰める */
+      .mo-nav a { margin: 12px 0; font-size: 1.1rem; text-align: center; margin-left: 0; letter-spacing: 0.1em; }
+      .mo-nav-btn { margin-top: 20px; font-size: 1.1rem; padding: 12px 40px; }
 
-      .marquee-container { padding: 4px 0; }
-      .marquee-content { font-size: 0.7rem; letter-spacing: 1px; }
+      /* マーキーの高さを半分に */
+      .marquee-container { padding: 2px 0; }
+      .marquee-content { font-size: 0.55rem; letter-spacing: 1px; }
       .marquee-content span { padding-right: 20px; }
 
-      /* 修正：SPファーストビューのカードをさらに小さく・横長に */
-      .mo-hero { height: auto; min-height: 70vh; padding: 100px 5% 50px; }
-      .mo-hero-container { justify-content: center; align-items: center; }
+      /* SPファーストビュー（画面いっぱい、カード極小・横長） */
+      .mo-hero { height: 100vh; min-height: 100svh; padding: 60px 0 0 0; align-items: center; }
+      .mo-hero-container { justify-content: center; align-items: center; padding: 0 10px; }
       
       .mo-hero-text { 
-        margin: 0 auto; padding: 15px 20px; /* 上下余白を削って横長に */
+        margin: 0; padding: 15px 15px; 
         background: rgba(255, 255, 255, 0.7); border-radius: 16px; 
-        max-width: 96%; width: 100%; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        max-width: 100%; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
       }
       
       .mo-hero-catch { font-size: 1.25rem; line-height: 1.35; text-align: center; margin-bottom: 8px; }
       .mo-hero-catch span { display: inline; margin-left: 0 !important; }
-      .mo-hero-subcatch { font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px; }
+      .mo-hero-subcatch { font-size: 0.85rem; line-height: 1.4; margin-bottom: 12px; }
       .mo-hero-desc { font-size: 0.75rem; margin-bottom: 15px; line-height: 1.4; }
-      .mo-hero-badge { font-size: 0.8rem; padding: 8px 16px; border-radius: 30px; }
+      .mo-hero-badge { font-size: 0.85rem; padding: 8px 16px; border-radius: 30px; }
       
-      .mo-hero-bg-img {
-        animation: hero-pan-sp 20s ease-in-out infinite alternate;
-      }
+      .mo-hero-bg-img { animation: hero-pan-sp 20s ease-in-out infinite alternate; }
       @keyframes hero-pan-sp { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
+      /* SP時も白色は完全に非表示 */
       .mo-hero-overlay { background: transparent; display: none; }
 
       #about { padding: 100px 0; }
@@ -412,6 +423,7 @@
       .pop-content p { font-size: 0.9rem; }
       
       #features { padding: 100px 0; }
+      /* フリックしやすくするためflex-basisを調整 */
       .mo-feature-cards {
         display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
         gap: 15px; padding-bottom: 30px; -webkit-overflow-scrolling: touch; margin-top: 20px;
@@ -419,7 +431,7 @@
       }
       .mo-feature-cards::-webkit-scrollbar { height: 3px; }
       .mo-feature-cards::-webkit-scrollbar-thumb { background: rgba(242, 85, 17, 0.5); border-radius: 10px; }
-      .mo-feature-card { flex: 0 0 85%; scroll-snap-align: center; margin-bottom: 0; padding: 40px 25px; border-radius: 20px; }
+      .mo-feature-card { flex: 0 0 70%; scroll-snap-align: center; margin-bottom: 0; padding: 40px 25px; border-radius: 20px; }
       .mo-feature-title { font-size: 1.15rem; }
       .mo-feature-desc { font-size: 0.9rem; }
       .feature-icon-box { width: 70px; height: 70px; margin-bottom: 25px; }
@@ -437,28 +449,30 @@
       }
       .mo-review-grid::-webkit-scrollbar { height: 3px; }
       .mo-review-grid::-webkit-scrollbar-thumb { background: rgba(242, 85, 17, 0.5); border-radius: 10px; }
-      .mo-review-item { flex: 0 0 85%; scroll-snap-align: center; margin-bottom: 0; padding: 35px 25px; border-radius: 20px; }
+      /* フリックしやすくするためflex-basisを調整 */
+      .mo-review-item { flex: 0 0 75%; scroll-snap-align: center; margin-bottom: 0; padding: 35px 25px; border-radius: 20px; }
       .mo-review-item p { font-size: 0.95rem; line-height: 1.6; }
       
-      /* SPスペック表のレイアウト調整 */
+      /* SPスペック表の縮小レイアウト */
       #size { padding: 100px 0; }
       .mo-spec-tabs { gap: 10px; margin-bottom: 30px; }
       .mo-spec-tab { padding: 15px 10px; border-radius: 50px; }
-      .mo-spec-tab span { font-size: 0.9rem; letter-spacing: 0; }
+      .mo-spec-tab span { font-size: 0.85rem; letter-spacing: 0; }
       
-      .mo-spec-content { padding: 30px 20px; border-radius: 20px; }
-      .mo-spec-visual-flex { flex-direction: column; gap: 30px; padding: 30px 20px; }
+      .mo-spec-content { padding: 25px 15px; border-radius: 20px; }
+      .mo-spec-visual-flex { flex-direction: column; gap: 20px; padding: 20px 15px; }
       .mo-spec-img-box { width: 100%; flex: auto; }
+      .mo-spec-img-box img { max-width: 140px; margin-bottom: 15px; } /* 画像を小さく */
       
-      .mo-table th, .mo-table td { padding: 12px 10px; font-size: 0.85rem; }
+      .mo-table th, .mo-table td { padding: 10px 8px; font-size: 0.8rem; }
       
-      .mo-spec-details { padding: 25px 20px; }
+      .mo-spec-details { padding: 20px 15px; margin-top: 20px; }
       .mo-spec-details dl { flex-direction: column; }
-      .mo-spec-details dt { width: 100%; padding: 15px 0 5px; border-bottom: none; font-size: 0.95em; color: rgba(22, 36, 64, 0.7); }
-      .mo-spec-details dd { width: 100%; padding: 0 0 15px; font-size: 1em; border-bottom: 1px solid rgba(0,0,0,0.05); font-weight: 500; }
-      .mo-level-indicator { flex-direction: column; align-items: flex-start; gap: 10px; width: 100%; }
-      .mo-level-bar { max-width: 100%; width: 100%; gap: 4px; }
-      .mo-level-bar span { height: 12px; }
+      .mo-spec-details dt { width: 100%; padding: 10px 0 5px; border-bottom: none; font-size: 0.9em; color: rgba(22, 36, 64, 0.7); }
+      .mo-spec-details dd { width: 100%; padding: 0 0 10px; font-size: 0.95em; border-bottom: 1px solid rgba(0,0,0,0.05); font-weight: 500; }
+      .mo-level-indicator { flex-direction: column; align-items: flex-start; gap: 8px; width: 100%; padding: 15px; }
+      .mo-level-bar { max-width: 100%; width: 100%; gap: 3px; }
+      .mo-level-bar span { height: 10px; }
 
       #faq { padding-top: 0; }
       .mo-faq-wrap { margin-left: -20px; margin-right: -20px; }
@@ -467,13 +481,16 @@
       .mo-faq-answer { font-size: 0.9rem; padding: 20px; }
       
       #buy { padding: 100px 0; }
-      .mo-buy-box { padding: 50px 25px; border-radius: 24px; }
+      .mo-buy-box { padding: 40px 15px; border-radius: 24px; }
       
-      .mo-buy-grid { grid-template-columns: 1fr; gap: 20px; }
-      .mo-buy-item { padding: 30px 20px; }
-      .mo-buy-item img { height: 130px; }
-      .mo-color-btns { flex-direction: row; gap: 10px; }
-      .mo-color-btn { flex: 1; padding: 14px 10px; font-size: 0.85em; }
+      /* 修正：SP購入カードを2カラム（横並び）にする */
+      .mo-buy-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .mo-buy-item { padding: 20px 10px; border-radius: 16px; }
+      .mo-buy-item img { height: 90px; margin-bottom: 15px; }
+      .mo-buy-item h4 { font-size: 0.95rem; margin-bottom: 15px; letter-spacing: 0; }
+      
+      .color-chip { width: 24px; height: 24px; }
+      .mo-buy-action-btn { padding: 10px 0; font-size: 0.95em; }
 
       .mo-footer { padding: 60px 0 140px 0; }
       .mo-footer-logo img { height: 28px; }
@@ -481,6 +498,8 @@
       .mo-footer-info { font-size: 0.8em; }
       .mo-copyright { font-size: 0.7em; }
 
+      /* 追従ボタンのアニメーション見切れ対応としてbottomを上げる */
+      .fixed-bottom-wrapper { bottom: 45px; }
       .combined-buy-btn { padding: 8px 25px 8px 12px; }
       .pants-icon { width: 35px; height: 35px; margin-right: 12px; }
       .combined-buy-btn .btn-text { font-size: 1.1rem; }
@@ -802,23 +821,27 @@
         
         <div class="mo-buy-box animate-zoom-in" style="animation-delay: 0.5s;">
           <div class="mo-buy-grid">
+            
             <div class="mo-buy-item">
-              <img src="2-bl.png" alt="ボクサータイプ">
+              <img src="2-bl.png" alt="ボクサータイプ" id="js-buy-img-boxer">
               <h4>ボクサータイプ</h4>
-              <div class="mo-color-btns">
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-black">ブラック</a>
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-blue">ブルー</a>
+              <div class="mo-color-chips">
+                <button class="color-chip chip-black active" data-target="js-buy-img-boxer" data-src="2-bl.png" aria-label="ブラック"></button>
+                <button class="color-chip chip-blue" data-target="js-buy-img-boxer" data-src="1-gy.png" aria-label="ブルー"></button>
               </div>
+              <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-buy-action-btn">購入する</a>
             </div>
             
             <div class="mo-buy-item">
-              <img src="1-gy.png" alt="トランクスタイプ">
+              <img src="1-gy.png" alt="トランクスタイプ" id="js-buy-img-trunks">
               <h4>トランクスタイプ</h4>
-              <div class="mo-color-btns">
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-black">ブラック</a>
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-color-btn btn-blue">ブルー</a>
+              <div class="mo-color-chips">
+                <button class="color-chip chip-black active" data-target="js-buy-img-trunks" data-src="1-gy.png" aria-label="ブラック"></button>
+                <button class="color-chip chip-blue" data-target="js-buy-img-trunks" data-src="2-bl.png" aria-label="ブルー"></button>
               </div>
+              <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-buy-action-btn">購入する</a>
             </div>
+            
           </div>
           
           <div style="margin-top: 50px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 30px;">
@@ -859,7 +882,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // SPメニュー制御
+      // SPメニュー制御（＋/× スムーズなアニメーション切り替え）
       const menuToggle = document.getElementById('js-menu-toggle');
       const nav = document.getElementById('js-nav');
 
@@ -912,7 +935,33 @@
         });
       });
 
-      // 追従カートボタンの表示ロジック
+      // 購入セクションのカラーチップ画像切り替えロジック
+      const colorChips = document.querySelectorAll('.color-chip');
+      colorChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+          // 同じ親(商品)の中にあるチップのactiveを外す
+          const siblings = this.parentElement.querySelectorAll('.color-chip');
+          siblings.forEach(s => s.classList.remove('active'));
+          
+          // クリックされたチップをactiveに
+          this.classList.add('active');
+          
+          // 対応する画像を切り替え
+          const targetId = this.getAttribute('data-target');
+          const imgSrc = this.getAttribute('data-src');
+          const targetImg = document.getElementById(targetId);
+          if(targetImg) {
+            // ふんわり切り替わるように一旦透明にする
+            targetImg.style.opacity = 0;
+            setTimeout(() => {
+              targetImg.src = imgSrc;
+              targetImg.style.opacity = 1;
+            }, 150);
+          }
+        });
+      });
+
+      // 追従カートボタンの表示ロジック（見切れ防止でスクロール位置を調整）
       const bottomBar = document.getElementById('js-bottom-bar');
       const toggleBottomElems = () => {
         if (window.scrollY > 400) {
