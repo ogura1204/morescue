@@ -184,6 +184,9 @@
       padding: 120px 0;
       background: var(--mo-light) url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIiBvcGFjaXR5PSIwLjA1Ij48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIxIiBmaWxsPSIjMWEyYjRjIi8+PC9zdmc+'); 
     }
+    /* スワイプ案内のテキスト（PCでは非表示） */
+    .mo-swipe-hint { display: none; text-align: center; font-size: 0.85rem; color: rgba(26, 43, 76, 0.6); margin-bottom: 10px; }
+
     .mo-feature-cards { display: flex; gap: 30px; margin-top: 60px; }
     .mo-feature-card { flex: 1; background: #fff; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; position: relative; overflow: hidden; transition: transform 0.3s; }
     .mo-feature-card:hover { transform: translateY(-15px); }
@@ -280,13 +283,11 @@
     .combined-buy-btn .btn-text { font-weight: bold; font-size: 1.3em; letter-spacing: 1px; }
 
     /* ==========================================================================
-       【SP】スマートフォン用レスポンシブ微調整（フォントサイズ・バランス最適化）
+       【SP】スマートフォン用レスポンシブ微調整（フォントサイズ・バランス・横スワイプ）
        ========================================================================== */
     @media (max-width: 768px) {
-      /* 全体的にフォントサイズを縮小し、美しいバランスに */
       .morescue-dynamic-theme { font-size: 15px; }
 
-      /* セクションタイトル */
       .mo-section-title { font-size: 1.8rem; margin-bottom: 30px; letter-spacing: 0; }
 
       .mo-logo img { height: 26px; }
@@ -295,12 +296,14 @@
       .mo-nav.is-open { display: flex; }
       .mo-nav a { margin: 15px 0; font-size: 1.1em; text-align: center; }
       
-      /* ヒーローセクションのサイズ・改行バランス */
+      /* マーキー高さ半分化 */
+      .marquee-container { padding: 5px 0; }
+      .marquee-content { font-size: 0.85rem; }
+
       .mo-hero { height: auto; padding: 130px 5% 80px; }
       .mo-hero-text { margin: 0 auto; text-align: center; }
       
       .mo-hero-catch { font-size: 1.9rem; line-height: 1.35; text-align: center; margin-bottom: 20px; }
-      /* 「あ、っ」の変な寄りを防止し、自然な中央揃えに */
       .mo-hero-catch span { display: inline; text-align: center; margin-left: 0 !important; }
       
       .mo-hero-subcatch { font-size: 1.15rem; line-height: 1.4; margin-bottom: 25px; }
@@ -327,7 +330,6 @@
       .mo-card h3 { font-size: 1.25rem; }
       .mo-card p { font-size: 0.95rem; }
 
-      /* 特殊構造のSP改行余白とフォントサイズ縮小 */
       .mo-structure-section { padding: 60px 0 100px; margin-top: -6vw; }
       .mo-structure-sub { font-size: 0.8rem !important; line-height: 1.3 !important; margin-top: 10px !important; display: block !important; }
       
@@ -339,15 +341,22 @@
       .pop-content h3 { font-size: 1.1rem; }
       .pop-content p { font-size: 0.9rem; }
       
+      /* スワイプヒント表示 */
+      .mo-swipe-hint { display: block; }
+
       /* 3つのこだわり：横スライド化 */
       #features { padding: 80px 0; }
       .mo-feature-cards {
         display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
-        gap: 15px; padding-bottom: 20px; -webkit-overflow-scrolling: touch; margin-top: 40px;
+        gap: 15px; padding-bottom: 20px; -webkit-overflow-scrolling: touch; margin-top: 10px;
+        /* コンテナのpaddingを打ち消し、両端までスクロールできるようにする */
+        padding-left: 20px; padding-right: 20px;
+        margin-left: -20px; margin-right: -20px;
       }
-      .mo-feature-cards::-webkit-scrollbar { height: 6px; }
+      .mo-feature-cards::-webkit-scrollbar { height: 4px; }
       .mo-feature-cards::-webkit-scrollbar-thumb { background: var(--mo-orange); border-radius: 10px; }
-      .mo-feature-card { flex: 0 0 85%; scroll-snap-align: center; margin-bottom: 0; padding: 30px 20px; }
+      /* 80%にすることで、次のカードが画面の右端に少し見切れるようにする */
+      .mo-feature-card { flex: 0 0 80%; scroll-snap-align: center; margin-bottom: 0; padding: 30px 20px; }
       .mo-feature-title { font-size: 1.15rem; }
       .mo-feature-desc { font-size: 0.9rem; }
       
@@ -357,11 +366,19 @@
       .mo-expert-text p { font-size: 0.95rem; }
       .mo-expert-name { font-size: 0.9rem; }
       
-      .mo-review-grid { margin-top: 30px; gap: 20px; }
-      .mo-review-item { padding: 25px 20px; }
+      /* レビュー：横スライド化 */
+      .mo-review-grid {
+        display: flex; flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory;
+        gap: 15px; padding-bottom: 20px; -webkit-overflow-scrolling: touch; margin-top: 10px;
+        padding-left: 20px; padding-right: 20px;
+        margin-left: -20px; margin-right: -20px;
+      }
+      .mo-review-grid::-webkit-scrollbar { height: 4px; }
+      .mo-review-grid::-webkit-scrollbar-thumb { background: var(--mo-orange); border-radius: 10px; }
+      /* ここも80%でチラ見せ */
+      .mo-review-item { flex: 0 0 80%; scroll-snap-align: center; margin-bottom: 0; padding: 25px 20px; }
       .mo-review-item p { font-size: 0.95rem; }
       
-      /* SPタブレイアウト */
       #size { padding: 80px 0; }
       .mo-spec-tabs { gap: 10px; margin-bottom: 20px; }
       .mo-spec-tab { padding: 10px 5px; border-radius: 10px; }
@@ -387,7 +404,6 @@
       .mo-footer-info { font-size: 0.85em; }
       .mo-copyright { font-size: 0.75em; }
 
-      /* スマホ時の追従ボタン縮小 */
       .combined-buy-btn { padding: 6px 20px 6px 10px; }
       .pants-icon { width: 35px; height: 35px; margin-left: 0; margin-right: 10px; }
       .combined-buy-btn .btn-text { font-size: 1.05rem; }
@@ -444,7 +460,7 @@
           </p>
           
           <div class="mo-hero-desc animate-fade-in-up" style="animation-delay: 1.3s;">
-            <p>ズボンへの尿ジミ、気になるニオイをレスキュー。<br>特許取得の立体構造で、普通のパンツと変わらないスマートさと、<br>究極の履き心地を両立。</p>
+            <p>ズボンへの尿ジミ、気になるニオイをレスキュー。<br class="pc-only">特許取得の立体構造で、普通のパンツと変わらないスマートさと、<br class="pc-only">究極の履き心地を両立。</p>
           </div>
           
           <div class="mo-hero-buttons animate-fade-in-up" style="animation-delay: 1.6s;">
@@ -527,6 +543,7 @@
       <div class="mo-container">
         <h2 class="mo-section-title text-center animate-slide-up">快適さと清潔さを守る<br>「3つのこだわり」</h2>
         
+        <div class="mo-swipe-hint sp-only"><span>← スワイプできます →</span></div>
         <div class="mo-feature-cards">
           <div class="mo-feature-card animate-slide-up" style="animation-delay: 0.3s;">
             <div class="feature-icon-box">
@@ -568,6 +585,7 @@
         </div>
 
         <h2 class="mo-section-title text-center" style="margin-top: 100px;">REVIEW</h2>
+        <div class="mo-swipe-hint sp-only" style="margin-top: -30px; margin-bottom: 10px;"><span>← スワイプできます →</span></div>
         <div class="mo-review-grid">
           <div class="mo-review-item animate-slide-up" style="animation-delay: 0.2s;">
             <div class="mo-review-header">
