@@ -98,7 +98,9 @@
     .mo-nav a:hover { color: var(--mo-orange); }
     .mo-nav-btn { background: var(--mo-grad-orange); color: #fff !important; padding: 10px 24px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 15px rgba(242, 85, 17, 0.3); transition: transform 0.3s; }
     .mo-nav-btn:hover { transform: translateY(-2px); }
-    .mo-menu-toggle { display: none; }
+    
+    /* タップ時の四角いハイライト枠を消す */
+    .mo-menu-toggle { display: none; -webkit-tap-highlight-color: transparent; outline: none; }
 
     .mo-bg-orange-marquee { background-color: var(--mo-orange); color: #fff; position: relative; z-index: 1000; }
     .marquee-container { padding: 8px 0; overflow: hidden; white-space: nowrap; }
@@ -170,7 +172,12 @@
     .pop-left-top .pop-line { right: -60px; } .pop-right-top .pop-line { left: -60px; }
     .pop-line-vertical { width: 1px; height: 60px; background: var(--mo-orange); margin: 0 auto 10px; }
     
-    .pop-content { background: var(--mo-white); padding: 30px 25px; border-radius: 20px; box-shadow: var(--mo-shadow-soft); border: 1px solid rgba(0,0,0,0.03); text-align: center; }
+    /* 修正：カードの影とボーダーを強めて目立たせる */
+    .pop-content { 
+      background: var(--mo-white); padding: 30px 25px; border-radius: 20px; 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.08); 
+      text-align: center; 
+    }
     .pop-content h3 { color: var(--mo-orange); font-size: 1.15em; margin-bottom: 10px; font-weight: 800; letter-spacing: 0.05em; }
     .pop-content p { font-size: 0.9em; margin: 0; color: var(--mo-text); line-height: 1.6; }
     
@@ -180,7 +187,13 @@
     /* 【5】 技術・機能深掘り */
     #features { padding: 140px 0; background: var(--mo-light); }
     .mo-feature-cards { display: flex; gap: 30px; margin-top: 70px; }
-    .mo-feature-card { flex: 1; background: #fff; padding: 50px 35px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); text-align: center; position: relative; overflow: hidden; transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.02); }
+    
+    /* 修正：カードの影とボーダーを強めて目立たせる */
+    .mo-feature-card { 
+      flex: 1; background: #fff; padding: 50px 35px; border-radius: 24px; 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.06); text-align: center; position: relative; 
+      overflow: hidden; transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.05); 
+    }
     .mo-feature-card:hover { transform: translateY(-10px); box-shadow: var(--mo-shadow-hover); }
     
     .feature-icon-box { 
@@ -211,19 +224,20 @@
     .mo-review-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
     .mo-review-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
 
-    /* 【9】 スペック・サイズ（レイアウトの大幅刷新） */
+    /* 【9】 スペック・サイズ */
     #size { padding: 140px 0; }
-    .mo-spec-tabs { display: flex; gap: 15px; justify-content: center; margin: 0 auto 50px; max-width: 500px; }
+    .mo-spec-tabs { display: flex; gap: 20px; justify-content: center; margin: 0 auto 50px; max-width: 600px; }
     .mo-spec-tab { 
       flex: 1; text-align: center; cursor: pointer; 
-      opacity: 0.6; transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.05); 
-      border-radius: 50px; padding: 15px 25px; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.02); 
+      opacity: 0.5; transition: all 0.4s ease; border: 1px solid transparent; 
+      border-radius: 20px; padding: 20px 15px; background: transparent; 
     }
-    .mo-spec-tab.is-active { opacity: 1; background: var(--mo-navy); border-color: var(--mo-navy); box-shadow: 0 10px 25px rgba(22, 36, 64, 0.2); transform: translateY(-3px); }
-    .mo-spec-tab span { font-weight: 700; color: var(--mo-navy); display: block; font-size: 1.1em; transition: color 0.3s; }
-    .mo-spec-tab.is-active span { color: #fff; }
+    .mo-spec-tab.is-active { opacity: 1; background: #fff; box-shadow: var(--mo-shadow-soft); border-color: rgba(0,0,0,0.03); transform: translateY(-5px); }
     
-    .mo-spec-content { display: none; animation: fadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+    .mo-spec-tab img { width: 100%; max-width: 150px; height: auto; margin: 0 auto 15px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
+    .mo-spec-tab span { font-weight: 700; color: var(--mo-navy); display: block; font-size: 1.1em; }
+    
+    .mo-spec-content { display: none; animation: fadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1); background: #fff; padding: 50px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); border: 1px solid rgba(0,0,0,0.02); }
     .mo-spec-content.is-active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -267,6 +281,7 @@
 
     /* 購入セクション */
     .mo-buy-box { background: var(--mo-white); padding: 70px; border-radius: 32px; max-width: 900px; margin: 50px auto 0; box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
+    
     .mo-buy-grid { display: grid; grid-template-columns: repeat(2, 320px); justify-content: center; gap: 40px; margin-bottom: 40px; }
     
     .mo-buy-item { background: var(--mo-light); padding: 40px 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); transition: transform 0.3s; }
@@ -277,6 +292,7 @@
     .mo-color-btns { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
     .mo-color-btn { display: block; padding: 14px; border-radius: 10px; color: #fff !important; text-decoration: none; font-weight: bold; font-size: 0.95em; transition: all 0.3s; letter-spacing: 0.05em; }
     .mo-color-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+    
     .btn-black { background-color: #222222; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
     .btn-blue { background-color: #235fac; box-shadow: 0 4px 15px rgba(35, 95, 172, 0.3); }
 
@@ -331,10 +347,12 @@
 
       .mo-logo img { height: 26px; }
       
+      /* 修正：タップ枠線削除、回転アニメーション */
       .mo-menu-toggle { 
         display: block; font-size: 2.8em; cursor: pointer; color: var(--mo-navy); 
         font-weight: 300; line-height: 1; width: 40px; text-align: center; 
         position: relative; z-index: 10000; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+        -webkit-tap-highlight-color: transparent; outline: none;
       }
       .mo-menu-toggle.is-active { transform: rotate(45deg); color: var(--mo-navy); }
       
@@ -354,20 +372,21 @@
       .marquee-content { font-size: 0.7rem; letter-spacing: 1px; }
       .marquee-content span { padding-right: 20px; }
 
-      .mo-hero { height: auto; min-height: 85vh; padding: 100px 5% 60px; }
+      /* 修正：SPファーストビューのカードをさらに小さく・横長に */
+      .mo-hero { height: auto; min-height: 70vh; padding: 100px 5% 50px; }
       .mo-hero-container { justify-content: center; align-items: center; }
       
       .mo-hero-text { 
-        margin: 0 auto; padding: 25px 20px; 
-        background: rgba(255, 255, 255, 0.8); border-radius: 16px; 
-        max-width: 95%; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        margin: 0 auto; padding: 15px 20px; /* 上下余白を削って横長に */
+        background: rgba(255, 255, 255, 0.7); border-radius: 16px; 
+        max-width: 96%; width: 100%; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
       }
       
-      .mo-hero-catch { font-size: 1.4rem; line-height: 1.4; margin-bottom: 15px; }
+      .mo-hero-catch { font-size: 1.25rem; line-height: 1.35; text-align: center; margin-bottom: 8px; }
       .mo-hero-catch span { display: inline; margin-left: 0 !important; }
-      .mo-hero-subcatch { font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; }
-      .mo-hero-desc { font-size: 0.85rem; margin-bottom: 25px; line-height: 1.5; }
-      .mo-hero-badge { font-size: 0.9rem; padding: 10px 20px; border-radius: 30px; }
+      .mo-hero-subcatch { font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px; }
+      .mo-hero-desc { font-size: 0.75rem; margin-bottom: 15px; line-height: 1.4; }
+      .mo-hero-badge { font-size: 0.8rem; padding: 8px 16px; border-radius: 30px; }
       
       .mo-hero-bg-img {
         animation: hero-pan-sp 20s ease-in-out infinite alternate;
@@ -517,7 +536,7 @@
             <span class="animate-impact line-3" style="animation-delay: 0.6s;">無かったことに。</span>
           </h2>
           <p class="mo-hero-subcatch animate-slide-up" style="animation-delay: 1.0s;">
-            大人の男の『もしも』を救う、<br class="sp-only">レスキューパンツ。
+            大人の男の『もしも』を救う、<br>レスキューパンツ。
           </p>
           
           <div class="mo-hero-desc animate-fade-in-up" style="animation-delay: 1.3s;">
@@ -581,21 +600,23 @@
             <div class="pop-line"></div>
             <div class="pop-content">
               <h3>立体構造</h3>
-              <p>股間を優しく包み込む独自の3Dパターン設計。<br>究極のフィット感。<span style="display:block; font-size:0.85em; margin-top:5px; color:var(--mo-navy); font-weight:bold;">（特許取得済）</span></p>
+              <p>股間を優しく包み込む独自の3Dパターン設計。究極のフィット感。</p>
+              <span style="display:block; font-size:0.85em; margin-top:5px; color:var(--mo-navy); font-weight:bold;">（特許取得済）</span>
             </div>
           </div>
           <div class="mo-pop-item pop-right-top animate-pop-in" style="animation-delay: 1.2s;">
             <div class="pop-line"></div>
             <div class="pop-content">
               <h3>スマート設計</h3>
-              <p>外見からは吸水機能があるとは一切気づかれない<br>シルエット。<span style="display:block; font-size:0.85em; margin-top:5px; color:var(--mo-navy); font-weight:bold;">（意匠登録済）</span></p>
+              <p>外見からは吸水機能があるとは一切気づかれないシルエット。</p>
+              <span style="display:block; font-size:0.85em; margin-top:5px; color:var(--mo-navy); font-weight:bold;">（意匠登録済）</span>
             </div>
           </div>
           <div class="mo-pop-item pop-bottom animate-pop-in" style="animation-delay: 1.4s;">
             <div class="pop-line-vertical"></div>
             <div class="pop-content">
               <h3>吊り式吸水パッド構造</h3>
-              <p>内側の特殊パッドが尿漏れをしっかりキャッチ。<br>体に密着しすぎず快適。</p>
+              <p>内側の特殊パッドが尿漏れをしっかりキャッチ。体に密着しすぎず快適。</p>
             </div>
           </div>
         </div>
