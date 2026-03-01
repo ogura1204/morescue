@@ -6,7 +6,7 @@
   <title>MORESCUE - 究極のレスキューパンツ</title>
   <style>
     /* ==========================================================================
-       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V3)
+       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (Light Blue Edition)
        ========================================================================== */
     @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700;900&family=Noto+Sans+JP:wght@700;900&display=swap');
 
@@ -14,8 +14,8 @@
     body { 
       margin: 0; padding: 0; 
       font-family: 'M PLUS 1p', 'Noto Sans JP', sans-serif;
-      background-color: #f0f8fc;
-      color: #111;
+      background-color: #f2f9fc;
+      color: #2c3e50;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
@@ -24,26 +24,25 @@
     @media (min-width: 769px) { .sp-only { display: none !important; } }
     @media (max-width: 768px) { .sp-only { display: block !important; } .pc-only { display: none !important; } }
 
-    /* 限界突破カラーパレット */
+    /* 限界突破カラーパレット（水色基調に最適化） */
     :root {
-      --c-main: #81cbf0; 
-      --c-main-dark: #3aa8e6;
-      --c-yellow: #FFEA00;
-      --c-red: #FF3300;
-      --c-black: #111111;
-      --c-white: #FFFFFF;
-      --c-navy: #162440;
+      --c-main: #81cbf0;       /* 指定メインカラー：水色 */
+      --c-main-dark: #5eb5e3;  /* 少し濃い水色 */
+      --c-yellow: #ffecb3;     /* 水色に合うマイルドなイエロー */
+      --c-accent: #ff8a65;     /* 水色に合うコーラルオレンジ（旧赤色） */
+      --c-dark: #1e3a5f;       /* 黒の代わりとなる深いネイビー（統一感アップ） */
+      --c-white: #ffffff;
       
       /* ハーフトーン（網点）背景 */
       --bg-halftone-blue: radial-gradient(var(--c-main-dark) 10%, transparent 11%), radial-gradient(var(--c-main-dark) 10%, transparent 11%);
-      --bg-halftone-black: radial-gradient(rgba(17,17,17,0.1) 15%, transparent 16%), radial-gradient(rgba(17,17,17,0.1) 15%, transparent 16%);
+      --bg-halftone-dark: radial-gradient(rgba(30, 58, 95, 0.08) 15%, transparent 16%), radial-gradient(rgba(30, 58, 95, 0.08) 15%, transparent 16%);
       
-      /* ソリッドシャドウ（漫画風の黒い影） */
-      --shadow-sm: 4px 4px 0px var(--c-black);
-      --shadow-md: 8px 8px 0px var(--c-black);
-      --shadow-lg: 12px 12px 0px var(--c-black);
+      /* ソリッドシャドウ（漫画風の濃い影） */
+      --shadow-sm: 4px 4px 0px var(--c-dark);
+      --shadow-md: 8px 8px 0px var(--c-dark);
+      --shadow-lg: 12px 12px 0px var(--c-dark);
       
-      --border-thick: 4px solid var(--c-black);
+      --border-thick: 4px solid var(--c-dark);
     }
 
     .mo-container { max-width: 1000px; margin: 0 auto; padding: 0 20px; position: relative; }
@@ -51,33 +50,45 @@
     .text-center { text-align: center; } 
     img { max-width: 100%; height: auto; }
 
-    /* 共通見出し（コミック風ド派手） */
-    .comic-title-wrap { display: inline-block; position: relative; margin-bottom: 70px; transform: rotate(-2deg); }
-    .comic-title {
-      font-size: 3.5rem; font-weight: 900; color: var(--c-white); line-height: 1.2; margin: 0;
-      text-shadow: -2px -2px 0 var(--c-black), 2px -2px 0 var(--c-black), -2px 2px 0 var(--c-black), 2px 2px 0 var(--c-black), 6px 6px 0 var(--c-black);
-      letter-spacing: 0.02em;
+    /* 共通見出し（コミック風ド派手・完全中央配置仕様） */
+    .comic-title-wrap { 
+      display: inline-flex; align-items: center; justify-content: center;
+      position: relative; margin-bottom: 70px; transform: rotate(-2deg); 
+      padding: 15px 30px; /* 余白を設けることで背景枠をテキストにフィットさせる */
+      max-width: 100%; box-sizing: border-box;
     }
-    .comic-title .hl-yellow { color: var(--c-yellow); }
-    .comic-title .hl-red { color: var(--c-red); }
     .comic-title-bg {
-      position: absolute; top: 10px; left: -10px; right: -10px; bottom: -10px;
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0; /* padding領域いっぱいに広がる */
       background: var(--c-main); z-index: -1; border: var(--border-thick); transform: skewX(-10deg);
       box-shadow: var(--shadow-md);
     }
+    /* 背景色バリエーション */
+    .comic-title-wrap.bg-white .comic-title-bg { background: var(--c-white); }
+    .comic-title-wrap.bg-yellow .comic-title-bg { background: var(--c-yellow); }
+    .comic-title-wrap.bg-accent .comic-title-bg { background: var(--c-accent); }
+
+    .comic-title {
+      font-size: clamp(1.8rem, 4vw, 3.5rem); /* 画面幅に合わせてフォントサイズを自動調整 */
+      font-weight: 900; color: var(--c-white); line-height: 1.4; margin: 0; text-align: center;
+      text-shadow: -2px -2px 0 var(--c-dark), 2px -2px 0 var(--c-dark), -2px 2px 0 var(--c-dark), 2px 2px 0 var(--c-dark), 6px 6px 0 var(--c-dark);
+      letter-spacing: 0.05em;
+    }
+    .comic-title .hl-yellow { color: var(--c-yellow); }
+    .comic-title .hl-accent { color: var(--c-accent); }
+    .comic-title .hl-dark { color: var(--c-dark); text-shadow: -2px -2px 0 var(--c-white), 2px -2px 0 var(--c-white), -2px 2px 0 var(--c-white), 2px 2px 0 var(--c-white), 6px 6px 0 rgba(30,58,95,0.2); }
 
     /* 押し込めるボタンスタイル */
     .comic-btn {
-      display: inline-block; background: var(--c-red); color: var(--c-white) !important;
-      font-size: 1.8rem; font-weight: 900; padding: 20px 50px; border: var(--border-thick); border-radius: 50px;
+      display: inline-block; background: var(--c-accent); color: var(--c-white) !important;
+      font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; padding: 20px 40px; border: var(--border-thick); border-radius: 50px;
       text-decoration: none; box-shadow: var(--shadow-lg); transition: all 0.1s ease;
       letter-spacing: 0.05em; text-align: center;
     }
     .comic-btn:hover {
-      transform: translate(6px, 6px); box-shadow: 2px 2px 0px var(--c-black); background: #e62e00;
+      transform: translate(6px, 6px); box-shadow: 2px 2px 0px var(--c-dark); background: #ff7043;
     }
-    .comic-btn-yellow { background: var(--c-yellow); color: var(--c-black) !important; }
-    .comic-btn-yellow:hover { background: #e6d300; }
+    .comic-btn-yellow { background: var(--c-yellow); color: var(--c-dark) !important; }
+    .comic-btn-yellow:hover { background: #ffe082; }
 
     /* スクロールアニメーション（一般） */
     .anim-slide-up { opacity: 0; transform: translateY(50px); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -91,18 +102,19 @@
        ヘッダー＆マーキー
        ========================================================================== */
     .mo-sticky-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 10000; }
-    .mo-header { background: var(--c-white); border-bottom: var(--border-thick); display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; box-shadow: 0 4px 0 rgba(0,0,0,0.1); }
+    .mo-header { background: var(--c-white); border-bottom: var(--border-thick); display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; box-shadow: 0 4px 0 rgba(30,58,95,0.1); }
     .mo-logo img { height: 35px; display: block; }
     
     .mo-nav { display: flex; align-items: center; gap: 20px; }
-    .mo-nav a { text-decoration: none; color: var(--c-black); font-weight: 900; font-size: 1rem; border-bottom: 3px solid transparent; transition: 0.2s; }
-    .mo-nav a:hover { border-color: var(--c-red); color: var(--c-red); }
-    .mo-nav-btn { background: var(--c-yellow); padding: 8px 20px; border: 3px solid var(--c-black); border-radius: 30px; box-shadow: var(--shadow-sm); }
-    .mo-nav-btn:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--c-black); }
+    .mo-nav a { text-decoration: none; color: var(--c-dark); font-weight: 900; font-size: 1rem; border-bottom: 3px solid transparent; transition: 0.2s; }
+    .mo-nav a:hover { border-color: var(--c-accent); color: var(--c-accent); }
+    /* 楽天リンクに変更 */
+    .mo-nav-btn { background: var(--c-yellow); padding: 8px 20px; border: 3px solid var(--c-dark); border-radius: 30px; box-shadow: var(--shadow-sm); }
+    .mo-nav-btn:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--c-dark); }
     
     .mo-menu-toggle { display: none; }
 
-    .mo-marquee { background: repeating-linear-gradient(-45deg, var(--c-black), var(--c-black) 20px, #333 20px, #333 40px); color: var(--c-yellow); border-bottom: var(--border-thick); padding: 10px 0; overflow: hidden; white-space: nowrap; }
+    .mo-marquee { background: repeating-linear-gradient(-45deg, var(--c-dark), var(--c-dark) 20px, #2a4b7c 20px, #2a4b7c 40px); color: var(--c-yellow); border-bottom: var(--border-thick); padding: 10px 0; overflow: hidden; white-space: nowrap; }
     .marquee-content { display: inline-block; animation: marquee 20s linear infinite; font-weight: 900; font-size: 1.2rem; letter-spacing: 2px; }
     .marquee-content span { padding-right: 50px; }
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -113,11 +125,11 @@
     .hv-section {
       height: 100vh; min-height: 800px;
       background-color: var(--c-main);
-      display: flex; align-items: flex-end; /* PC/SPともに画面下部に寄せる */
+      display: flex; align-items: flex-end; 
       justify-content: center;
       position: relative; overflow: hidden;
-      border-bottom: 8px solid var(--c-black);
-      padding-bottom: 60px; /* 下部余白 */
+      border-bottom: 8px solid var(--c-dark);
+      padding-bottom: 60px;
     }
     
     .hv-flash {
@@ -133,7 +145,7 @@
       position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);
       z-index: 2; width: 100%; max-width: 700px; text-align: center; pointer-events: none;
     }
-    .hv-center-face img { width: 100%; height: auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); }
+    .hv-center-face img { width: 100%; height: auto; filter: drop-shadow(0 20px 40px rgba(30,58,95,0.5)); }
 
     /* コンテンツ群 */
     .hv-content-wrap {
@@ -150,36 +162,36 @@
       background: var(--c-white); border: var(--border-thick); border-radius: 30px;
       padding: 40px; box-shadow: var(--shadow-lg); 
       max-width: 450px; position: relative;
-      opacity: 0; /* 初期非表示 */
+      opacity: 0; 
       animation: hvLoop1 12s infinite; 
       transform-origin: left bottom;
     }
-    .hv-catch-bubble::after { content: ''; position: absolute; bottom: -25px; right: 50px; border-width: 30px 0 0 30px; border-style: solid; border-color: var(--c-black) transparent transparent transparent; }
+    .hv-catch-bubble::after { content: ''; position: absolute; bottom: -25px; right: 50px; border-width: 30px 0 0 30px; border-style: solid; border-color: var(--c-dark) transparent transparent transparent; }
     .hv-catch-bubble::before { content: ''; position: absolute; bottom: -16px; right: 54px; border-width: 22px 0 0 22px; border-style: solid; border-color: var(--c-white) transparent transparent transparent; z-index: 1; }
-    .hv-catch { font-size: 3.2rem; font-weight: 900; line-height: 1.2; color: var(--c-black); margin: 0; }
-    .hv-catch span.hl { color: var(--c-red); }
+    .hv-catch { font-size: 3.2rem; font-weight: 900; line-height: 1.2; color: var(--c-dark); margin: 0; }
+    .hv-catch span.hl { color: var(--c-accent); }
 
     .hv-product-card {
       background: var(--c-yellow); border: var(--border-thick); border-radius: 20px;
       padding: 30px; box-shadow: var(--shadow-lg); 
       max-width: 420px; position: relative; display: flex; flex-direction: column; align-items: center;
-      opacity: 0; /* 初期非表示 */
+      opacity: 0; 
       animation: hvLoop2 12s infinite; 
       transform-origin: right bottom;
     }
-    .hv-product-img { width: 180px; margin-bottom: 20px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3)); transform: rotate(-5deg); }
-    .hv-product-text { background: var(--c-white); border: 3px solid var(--c-black); padding: 15px; border-radius: 10px; font-size: 1rem; font-weight: 700; line-height: 1.6; text-align: left; }
-    .hv-product-text strong { color: var(--c-red); font-size: 1.3rem; display: block; margin-bottom: 8px; line-height: 1.3; }
+    .hv-product-img { width: 180px; margin-bottom: 20px; filter: drop-shadow(0 10px 10px rgba(30,58,95,0.3)); transform: rotate(-5deg); }
+    .hv-product-text { background: var(--c-white); border: 3px solid var(--c-dark); padding: 15px; border-radius: 10px; font-size: 1rem; font-weight: 700; line-height: 1.6; text-align: left; }
+    .hv-product-text strong { color: var(--c-accent); font-size: 1.3rem; display: block; margin-bottom: 8px; line-height: 1.3; }
 
     .hv-badge {
       position: absolute; top: -40px; right: -30px;
-      background: var(--c-red); color: var(--c-white);
+      background: var(--c-accent); color: var(--c-white);
       width: 150px; height: 150px; border-radius: 50%; border: var(--border-thick);
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       box-shadow: var(--shadow-sm); transform: rotate(15deg); line-height: 1.1;
     }
     .hv-badge span.small { font-size: 1rem; font-weight: 900; }
-    .hv-badge span.big { font-size: 2rem; font-weight: 900; color: var(--c-yellow); text-shadow: 2px 2px 0 var(--c-black); }
+    .hv-badge span.big { font-size: 2rem; font-weight: 900; color: var(--c-yellow); text-shadow: 2px 2px 0 var(--c-dark); }
 
     /* 激しいバウンドで出現 -> キープ -> 消失 -> 待機のループ */
     @keyframes hvLoop1 {
@@ -204,8 +216,8 @@
        ========================================================================== */
     #about { 
       background-color: var(--c-white);
-      background-image: var(--bg-halftone-black); background-size: 20px 20px; background-position: 0 0, 10px 10px;
-      border-bottom: 8px solid var(--c-black); 
+      background-image: var(--bg-halftone-dark); background-size: 20px 20px; background-position: 0 0, 10px 10px;
+      border-bottom: 8px solid var(--c-dark); 
     }
     
     .mo-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
@@ -213,14 +225,14 @@
     .comic-card:nth-child(even) { transform: rotate(1.5deg); background: #f9f9f9; }
     .comic-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow-lg); border-color: var(--c-main); }
     
-    .card-num { position: absolute; top: -20px; left: -20px; background: var(--c-navy); color: var(--c-white); font-size: 2rem; font-weight: 900; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border: var(--border-thick); box-shadow: var(--shadow-sm); transform: rotate(-10deg); }
-    .comic-card h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; border-bottom: 3px solid var(--c-black); padding-bottom: 10px; color: var(--c-red); }
+    .card-num { position: absolute; top: -20px; left: -20px; background: var(--c-dark); color: var(--c-white); font-size: 2rem; font-weight: 900; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border: var(--border-thick); box-shadow: var(--shadow-sm); transform: rotate(-10deg); }
+    .comic-card h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; border-bottom: 3px solid var(--c-dark); padding-bottom: 10px; color: var(--c-accent); }
     .comic-card p { font-size: 1.05rem; font-weight: 700; line-height: 1.6; margin: 0; }
 
     /* ==========================================================================
        特許構造セクション（ポップアップループ化）
        ========================================================================== */
-    #structure { background: var(--c-yellow); border-bottom: 8px solid var(--c-black); }
+    #structure { background: var(--c-yellow); border-bottom: 8px solid var(--c-dark); }
     .structure-wrapper { position: relative; max-width: 800px; margin: 0 auto; text-align: center; }
     .pants-center-img { max-width: 400px; margin: 0 auto; border: var(--border-thick); box-shadow: var(--shadow-lg); border-radius: 20px; background: var(--c-white); padding: 30px; transform: rotate(-2deg); }
     
@@ -229,7 +241,7 @@
       padding: 20px; border-radius: 15px; font-weight: 700; width: 260px; text-align: left;
       opacity: 0; /* 初期非表示 */
     }
-    .comic-pop::after { content:''; position:absolute; width: 50px; height: 50px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,0 L100,50 L0,100 Z" fill="%23111"/></svg>') no-repeat center/contain; }
+    .comic-pop::after { content:''; position:absolute; width: 50px; height: 50px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,0 L100,50 L0,100 Z" fill="%231e3a5f"/></svg>') no-repeat center/contain; }
     
     .comic-pop h4 { color: var(--c-main-dark); font-size: 1.3rem; margin: 0 0 10px; font-weight: 900; border-bottom: 2px dashed #ccc; padding-bottom: 5px; }
 
@@ -268,7 +280,7 @@
     /* ==========================================================================
        3つのこだわり
        ========================================================================== */
-    #features { background: var(--c-main); border-bottom: 8px solid var(--c-black); }
+    #features { background: var(--c-main); border-bottom: 8px solid var(--c-dark); }
     .feature-comic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
     
     .feature-panel { background: var(--c-white); border: var(--border-thick); box-shadow: var(--shadow-md); transform: rotate(1deg); transition: 0.2s; overflow: hidden; display: flex; flex-direction: column; }
@@ -279,89 +291,88 @@
     .feature-img-box { height: 200px; border-bottom: var(--border-thick); background: #eee; position: relative; overflow: hidden; }
     .feature-img-box img { width: 100%; height: 100%; object-fit: cover; }
     .feature-text-box { padding: 30px 20px; text-align: left; flex-grow: 1; }
-    .feature-text-box h4 { font-size: 1.5rem; font-weight: 900; margin: 0 0 15px; color: var(--c-black); }
+    .feature-text-box h4 { font-size: 1.5rem; font-weight: 900; margin: 0 0 15px; color: var(--c-dark); }
     .feature-text-box p { font-size: 1.05rem; font-weight: 700; margin: 0; line-height: 1.6; }
-    .text-highlight { background: linear-gradient(transparent 60%, var(--c-yellow) 60%); padding: 0 5px; color: var(--c-red); font-weight: 900; font-size: 1.1rem; }
+    .text-highlight { background: linear-gradient(transparent 60%, var(--c-yellow) 60%); padding: 0 5px; color: var(--c-accent); font-weight: 900; font-size: 1.1rem; }
 
     /* ==========================================================================
        専門家・レビュー
        ========================================================================== */
-    #review { background: var(--c-white); background-image: var(--bg-halftone-blue); background-size: 14px 14px; background-position: 0 0, 7px 7px; border-bottom: 8px solid var(--c-black); }
+    #review { background: var(--c-white); background-image: var(--bg-halftone-blue); background-size: 14px 14px; background-position: 0 0, 7px 7px; border-bottom: 8px solid var(--c-dark); }
     
     .expert-card { background: var(--c-white); border: var(--border-thick); box-shadow: var(--shadow-lg); padding: 50px; border-radius: 20px; display: flex; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto; transform: rotate(-1deg); }
     .expert-card img { width: 200px; height: 200px; border-radius: 50%; border: var(--border-thick); object-fit: cover; }
-    .expert-info h3 { font-size: 2rem; font-weight: 900; margin: 0 0 20px; color: var(--c-red); }
+    .expert-info h3 { font-size: 2rem; font-weight: 900; margin: 0 0 20px; color: var(--c-accent); }
     .expert-info p { font-size: 1.1rem; font-weight: 700; line-height: 1.6; }
 
     .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; }
     .review-bubble { background: var(--c-white); border: var(--border-thick); border-radius: 30px; padding: 30px; box-shadow: var(--shadow-md); position: relative; transform: rotate(1deg); }
     .review-bubble:nth-child(2) { transform: rotate(-2deg); }
-    .review-bubble::after { content: ''; position: absolute; bottom: -20px; left: 40px; border-width: 20px 20px 0 0; border-style: solid; border-color: var(--c-black) transparent transparent transparent; }
+    .review-bubble::after { content: ''; position: absolute; bottom: -20px; left: 40px; border-width: 20px 20px 0 0; border-style: solid; border-color: var(--c-dark) transparent transparent transparent; }
     .review-bubble::before { content: ''; position: absolute; bottom: -14px; left: 44px; border-width: 15px 15px 0 0; border-style: solid; border-color: var(--c-white) transparent transparent transparent; z-index: 1; }
-    .review-stars { color: var(--c-red); font-size: 1.5rem; margin-bottom: 10px; letter-spacing: 2px; }
+    .review-stars { color: var(--c-accent); font-size: 1.5rem; margin-bottom: 10px; letter-spacing: 2px; }
     .review-text { font-weight: 700; font-size: 1.05rem; line-height: 1.6; }
 
     /* ==========================================================================
-       スペック＆購入合体セクション（限界突破）
+       スペック＆購入合体セクション（限界突破コンボ）
        ========================================================================== */
-    #size { background: var(--c-light-blue); background-image: repeating-linear-gradient(45deg, var(--c-main), var(--c-main) 40px, #a6dcf5 40px, #a6dcf5 80px); border-bottom: 8px solid var(--c-black); padding: 150px 0; }
+    #size { background: var(--c-main); background-image: repeating-linear-gradient(45deg, var(--c-main), var(--c-main) 40px, var(--c-main-dark) 40px, var(--c-main-dark) 80px); border-bottom: 8px solid var(--c-dark); padding: 150px 0; }
     
-    .mo-spec-buy-container { background: var(--c-white); border: 8px solid var(--c-black); box-shadow: 15px 15px 0 var(--c-yellow); padding: 60px; max-width: 1000px; margin: 0 auto; position: relative; border-radius: 12px; }
+    .mo-spec-buy-container { background: var(--c-white); border: 8px solid var(--c-dark); box-shadow: 15px 15px 0 var(--c-yellow); padding: 60px; max-width: 1000px; margin: 0 auto; position: relative; border-radius: 12px; }
     
     .spec-tabs { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
-    .spec-tab { background: #eee; border: var(--border-thick); padding: 15px 40px; font-size: 1.4rem; font-weight: 900; cursor: pointer; box-shadow: 4px 4px 0 var(--c-black); transform: skewX(-10deg); transition: 0.2s; color: #666; }
+    .spec-tab { background: #eee; border: var(--border-thick); padding: 15px 40px; font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 900; cursor: pointer; box-shadow: 4px 4px 0 var(--c-dark); transform: skewX(-10deg); transition: 0.2s; color: #666; }
     .spec-tab span { display: block; transform: skewX(10deg); }
-    .spec-tab.is-active { background: var(--c-navy); color: var(--c-white); box-shadow: none; transform: skewX(-10deg) translate(4px, 4px); }
+    .spec-tab.is-active { background: var(--c-dark); color: var(--c-white); box-shadow: none; transform: skewX(-10deg) translate(4px, 4px); }
     
     .spec-content { display: none; }
     .spec-content.is-active { display: block; animation: slideInSpec 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     @keyframes slideInSpec { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-    .mo-spec-visual-flex { display: flex; gap: 40px; align-items: stretch; background: var(--c-light); padding: 40px; border-radius: 12px; border: var(--border-thick); box-shadow: var(--shadow-lg); position: relative; }
+    .mo-spec-visual-flex { display: flex; gap: 40px; align-items: stretch; background: var(--c-white); padding: 40px; border-radius: 12px; border: var(--border-thick); box-shadow: var(--shadow-lg); position: relative; }
     
     /* 左側：画像とレベルとカラー */
     .mo-spec-left { flex: 0 0 320px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
-    .mo-spec-left img { height: 250px; object-fit: contain; margin-bottom: 25px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15)); transition: all 0.3s ease; }
+    .mo-spec-left img { height: 250px; object-fit: contain; margin-bottom: 25px; filter: drop-shadow(0 15px 30px rgba(30,58,95,0.15)); transition: all 0.3s ease; }
     
     /* カラー選択チップ */
     .color-select { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
-    .color-dot { width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--c-black); cursor: pointer; transition: 0.2s; box-shadow: 2px 2px 0 var(--c-black); padding: 0; outline: none; }
-    .color-dot:hover, .color-dot.active { transform: scale(1.2); box-shadow: 4px 4px 0 var(--c-red); border-color: var(--c-red); }
+    .color-dot { width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--c-dark); cursor: pointer; transition: 0.2s; box-shadow: 2px 2px 0 var(--c-dark); padding: 0; outline: none; }
+    .color-dot:hover, .color-dot.active { transform: scale(1.2); box-shadow: 4px 4px 0 var(--c-accent); border-color: var(--c-accent); }
     .bg-black { background-color: #222; }
     .bg-blue { background-color: #235fac; }
 
-    /* 尿漏れゲージ */
-    .gauge-wrap { width: 100%; border: 3px solid var(--c-black); background: #fff; padding: 5px; position: relative; margin-top: auto; }
-    .gauge-title { position: absolute; top: -14px; left: 10px; background: var(--c-red); color: #fff; font-size: 0.85rem; font-weight: 900; padding: 0 5px; }
+    /* 尿漏れゲージ（デザイン統一） */
+    .gauge-wrap { width: 100%; border: 3px solid var(--c-dark); background: #fff; padding: 5px; position: relative; margin-top: auto; }
+    .gauge-title { position: absolute; top: -14px; left: 10px; background: var(--c-dark); color: #fff; font-size: 0.85rem; font-weight: 900; padding: 0 5px; }
     .gauge-bar-container { display: flex; gap: 3px; height: 15px; margin-top: 10px; }
     .gauge-block { flex: 1; background: #ddd; border: 1px solid #111; }
-    .gauge-block.active { background: var(--c-yellow); }
-    .gauge-block.active.danger { background: var(--c-red); }
+    .gauge-block.active { background: var(--c-accent); } /* 統一カラー */
 
     /* 右側：表とボタン */
     .mo-spec-right { flex: 1; display: flex; flex-direction: column; }
     .comic-table { width: 100%; border-collapse: collapse; border: var(--border-thick); background: var(--c-white); margin-bottom: 20px; }
-    .comic-table th { background: var(--c-black); color: var(--c-white); padding: 15px; font-weight: 900; border: 2px solid var(--c-black); }
-    .comic-table td { padding: 15px; font-weight: 700; border: 2px solid var(--c-black); text-align: center; }
+    .comic-table th { background: var(--c-dark); color: var(--c-white); padding: 15px; font-weight: 900; border: 2px solid var(--c-dark); }
+    .comic-table td { padding: 15px; font-weight: 700; border: 2px solid var(--c-dark); text-align: center; }
     
     .spec-list { font-weight: 700; font-size: 1.1rem; margin-bottom: 30px; }
-    .spec-list p { margin: 5px 0; padding: 10px; background: var(--c-white); border: 2px solid var(--c-black); display: flex; align-items: center;}
-    .spec-list span.label { background: var(--c-yellow); padding: 2px 10px; border: 2px solid var(--c-black); margin-right: 15px; display: inline-block; width: 80px; text-align: center; }
+    .spec-list p { margin: 5px 0; padding: 10px; background: var(--c-white); border: 2px solid var(--c-dark); display: flex; align-items: center;}
+    .spec-list span.label { background: var(--c-yellow); padding: 2px 10px; border: 2px solid var(--c-dark); margin-right: 15px; display: inline-block; width: 80px; text-align: center; }
 
-    /* 中の購入ボタン */
+    /* 中の購入ボタン（楽天リンク） */
     .mo-buy-action-btn { width: 100%; margin-top: auto; }
 
     /* ==========================================================================
        FAQセクション (完全復活・コミック仕様)
        ========================================================================== */
-    #faq { background: var(--c-white); border-bottom: 8px solid var(--c-black); }
+    #faq { background: var(--c-white); border-bottom: 8px solid var(--c-dark); }
     .mo-faq-wrap { margin-top: 40px; }
     .mo-faq-item { margin-bottom: 18px; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-md); border: var(--border-thick); transition: all 0.3s; transform: rotate(1deg); }
     .mo-faq-item:nth-child(even) { transform: rotate(-1deg); }
-    .mo-faq-item summary { padding: 25px 30px; font-weight: 900; background: #fff; cursor: pointer; position: relative; color: var(--c-navy); font-size: 1.1em; transition: 0.2s; }
+    .mo-faq-item summary { padding: 25px 30px; font-weight: 900; background: #fff; cursor: pointer; position: relative; color: var(--c-dark); font-size: 1.1em; transition: 0.2s; }
     .mo-faq-item summary:hover { background: var(--c-yellow); }
-    .mo-faq-item[open] { border-color: var(--c-red); transform: rotate(0); }
-    .mo-faq-item summary::after { content: '+'; position: absolute; right: 30px; top: 50%; transform: translateY(-50%); font-size: 2rem; color: var(--c-red); font-weight: 900; transition: 0.3s; }
+    .mo-faq-item[open] { border-color: var(--c-accent); transform: rotate(0); }
+    .mo-faq-item summary::after { content: '+'; position: absolute; right: 30px; top: 50%; transform: translateY(-50%); font-size: 2rem; color: var(--c-accent); font-weight: 900; transition: 0.3s; }
     .mo-faq-item[open] summary::after { transform: translateY(-50%) rotate(135deg); }
     .mo-faq-answer { padding: 30px 35px; background: #fafafa; color: #111; border-top: var(--border-thick); line-height: 1.8; font-weight: 700; font-size: 1rem; }
 
@@ -369,17 +380,18 @@
        SP用 レスポンシブ (タイムループアニメーション)
        ========================================================================== */
     @media (max-width: 768px) {
-      .comic-title { font-size: 2.2rem; margin-bottom: 40px; }
+      /* 見出しのパディングを調整してSPでもフィット */
+      .comic-title-wrap { padding: 10px 20px; margin-bottom: 40px; }
       
       .mo-logo img { height: 30px; }
-      .mo-menu-toggle { display: block; font-size: 2.5rem; font-weight: 900; color: var(--c-black); cursor: pointer; transition: 0.3s; z-index: 10001; position: relative; }
-      .mo-menu-toggle.is-active { transform: rotate(135deg); color: var(--c-red); }
+      .mo-menu-toggle { display: block; font-size: 2.5rem; font-weight: 900; color: var(--c-dark); cursor: pointer; transition: 0.3s; z-index: 10001; position: relative; }
+      .mo-menu-toggle.is-active { transform: rotate(135deg); color: var(--c-accent); }
       
       .mo-nav { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--c-yellow); background-image: var(--bg-halftone-black); flex-direction: column; justify-content: center; align-items: center; z-index: 10000; }
       .mo-nav.is-open { display: flex; animation: menuBAM 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
       @keyframes menuBAM { 0% { transform: scale(0); border-radius: 50%; } 100% { transform: scale(1); border-radius: 0; } }
-      .mo-nav a { font-size: 1.8rem; margin: 15px 0; color: var(--c-black); text-shadow: 2px 2px 0 var(--c-white); background: var(--c-white); padding: 10px 30px; border: var(--border-thick); box-shadow: var(--shadow-sm); transform: rotate(-2deg); }
-      .mo-nav-btn { font-size: 1.5rem !important; background: var(--c-red) !important; color: #fff !important; margin-top: 30px; }
+      .mo-nav a { font-size: clamp(1.1rem, 4vw, 1.5rem); margin: 10px 0; color: var(--c-dark); text-shadow: 2px 2px 0 var(--c-white); background: var(--c-white); padding: 10px 20px; border: var(--border-thick); box-shadow: var(--shadow-sm); transform: rotate(-2deg); }
+      .mo-nav-btn { font-size: 1.3rem !important; background: var(--c-accent) !important; color: #fff !important; margin-top: 20px; }
 
       .marquee-container { padding: 5px 0; }
       .marquee-content { font-size: 0.8rem; }
@@ -391,7 +403,6 @@
       
       /* 顔は中央少し上に配置 */
       .hv-center-face { width: 150%; max-width: 150%; top: 40%; }
-      .hv-center-face img { filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
 
       .hv-content-wrap { padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: auto; }
 
@@ -399,23 +410,23 @@
         padding: 25px 20px; max-width: 90%; margin: 0 auto 20px; transform: rotate(0); 
       }
       .hv-catch-bubble::after, .hv-catch-bubble::before { left: 50%; transform: translateX(-50%); right: auto; }
-      .hv-catch { font-size: 2rem; text-align: center; }
+      .hv-catch { font-size: 1.8rem; text-align: center; }
       
       .hv-product-card { 
         max-width: 90%; margin: 0 auto; padding: 20px; transform: rotate(0); 
       }
       .hv-product-img { width: 130px; margin-bottom: 10px; }
-      .hv-product-text { font-size: 0.9rem; padding: 10px; }
+      .hv-product-text { font-size: 0.85rem; padding: 10px; }
       .hv-product-text strong { font-size: 1.1rem; }
       
       .hv-badge { 
         width: 100px; height: 100px; top: -20px; right: -10px; padding: 0; border-width: 3px; 
       }
       .hv-badge span.small { font-size: 0.7rem; }
-      .hv-badge span.big { font-size: 1.2rem; }
+      .hv-badge span.big { font-size: 1.2rem; text-shadow: 1px 1px 0 var(--c-dark);}
 
       /* その他セクション SP */
-      .mo-card-grid, .feature-comic-grid, .review-grid, .buy-grid { grid-template-columns: 1fr; gap: 30px; }
+      .mo-card-grid, .feature-comic-grid, .review-grid { grid-template-columns: 1fr; gap: 30px; }
       
       .structure-wrapper { padding-top: 30px; }
       .comic-pop { position: relative; top: auto; left: auto; right: auto; bottom: auto; width: 100%; margin-bottom: 20px; margin-left: 0; }
@@ -457,19 +468,21 @@
         </a>
         <div class="mo-menu-toggle" id="js-menu-toggle">＋</div>
         <nav class="mo-nav" id="js-nav">
-          <a href="#about">MORESCUE<span style="font-size: 0.7em;">(モレスキュー)</span>とは</a>
+          <a href="#about">「MORESCUE」<span style="font-size: 0.6em; vertical-align: middle;">(モレスキュー)</span>とは</a>
           <a href="#features">特徴</a>
           <a href="#structure">特許構造</a>
-          <a href="#size">スペック・購入</a>
+          <a href="#size">スペック</a>
           <a href="#faq">FAQ</a>
-          <a href="#size" class="mo-nav-btn comic-btn">今すぐ買う！</a>
+          <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="mo-nav-btn comic-btn">今すぐ買う！</a>
         </nav>
       </header>
       <div class="mo-marquee">
         <div class="marquee-content">
-          <span>⚠️ 誰にも言えない「あ、っ」の瞬間を無かったことに！ ⚠️</span>
-          <span>⚠️ 誰にも言えない「あ、っ」の瞬間を無かったことに！ ⚠️</span>
-          <span>⚠️ 誰にも言えない「あ、っ」の瞬間を無かったことに！ ⚠️</span>
+          <span>🩲 誰にも言えない「あ、っ」の瞬間を無かったことに！ 🩲</span>
+          <span>🩲 誰にも言えない「あ、っ」の瞬間を無かったことに！ 🩲</span>
+          <span>🩲 誰にも言えない「あ、っ」の瞬間を無かったことに！ 🩲</span>
+          <span>🩲 誰にも言えない「あ、っ」の瞬間を無かったことに！ 🩲</span>
+          <span>🩲 誰にも言えない「あ、っ」の瞬間を無かったことに！ 🩲</span>
         </div>
       </div>
     </div>
@@ -510,9 +523,9 @@
     <section id="about" class="mo-section fade-in-trigger">
       <div class="mo-container">
         <div class="text-center">
-          <div class="comic-title-wrap anim-slide-up">
+          <div class="comic-title-wrap bg-white anim-slide-up">
             <div class="comic-title-bg"></div>
-            <h2 class="comic-title">
+            <h2 class="comic-title hl-dark">
               誰にも言えない<br class="sp-only"><span class="hl-red">「あ、っ」</span>の瞬間、<br>ありませんか？
             </h2>
           </div>
@@ -541,10 +554,10 @@
 
     <section id="structure" class="mo-section fade-in-trigger">
       <div class="mo-container text-center">
-        <div class="comic-title-wrap anim-slide-up">
-          <div class="comic-title-bg" style="background:var(--c-white);"></div>
-          <h2 class="comic-title" style="color:var(--c-black); text-shadow:-2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff, 6px 6px 0 rgba(0,0,0,0.1);">
-            日常を救う<span class="hl-red">MORESCUE</span><br>特殊構造が叶える<span class="hl-yellow" style="text-shadow:-2px -2px 0 #111, 2px -2px 0 #111, -2px 2px 0 #111, 2px 2px 0 #111;">見えない安心</span>
+        <div class="comic-title-wrap bg-white anim-slide-up">
+          <div class="comic-title-bg"></div>
+          <h2 class="comic-title hl-dark">
+            日常を救う<span class="hl-red">MORESCUE</span><br>特殊構造が叶える<span class="hl-yellow" style="text-shadow:-2px -2px 0 var(--c-dark), 2px -2px 0 var(--c-dark), -2px 2px 0 var(--c-dark), 2px 2px 0 var(--c-dark);">見えない安心</span>
           </h2>
         </div>
 
@@ -571,9 +584,9 @@
 
     <section id="features" class="mo-section fade-in-trigger text-center">
       <div class="mo-container">
-        <div class="comic-title-wrap anim-slide-up">
-          <div class="comic-title-bg" style="background:var(--c-yellow);"></div>
-          <h2 class="comic-title" style="color:var(--c-black); text-shadow:-2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff, 6px 6px 0 rgba(0,0,0,0.2);">
+        <div class="comic-title-wrap bg-yellow anim-slide-up">
+          <div class="comic-title-bg"></div>
+          <h2 class="comic-title hl-dark">
             快適さと清潔さを守る<br><span class="hl-red">3つのこだわり!!</span>
           </h2>
         </div>
@@ -619,13 +632,13 @@
           <div class="expert-info">
             <h3>QOLを向上させる賢い選択！</h3>
             <p>「尿漏れは隠す悩みではなく、適切なアイテムで対処すべきエチケット。MORESCUEの特許構造は驚くほど快適です。」</p>
-            <p style="font-weight:900; margin-top:15px; color:var(--c-navy);">繊維製品品質管理士</p>
+            <p style="font-weight:900; margin-top:15px; color:var(--c-dark);">繊維製品品質管理士</p>
           </div>
         </div>
 
         <div class="text-center" style="margin-top: 80px;">
-          <div class="comic-title-wrap anim-slide-up">
-            <div class="comic-title-bg" style="background:var(--c-red);"></div>
+          <div class="comic-title-wrap bg-accent anim-slide-up">
+            <div class="comic-title-bg"></div>
             <h2 class="comic-title">愛用者の声が<span class="hl-yellow">続々到着!!</span></h2>
           </div>
         </div>
@@ -662,12 +675,12 @@
       <div class="mo-container">
         
         <div class="text-center" style="margin-bottom: 20px;">
-          <div class="comic-title-wrap anim-slide-up">
-            <div class="comic-title-bg" style="background:var(--c-red);"></div>
+          <div class="comic-title-wrap bg-accent anim-slide-up">
+            <div class="comic-title-bg"></div>
             <h2 class="comic-title">大人のエチケットを、<br><span class="hl-yellow">今すぐ手に入れろ!!</span></h2>
           </div>
         </div>
-        <p class="text-center anim-slide-up" style="font-weight:900; font-size:1.4rem; color:var(--c-red); margin-bottom: 50px;">※「まとめ買い」が圧倒的人気!!</p>
+        <p class="text-center anim-slide-up" style="font-weight:900; font-size:1.4rem; color:var(--c-accent); margin-bottom: 50px; text-shadow: 1px 1px 0 var(--c-white);">※「まとめ買い」が圧倒的人気!!</p>
         
         <div class="mo-spec-buy-container anim-zoom-in">
           
@@ -688,10 +701,10 @@
                 </div>
                 
                 <div class="gauge-wrap">
-                  <div class="gauge-title">尿漏れ対応レベル MAX!</div>
+                  <div class="gauge-title" style="background:var(--c-dark);">尿漏れ対応レベル MAX!</div>
                   <div class="gauge-bar-container">
-                    <div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div>
-                    <div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div>
+                    <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div>
+                    <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div>
                   </div>
                   <p style="font-weight:900; margin:5px 0 0; font-size:0.9rem; text-align:center;">約10cc対応</p>
                 </div>
@@ -730,7 +743,7 @@
                 </div>
                 
                 <div class="gauge-wrap">
-                  <div class="gauge-title" style="background:var(--c-blue);">尿漏れ対応レベル 8</div>
+                  <div class="gauge-title" style="background:var(--c-dark);">尿漏れ対応レベル 8</div>
                   <div class="gauge-bar-container">
                     <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div>
                     <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block"></div><div class="gauge-block"></div>
@@ -763,7 +776,7 @@
         </div>
         
         <div class="text-center" style="margin-top:50px;">
-          <p style="font-weight:900; font-size:1.5rem; color:var(--c-navy); text-shadow: 2px 2px 0 #fff;">全国の量販店でも絶賛取扱中!!</p>
+          <p style="font-weight:900; font-size:1.5rem; color:var(--c-dark); text-shadow: 2px 2px 0 var(--c-white);">全国の量販店でも絶賛取扱中!!</p>
         </div>
         
       </div>
@@ -772,9 +785,9 @@
     <section id="faq" class="mo-section fade-in-trigger" style="padding-top: 0;">
       <div class="mo-container">
         <div class="text-center">
-          <div class="comic-title-wrap anim-slide-up">
-            <div class="comic-title-bg" style="background:var(--c-white);"></div>
-            <h2 class="comic-title" style="color:var(--c-black); text-shadow:-2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff, 6px 6px 0 rgba(0,0,0,0.1);">
+          <div class="comic-title-wrap bg-white anim-slide-up">
+            <div class="comic-title-bg"></div>
+            <h2 class="comic-title hl-dark">
               よくある質問<span class="hl-red">!!</span>
             </h2>
           </div>
@@ -788,7 +801,7 @@
       </div>
     </section>
 
-    <footer class="mo-footer" style="background:var(--c-black); padding: 60px 0 120px; text-align:center; color:#fff; border-top: 8px solid var(--c-main);">
+    <footer class="mo-footer" style="background:var(--c-dark); padding: 60px 0 120px; text-align:center; color:#fff; border-top: 8px solid var(--c-main);">
       <div class="mo-container">
         <img src="logo.png" alt="MORESCUE" style="height:40px; filter:brightness(0) invert(1); margin:0 auto 20px;">
         <p style="font-weight:900; font-size:1.2rem; margin-bottom:20px;">
@@ -804,7 +817,7 @@
     </footer>
 
     <div class="fixed-bottom-comic" id="js-bottom-bar">
-      <a href="#size" class="comic-btn animate-poyon" style="display:flex; align-items:center; padding: 10px 30px 10px 15px;">
+      <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="comic-btn animate-poyon" style="display:flex; align-items:center; padding: 10px 30px 10px 15px;">
         <img src="2-bl.png" alt="パンツ" style="height:40px; margin-right:15px; filter:drop-shadow(2px 2px 0 #111);">
         <span style="font-size:1.4rem;">今すぐGET!!</span>
       </a>
@@ -900,9 +913,10 @@
       });
 
       // 追従カートボタンの表示ロジック
+      // 修正：スクロール100px以上で早めに表示させる
       const bottomBar = document.getElementById('js-bottom-bar');
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 400 && (!nav || !nav.classList.contains('is-open'))) {
+        if (window.scrollY > 100 && (!nav || !nav.classList.contains('is-open'))) {
           bottomBar.classList.add('is-visible');
         } else {
           bottomBar.classList.remove('is-visible');
@@ -912,7 +926,10 @@
   </script>
   
   <style>
-    /* 追加：ループアニメーションのキーフレーム定義 */
+    /* ==========================================================================
+       ループアニメーションのキーフレーム定義
+       ========================================================================== */
+    
     /* ファーストビュー用タイムループ（PC・SP共通で12秒周期） */
     .loop-bam-1 {
       opacity: 0;
@@ -926,20 +943,20 @@
     }
 
     @keyframes loopBam1 {
-      0%, 2% { opacity: 0; transform: scale(0.1) rotate(15deg); }
-      6% { opacity: 1; transform: scale(1.1) rotate(-5deg); }
+      0%, 2% { opacity: 0; transform: scale(0.1) rotate(15deg) translateY(200px); }
+      6% { opacity: 1; transform: scale(1.1) rotate(-5deg) translateY(0); }
       9% { transform: scale(1) rotate(-3deg); }
       60% { opacity: 1; transform: scale(1) rotate(-3deg); }
       63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
-      66%, 100% { opacity: 0; transform: scale(0.1) rotate(-15deg); }
+      66%, 100% { opacity: 0; transform: scale(0.1) rotate(-15deg) translateY(200px); }
     }
     @keyframes loopBam2 {
-      0%, 15% { opacity: 0; transform: scale(0.1) rotate(-15deg); } /* 1つ目より遅れて出現 */
-      19% { opacity: 1; transform: scale(1.1) rotate(5deg); }
+      0%, 15% { opacity: 0; transform: scale(0.1) rotate(-15deg) translateY(200px); } /* 1つ目より遅れて出現 */
+      19% { opacity: 1; transform: scale(1.1) rotate(5deg) translateY(0); }
       22% { transform: scale(1) rotate(2deg); }
       60% { opacity: 1; transform: scale(1) rotate(2deg); }
       63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
-      66%, 100% { opacity: 0; transform: scale(0.1) rotate(15deg); }
+      66%, 100% { opacity: 0; transform: scale(0.1) rotate(15deg) translateY(200px); }
     }
 
     /* 見えない安心ポップアップ用の時間差タイムループ (10秒周期) */
@@ -953,21 +970,21 @@
       6% { opacity: 1; transform: scale(1.1) rotate(5deg) translateX(0); }
       9% { transform: scale(1) rotate(-3deg); }
       75% { opacity: 1; transform: scale(1) rotate(-3deg); }
-      78%, 100% { opacity: 0; transform: scale(0.1) rotate(-20deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(-20deg) translateX(-50px); }
     }
     @keyframes popLoop2 {
       0%, 18% { opacity: 0; transform: scale(0.1) rotate(20deg) translateX(50px); }
       22% { opacity: 1; transform: scale(1.1) rotate(-5deg) translateX(0); }
       25% { transform: scale(1) rotate(2deg); }
       75% { opacity: 1; transform: scale(1) rotate(2deg); }
-      78%, 100% { opacity: 0; transform: scale(0.1) rotate(20deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(20deg) translateX(50px); }
     }
     @keyframes popLoop3 {
       0%, 34% { opacity: 0; transform: scale(0.1) rotate(10deg) translateY(50px); }
       38% { opacity: 1; transform: scale(1.1) rotate(-2deg) translateY(0); }
       41% { transform: scale(1) rotate(-1deg); }
       75% { opacity: 1; transform: scale(1) rotate(-1deg); }
-      78%, 100% { opacity: 0; transform: scale(0.1) rotate(10deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(10deg) translateY(50px); }
     }
   </style>
 </body>
