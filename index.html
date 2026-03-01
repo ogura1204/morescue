@@ -6,7 +6,7 @@
   <title>MORESCUE</title>
   <style>
     /* ==========================================================================
-       MORESCUE Dynamic Theme - Refined & Elegant Design
+       MORESCUE Dynamic Theme - High-Impact & LightBlue Design
        ========================================================================== */
     html { scroll-behavior: smooth; }
     body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -19,13 +19,15 @@
     :root {
       --mo-navy: #162440;
       --mo-navy-dark: #0d1526;
-      --mo-orange: #f25511;
+      /* 変更：オレンジ部分を #81cbf0 に変更 */
+      --mo-orange: #81cbf0;
       --mo-blue: #235fac;
       --mo-light: #f8f9fa;
       --mo-white: #ffffff;
       --mo-text: #4a4a4a;
       --mo-grad-navy: linear-gradient(135deg, var(--mo-navy-dark) 0%, var(--mo-navy) 100%);
-      --mo-grad-orange: linear-gradient(135deg, #f77a45 0%, var(--mo-orange) 100%);
+      /* 変更：水色ベースのグラデーション */
+      --mo-grad-orange: linear-gradient(135deg, #a6dcf5 0%, var(--mo-orange) 100%);
       --mo-shadow-soft: 0 15px 40px rgba(0, 0, 0, 0.08);
       --mo-shadow-hover: 0 25px 60px rgba(0, 0, 0, 0.15);
     }
@@ -55,45 +57,57 @@
     .mo-highlight-orange::after { content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 30%; z-index: -1; opacity: 0.5; background: var(--mo-orange); border-radius: 2px; }
     .mo-highlight-glow { color: var(--mo-orange); }
 
-    /* アニメーション定義 */
-    .animate-slide-up, .animate-fade-in-up { opacity: 0; transform: translateY(40px); }
-    .fade-in-trigger.is-visible .animate-slide-up, .fade-in-trigger.is-visible .animate-fade-in-up { transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); opacity: 1; transform: translateY(0); }
+    /* ==========================================================================
+       アニメーション定義（全体的に派手・ダイナミックに超強化）
+       ========================================================================== */
+    .animate-impact { display: inline-block; opacity: 0; }
+    .fade-in-trigger.is-visible .animate-impact { animation: bounce-in 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    @keyframes bounce-in { 
+      0% { opacity: 0; transform: scale(2.5) translateY(-50px) rotate(-10deg); filter: blur(10px); } 
+      50% { opacity: 1; transform: scale(0.8) translateY(10px) rotate(5deg); filter: blur(0); }
+      75% { transform: scale(1.1) translateY(-5px) rotate(-2deg); }
+      100% { opacity: 1; transform: scale(1) translateY(0) rotate(0); } 
+    }
+
+    .animate-slide-up, .animate-fade-in-up { opacity: 0; transform: translateY(80px); }
+    .fade-in-trigger.is-visible .animate-slide-up, .fade-in-trigger.is-visible .animate-fade-in-up { transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 1; transform: translateY(0); }
     
-    .animate-slide-right { opacity: 0; transform: translateX(-40px); }
-    .fade-in-trigger.is-visible .animate-slide-right { transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); opacity: 1; transform: translateX(0); }
+    .animate-slide-right { opacity: 0; transform: translateX(-100px) scale(0.9); }
+    .fade-in-trigger.is-visible .animate-slide-right { transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 1; transform: translateX(0) scale(1); }
     
-    .animate-zoom-in { opacity: 0; transform: scale(0.9); }
-    .fade-in-trigger.is-visible .animate-zoom-in { transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1); opacity: 1; transform: scale(1); }
+    .animate-zoom-in { opacity: 0; transform: scale(0.3) rotate(-10deg); }
+    .fade-in-trigger.is-visible .animate-zoom-in { transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 1; transform: scale(1) rotate(0); }
     
-    .animate-zoom-in-slow { transform: scale(1.1); transition: transform 12s ease-out; }
+    .animate-zoom-in-slow { transform: scale(1.2); transition: transform 12s ease-out; }
     .fade-in-trigger.is-visible .animate-zoom-in-slow { transform: scale(1); }
 
-    .animate-float { animation: float-img 5s ease-in-out infinite; }
-    @keyframes float-img { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+    .animate-float { animation: float-img 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+    @keyframes float-img { 0% { transform: translateY(0px) rotate(0deg); } 100% { transform: translateY(-30px) rotate(4deg); } }
 
-    .animate-poyon { animation: poyon 3s infinite; transform-origin: bottom center; }
+    .animate-poyon { animation: poyon 2.5s infinite; transform-origin: bottom center; }
     @keyframes poyon {
       0%, 100% { transform: scale(1, 1) translateY(0); }
-      10% { transform: scale(1.02, 0.98) translateY(0); }
-      25% { transform: scale(0.98, 1.02) translateY(-8px); box-shadow: 0 15px 30px rgba(242, 85, 17, 0.2); }
-      40% { transform: scale(1.01, 0.99) translateY(0); box-shadow: 0 5px 15px rgba(242, 85, 17, 0.3); }
-      55% { transform: scale(0.99, 1.01) translateY(-3px); }
+      10% { transform: scale(1.15, 0.85) translateY(0); }
+      25% { transform: scale(0.85, 1.15) translateY(-20px); box-shadow: 0 20px 40px rgba(129, 203, 240, 0.5); }
+      40% { transform: scale(1.05, 0.95) translateY(0); box-shadow: 0 5px 15px rgba(129, 203, 240, 0.6); }
+      55% { transform: scale(0.98, 1.02) translateY(-5px); }
       70% { transform: scale(1, 1) translateY(0); }
     }
 
-    /* タイポグラフィーアニメーション */
+    /* タイポグラフィーアニメーション（派手化：大きく回転しながら登場） */
     .typo-line { display: block; }
     .typo-char { 
       display: inline-block; 
       opacity: 0; 
-      transform: translateY(12px) scale(0.96); 
-      filter: blur(4px); 
+      transform: translateY(40px) scale(0.5) rotate(20deg); 
+      filter: blur(8px); 
     }
     .fade-in-trigger.is-visible .typo-char { 
-      animation: typo-reveal 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) forwards; 
+      animation: typo-reveal 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
     }
     @keyframes typo-reveal { 
-      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } 
+      0% { opacity: 0; transform: translateY(40px) scale(0.5) rotate(20deg); filter: blur(8px); }
+      100% { opacity: 1; transform: translateY(0) scale(1) rotate(0); filter: blur(0); } 
     }
 
     /* ヘッダー＆マーキー */
@@ -107,26 +121,25 @@
     .mo-nav { display: flex; align-items: center; }
     .mo-nav a { margin-left: 30px; text-decoration: none; color: var(--mo-navy); font-weight: 600; font-size: 0.9em; transition: color 0.3s; letter-spacing: 0.05em; }
     .mo-nav a:hover { color: var(--mo-orange); }
-    .mo-nav-btn { background: var(--mo-grad-orange); color: #fff !important; padding: 10px 24px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 15px rgba(242, 85, 17, 0.3); transition: transform 0.3s; }
+    /* 水色背景に白文字は見えにくいので、テキストシャドウで視認性確保 */
+    .mo-nav-btn { background: var(--mo-grad-orange); color: #fff !important; padding: 10px 24px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 15px rgba(129, 203, 240, 0.5); transition: transform 0.3s; text-shadow: 0 1px 3px rgba(0,0,0,0.15); }
     .mo-nav-btn:hover { transform: translateY(-2px); }
     .mo-menu-toggle { display: none; -webkit-tap-highlight-color: transparent; outline: none; }
 
-    .mo-bg-orange-marquee { background-color: var(--mo-orange); color: #fff; position: relative; z-index: 10000; }
+    .mo-bg-orange-marquee { background-color: var(--mo-orange); color: #fff; position: relative; z-index: 10000; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
     .marquee-container { padding: 8px 0; overflow: hidden; white-space: nowrap; }
     .marquee-content { display: inline-block; animation: marquee 40s linear infinite; font-weight: 600; font-size: 1rem; letter-spacing: 0.1em; }
     .marquee-content span { padding-right: 40px; }
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ヒーローセクション */
-    .mo-hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; padding-bottom: 50px; background-color: var(--mo-light); }
+    .mo-hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 100px; padding-bottom: 50px; background-color: var(--mo-light); }
     .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden; }
     .mo-hero-bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center; animation: hero-pan 25s ease-in-out infinite alternate; }
     .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; z-index: 2; pointer-events: none; }
     
-    /* 修正：PC時はより左側(padding: 0 8%)に配置 */
-    .mo-hero-container { position: relative; z-index: 3; display: flex; justify-content: flex-start; width: 100%; padding: 0 8%; margin: 0; }
+    .mo-hero-container { position: relative; z-index: 3; display: flex; justify-content: flex-start; width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 8%; }
     
-    /* 修正：PCカードをより細く、美しく */
     .mo-hero-text { 
       background: rgba(255, 255, 255, 0.7); 
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
@@ -147,10 +160,11 @@
     .mo-hero-badge { 
       display: inline-block; padding: 14px 30px; font-size: 1.1em; font-weight: 800; 
       border-radius: 50px; line-height: 1.4; text-align: center;
-      background: var(--mo-grad-orange); color: #fff; box-shadow: 0 10px 25px rgba(242, 85, 17, 0.3); 
+      background: var(--mo-grad-orange); color: #fff; box-shadow: 0 10px 25px rgba(129, 203, 240, 0.5); 
+      text-shadow: 0 1px 3px rgba(0,0,0,0.15); /* 白文字の視認性確保 */
     }
 
-    @keyframes hero-pan { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
+    @keyframes hero-pan { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
 
     /* 【3】 お悩み共感セクション */
     #about { position: relative; z-index: 5; padding: 140px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
@@ -162,7 +176,7 @@
       transition: all 0.4s ease; display: flex; flex-direction: column; 
       box-shadow: 0 15px 30px rgba(0,0,0,0.3);
     }
-    .mo-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.3); }
+    .mo-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 25px 50px rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.4); }
     .mo-card-number { font-size: 5em; font-weight: 800; color: rgba(255,255,255,0.05); position: absolute; top: -15px; left: 20px; line-height: 1; }
     
     .mo-card h3 { font-size: 1.4em; margin-bottom: 15px; color: #fff; position: relative; z-index: 1; font-weight: 700; letter-spacing: 0.05em; }
@@ -175,23 +189,34 @@
     
     .mo-pants-img { border: none; background: transparent; filter: drop-shadow(0 20px 40px rgba(22, 36, 64, 0.15)); }
     
-    .mo-pulse-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; border: 1px solid rgba(35, 95, 172, 0.3); border-radius: 50%; opacity: 0; z-index: -1; }
-    .fade-in-trigger.is-visible .mo-pulse-circle { animation: pulse-ring 4s infinite cubic-bezier(0.25, 1, 0.5, 1); }
-    @keyframes pulse-ring { 0% { width: 300px; height: 300px; opacity: 0.5; } 100% { width: 600px; height: 600px; opacity: 0; } }
+    .mo-pulse-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; border: 3px solid rgba(129, 203, 240, 0.6); border-radius: 50%; opacity: 0; z-index: -1; }
+    .fade-in-trigger.is-visible .mo-pulse-circle { animation: pulse-ring 3s infinite cubic-bezier(0.25, 1, 0.5, 1); }
+    @keyframes pulse-ring { 
+      0% { width: 300px; height: 300px; opacity: 1; border-width: 8px; } 
+      100% { width: 800px; height: 800px; opacity: 0; border-width: 1px; } 
+    }
     
     .mo-pop-item { position: absolute; z-index: 3; width: 280px; opacity: 0; }
-    .pop-left-top { top: 0; left: -80px; } .pop-right-top { top: 0; right: -80px; } .pop-bottom { bottom: -80px; left: 50%; transform: translateX(-50%); width: 320px; }
+    
+    /* 修正：ポップアップの登場アニメーションも派手に */
+    .pop-left-top { top: 0; left: -80px; transform: translateX(-100px) translateY(-50px) scale(0); } 
+    .pop-right-top { top: 0; right: -80px; transform: translateX(100px) translateY(-50px) scale(0); } 
+    .pop-bottom { bottom: -80px; left: 50%; transform: translateX(-50%) translateY(100px) scale(0); width: 320px; }
+    
+    .fade-in-trigger.is-visible .pop-left-top { transform: translateX(0) translateY(0) scale(1); } 
+    .fade-in-trigger.is-visible .pop-right-top { transform: translateX(0) translateY(0) scale(1); } 
+    .fade-in-trigger.is-visible .pop-bottom { transform: translateX(-50%) translateY(0) scale(1); }
+
     .pop-line { height: 1px; background: var(--mo-orange); width: 80px; position: absolute; top: 50%; z-index: -1; }
     .pop-left-top .pop-line { right: -60px; } .pop-right-top .pop-line { left: -60px; }
     .pop-line-vertical { width: 1px; height: 60px; background: var(--mo-orange); margin: 0 auto 10px; }
     
-    .pop-content { background: var(--mo-white); padding: 30px 25px; border-radius: 20px; box-shadow: var(--mo-shadow-hover); border: 2px solid transparent; text-align: center; transition: all 0.3s ease; }
-    .pop-content:hover { border-color: var(--mo-orange); transform: translateY(-5px); box-shadow: 0 25px 50px rgba(242, 85, 17, 0.15); }
-    .pop-content h3 { color: var(--mo-orange); font-size: 1.15em; margin-bottom: 10px; font-weight: 800; letter-spacing: 0.05em; }
+    .pop-content { background: var(--mo-white); padding: 30px 25px; border-radius: 20px; box-shadow: var(--mo-shadow-hover); border: 2px solid transparent; text-align: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .pop-content:hover { border-color: var(--mo-orange); transform: translateY(-8px) scale(1.03); box-shadow: 0 30px 60px rgba(129, 203, 240, 0.25); }
+    .pop-content h3 { color: var(--mo-orange); font-size: 1.15em; margin-bottom: 10px; font-weight: 800; letter-spacing: 0.05em; text-shadow: 0 1px 2px rgba(0,0,0,0.05); }
     .pop-content p { font-size: 0.9em; margin: 0; color: var(--mo-text); line-height: 1.6; }
     
-    .fade-in-trigger.is-visible .animate-pop-in { transition: all 1s cubic-bezier(0.25, 1.5, 0.5, 1); opacity: 1; }
-    .fade-in-trigger.is-visible .pop-left-top { transform: translateX(0); } .fade-in-trigger.is-visible .pop-right-top { transform: translateX(0); } .fade-in-trigger.is-visible .pop-bottom { transform: translateX(-50%) translateY(0); }
+    .fade-in-trigger.is-visible .animate-pop-in { transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 1; }
 
     /* 【5】 技術・機能深掘り */
     #features { padding: 140px 0; background: var(--mo-light); }
@@ -200,33 +225,36 @@
     .mo-feature-card { 
       flex: 1; background: #fff; border-radius: 24px; 
       box-shadow: var(--mo-shadow-hover); text-align: center; position: relative; 
-      overflow: hidden; transition: all 0.4s ease; border: 2px solid transparent; 
+      overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 2px solid transparent; 
       display: flex; flex-direction: column;
     }
-    .mo-feature-card:hover { transform: translateY(-10px); border-color: var(--mo-orange); box-shadow: 0 30px 60px rgba(242, 85, 17, 0.15); }
+    .mo-feature-card:hover { transform: translateY(-12px) scale(1.02); border-color: var(--mo-orange); box-shadow: 0 35px 70px rgba(129, 203, 240, 0.25); }
     
     .mo-feature-img { width: 100%; height: 200px; background-color: #e0e5ec; overflow: hidden; }
-    .mo-feature-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-    .mo-feature-card:hover .mo-feature-img img { transform: scale(1.05); }
+    .mo-feature-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+    .mo-feature-card:hover .mo-feature-img img { transform: scale(1.1); }
     
     .mo-feature-text-wrap { padding: 35px 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
     .mo-feature-title { font-size: 1.25em; color: var(--mo-navy); margin-bottom: 15px; font-weight: 800; line-height: 1.4; letter-spacing: 0.02em; }
     .mo-feature-desc { font-size: 0.95em; line-height: 1.7; color: #555; margin: 0; }
 
     /* 専門家・レビュー */
-    .mo-expert-box { display: flex; align-items: stretch; gap: 60px; background: #fff; padding: 60px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.02); }
+    .mo-expert-box { display: flex; align-items: stretch; gap: 60px; background: #fff; padding: 60px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.02); transition: transform 0.4s; }
+    .mo-expert-box:hover { transform: translateY(-5px); box-shadow: var(--mo-shadow-hover); }
     .mo-expert-img-wrap { flex: 0 0 320px; position: relative; overflow: hidden; border-radius: 20px; }
     .mo-expert-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
     .mo-expert-text { flex: 1; display: flex; flex-direction: column; justify-content: center; }
     .mo-expert-title { font-size: 1.7em; color: var(--mo-navy); font-weight: 800; margin-bottom: 25px; line-height: 1.4; }
     .mo-expert-text p { color: #555; font-size: 1.05em; }
+    /* 修正：署名を大きく */
     .mo-expert-name { font-weight: 700; color: var(--mo-navy); margin-top: 25px; text-align: right; font-size: 0.95em; }
     
     .mo-review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
-    .mo-review-item { background: var(--mo-navy); color: #fff; padding: 40px 30px; border-radius: 20px; position: relative; transition: all 0.4s ease; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-    .mo-review-item:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
-    .mo-review-item::after { content: '”'; position: absolute; top: -10px; right: 20px; font-size: 5em; color: rgba(255,255,255,0.05); font-family: serif; line-height: 1; }
-    .mo-stars { color: var(--mo-orange); letter-spacing: 3px; margin-bottom: 0; font-size: 1.1em; }
+    .mo-review-item { background: var(--mo-navy); color: #fff; padding: 40px 30px; border-radius: 20px; position: relative; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    .mo-review-item:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 25px 60px rgba(0,0,0,0.5); }
+    .mo-review-item::after { content: '”'; position: absolute; top: -10px; right: 20px; font-size: 5em; color: rgba(255,255,255,0.05); font-family: serif; line-height: 1; transition: transform 0.4s; }
+    .mo-review-item:hover::after { transform: scale(1.2) rotate(10deg); color: rgba(129, 203, 240, 0.15); }
+    .mo-stars { color: var(--mo-orange); letter-spacing: 3px; margin-bottom: 0; font-size: 1.1em; text-shadow: 0 0 5px rgba(129, 203, 240, 0.5); }
     
     .mo-review-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
     .mo-review-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
@@ -236,37 +264,42 @@
     .mo-spec-tabs { display: flex; gap: 15px; justify-content: center; margin: 0 auto 50px; max-width: 500px; }
     .mo-spec-tab { 
       flex: 1; text-align: center; cursor: pointer; 
-      opacity: 0.6; transition: all 0.4s ease; border: 1px solid rgba(0,0,0,0.05); 
+      opacity: 0.6; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(0,0,0,0.05); 
       border-radius: 50px; padding: 15px 25px; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.02); 
     }
-    .mo-spec-tab.is-active { opacity: 1; background: var(--mo-navy); border-color: var(--mo-navy); box-shadow: 0 10px 25px rgba(22, 36, 64, 0.2); transform: translateY(-3px); }
+    .mo-spec-tab:hover { transform: translateY(-2px); opacity: 0.8; }
+    .mo-spec-tab.is-active { opacity: 1; background: var(--mo-navy); border-color: var(--mo-navy); box-shadow: 0 15px 30px rgba(22, 36, 64, 0.3); transform: translateY(-5px) scale(1.05); }
     .mo-spec-tab span { font-weight: 700; color: var(--mo-navy); display: block; font-size: 1.1em; transition: color 0.3s; }
     .mo-spec-tab.is-active span { color: #fff; }
     
-    .mo-spec-content { display: none; animation: fadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+    .mo-spec-content { display: none; animation: fadeInSpec 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .mo-spec-content.is-active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInSpec { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-    .mo-spec-visual-flex { display: flex; gap: 50px; align-items: flex-start; background: #fff; padding: 50px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); border: 1px solid rgba(0,0,0,0.02); }
+    .mo-spec-visual-flex { display: flex; gap: 50px; align-items: flex-start; background: #fff; padding: 50px; border-radius: 24px; box-shadow: var(--mo-shadow-soft); border: 1px solid rgba(0,0,0,0.02); transition: box-shadow 0.4s; }
+    .mo-spec-visual-flex:hover { box-shadow: var(--mo-shadow-hover); }
     .mo-spec-img-box { flex: 0 0 320px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; min-height: 400px; }
-    .mo-spec-img-box img { height: 280px; width: auto; object-fit: contain; margin: 0 auto 30px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1)); transition: opacity 0.3s; }
+    .mo-spec-img-box img { height: 280px; width: auto; object-fit: contain; margin: 0 auto 30px; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1)); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .mo-spec-visual-flex:hover .mo-spec-img-box img { transform: scale(1.08) translateY(-10px); filter: drop-shadow(0 25px 40px rgba(0,0,0,0.15)); }
     .mo-spec-info-box { flex: 1; }
 
     .mo-level-indicator { background: var(--mo-light); padding: 25px 20px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; }
     .mo-level-label { font-weight: 700; color: var(--mo-navy); font-size: 0.9em; letter-spacing: 0.05em; }
     .mo-level-bar { display: flex; gap: 4px; width: 100%; max-width: 260px; }
     .mo-level-bar span { flex: 1; height: 12px; background: #d0d5dc; border-radius: 3px; transition: all 0.3s; }
-    .mo-level-bar span.active { background: var(--mo-grad-orange); box-shadow: 0 2px 6px rgba(242, 85, 17, 0.3); }
-    .mo-level-text { font-weight: 800; color: var(--mo-orange); font-size: 0.9em; letter-spacing: 0.05em; margin-top: 5px; }
+    .mo-level-bar span.active { background: var(--mo-grad-orange); box-shadow: 0 2px 8px rgba(129, 203, 240, 0.6); }
+    .mo-level-text { font-weight: 800; color: var(--mo-orange); font-size: 0.9em; letter-spacing: 0.05em; margin-top: 5px; text-shadow: 0 1px 2px rgba(0,0,0,0.05); }
 
     .mo-table-wrap { border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
     .mo-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
     .mo-table th { background: var(--mo-navy); color: #fff; padding: 18px 15px; width: 50%; font-weight: 600; letter-spacing: 0.05em; border-right: 1px solid rgba(255,255,255,0.1); } 
     .mo-table th:last-child { border-right: none; }
-    .mo-table td { padding: 18px 15px; border-bottom: 1px solid #f0f0f0; text-align: center; font-weight: 500; color: #444; background: #fff; }
+    .mo-table td { padding: 18px 15px; border-bottom: 1px solid #f0f0f0; text-align: center; font-weight: 500; color: #444; background: #fff; transition: background 0.3s; }
+    .mo-table tr:hover td { background: #fafafa; }
     .mo-table tr:last-child td { border-bottom: none; }
     
-    .mo-spec-details { margin-top: 30px; background: var(--mo-light); padding: 30px 40px; border-radius: 16px; }
+    .mo-spec-details { margin-top: 30px; background: var(--mo-light); padding: 30px 40px; border-radius: 16px; transition: transform 0.3s; }
+    .mo-spec-details:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.03); }
     .mo-spec-details dl { margin: 0; display: flex; flex-wrap: wrap; }
     .mo-spec-details dt { width: 30%; font-weight: 700; color: var(--mo-navy); padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.05); letter-spacing: 0.05em; }
     .mo-spec-details dd { width: 70%; margin: 0; padding: 16px 0; color: #555; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; }
@@ -276,40 +309,43 @@
     /* 【10】 FAQ */
     .mo-faq-item { margin-bottom: 15px; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); }
     .mo-faq-item summary { padding: 25px 30px; font-weight: 700; background: #fff; cursor: pointer; position: relative; color: var(--mo-navy); transition: all 0.3s; font-size: 1.05em; }
-    .mo-faq-item summary:hover { color: var(--mo-orange); }
-    .mo-faq-item summary::after { content: '+'; position: absolute; right: 30px; font-size: 1.5em; color: var(--mo-orange); font-weight: 400; transition: transform 0.3s; }
-    .mo-faq-item[open] summary::after { transform: rotate(45deg); }
-    .mo-faq-answer { padding: 25px 30px; background: #fafafa; color: #555; border-top: 1px solid #f0f0f0; line-height: 1.7; }
+    .mo-faq-item summary:hover { color: var(--mo-orange); background: #fafafa; }
+    .mo-faq-item summary::after { content: '+'; position: absolute; right: 30px; font-size: 1.5em; color: var(--mo-orange); font-weight: 400; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .mo-faq-item[open] summary::after { transform: rotate(135deg); }
+    .mo-faq-answer { padding: 25px 30px; background: #fafafa; color: #555; border-top: 1px solid #f0f0f0; line-height: 1.7; animation: slideDownFaq 0.4s ease-out; }
+    @keyframes slideDownFaq { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
     /* 購入セクション */
-    .mo-buy-box { background: var(--mo-white); padding: 70px; border-radius: 32px; max-width: 900px; margin: 50px auto 0; box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
+    .mo-buy-box { background: var(--mo-white); padding: 70px; border-radius: 32px; max-width: 900px; margin: 50px auto 0; box-shadow: 0 35px 80px rgba(0,0,0,0.25); }
     .mo-buy-grid { display: grid; grid-template-columns: repeat(2, 320px); justify-content: center; gap: 40px; margin-bottom: 40px; }
     
-    .mo-buy-item { background: var(--mo-light); padding: 40px 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); transition: transform 0.3s; }
-    .mo-buy-item:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
-    .mo-buy-item img { height: 160px; width: auto; object-fit: contain; margin: 0 auto 25px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); transition: opacity 0.3s; }
+    .mo-buy-item { background: var(--mo-light); padding: 40px 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .mo-buy-item:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 45px rgba(0,0,0,0.08); }
+    .mo-buy-item img { height: 160px; width: auto; object-fit: contain; margin: 0 auto 25px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .mo-buy-item:hover img { transform: scale(1.1) translateY(-5px); filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15)); }
     .mo-buy-item h4 { color: var(--mo-navy); font-size: 1.2em; margin-bottom: 25px; font-weight: 800; letter-spacing: 0.05em; }
     
     .mo-color-chips { display: flex; gap: 15px; justify-content: center; margin-bottom: 25px; }
     .color-chip { 
       width: 32px; height: 32px; border-radius: 50%; border: 3px solid transparent; 
-      cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 0; outline: none;
+      cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 0; outline: none;
     }
-    .color-chip:hover { transform: scale(1.1); }
-    .color-chip.active { border-color: var(--mo-orange); transform: scale(1.15); box-shadow: 0 4px 12px rgba(242, 85, 17, 0.4); }
+    .color-chip:hover { transform: scale(1.2); }
+    .color-chip.active { border-color: var(--mo-orange); transform: scale(1.2); box-shadow: 0 6px 15px rgba(129, 203, 240, 0.6); }
     .chip-black { background-color: #222222; }
     .chip-blue { background-color: #235fac; }
 
     .mo-buy-action-btn { 
       width: 100%; display: block; padding: 15px 0; border-radius: 50px; 
       background: var(--mo-grad-orange); color: #fff !important; font-weight: bold; font-size: 1.1em;
-      text-decoration: none; box-shadow: 0 8px 20px rgba(242, 85, 17, 0.3); transition: transform 0.3s; margin-top: auto;
+      text-decoration: none; box-shadow: 0 10px 25px rgba(129, 203, 240, 0.5); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin-top: auto; text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
-    .mo-buy-action-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(242, 85, 17, 0.4); }
+    .mo-buy-action-btn:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 15px 35px rgba(129, 203, 240, 0.7); }
 
     /* フッター */
     .mo-footer { background: var(--mo-navy-dark); color: rgba(255,255,255,0.7); padding: 80px 0 160px 0; font-size: 0.9em; }
-    .mo-footer-logo img { height: 35px; margin: 0 auto 20px; display: block; filter: brightness(0) invert(1); opacity: 0.9; }
+    .mo-footer-logo img { height: 35px; margin: 0 auto 20px; display: block; filter: brightness(0) invert(1); opacity: 0.9; transition: transform 0.4s; }
+    .mo-footer-logo:hover img { transform: scale(1.05); opacity: 1; }
     .mo-footer-company { margin-bottom: 20px; }
     .mo-footer-info { margin-bottom: 30px; }
     .mo-footer-link { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; letter-spacing: 0.05em; }
@@ -322,23 +358,24 @@
       position: fixed; bottom: 30px; left: 0; width: 100%; z-index: 9999;
       display: flex; justify-content: center; pointer-events: none;
       opacity: 0; visibility: hidden;
-      transform: translateY(50px); transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      transform: translateY(80px) scale(0.9); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .fixed-bottom-wrapper.is-visible { 
-      transform: translateY(0); opacity: 1; visibility: visible; 
+      transform: translateY(0) scale(1); opacity: 1; visibility: visible; 
     }
     body.is-menu-open .fixed-bottom-wrapper {
-      opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; transform: translateY(50px) !important;
+      opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; transform: translateY(80px) scale(0.9) !important;
     }
     
     .combined-buy-btn {
       pointer-events: auto; display: inline-flex; align-items: center;
       background: var(--mo-grad-orange); color: #fff; 
       padding: 8px 30px 8px 15px;
-      border-radius: 50px; text-decoration: none; box-shadow: 0 15px 35px rgba(242, 85, 17, 0.4);
-      transition: transform 0.3s;
+      border-radius: 50px; text-decoration: none; box-shadow: 0 15px 35px rgba(129, 203, 240, 0.5);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
-    .combined-buy-btn:hover { transform: translateY(-3px); }
+    .combined-buy-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 25px 45px rgba(129, 203, 240, 0.7); }
     
     .pants-icon { 
       width: 45px; height: 45px; background: transparent; border: none; border-radius: 0; 
@@ -361,10 +398,10 @@
       .mo-menu-toggle { 
         display: block; font-size: 2.8em; cursor: pointer; color: var(--mo-navy); 
         font-weight: 300; line-height: 1; width: 40px; text-align: center; 
-        position: relative; z-index: 10000; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+        position: relative; z-index: 10000; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         -webkit-tap-highlight-color: transparent; outline: none; user-select: none;
       }
-      .mo-menu-toggle.is-active { transform: rotate(45deg); color: var(--mo-navy); }
+      .mo-menu-toggle.is-active { transform: rotate(135deg); color: var(--mo-navy); }
       
       .mo-nav { 
         display: none; position: fixed; top: 65px; left: 0; width: 100vw; height: calc(100vh - 65px); 
@@ -372,8 +409,8 @@
         flex-direction: column; justify-content: center; align-items: center; 
         padding: 20px; z-index: 999; box-sizing: border-box;
       }
-      .mo-nav.is-open { display: flex; animation: fadeInMenu 0.3s ease forwards; }
-      @keyframes fadeInMenu { from { opacity: 0; } to { opacity: 1; } }
+      .mo-nav.is-open { display: flex; animation: fadeInMenu 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+      @keyframes fadeInMenu { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
       
       .mo-nav a { margin: 12px 0; font-size: 1.1rem; text-align: center; margin-left: 0; letter-spacing: 0.1em; }
       .mo-nav-btn { margin-top: 20px; font-size: 1.1rem; padding: 12px 40px; }
@@ -382,30 +419,27 @@
       .marquee-content { font-size: 0.6rem; letter-spacing: 1px; }
       .marquee-content span { padding-right: 20px; }
 
-      /* 修正：SPファーストビューを100svhの画面いっぱいに。ヘッダー考慮の完全中央配置 */
-      .mo-hero { height: 100vh; height: 100svh; padding-top: 65px; padding-bottom: 0; align-items: center; justify-content: center; overflow: hidden; }
-      
-      /* 修正：SP背景画像のサイズ変動を防ぐ */
+      /* 修正：SPファーストビューを100vhで固定、カードを完全中央配置に再計算 */
+      .mo-hero { height: 100vh; height: 100svh; padding: 65px 0 0 0; align-items: center; justify-content: center; overflow: hidden; box-sizing: border-box; }
       .mo-hero-bg { height: 100%; overflow: hidden; }
       .mo-hero-bg-img { animation: none !important; transform: scale(1) !important; object-position: center top; height: 100%; }
       .mo-hero-overlay { background: transparent; display: none; }
 
-      /* 修正：SPカードを極小化し、完全中央に配置 */
-      .mo-hero-container { justify-content: center; align-items: center; padding: 0; width: 100%; margin: 0; }
+      .mo-hero-container { justify-content: center; align-items: center; padding: 0 10px; width: 100%; margin: 0; }
       
       .mo-hero-text { 
-        margin: 0; padding: 20px 15px; 
-        background: rgba(255, 255, 255, 0.7); border-radius: 12px; 
-        max-width: 320px; width: 92%; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        text-align: left; /* 左揃え */
+        margin: 0; padding: 20px 20px 25px; 
+        background: rgba(255, 255, 255, 0.7); border-radius: 16px; 
+        max-width: 320px; width: 92%; box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        text-align: left; 
       }
       
-      .mo-hero-catch { font-size: 1.25rem; line-height: 1.35; text-align: left; margin-bottom: 12px; }
-      .mo-hero-catch .typo-line:first-child { margin-left: -0.45em; } /* ツラ合わせ */
+      .mo-hero-catch { font-size: 1.4rem; line-height: 1.4; text-align: left; margin-bottom: 12px; }
+      .mo-hero-catch .typo-line:first-child { margin-left: -0.45em; } 
       
-      .mo-hero-subcatch { font-size: 0.9rem; line-height: 1.4; margin-bottom: 15px; }
-      .mo-hero-desc { font-size: 0.75rem; margin-bottom: 20px; line-height: 1.5; }
-      .mo-hero-badge { font-size: 0.85rem; padding: 10px 20px; border-radius: 30px; display: inline-block; }
+      .mo-hero-subcatch { font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; }
+      .mo-hero-desc { font-size: 0.75rem; margin-bottom: 25px; line-height: 1.5; }
+      .mo-hero-badge { font-size: 0.9rem; padding: 12px 25px; border-radius: 30px; display: inline-block; }
 
       #about { padding: 100px 0; }
       .mo-lead-text { font-size: 1.05rem; margin-bottom: 40px; }
@@ -431,7 +465,7 @@
         padding-left: 20px; padding-right: 20px; margin-left: -20px; margin-right: -20px;
       }
       .mo-feature-cards::-webkit-scrollbar { height: 3px; }
-      .mo-feature-cards::-webkit-scrollbar-thumb { background: rgba(242, 85, 17, 0.5); border-radius: 10px; }
+      .mo-feature-cards::-webkit-scrollbar-thumb { background: rgba(129, 203, 240, 0.5); border-radius: 10px; }
       .mo-feature-card { flex: 0 0 75%; scroll-snap-align: center; margin-bottom: 0; border-radius: 20px; padding: 0; }
       
       .mo-feature-img { height: 160px; }
@@ -451,7 +485,7 @@
         padding-left: 20px; padding-right: 20px; margin-left: -20px; margin-right: -20px;
       }
       .mo-review-grid::-webkit-scrollbar { height: 3px; }
-      .mo-review-grid::-webkit-scrollbar-thumb { background: rgba(242, 85, 17, 0.5); border-radius: 10px; }
+      .mo-review-grid::-webkit-scrollbar-thumb { background: rgba(129, 203, 240, 0.5); border-radius: 10px; }
       .mo-review-item { flex: 0 0 75%; scroll-snap-align: center; margin-bottom: 0; padding: 30px 20px; border-radius: 20px; }
       .mo-review-item p { font-size: 0.9rem; line-height: 1.6; }
       
@@ -499,6 +533,7 @@
       .mo-footer-info { font-size: 0.8em; }
       .mo-copyright { font-size: 0.7em; }
 
+      /* 見切れ防止にbottomを上げる */
       .fixed-bottom-wrapper { bottom: 45px; }
       .combined-buy-btn { padding: 8px 25px 8px 12px; }
       .pants-icon { width: 35px; height: 35px; margin-right: 12px; }
@@ -519,7 +554,7 @@
           <div class="mo-menu-toggle" id="js-menu-toggle">＋</div>
           
           <nav class="mo-nav" id="js-nav">
-            <a href="#about">MORESCUEとは</a>
+            <a href="#about">「MORESCUE」<span style="font-size: 0.6em;">(モレスキュー)</span>とは</a>
             <a href="#features">特徴</a>
             <a href="#structure">特許特殊構造</a>
             <a href="#size">スペック</a>
@@ -604,7 +639,7 @@
       <div class="mo-container">
         <div class="mo-structure-header text-center">
           <h2 class="mo-section-title">
-            <span class="animate-impact line-1">日常を救う「MORESCUE」</span><br>
+            <span class="animate-impact line-1">日常を救う「MORESCUE」<span style="font-size: 0.5em; vertical-align: middle;">(モレスキュー)</span></span><br>
             <span class="mo-text-blue animate-impact line-2 mo-structure-sub" style="font-size: 0.7em; display: inline-block; margin-top: 15px; animation-delay: 0.5s;">特殊構造が叶える<br class="sp-only">「見えない安心」</span>
           </h2>
         </div>
@@ -687,7 +722,7 @@
           </div>
           <div class="mo-expert-text">
             <h3 class="mo-expert-title">「QOLを向上させる、<br>現代男性の賢い選択」</h3>
-            <p>「尿漏れは隠すべき悩みではなく、適切なアイテムで対処すべきエチケットの一つです。MORESCUEの特許構造は、機能性下着にありがちな不快な締め付けを解消し、長時間の着用でも驚くほど快適です。」</p>
+            <p>「尿漏れは隠すべき悩みではなく、適切なアイテムで対処すべきエチケットの一つです。「MORESCUE」<span style="font-size: 0.8em;">(モレスキュー)</span>の特許構造は、機能性下着にありがちな不快な締め付けを解消し、長時間の着用でも驚くほど快適です。」</p>
             <p class="mo-expert-name">繊維製品品質管理士</p>
           </div>
         </div>
@@ -898,7 +933,7 @@
         const hero = document.getElementById('js-hero-section');
         if (hero) {
           if (window.innerWidth <= 768) {
-            // SP時はブラウザの表示領域の高さを取得し、ピクセルで固定する（これでバンッと動かなくなる）
+            // SP時はブラウザの表示領域の高さを取得し、ピクセルで完全固定（アドレスバーの出し入れに影響されない）
             hero.style.height = window.innerHeight + 'px';
             hero.style.minHeight = window.innerHeight + 'px';
           } else {
@@ -907,9 +942,7 @@
           }
         }
       };
-      // 初回実行
       setHeroHeight();
-      // 画面の横幅が変わった時（画面回転時など）のみ再計算する
       let vhWindowWidth = window.innerWidth;
       window.addEventListener('resize', () => {
         if (window.innerWidth !== vhWindowWidth) {
@@ -918,7 +951,7 @@
         }
       });
 
-      // タイポグラフィーアニメーション（1文字ずつフェード＆スライドイン）
+      // タイポグラフィーアニメーション（1文字ずつダイナミックにフェードイン）
       const typoCatch = document.getElementById('js-typo-catch');
       if (typoCatch) {
         const lines = typoCatch.querySelectorAll('.typo-line');
