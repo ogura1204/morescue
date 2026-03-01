@@ -6,7 +6,7 @@
   <title>MORESCUE - 究極のレスキューパンツ</title>
   <style>
     /* ==========================================================================
-       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME
+       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V3)
        ========================================================================== */
     @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700;900&family=Noto+Sans+JP:wght@700;900&display=swap');
 
@@ -26,7 +26,7 @@
 
     /* 限界突破カラーパレット */
     :root {
-      --c-main: #81cbf0; /* メインカラー水色 */
+      --c-main: #81cbf0; 
       --c-main-dark: #3aa8e6;
       --c-yellow: #FFEA00;
       --c-red: #FF3300;
@@ -97,7 +97,6 @@
     .mo-nav { display: flex; align-items: center; gap: 20px; }
     .mo-nav a { text-decoration: none; color: var(--c-black); font-weight: 900; font-size: 1rem; border-bottom: 3px solid transparent; transition: 0.2s; }
     .mo-nav a:hover { border-color: var(--c-red); color: var(--c-red); }
-    /* ヘッダーのボタンもスペック（購入合体）へ飛ぶように変更 */
     .mo-nav-btn { background: var(--c-yellow); padding: 8px 20px; border: 3px solid var(--c-black); border-radius: 30px; box-shadow: var(--shadow-sm); }
     .mo-nav-btn:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--c-black); }
     
@@ -109,15 +108,16 @@
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ==========================================================================
-       ファーストビュー（HV）- 限界突破アニメーション
+       ファーストビュー（HV）- 限界突破・時間差ループアニメーション
        ========================================================================== */
     .hv-section {
       height: 100vh; min-height: 800px;
       background-color: var(--c-main);
-      display: flex; align-items: flex-start; /* PC時はpadding-topで下げるためflex-start */
+      display: flex; align-items: flex-end; /* PC/SPともに画面下部に寄せる */
       justify-content: center;
       position: relative; overflow: hidden;
       border-bottom: 8px solid var(--c-black);
+      padding-bottom: 60px; /* 下部余白 */
     }
     
     .hv-flash {
@@ -130,74 +130,74 @@
 
     /* 中心の男性の顔切り抜き（プレースホルダー） */
     .hv-center-face {
-      position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);
+      position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);
       z-index: 2; width: 100%; max-width: 700px; text-align: center; pointer-events: none;
     }
     .hv-center-face img { width: 100%; height: auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); }
 
-    /* コンテンツ群（PC） */
+    /* コンテンツ群 */
     .hv-content-wrap {
       position: relative; z-index: 3; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px;
-      display: flex; justify-content: space-between; align-items: flex-start;
-      padding-top: 18vh; /* 修正：PC時のコンテンツを下に下げる */
+      display: flex; justify-content: space-between; align-items: flex-end;
       pointer-events: none;
     }
     .hv-content-wrap > * { pointer-events: auto; }
 
-    /* 左側：キャッチコピーの吹き出し */
+    /* ====================================
+       HV ループアニメーション設定 (12秒周期)
+       ==================================== */
     .hv-catch-bubble {
       background: var(--c-white); border: var(--border-thick); border-radius: 30px;
-      padding: 40px; box-shadow: var(--shadow-lg); transform: rotate(-3deg);
-      max-width: 450px; position: relative; opacity: 0; /* JS用初期状態 */
+      padding: 40px; box-shadow: var(--shadow-lg); 
+      max-width: 450px; position: relative;
+      opacity: 0; /* 初期非表示 */
+      animation: hvLoop1 12s infinite; 
+      transform-origin: left bottom;
     }
-    .hv-catch-bubble::after {
-      content: ''; position: absolute; bottom: -25px; right: 50px;
-      border-width: 30px 0 0 30px; border-style: solid; border-color: var(--c-black) transparent transparent transparent;
-    }
-    .hv-catch-bubble::before {
-      content: ''; position: absolute; bottom: -16px; right: 54px;
-      border-width: 22px 0 0 22px; border-style: solid; border-color: var(--c-white) transparent transparent transparent; z-index: 1;
-    }
+    .hv-catch-bubble::after { content: ''; position: absolute; bottom: -25px; right: 50px; border-width: 30px 0 0 30px; border-style: solid; border-color: var(--c-black) transparent transparent transparent; }
+    .hv-catch-bubble::before { content: ''; position: absolute; bottom: -16px; right: 54px; border-width: 22px 0 0 22px; border-style: solid; border-color: var(--c-white) transparent transparent transparent; z-index: 1; }
     .hv-catch { font-size: 3.2rem; font-weight: 900; line-height: 1.2; color: var(--c-black); margin: 0; }
     .hv-catch span.hl { color: var(--c-red); }
 
-    /* 右側：パンツ＋説明＋バッジの合体カード */
     .hv-product-card {
       background: var(--c-yellow); border: var(--border-thick); border-radius: 20px;
-      padding: 30px; box-shadow: var(--shadow-lg); transform: rotate(2deg);
+      padding: 30px; box-shadow: var(--shadow-lg); 
       max-width: 420px; position: relative; display: flex; flex-direction: column; align-items: center;
-      opacity: 0; /* JS用初期状態 */
+      opacity: 0; /* 初期非表示 */
+      animation: hvLoop2 12s infinite; 
+      transform-origin: right bottom;
     }
     .hv-product-img { width: 180px; margin-bottom: 20px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3)); transform: rotate(-5deg); }
     .hv-product-text { background: var(--c-white); border: 3px solid var(--c-black); padding: 15px; border-radius: 10px; font-size: 1rem; font-weight: 700; line-height: 1.6; text-align: left; }
     .hv-product-text strong { color: var(--c-red); font-size: 1.3rem; display: block; margin-bottom: 8px; line-height: 1.3; }
 
-    /* 爆発バッジ（カードに付随） */
     .hv-badge {
       position: absolute; top: -40px; right: -30px;
       background: var(--c-red); color: var(--c-white);
       width: 150px; height: 150px; border-radius: 50%; border: var(--border-thick);
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       box-shadow: var(--shadow-sm); transform: rotate(15deg); line-height: 1.1;
-      opacity: 0; /* JS用初期状態 */
     }
     .hv-badge span.small { font-size: 1rem; font-weight: 900; }
     .hv-badge span.big { font-size: 2rem; font-weight: 900; color: var(--c-yellow); text-shadow: 2px 2px 0 var(--c-black); }
 
-    /* ----------------------------------------------------
-       ド派手登場アニメーション (PC/SP共通ベース)
-       ---------------------------------------------------- */
-    @keyframes smashInExtreme {
-      0% { opacity: 0; transform: scale(4) rotate(15deg); filter: blur(20px); pointer-events: none; }
-      40% { opacity: 1; transform: scale(0.8) rotate(-5deg); filter: blur(0); }
-      70% { transform: scale(1.1) rotate(2deg); }
-      100% { opacity: 1; transform: scale(1) rotate(0deg); pointer-events: auto; }
+    /* 激しいバウンドで出現 -> キープ -> 消失 -> 待機のループ */
+    @keyframes hvLoop1 {
+      0%, 2% { opacity: 0; transform: scale(0.1) rotate(20deg); }
+      5% { opacity: 1; transform: scale(1.1) rotate(-5deg); }
+      8% { transform: scale(1) rotate(-3deg); }
+      60% { opacity: 1; transform: scale(1) rotate(-3deg); }
+      63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
+      66%, 100% { opacity: 0; transform: scale(0.1) rotate(-20deg); }
     }
-    
-    /* PC用（1回だけ再生） */
-    .fade-in-trigger.is-visible .anim-pc-1 { animation: smashInExtreme 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0s; }
-    .fade-in-trigger.is-visible .anim-pc-2 { animation: smashInExtreme 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.3s; }
-    .fade-in-trigger.is-visible .anim-pc-3 { animation: smashInExtreme 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.6s; }
+    @keyframes hvLoop2 {
+      0%, 15% { opacity: 0; transform: scale(0.1) rotate(-20deg); } /* 1つ目より遅れて出現 */
+      18% { opacity: 1; transform: scale(1.1) rotate(5deg); }
+      21% { transform: scale(1) rotate(2deg); }
+      60% { opacity: 1; transform: scale(1) rotate(2deg); }
+      63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
+      66%, 100% { opacity: 0; transform: scale(0.1) rotate(20deg); }
+    }
 
     /* ==========================================================================
        お悩み共感セクション
@@ -218,21 +218,52 @@
     .comic-card p { font-size: 1.05rem; font-weight: 700; line-height: 1.6; margin: 0; }
 
     /* ==========================================================================
-       特許構造セクション
+       特許構造セクション（ポップアップループ化）
        ========================================================================== */
     #structure { background: var(--c-yellow); border-bottom: 8px solid var(--c-black); }
     .structure-wrapper { position: relative; max-width: 800px; margin: 0 auto; text-align: center; }
     .pants-center-img { max-width: 400px; margin: 0 auto; border: var(--border-thick); box-shadow: var(--shadow-lg); border-radius: 20px; background: var(--c-white); padding: 30px; transform: rotate(-2deg); }
     
-    .comic-pop { position: absolute; background: var(--c-white); border: var(--border-thick); box-shadow: var(--shadow-md); padding: 20px; border-radius: 15px; font-weight: 700; width: 260px; text-align: left; }
+    .comic-pop {
+      position: absolute; background: var(--c-white); border: var(--border-thick); box-shadow: var(--shadow-md);
+      padding: 20px; border-radius: 15px; font-weight: 700; width: 260px; text-align: left;
+      opacity: 0; /* 初期非表示 */
+    }
     .comic-pop::after { content:''; position:absolute; width: 50px; height: 50px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,0 L100,50 L0,100 Z" fill="%23111"/></svg>') no-repeat center/contain; }
-    .pop-1 { top: 10%; left: -120px; transform: rotate(-3deg); }
-    .pop-1::after { right: -30px; top: 50%; transform: translateY(-50%) rotate(10deg); width:30px; height:20px; }
-    .pop-2 { top: 40%; right: -120px; transform: rotate(2deg); }
-    .pop-2::after { left: -30px; top: 50%; transform: translateY(-50%) rotate(190deg); width:30px; height:20px; }
-    .pop-3 { bottom: -40px; left: 50%; transform: translateX(-50%) rotate(-1deg); width: 320px; }
-    .pop-3::after { top: -20px; left: 50%; transform: translateX(-50%) rotate(-90deg); width:20px; height:30px; }
+    
     .comic-pop h4 { color: var(--c-main-dark); font-size: 1.3rem; margin: 0 0 10px; font-weight: 900; border-bottom: 2px dashed #ccc; padding-bottom: 5px; }
+
+    /* ポップアップのずらしループアニメーション (10秒周期) */
+    .pop-loop-1 { top: 10%; left: -120px; animation: popLoop1 10s infinite; transform-origin: bottom right; }
+    .pop-loop-1::after { right: -30px; top: 50%; transform: translateY(-50%) rotate(10deg); width:30px; height:20px; }
+    
+    .pop-loop-2 { top: 40%; right: -120px; animation: popLoop2 10s infinite; transform-origin: bottom left; }
+    .pop-loop-2::after { left: -30px; top: 50%; transform: translateY(-50%) rotate(190deg); width:30px; height:20px; }
+    
+    .pop-loop-3 { bottom: -40px; left: 50%; margin-left: -160px; width: 320px; animation: popLoop3 10s infinite; transform-origin: top center; }
+    .pop-loop-3::after { top: -20px; left: 50%; transform: translateX(-50%) rotate(-90deg); width:20px; height:30px; }
+
+    @keyframes popLoop1 {
+      0%, 2% { opacity: 0; transform: scale(0.1) rotate(-20deg); }
+      6% { opacity: 1; transform: scale(1.1) rotate(5deg); }
+      9% { transform: scale(1) rotate(-3deg); }
+      75% { opacity: 1; transform: scale(1) rotate(-3deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(-20deg); }
+    }
+    @keyframes popLoop2 {
+      0%, 18% { opacity: 0; transform: scale(0.1) rotate(20deg); }
+      22% { opacity: 1; transform: scale(1.1) rotate(-5deg); }
+      25% { transform: scale(1) rotate(2deg); }
+      75% { opacity: 1; transform: scale(1) rotate(2deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(20deg); }
+    }
+    @keyframes popLoop3 {
+      0%, 34% { opacity: 0; transform: scale(0.1) rotate(10deg); }
+      38% { opacity: 1; transform: scale(1.1) rotate(-2deg); }
+      41% { transform: scale(1) rotate(-1deg); }
+      75% { opacity: 1; transform: scale(1) rotate(-1deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(10deg); }
+    }
 
     /* ==========================================================================
        3つのこだわり
@@ -321,6 +352,20 @@
     .mo-buy-action-btn { width: 100%; margin-top: auto; }
 
     /* ==========================================================================
+       FAQセクション (完全復活・コミック仕様)
+       ========================================================================== */
+    #faq { background: var(--c-white); border-bottom: 8px solid var(--c-black); }
+    .mo-faq-wrap { margin-top: 40px; }
+    .mo-faq-item { margin-bottom: 18px; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-md); border: var(--border-thick); transition: all 0.3s; transform: rotate(1deg); }
+    .mo-faq-item:nth-child(even) { transform: rotate(-1deg); }
+    .mo-faq-item summary { padding: 25px 30px; font-weight: 900; background: #fff; cursor: pointer; position: relative; color: var(--c-navy); font-size: 1.1em; transition: 0.2s; }
+    .mo-faq-item summary:hover { background: var(--c-yellow); }
+    .mo-faq-item[open] { border-color: var(--c-red); transform: rotate(0); }
+    .mo-faq-item summary::after { content: '+'; position: absolute; right: 30px; top: 50%; transform: translateY(-50%); font-size: 2rem; color: var(--c-red); font-weight: 900; transition: 0.3s; }
+    .mo-faq-item[open] summary::after { transform: translateY(-50%) rotate(135deg); }
+    .mo-faq-answer { padding: 30px 35px; background: #fafafa; color: #111; border-top: var(--border-thick); line-height: 1.8; font-weight: 700; font-size: 1rem; }
+
+    /* ==========================================================================
        SP用 レスポンシブ (タイムループアニメーション)
        ========================================================================== */
     @media (max-width: 768px) {
@@ -336,24 +381,28 @@
       .mo-nav a { font-size: 1.8rem; margin: 15px 0; color: var(--c-black); text-shadow: 2px 2px 0 var(--c-white); background: var(--c-white); padding: 10px 30px; border: var(--border-thick); box-shadow: var(--shadow-sm); transform: rotate(-2deg); }
       .mo-nav-btn { font-size: 1.5rem !important; background: var(--c-red) !important; color: #fff !important; margin-top: 30px; }
 
-      /* HV スマホ */
-      .hv-section { padding-top: 60px; height: 100vh; height: 100svh; align-items: center; }
-      .hv-center-face { width: 150%; max-width: 150%; top: 60%; }
-      .hv-content-wrap { padding: 0; display: block; height: auto; }
+      .marquee-container { padding: 5px 0; }
+      .marquee-content { font-size: 0.8rem; }
 
-      /* SP時：それぞれの要素にズラしたループアニメーションを適用 */
-      /* ループ時間：9秒 (出撃〜待機〜退場〜顔見せ時間) */
+      /* =======================================================
+         SP ファーストビュー（下部寄せ・タイムループ）
+         ======================================================= */
+      .hv-section { padding-top: 60px; height: 100vh; height: 100svh; align-items: flex-end; padding-bottom: 30px; }
       
+      /* 顔は中央少し上に配置 */
+      .hv-center-face { width: 150%; max-width: 150%; top: 40%; }
+      .hv-center-face img { filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
+
+      .hv-content-wrap { padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: auto; }
+
       .hv-catch-bubble { 
         padding: 25px 20px; max-width: 90%; margin: 0 auto 20px; transform: rotate(0); 
-        opacity: 0; animation: spLoop1 9s infinite; transform-origin: center;
       }
       .hv-catch-bubble::after, .hv-catch-bubble::before { left: 50%; transform: translateX(-50%); right: auto; }
       .hv-catch { font-size: 2rem; text-align: center; }
       
       .hv-product-card { 
         max-width: 90%; margin: 0 auto; padding: 20px; transform: rotate(0); 
-        opacity: 0; animation: spLoop2 9s infinite; transform-origin: center;
       }
       .hv-product-img { width: 130px; margin-bottom: 10px; }
       .hv-product-text { font-size: 0.9rem; padding: 10px; }
@@ -361,49 +410,22 @@
       
       .hv-badge { 
         width: 100px; height: 100px; top: -20px; right: -10px; padding: 0; border-width: 3px; 
-        opacity: 0; animation: spLoop3 9s infinite; transform-origin: center;
       }
       .hv-badge span.small { font-size: 0.7rem; }
       .hv-badge span.big { font-size: 1.2rem; }
 
-      @keyframes spLoop1 {
-        0% { opacity: 0; transform: scale(3) rotate(10deg); }
-        4% { opacity: 1; transform: scale(0.9) rotate(-3deg); }
-        7% { transform: scale(1.05) rotate(1deg); }
-        10% { transform: scale(1) rotate(0); }
-        45% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0; transform: scale(0.5); }
-        100% { opacity: 0; }
-      }
-      @keyframes spLoop2 {
-        0%, 5% { opacity: 0; transform: scale(3) rotate(-10deg); }
-        9% { opacity: 1; transform: scale(0.9) rotate(3deg); }
-        12% { transform: scale(1.05) rotate(-1deg); }
-        15% { transform: scale(1) rotate(0); }
-        45% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0; transform: scale(0.5); }
-        100% { opacity: 0; }
-      }
-      @keyframes spLoop3 {
-        0%, 10% { opacity: 0; transform: scale(3) rotate(30deg); }
-        14% { opacity: 1; transform: scale(0.8) rotate(-10deg); }
-        17% { transform: scale(1.1) rotate(5deg); }
-        20% { transform: scale(1) rotate(15deg); }
-        45% { opacity: 1; transform: scale(1) rotate(15deg); }
-        50% { opacity: 0; transform: scale(0.5); }
-        100% { opacity: 0; }
-      }
-
       /* その他セクション SP */
-      .mo-card-grid, .feature-comic-grid, .review-grid { grid-template-columns: 1fr; gap: 30px; }
+      .mo-card-grid, .feature-comic-grid, .review-grid, .buy-grid { grid-template-columns: 1fr; gap: 30px; }
+      
       .structure-wrapper { padding-top: 30px; }
-      .comic-pop { position: relative; top: auto; left: auto; right: auto; bottom: auto; width: 100%; margin-bottom: 20px; transform: none !important; }
+      .comic-pop { position: relative; top: auto; left: auto; right: auto; bottom: auto; width: 100%; margin-bottom: 20px; margin-left: 0; }
       .comic-pop::after { display: none; }
+      
       .expert-card { flex-direction: column; padding: 30px 20px; gap: 20px; }
       .expert-card img { width: 150px; height: 150px; margin: 0 auto; }
       .expert-info h3 { font-size: 1.5rem; text-align: center; }
       
-      /* スペック・購入 SP */
+      /* スペック SP */
       #size { padding: 100px 0; }
       .mo-spec-buy-container { padding: 40px 20px; border-width: 4px; box-shadow: 8px 8px 0 var(--c-yellow); }
       .mo-spec-visual-flex { flex-direction: column; padding: 25px 20px; gap: 30px; }
@@ -417,6 +439,10 @@
       .spec-list p { flex-direction: column; align-items: flex-start; gap: 5px; }
       .spec-list span.label { margin-right: 0; }
       .mo-buy-action-btn { padding: 15px 0; font-size: 1.4rem; }
+      
+      /* FAQ SP */
+      .mo-faq-item summary { font-size: 1rem; padding: 20px; }
+      .mo-faq-answer { font-size: 0.9rem; padding: 20px; }
     }
   </style>
 </head>
@@ -457,14 +483,14 @@
       
       <div class="hv-content-wrap">
         
-        <div class="hv-catch-bubble anim-pc-1">
+        <div class="hv-catch-bubble loop-bam-1">
           <h2 class="hv-catch">
             「あ、っ」と<br>思ったその瞬間を、<br><span class="hl">無かった</span>ことに。
           </h2>
         </div>
         
-        <div class="hv-product-card anim-pc-2">
-          <div class="hv-badge anim-pc-3">
+        <div class="hv-product-card loop-bam-2">
+          <div class="hv-badge">
             <span class="small">シリーズ累計</span>
             <span class="big">〇〇万枚</span>
             <span class="small">突破!!</span>
@@ -527,15 +553,15 @@
             <img src="2-bl.png" alt="MORESCUE パンツ構造">
           </div>
           
-          <div class="comic-pop pop-1">
+          <div class="comic-pop pop-loop-1 pop-1">
             <h4>立体構造 (特許取得済)</h4>
             <p>股間を優しく包み込む独自の3Dパターン設計。究極のフィット感だ！</p>
           </div>
-          <div class="comic-pop pop-2">
+          <div class="comic-pop pop-loop-2 pop-2">
             <h4>スマート設計 (意匠登録済)</h4>
             <p>外見からは吸水機能があるとは一切気づかれないシルエット！</p>
           </div>
-          <div class="comic-pop pop-3">
+          <div class="comic-pop pop-loop-3 pop-3">
             <h4>吊り式吸水パッド構造</h4>
             <p>内側の特殊パッドが尿漏れをしっかりキャッチ。体に密着しすぎず快適！</p>
           </div>
@@ -641,7 +667,7 @@
             <h2 class="comic-title">大人のエチケットを、<br><span class="hl-yellow">今すぐ手に入れろ!!</span></h2>
           </div>
         </div>
-        <p class="text-center anim-slide-up" style="font-weight:900; font-size:1.4rem; color:var(--c-red); text-shadow: 1px 1px 0 #fff; margin-bottom: 50px;">※「まとめ買い」が圧倒的人気!!</p>
+        <p class="text-center anim-slide-up" style="font-weight:900; font-size:1.4rem; color:var(--c-red); margin-bottom: 50px;">※「まとめ買い」が圧倒的人気!!</p>
         
         <div class="mo-spec-buy-container anim-zoom-in">
           
@@ -743,6 +769,25 @@
       </div>
     </section>
 
+    <section id="faq" class="mo-section fade-in-trigger" style="padding-top: 0;">
+      <div class="mo-container">
+        <div class="text-center">
+          <div class="comic-title-wrap anim-slide-up">
+            <div class="comic-title-bg" style="background:var(--c-white);"></div>
+            <h2 class="comic-title" style="color:var(--c-black); text-shadow:-2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff, 6px 6px 0 rgba(0,0,0,0.1);">
+              よくある質問<span class="hl-red">!!</span>
+            </h2>
+          </div>
+        </div>
+        <div class="mo-faq-wrap anim-slide-up" style="max-width:800px; margin:0 auto; animation-delay: 0.3s;">
+          <details class="mo-faq-item"><summary>見た目でバレませんか？</summary><p class="mo-faq-answer">普通のニットトランクスと同じデザインで気づかれません。</p></details>
+          <details class="mo-faq-item"><summary>どこで買えますか？</summary><p class="mo-faq-answer">楽天市場のほか、お近くの量販店にてお求めいただけます。</p></details>
+          <details class="mo-faq-item"><summary>ニオイは漏れませんか？</summary><p class="mo-faq-answer">強力な抗菌防臭加工により、心配はほとんどありません。</p></details>
+          <details class="mo-faq-item"><summary>吸水量は？</summary><p class="mo-faq-answer">トイレ後などの「数滴」に対応。失禁には対応していません。</p></details>
+        </div>
+      </div>
+    </section>
+
     <footer class="mo-footer" style="background:var(--c-black); padding: 60px 0 120px; text-align:center; color:#fff; border-top: 8px solid var(--c-main);">
       <div class="mo-container">
         <img src="logo.png" alt="MORESCUE" style="height:40px; filter:brightness(0) invert(1); margin:0 auto 20px;">
@@ -799,14 +844,12 @@
           nav.classList.toggle('is-open'); 
           menuToggle.classList.toggle('is-active'); 
           document.body.style.overflow = nav.classList.contains('is-open') ? 'hidden' : '';
-          document.body.classList.toggle('is-menu-open');
         });
         nav.querySelectorAll('a').forEach(link => {
           link.addEventListener('click', () => {
             nav.classList.remove('is-open');
             menuToggle.classList.remove('is-active');
             document.body.style.overflow = '';
-            document.body.classList.remove('is-menu-open');
           });
         });
       }
@@ -859,7 +902,7 @@
       // 追従カートボタンの表示ロジック
       const bottomBar = document.getElementById('js-bottom-bar');
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 400 && !document.body.classList.contains('is-menu-open')) {
+        if (window.scrollY > 400 && (!nav || !nav.classList.contains('is-open'))) {
           bottomBar.classList.add('is-visible');
         } else {
           bottomBar.classList.remove('is-visible');
@@ -867,5 +910,65 @@
       });
     });
   </script>
+  
+  <style>
+    /* 追加：ループアニメーションのキーフレーム定義 */
+    /* ファーストビュー用タイムループ（PC・SP共通で12秒周期） */
+    .loop-bam-1 {
+      opacity: 0;
+      animation: loopBam1 12s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-origin: left bottom;
+    }
+    .loop-bam-2 {
+      opacity: 0;
+      animation: loopBam2 12s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-origin: right bottom;
+    }
+
+    @keyframes loopBam1 {
+      0%, 2% { opacity: 0; transform: scale(0.1) rotate(15deg); }
+      6% { opacity: 1; transform: scale(1.1) rotate(-5deg); }
+      9% { transform: scale(1) rotate(-3deg); }
+      60% { opacity: 1; transform: scale(1) rotate(-3deg); }
+      63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
+      66%, 100% { opacity: 0; transform: scale(0.1) rotate(-15deg); }
+    }
+    @keyframes loopBam2 {
+      0%, 15% { opacity: 0; transform: scale(0.1) rotate(-15deg); } /* 1つ目より遅れて出現 */
+      19% { opacity: 1; transform: scale(1.1) rotate(5deg); }
+      22% { transform: scale(1) rotate(2deg); }
+      60% { opacity: 1; transform: scale(1) rotate(2deg); }
+      63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
+      66%, 100% { opacity: 0; transform: scale(0.1) rotate(15deg); }
+    }
+
+    /* 見えない安心ポップアップ用の時間差タイムループ (10秒周期) */
+    .comic-pop { opacity: 0; }
+    .pop-loop-1 { animation: popLoop1 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom right; }
+    .pop-loop-2 { animation: popLoop2 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom left; }
+    .pop-loop-3 { animation: popLoop3 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: top center; }
+
+    @keyframes popLoop1 {
+      0%, 2% { opacity: 0; transform: scale(0.1) rotate(-20deg) translateX(-50px); }
+      6% { opacity: 1; transform: scale(1.1) rotate(5deg) translateX(0); }
+      9% { transform: scale(1) rotate(-3deg); }
+      75% { opacity: 1; transform: scale(1) rotate(-3deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(-20deg); }
+    }
+    @keyframes popLoop2 {
+      0%, 18% { opacity: 0; transform: scale(0.1) rotate(20deg) translateX(50px); }
+      22% { opacity: 1; transform: scale(1.1) rotate(-5deg) translateX(0); }
+      25% { transform: scale(1) rotate(2deg); }
+      75% { opacity: 1; transform: scale(1) rotate(2deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(20deg); }
+    }
+    @keyframes popLoop3 {
+      0%, 34% { opacity: 0; transform: scale(0.1) rotate(10deg) translateY(50px); }
+      38% { opacity: 1; transform: scale(1.1) rotate(-2deg) translateY(0); }
+      41% { transform: scale(1) rotate(-1deg); }
+      75% { opacity: 1; transform: scale(1) rotate(-1deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(10deg); }
+    }
+  </style>
 </body>
 </html>
