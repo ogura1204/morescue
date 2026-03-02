@@ -6,7 +6,7 @@
   <title>MORESCUE - 究極のレスキューパンツ</title>
   <style>
     /* ==========================================================================
-       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V9 - Perfect Colors & Margin)
+       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V9 - Perfect Layers & Margin)
        ========================================================================== */
     @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700;900&family=Noto+Sans+JP:wght@700;900&display=swap');
 
@@ -68,8 +68,12 @@
       padding: 20px 40px; box-shadow: var(--shadow-lg); 
       max-width: 95%; box-sizing: border-box;
     }
-    /* 背景色バリエーション */
-    .section-title-card.bg-yellow { background: var(--c-yellow); }
+    .comic-title-bg {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+      background: var(--c-white); /* すべて白に統一 */
+      z-index: -1; border: var(--border-thick); transform: skewX(-10deg);
+      box-shadow: var(--shadow-md);
+    }
 
     .section-title {
       font-size: clamp(1.6rem, 4vw, 3rem); 
@@ -137,7 +141,7 @@
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ==========================================================================
-       ファーストビュー（HV）- 背景画像縮小＆上部余白拡大
+       ファーストビュー（HV）- 階層＆余白の完全最適化
        ========================================================================== */
     .hv-section {
       height: 100vh; min-height: 850px;
@@ -146,19 +150,30 @@
       position: relative; overflow: hidden;
       border-bottom: 8px solid var(--c-dark);
       padding-bottom: 40px; 
+      background-color: var(--c-main);
     }
     
-    .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: var(--c-main); overflow: hidden; }
+    /* 修正：集中線を一番背面に配置 (z-index: 1) */
+    .hv-flash {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 200vw; height: 200vw;
+      background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.2) 0deg 10deg, transparent 10deg 20deg);
+      z-index: 1; animation: spinFlash 120s linear infinite; pointer-events: none;
+    }
+    @keyframes spinFlash { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    /* 修正：背景画像コンテナを下部に合わせ、手前(z-index: 2)に配置 */
+    .mo-hero-bg { 
+      position: absolute; bottom: 0; left: 0; width: 100%; 
+      height: 75vh; /* PCは上部25vhの余白 */
+      z-index: 2; overflow: hidden; pointer-events: none;
+    }
     
-    /* 修正：画像を小さくし、上部に大きな余白（25vh）を設ける */
+    /* 画像を大きくし、下部見切れOKにする */
     .bg-slide {
-      position: absolute; 
-      top: 25vh; /* PCは上部余白を大きくとる */
-      left: 5%; 
-      width: 90%; 
-      height: 75vh;
-      object-fit: contain; /* 全体が見えるように縮小 */
-      object-position: center top; 
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover; /* 画面幅に合わせて拡大し、下部がはみ出てもOK */
+      object-position: center top; /* モデルの顔（上部）を基準に表示 */
       opacity: 0; animation: slideCrossFade 15s infinite;
     }
     .bg-slide:nth-child(1) { animation-delay: 0s; }
@@ -171,18 +186,36 @@
       43%, 100% { opacity: 0; transform: scale(1.05); }
     }
 
-    .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-halftone-dark); background-size: 10px 10px; opacity: 0.2; z-index: 2; pointer-events: none; }
-    .hv-flash { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200vw; height: 200vw; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.1) 0deg 10deg, transparent 10deg 20deg); z-index: 3; animation: spinFlash 120s linear infinite; pointer-events: none; }
+    /* 網点オーバーレイ (z-index: 3) */
+    .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-halftone-dark); background-size: 10px 10px; opacity: 0.15; z-index: 3; pointer-events: none; }
 
+    /* コンテンツ群 (z-index: 5) */
     .hv-content-wrap { position: relative; z-index: 5; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: flex-end; pointer-events: none; }
     .hv-content-wrap > * { pointer-events: auto; }
+
+    /* 修正：シリーズ累計バッジ（右上配置、独立） */
+    .hv-badge-wrap {
+      position: absolute; top: 120px; right: 5%; z-index: 10;
+      opacity: 0; animation: loopBam3 12s infinite; transform-origin: center;
+      pointer-events: none;
+    }
+    .hv-badge {
+      background: var(--c-accent); color: var(--c-white);
+      width: 160px; height: 160px; border-radius: 50%; border: var(--border-thick);
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      box-shadow: var(--shadow-sm); transform: rotate(15deg); line-height: 1.1;
+    }
+    .hv-badge span.small { font-size: 1.1rem; font-weight: 900; }
+    .hv-badge span.big { font-size: 2.2rem; font-weight: 900; color: var(--c-yellow); }
 
     /* ====================================
        上からバンッ！と降ってくるループアニメーション
        ==================================== */
     .hv-catch-bubble {
-      padding: 40px 35px; max-width: 95%; width: fit-content; position: relative;
-      opacity: 0; animation: loopBam1 12s infinite; transform-origin: center;
+      background: var(--c-white); border: var(--border-thick); border-radius: 20px;
+      padding: 40px 35px; box-shadow: var(--shadow-lg); 
+      max-width: 95%; width: fit-content; position: relative;
+      opacity: 0; animation: loopBam1 12s infinite; transform-origin: left bottom;
     }
     .hv-catch { 
       font-size: clamp(1.6rem, 4vw, 3rem); 
@@ -192,23 +225,16 @@
     .hv-catch span.hl { color: var(--c-accent); }
 
     .hv-product-card {
-      padding: 30px; max-width: 420px; position: relative; display: flex; flex-direction: column; align-items: center;
-      opacity: 0; animation: loopBam2 12s infinite; transform-origin: center;
+      background: var(--c-yellow); border: var(--border-thick); border-radius: 20px;
+      padding: 30px; box-shadow: var(--shadow-lg); 
+      max-width: 420px; position: relative; display: flex; flex-direction: column; align-items: center;
+      opacity: 0; animation: loopBam2 12s infinite; transform-origin: right bottom;
     }
     .hv-product-img { width: 180px; margin-bottom: 20px; filter: drop-shadow(0 10px 10px rgba(30,58,95,0.3)); transform: rotate(-5deg); }
-    .hv-product-text { border: 2px solid var(--c-dark); background: #f9f9f9; padding: 15px; border-radius: 10px; font-size: 1rem; font-weight: 700; line-height: 1.6; text-align: left; }
+    .hv-product-text { background: var(--c-white); border: 3px solid var(--c-dark); padding: 15px; border-radius: 10px; font-size: 1rem; font-weight: 700; line-height: 1.6; text-align: left; color: var(--c-dark); }
     .hv-product-text strong { color: var(--c-accent); font-size: 1.3rem; display: block; margin-bottom: 8px; line-height: 1.3; }
 
-    .hv-badge {
-      position: absolute; top: -40px; right: -30px;
-      background: var(--c-accent); color: var(--c-white);
-      width: 150px; height: 150px; border-radius: 50%; border: var(--border-thick);
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      box-shadow: var(--shadow-sm); transform: rotate(15deg); line-height: 1.1;
-    }
-    .hv-badge span.small { font-size: 1rem; font-weight: 900; }
-    .hv-badge span.big { font-size: 2rem; font-weight: 900; color: var(--c-yellow); }
-
+    /* 修正：空白時間を一瞬に短縮＆タイミングずらしの完全ループ */
     @keyframes loopBam1 {
       0% { opacity: 0; transform: translateY(-300px) scale(0.5) rotate(15deg); }
       4% { opacity: 1; transform: translateY(20px) scale(1.05) rotate(-3deg); }
@@ -219,13 +245,21 @@
       95%, 100% { opacity: 0; transform: translateY(300px) scale(0.5) rotate(15deg); }
     }
     @keyframes loopBam2 {
-      0%, 8% { opacity: 0; transform: translateY(-300px) scale(0.5) rotate(-15deg); }
-      12% { opacity: 1; transform: translateY(20px) scale(1.05) rotate(3deg); }
-      14% { transform: translateY(-10px) scale(0.98) rotate(-1deg); }
-      16% { transform: translateY(0) scale(1) rotate(0); }
+      0%, 10% { opacity: 0; transform: translateY(-300px) scale(0.5) rotate(-15deg); } 
+      14% { opacity: 1; transform: translateY(20px) scale(1.05) rotate(3deg); }
+      16% { transform: translateY(-10px) scale(0.98) rotate(-1deg); }
+      18% { transform: translateY(0) scale(1) rotate(0); }
       88% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
       92% { opacity: 1; transform: translateY(-20px) scale(1.05) rotate(3deg); }
       95%, 100% { opacity: 0; transform: translateY(300px) scale(0.5) rotate(-15deg); }
+    }
+    @keyframes loopBam3 {
+      0%, 20% { opacity: 0; transform: scale(0.1) rotate(45deg) translateY(-200px); } 
+      24% { opacity: 1; transform: scale(1.1) rotate(-5deg) translateY(0); }
+      26% { transform: scale(1) rotate(15deg); }
+      88% { opacity: 1; transform: scale(1) rotate(15deg); }
+      92% { opacity: 1; transform: scale(1.1) rotate(0deg); }
+      95%, 100% { opacity: 0; transform: scale(0.1) rotate(45deg) translateY(-200px); }
     }
 
     /* ==========================================================================
@@ -261,6 +295,7 @@
     .pop-3 { bottom: -40px; left: 50%; margin-left: -160px; width: 320px; }
     
     .comic-pop h4 { font-size: 1.3rem; margin: 0 0 10px; font-weight: 900; border-bottom: 2px dashed var(--c-dark); padding-bottom: 5px; color: var(--c-accent); }
+    .comic-pop p { color: var(--c-dark); margin: 0; }
 
     .pop-loop-1 { animation: popLoop1 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: center; }
     .pop-loop-2 { animation: popLoop2 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: center; }
@@ -413,8 +448,6 @@
        SP用 レスポンシブ
        ========================================================================== */
     @media (max-width: 768px) {
-      .section-title-card { padding: 15px 20px; margin-bottom: 40px; }
-      
       .mo-logo img { height: 30px; }
       .mo-menu-toggle { display: block; font-size: 2.5rem; font-weight: 900; color: var(--c-dark); cursor: pointer; transition: 0.3s; z-index: 10001; position: relative; }
       .mo-menu-toggle.is-active { transform: rotate(135deg); color: var(--c-accent); }
@@ -435,22 +468,24 @@
       /* HV スマホ */
       .hv-section { padding-top: 60px; height: 100vh; height: 100svh; align-items: flex-end; padding-bottom: 30px; }
       
-      /* SPは少し画像を大きく表示する */
-      .bg-slide { top: 15vh; left: 0; width: 100%; height: 85vh; }
+      .mo-hero-bg { height: 85vh; }
+      .bg-slide { top: 0; height: 100%; }
 
       .hv-content-wrap { padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: auto; }
 
+      /* 右上バッジのSP調整 */
+      .hv-badge-wrap { top: 75px; right: 10px; }
+      .hv-badge { width: 100px; height: 100px; padding: 0; border-width: 3px; }
+      .hv-badge span.small { font-size: 0.7rem; }
+      .hv-badge span.big { font-size: 1.2rem; }
+
       .hv-catch-bubble { padding: 25px 20px; max-width: 95%; margin: 0 auto 20px; transform: rotate(0); }
-      .hv-catch { font-size: clamp(1.3rem, 5vw, 2.5rem); text-align: center; } 
+      .hv-catch { text-align: center; } 
       
       .hv-product-card { max-width: 90%; margin: 0 auto; padding: 20px; transform: rotate(0); }
       .hv-product-img { width: 130px; margin-bottom: 10px; }
       .hv-product-text { font-size: 0.85rem; padding: 10px; }
       .hv-product-text strong { font-size: 1.1rem; }
-      
-      .hv-badge { width: 100px; height: 100px; top: -20px; right: -10px; padding: 0; border-width: 3px; }
-      .hv-badge span.small { font-size: 0.7rem; }
-      .hv-badge span.big { font-size: 1.2rem; }
 
       .mo-card-grid, .feature-comic-grid, .review-grid { grid-template-columns: 1fr; gap: 30px; }
       
@@ -461,7 +496,6 @@
       .expert-card img { width: 150px; height: 150px; margin: 0 auto; }
       .expert-info h3 { font-size: 1.5rem; text-align: center; }
       
-      /* スペック SP */
       #size { padding: 100px 0; }
       .mo-spec-buy-container { padding: 40px 20px; border-width: 4px; box-shadow: 8px 8px 0 var(--c-yellow); }
       .mo-spec-visual-flex { flex-direction: column; padding: 25px 20px; gap: 30px; }
@@ -476,12 +510,10 @@
       .spec-list span.label { margin-right: 0; }
       .mo-buy-action-btn { padding: 15px 0; font-size: 1.4rem; }
       
-      /* FAQ SP */
       #faq { padding: 100px 0; }
       .mo-faq-item summary { font-size: 1rem; padding: 20px; }
       .mo-faq-answer { font-size: 0.9rem; padding: 20px; }
       
-      /* 追従ボタン SP */
       .fixed-bottom-bar.is-visible { bottom: 20px; }
       .floating-btn { padding: 10px 20px 10px 15px; font-size: 1.2rem; border-width: 3px; }
       .floating-btn img { height: 35px; margin-right: 10px; }
@@ -529,6 +561,14 @@
       <div class="mo-hero-overlay"></div>
       <div class="hv-flash"></div>
       
+      <div class="hv-badge-wrap">
+        <div class="hv-badge">
+          <span class="small">シリーズ累計</span>
+          <span class="big">〇〇万枚</span>
+          <span class="small">突破!!</span>
+        </div>
+      </div>
+      
       <div class="hv-content-wrap">
         
         <div class="hv-catch-bubble unified-card loop-bam-1">
@@ -540,12 +580,6 @@
         </div>
         
         <div class="hv-product-card unified-card loop-bam-2">
-          <div class="hv-badge">
-            <span class="small">シリーズ累計</span>
-            <span class="big">〇〇万枚</span>
-            <span class="small">突破!!</span>
-          </div>
-          
           <img src="2-bl.png" alt="MORESCUEパンツ" class="hv-product-img">
           
           <div class="hv-product-text">
@@ -561,8 +595,8 @@
       <div class="mo-container">
         <div class="text-center">
           <div class="section-title-card bg-white anim-slide-up">
-            <div class="section-title-bg"></div>
-            <h2 class="section-title">
+            <div class="comic-title-bg"></div>
+            <h2 class="section-title hl-dark">
               誰にも言えない<br class="sp-only"><span class="hl">「あ、っ」</span>の瞬間、<br>ありませんか？
             </h2>
           </div>
@@ -592,9 +626,9 @@
     <section id="structure" class="mo-section fade-in-trigger">
       <div class="mo-container text-center">
         <div class="section-title-card bg-white anim-slide-up">
-          <div class="section-title-bg"></div>
-          <h2 class="section-title">
-            日常を救う<span class="hl">MORESCUE</span><br>特殊構造が叶える<span class="hl">見えない安心</span>
+          <div class="comic-title-bg"></div>
+          <h2 class="section-title hl-dark">
+            日常を救う<span class="hl">MORESCUE</span><br>特殊構造が叶える<span class="hl-yellow">見えない安心</span>
           </h2>
         </div>
 
@@ -622,8 +656,8 @@
     <section id="features" class="mo-section fade-in-trigger text-center">
       <div class="mo-container">
         <div class="section-title-card bg-yellow anim-slide-up">
-          <div class="section-title-bg"></div>
-          <h2 class="section-title">
+          <div class="comic-title-bg"></div>
+          <h2 class="section-title hl-dark">
             快適さと清潔さを守る<br><span class="hl">3つのこだわり!!</span>
           </h2>
         </div>
@@ -675,7 +709,7 @@
 
         <div class="text-center" style="margin-top: 80px;">
           <div class="section-title-card bg-white anim-slide-up">
-            <div class="section-title-bg"></div>
+            <div class="comic-title-bg"></div>
             <h2 class="section-title">愛用者の声が<span class="hl">続々到着!!</span></h2>
           </div>
         </div>
@@ -712,8 +746,8 @@
       <div class="mo-container">
         
         <div class="text-center" style="margin-bottom: 20px;">
-          <div class="section-title-card bg-yellow anim-slide-up">
-            <div class="section-title-bg"></div>
+          <div class="section-title-card bg-white anim-slide-up">
+            <div class="comic-title-bg"></div>
             <h2 class="section-title">大人のエチケットを、<br><span class="hl">今すぐ手に入れろ!!</span></h2>
           </div>
         </div>
@@ -829,7 +863,7 @@
       <div class="mo-container">
         <div class="text-center">
           <div class="section-title-card bg-white anim-slide-up">
-            <div class="section-title-bg"></div>
+            <div class="comic-title-bg"></div>
             <h2 class="section-title">
               よくある質問<span class="hl">!!</span>
             </h2>
