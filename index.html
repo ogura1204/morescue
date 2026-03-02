@@ -6,7 +6,7 @@
   <title>MORESCUE - 究極のレスキューパンツ</title>
   <style>
     /* ==========================================================================
-       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V7 - Ultimate Loop & Unified)
+       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V8 - Perfect Unified)
        ========================================================================== */
     @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700;900&family=Noto+Sans+JP:wght@700;900&display=swap');
 
@@ -59,6 +59,28 @@
     }
 
     /* ==========================================================================
+       共通見出し（FVの「あ、っと思った」デザインに完全統一）
+       ========================================================================== */
+    .section-title-card { 
+      display: inline-flex; align-items: center; justify-content: center;
+      position: relative; margin-bottom: 60px; transform: rotate(-2deg); 
+      background: var(--c-white); border: var(--border-thick); border-radius: 20px;
+      padding: 20px 40px; box-shadow: var(--shadow-lg); 
+      max-width: 95%; box-sizing: border-box;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 3rem); 
+      font-weight: 900; color: var(--c-dark); line-height: 1.4; margin: 0; text-align: center;
+      letter-spacing: 0.05em;
+    }
+    .section-title .hl { color: var(--c-accent); }
+    
+    @media (max-width: 768px) {
+      .section-title-card { padding: 15px 20px; margin-bottom: 40px; border-radius: 16px; }
+      .section-title { font-size: clamp(1.4rem, 5vw, 2.2rem); }
+    }
+
+    /* ==========================================================================
        ボタンデザイン統一
        ========================================================================== */
     .btn-sync {
@@ -84,32 +106,7 @@
     .main-buy-btn .btn-text { font-size: 1.3rem; }
     .content-buy-btn { width: 100%; margin-top: 20px; }
 
-    /* ==========================================================================
-       共通見出し
-       ========================================================================== */
-    .comic-title-wrap { 
-      display: inline-flex; align-items: center; justify-content: center;
-      position: relative; margin-bottom: 70px; transform: rotate(-2deg); 
-      padding: 15px 30px; max-width: 100%; box-sizing: border-box;
-    }
-    .comic-title-bg {
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
-      background: var(--c-main); z-index: -1; border: var(--border-thick); transform: skewX(-10deg);
-      box-shadow: var(--shadow-md);
-    }
-    .comic-title-wrap.bg-white .comic-title-bg { background: var(--c-white); }
-    .comic-title-wrap.bg-yellow .comic-title-bg { background: var(--c-yellow); }
-    .comic-title-wrap.bg-accent .comic-title-bg { background: var(--c-accent); }
-
-    .comic-title {
-      font-size: clamp(1.8rem, 4vw, 3.5rem); 
-      font-weight: 900; color: var(--c-white); line-height: 1.4; margin: 0; text-align: center;
-      letter-spacing: 0.05em;
-    }
-    .comic-title .hl-yellow { color: var(--c-yellow); }
-    .comic-title .hl-accent { color: var(--c-accent); }
-    .comic-title .hl-dark { color: var(--c-dark); }
-
+    /* アニメーション */
     .anim-slide-up { opacity: 0; transform: translateY(50px); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .is-visible .anim-slide-up { opacity: 1; transform: translateY(0); }
     .anim-zoom-in { opacity: 0; transform: scale(0.5) rotate(-5deg); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -131,7 +128,7 @@
 
     .mo-marquee { background: var(--c-main); color: var(--c-white); border-bottom: var(--border-thick); padding: 8px 0; overflow: hidden; white-space: nowrap; }
     .marquee-content { display: inline-block; animation: marquee 25s linear infinite; font-weight: 900; font-size: 1.2rem; letter-spacing: 2px; }
-    .marquee-content span { padding-right: 30px; display: inline-flex; align-items: center; }
+    .marquee-content span { padding-right: 30px; display: inline-flex; align-items: center; text-shadow: none; }
     .marquee-pants { height: 1.2em; vertical-align: middle; margin: 0 10px; }
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -139,18 +136,19 @@
        ファーストビュー（HV）
        ========================================================================== */
     .hv-section {
-      height: 100vh; min-height: 800px;
+      height: 100vh; min-height: 850px;
       display: flex; align-items: flex-end; /* コンテンツを下側に寄せる */
       justify-content: center;
       position: relative; overflow: hidden;
       border-bottom: 8px solid var(--c-dark);
-      padding-bottom: 60px;
+      padding-bottom: 40px; /* 下部余白 */
+      padding-top: 100px;   /* 修正：モデルの顔が見えるように上部にしっかり余白を確保 */
     }
     
     .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: var(--c-main); overflow: hidden; }
     .bg-slide {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
+      object-fit: cover; object-position: center top; /* 修正：モデルの顔（上部）が切れないように基準をTopに */
       opacity: 0; animation: slideCrossFade 15s infinite;
     }
     .bg-slide:nth-child(1) { animation-delay: 0s; }
@@ -166,7 +164,8 @@
     .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-halftone-dark); background-size: 10px 10px; opacity: 0.2; z-index: 2; pointer-events: none; }
     .hv-flash { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200vw; height: 200vw; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.1) 0deg 10deg, transparent 10deg 20deg); z-index: 3; animation: spinFlash 120s linear infinite; pointer-events: none; }
 
-    /* 修正：ダミー顔画像の削除により、コンテンツ群のz-indexと配置のみ残す */
+    /* 修正：ダミー顔画像 (hv-center-face) は完全に削除しました */
+
     .hv-content-wrap { position: relative; z-index: 5; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: flex-end; pointer-events: none; }
     .hv-content-wrap > * { pointer-events: auto; }
 
@@ -202,24 +201,24 @@
     .hv-badge span.small { font-size: 1rem; font-weight: 900; }
     .hv-badge span.big { font-size: 2rem; font-weight: 900; color: var(--c-yellow); }
 
-    /* 修正：上から落ちてきて、短時間で消える緩急ループ */
+    /* 修正：空白時間を一瞬に短縮したループアニメーション */
     @keyframes loopBam1 {
       0% { opacity: 0; transform: translateY(-300px) scale(0.5) rotate(15deg); }
       4% { opacity: 1; transform: translateY(20px) scale(1.05) rotate(-3deg); }
       6% { transform: translateY(-10px) scale(0.98) rotate(1deg); }
       8% { transform: translateY(0) scale(1) rotate(0); }
-      85% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
-      88% { opacity: 1; transform: translateY(-20px) scale(1.05) rotate(-3deg); }
-      92%, 100% { opacity: 0; transform: translateY(300px) scale(0.5) rotate(15deg); }
+      88% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+      92% { opacity: 1; transform: translateY(-20px) scale(1.05) rotate(-3deg); }
+      95%, 100% { opacity: 0; transform: translateY(300px) scale(0.5) rotate(15deg); }
     }
     @keyframes loopBam2 {
       0%, 8% { opacity: 0; transform: translateY(-300px) scale(0.5) rotate(-15deg); }
       12% { opacity: 1; transform: translateY(20px) scale(1.05) rotate(3deg); }
       14% { transform: translateY(-10px) scale(0.98) rotate(-1deg); }
       16% { transform: translateY(0) scale(1) rotate(0); }
-      85% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
-      88% { opacity: 1; transform: translateY(-20px) scale(1.05) rotate(3deg); }
-      92%, 100% { opacity: 0; transform: translateY(300px) scale(0.5) rotate(-15deg); }
+      88% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+      92% { opacity: 1; transform: translateY(-20px) scale(1.05) rotate(3deg); }
+      95%, 100% { opacity: 0; transform: translateY(300px) scale(0.5) rotate(-15deg); }
     }
 
     /* ==========================================================================
@@ -241,7 +240,7 @@
     .comic-card p { font-size: 1.05rem; font-weight: 700; line-height: 1.6; margin: 0; }
 
     /* ==========================================================================
-       特許構造セクション (上から降ってくるループ＆統一デザイン)
+       特許構造セクション (上から降ってくるループ＆完全統一デザイン)
        ========================================================================== */
     #structure { background: var(--c-yellow); border-bottom: 8px solid var(--c-dark); }
     .structure-wrapper { position: relative; max-width: 800px; margin: 0 auto; text-align: center; }
@@ -254,36 +253,35 @@
     .pop-2 { top: 40%; right: -120px; }
     .pop-3 { bottom: -40px; left: 50%; margin-left: -160px; width: 320px; }
     
-    .comic-pop h4 { font-size: 1.3rem; margin: 0 0 10px; font-weight: 900; border-bottom: 2px dashed var(--c-dark); padding-bottom: 5px; }
+    .comic-pop h4 { font-size: 1.3rem; margin: 0 0 10px; font-weight: 900; border-bottom: 2px dashed var(--c-dark); padding-bottom: 5px; color: var(--c-accent); }
 
     .pop-loop-1 { animation: popLoop1 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: center; }
     .pop-loop-2 { animation: popLoop2 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: center; }
     .pop-loop-3 { animation: popLoop3 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: center; }
 
-    /* 修正：特許構造も上からバンッと落ちてくる */
     @keyframes popLoop1 {
       0% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(-20deg); }
       5% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(5deg); }
       8% { transform: translateY(0) scale(1) rotate(-1deg); }
-      85% { opacity: 1; transform: translateY(0) scale(1) rotate(-1deg); }
-      88% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(5deg); }
-      92%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(-20deg); }
+      88% { opacity: 1; transform: translateY(0) scale(1) rotate(-1deg); }
+      92% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(5deg); }
+      95%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(-20deg); }
     }
     @keyframes popLoop2 {
       0%, 10% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(20deg); }
       15% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(-5deg); }
       18% { transform: translateY(0) scale(1) rotate(1deg); }
-      85% { opacity: 1; transform: translateY(0) scale(1) rotate(1deg); }
-      88% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(-5deg); }
-      92%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(20deg); }
+      88% { opacity: 1; transform: translateY(0) scale(1) rotate(1deg); }
+      92% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(-5deg); }
+      95%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(20deg); }
     }
     @keyframes popLoop3 {
       0%, 20% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(0deg); }
       25% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(0deg); }
       28% { transform: translateY(0) scale(1) rotate(0deg); }
-      85% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
-      88% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(0deg); }
-      92%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(0deg); }
+      88% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+      92% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(0deg); }
+      95%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(0deg); }
     }
 
     /* ==========================================================================
@@ -300,7 +298,7 @@
     .feature-img-box { height: 200px; border-bottom: var(--border-thick); background: #eee; position: relative; overflow: hidden; }
     .feature-img-box img { width: 100%; height: 100%; object-fit: cover; }
     .feature-text-box { padding: 30px 20px; text-align: left; flex-grow: 1; color: var(--c-dark); }
-    .feature-text-box h4 { font-size: 1.5rem; font-weight: 900; margin: 0 0 15px; }
+    .feature-text-box h4 { font-size: 1.5rem; font-weight: 900; margin: 0 0 15px; color: var(--c-dark); }
     .feature-text-box p { font-size: 1.05rem; font-weight: 700; margin: 0; line-height: 1.6; }
     .text-highlight { background: linear-gradient(transparent 60%, var(--c-yellow) 60%); padding: 0 5px; color: var(--c-accent); font-weight: 900; font-size: 1.1rem; }
 
@@ -315,7 +313,6 @@
     .expert-info p { font-size: 1.1rem; font-weight: 700; line-height: 1.6; }
 
     .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; }
-    /* 修正：レビューも統一デザインの unified-card クラスを使用 */
     .review-bubble { padding: 30px; position: relative; transform: rotate(1deg); }
     .review-bubble:nth-child(2) { transform: rotate(-2deg); }
     .review-stars { color: var(--c-accent); font-size: 1.5rem; margin-bottom: 10px; letter-spacing: 2px; }
@@ -365,6 +362,8 @@
     .spec-list p { margin: 5px 0; padding: 10px; background: var(--c-white); border: 2px solid var(--c-dark); display: flex; align-items: center; border-radius: 5px;}
     .spec-list span.label { background: var(--c-yellow); padding: 2px 10px; border: 2px solid var(--c-dark); margin-right: 15px; display: inline-block; width: 80px; text-align: center; border-radius: 3px;}
 
+    .mo-buy-action-btn { width: 100%; margin-top: auto; }
+
     /* ==========================================================================
        FAQセクション
        ========================================================================== */
@@ -377,7 +376,7 @@
     .mo-faq-item[open] { border-color: var(--c-accent); transform: rotate(0); }
     .mo-faq-item summary::after { content: '+'; position: absolute; right: 30px; top: 50%; transform: translateY(-50%); font-size: 2rem; color: var(--c-accent); font-weight: 900; transition: 0.3s; }
     .mo-faq-item[open] summary::after { transform: translateY(-50%) rotate(135deg); }
-    .mo-faq-answer { padding: 30px 35px; background: #fafafa; color: var(--c-dark); border-top: var(--border-thick); line-height: 1.8; font-weight: 700; font-size: 1rem; }
+    .mo-faq-answer { padding: 30px 35px; background: #fafafa; color: #111; border-top: var(--border-thick); line-height: 1.8; font-weight: 700; font-size: 1rem; }
 
     /* ==========================================================================
        フッター
@@ -392,7 +391,9 @@
     .mo-footer-separator { margin: 0 15px; color: rgba(255,255,255,0.3); }
     .mo-copyright { color: rgba(255,255,255,0.4); font-size: 0.85em; letter-spacing: 0.05em; }
 
-    /* 追従カートボタン */
+    /* ==========================================================================
+       追従カートボタン
+       ========================================================================== */
     .fixed-bottom-bar {
       position: fixed; bottom: -100px; left: 0; width: 100%; z-index: 9999;
       display: flex; justify-content: center;
@@ -416,7 +417,6 @@
       @keyframes menuBAM { 0% { transform: scale(0); border-radius: 50%; } 100% { transform: scale(1); border-radius: 0; } }
       .mo-nav a.nav-link { font-size: clamp(1.1rem, 4vw, 1.5rem); margin: 10px 0; color: var(--c-dark); background: var(--c-white); padding: 10px 20px; border: var(--border-thick); box-shadow: var(--shadow-sm); transform: rotate(-2deg); }
       
-      /* SPメニューの購入ボタン */
       .header-buy-btn { padding: 10px 25px 10px 15px; margin-top: 20px; }
       .header-buy-btn .btn-icon { height: 30px; margin-right: 10px; }
       .header-buy-btn .btn-text { font-size: 1.2rem; }
@@ -426,12 +426,11 @@
       .marquee-pants { height: 1em; margin: 0 5px; }
 
       .hv-section { padding-top: 60px; height: 100vh; height: 100svh; align-items: flex-end; padding-bottom: 30px; }
-      .hv-center-face { width: 150%; max-width: 150%; top: 40%; }
-
+      
       .hv-content-wrap { padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: auto; }
 
       .hv-catch-bubble { padding: 25px 20px; max-width: 95%; margin: 0 auto 20px; transform: rotate(0); }
-      .hv-catch { text-align: center; } 
+      .hv-catch { font-size: clamp(1.3rem, 5vw, 2.5rem); text-align: center; } 
       
       .hv-product-card { max-width: 90%; margin: 0 auto; padding: 20px; transform: rotate(0); }
       .hv-product-img { width: 130px; margin-bottom: 10px; }
@@ -468,7 +467,6 @@
       .mo-faq-item summary { font-size: 1rem; padding: 20px; }
       .mo-faq-answer { font-size: 0.9rem; padding: 20px; }
       
-      /* 追従ボタン SP */
       .fixed-bottom-bar.is-visible { bottom: 20px; }
       .floating-btn { padding: 10px 20px 10px 15px; font-size: 1.2rem; border-width: 3px; }
       .floating-btn img { height: 35px; margin-right: 10px; }
@@ -516,10 +514,6 @@
       <div class="mo-hero-overlay"></div>
       <div class="hv-flash"></div>
       
-      <div class="hv-center-face">
-        <img src="https://placehold.co/600x800/e0e5ec/1e3a5f?text=Mens+Face+(Cutout)" alt="男性の顔">
-      </div>
-      
       <div class="hv-content-wrap">
         
         <div class="hv-catch-bubble unified-card loop-bam-1">
@@ -530,7 +524,7 @@
           </h2>
         </div>
         
-        <div class="hv-product-card loop-bam-2">
+        <div class="hv-product-card unified-card loop-bam-2">
           <div class="hv-badge">
             <span class="small">シリーズ累計</span>
             <span class="big">〇〇万枚</span>
@@ -551,10 +545,9 @@
     <section id="about" class="mo-section fade-in-trigger">
       <div class="mo-container">
         <div class="text-center">
-          <div class="comic-title-wrap bg-white anim-slide-up">
-            <div class="comic-title-bg"></div>
-            <h2 class="comic-title hl-dark">
-              誰にも言えない<br class="sp-only"><span class="hl-accent">「あ、っ」</span>の瞬間、<br>ありませんか？
+          <div class="section-title-card bg-white anim-slide-up">
+            <h2 class="section-title">
+              誰にも言えない<br class="sp-only"><span class="hl">「あ、っ」</span>の瞬間、<br>ありませんか？
             </h2>
           </div>
         </div>
@@ -582,10 +575,9 @@
 
     <section id="structure" class="mo-section fade-in-trigger">
       <div class="mo-container text-center">
-        <div class="comic-title-wrap bg-white anim-slide-up">
-          <div class="comic-title-bg"></div>
-          <h2 class="comic-title hl-dark">
-            日常を救う<span class="hl-accent">MORESCUE</span><br>特殊構造が叶える<span class="hl-yellow">見えない安心</span>
+        <div class="section-title-card bg-white anim-slide-up">
+          <h2 class="section-title">
+            日常を救う<span class="hl">MORESCUE</span><br>特殊構造が叶える<span class="hl">見えない安心</span>
           </h2>
         </div>
 
@@ -612,10 +604,9 @@
 
     <section id="features" class="mo-section fade-in-trigger text-center">
       <div class="mo-container">
-        <div class="comic-title-wrap bg-yellow anim-slide-up">
-          <div class="comic-title-bg"></div>
-          <h2 class="comic-title hl-dark">
-            快適さと清潔さを守る<br><span class="hl-accent">3つのこだわり!!</span>
+        <div class="section-title-card bg-yellow anim-slide-up">
+          <h2 class="section-title">
+            快適さと清潔さを守る<br><span class="hl">3つのこだわり!!</span>
           </h2>
         </div>
         
@@ -665,9 +656,8 @@
         </div>
 
         <div class="text-center" style="margin-top: 80px;">
-          <div class="comic-title-wrap bg-accent anim-slide-up">
-            <div class="comic-title-bg"></div>
-            <h2 class="comic-title">愛用者の声が<span class="hl-yellow">続々到着!!</span></h2>
+          <div class="section-title-card bg-accent anim-slide-up">
+            <h2 class="section-title">愛用者の声が<span class="hl">続々到着!!</span></h2>
           </div>
         </div>
         
@@ -703,9 +693,8 @@
       <div class="mo-container">
         
         <div class="text-center" style="margin-bottom: 20px;">
-          <div class="comic-title-wrap bg-accent anim-slide-up">
-            <div class="comic-title-bg"></div>
-            <h2 class="comic-title">大人のエチケットを、<br><span class="hl-yellow">今すぐ手に入れろ!!</span></h2>
+          <div class="section-title-card bg-accent anim-slide-up">
+            <h2 class="section-title">大人のエチケットを、<br><span class="hl">今すぐ手に入れろ!!</span></h2>
           </div>
         </div>
         <p class="text-center anim-slide-up" style="font-weight:900; font-size:1.4rem; color:var(--c-accent); margin-bottom: 50px;">※「まとめ買い」が圧倒的人気!!</p>
@@ -819,10 +808,9 @@
     <section id="faq" class="mo-section fade-in-trigger">
       <div class="mo-container">
         <div class="text-center">
-          <div class="comic-title-wrap bg-white anim-slide-up">
-            <div class="comic-title-bg"></div>
-            <h2 class="comic-title hl-dark">
-              よくある質問<span class="hl-accent">!!</span>
+          <div class="section-title-card bg-white anim-slide-up">
+            <h2 class="section-title">
+              よくある質問<span class="hl">!!</span>
             </h2>
           </div>
         </div>
