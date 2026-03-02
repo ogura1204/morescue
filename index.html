@@ -6,7 +6,7 @@
   <title>MORESCUE - 究極のレスキューパンツ</title>
   <style>
     /* ==========================================================================
-       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V5 - Flat Text & Unified Buttons)
+       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V6 - Final Refinement)
        ========================================================================== */
     @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700;900&family=Noto+Sans+JP:wght@700;900&display=swap');
 
@@ -20,17 +20,16 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* スマホ・PCの改行制御クラス */
     @media (min-width: 769px) { .sp-only { display: none !important; } }
     @media (max-width: 768px) { .sp-only { display: block !important; } .pc-only { display: none !important; } }
 
-    /* カラーパレット（水色基調） */
+    /* 限界突破カラーパレット（水色基調） */
     :root {
       --c-main: #81cbf0;       
       --c-main-dark: #5eb5e3;  
       --c-yellow: #ffecb3;     
-      --c-accent: #ff8a65;     
-      --c-dark: #1e3a5f;       
+      --c-accent: #ff8a65;     /* コーラルオレンジ（赤系） */
+      --c-dark: #1e3a5f;       /* 濃いネイビー */
       --c-white: #ffffff;
       
       /* ハーフトーン背景 */
@@ -40,7 +39,7 @@
       /* 漫画風の濃い影 */
       --shadow-sm: 4px 4px 0px var(--c-dark);
       --shadow-md: 8px 8px 0px var(--c-dark);
-      --shadow-lg: 12px 12px 0px var(--c-dark);
+      --shadow-lg: 12px 12px 0px var(--c-dark); /* 吹き出しデザイン統一用 */
       
       --border-thick: 4px solid var(--c-dark);
     }
@@ -51,20 +50,20 @@
     img { max-width: 100%; height: auto; }
 
     /* ==========================================================================
-       ボタンデザイン完全統一（ヘッダー ＆ スペック ＆ 追従）
+       ボタンデザイン統一（ヘッダー ＆ スペック ＆ 追従）
        ========================================================================== */
     .btn-sync {
       background: var(--c-accent); color: #fff !important;
       display: inline-flex; align-items: center; justify-content: center;
       border-radius: 50px; text-decoration: none; font-weight: 900;
       border: 4px solid var(--c-white);
-      box-shadow: 0 8px 15px rgba(30,58,95,0.3);
+      box-shadow: 0 10px 20px rgba(30,58,95,0.4);
       transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       cursor: pointer; box-sizing: border-box; letter-spacing: 0.05em;
     }
     .btn-sync:hover {
       transform: scale(1.05) translateY(-3px); 
-      box-shadow: 0 12px 20px rgba(30,58,95,0.4);
+      box-shadow: 0 15px 25px rgba(30,58,95,0.5);
       background: #ff7043;
     }
     .btn-sync .btn-icon { filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2)); }
@@ -103,7 +102,6 @@
       font-size: clamp(1.8rem, 4vw, 3.5rem); 
       font-weight: 900; color: var(--c-white); line-height: 1.4; margin: 0; text-align: center;
       letter-spacing: 0.05em;
-      /* 影（text-shadow）を削除 */
     }
     .comic-title .hl-yellow { color: var(--c-yellow); }
     .comic-title .hl-accent { color: var(--c-accent); }
@@ -129,7 +127,6 @@
     .mo-nav a.nav-link:hover { border-color: var(--c-accent); color: var(--c-accent); }
     .mo-menu-toggle { display: none; }
 
-    /* マーキー */
     .mo-marquee { background: var(--c-main); color: var(--c-white); border-bottom: var(--border-thick); padding: 8px 0; overflow: hidden; white-space: nowrap; }
     .marquee-content { display: inline-block; animation: marquee 25s linear infinite; font-weight: 900; font-size: 1.2rem; letter-spacing: 2px; }
     .marquee-content span { padding-right: 30px; display: inline-flex; align-items: center; }
@@ -137,7 +134,7 @@
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ==========================================================================
-       ファーストビュー（HV）
+       ファーストビュー（HV）- 確実に表示されるimgタグ構造
        ========================================================================== */
     .hv-section {
       height: 100vh; min-height: 800px;
@@ -148,16 +145,16 @@
       padding-bottom: 60px;
     }
     
-    /* 修正：.png に変更 */
-    .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: var(--c-main); }
+    /* 修正：CSSの背景画像ではなく、imgタグで確実にスライドショーを実行する構造 */
+    .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: var(--c-main); overflow: hidden; }
     .bg-slide {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-size: cover; background-position: center;
+      object-fit: cover; object-position: center;
       opacity: 0; animation: slideCrossFade 15s infinite;
     }
-    .bg-slide:nth-child(1) { background-image: url('1-a.png'); animation-delay: 0s; }
-    .bg-slide:nth-child(2) { background-image: url('1-b.png'); animation-delay: 5s; }
-    .bg-slide:nth-child(3) { background-image: url('1-c.png'); animation-delay: 10s; }
+    .bg-slide:nth-child(1) { animation-delay: 0s; }
+    .bg-slide:nth-child(2) { animation-delay: 5s; }
+    .bg-slide:nth-child(3) { animation-delay: 10s; }
     
     @keyframes slideCrossFade {
       0% { opacity: 0; transform: scale(1); }
@@ -165,21 +162,15 @@
       43%, 100% { opacity: 0; transform: scale(1.05); }
     }
 
-    /* 網点オーバーレイ */
     .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-halftone-dark); background-size: 10px 10px; opacity: 0.2; z-index: 2; pointer-events: none; }
-
-    /* 集中線 */
     .hv-flash { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200vw; height: 200vw; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.1) 0deg 10deg, transparent 10deg 20deg); z-index: 3; animation: spinFlash 120s linear infinite; pointer-events: none; }
-
-    /* 中心の男性の顔切り抜き */
     .hv-center-face { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 100%; max-width: 700px; text-align: center; pointer-events: none; }
     .hv-center-face img { width: 100%; height: auto; filter: drop-shadow(0 20px 40px rgba(30,58,95,0.5)); }
 
-    /* コンテンツ群 */
     .hv-content-wrap { position: relative; z-index: 5; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: flex-end; pointer-events: none; }
     .hv-content-wrap > * { pointer-events: auto; }
 
-    /* キャッチコピー */
+    /* キャッチコピー（デザイン統一） */
     .hv-catch-bubble {
       background: var(--c-white); border: var(--border-thick); border-radius: 20px;
       padding: 40px 35px; box-shadow: var(--shadow-lg); 
@@ -193,7 +184,7 @@
     .typo-line { display: block; white-space: nowrap; width: 100%; text-align: left; }
     .hv-catch span.hl { color: var(--c-accent); }
 
-    /* パンツ＋説明＋バッジ */
+    /* パンツ＋説明＋バッジ（デザイン統一） */
     .hv-product-card {
       background: var(--c-yellow); border: var(--border-thick); border-radius: 20px;
       padding: 30px; box-shadow: var(--shadow-lg); 
@@ -214,7 +205,6 @@
     .hv-badge span.small { font-size: 1rem; font-weight: 900; }
     .hv-badge span.big { font-size: 2rem; font-weight: 900; color: var(--c-yellow); }
 
-    /* タイムループアニメーション */
     @keyframes hvLoop1 {
       0%, 2% { opacity: 0; transform: scale(0.1) rotate(15deg) translateY(200px); }
       6% { opacity: 1; transform: scale(1.05) rotate(-3deg) translateY(0); }
@@ -251,21 +241,22 @@
     .comic-card p { font-size: 1.05rem; font-weight: 700; line-height: 1.6; margin: 0; }
 
     /* ==========================================================================
-       特許構造セクション (ポップアップループ化)
+       特許構造セクション (ポップアップループ化、デザイン統一)
        ========================================================================== */
     #structure { background: var(--c-yellow); border-bottom: 8px solid var(--c-dark); }
     .structure-wrapper { position: relative; max-width: 800px; margin: 0 auto; text-align: center; }
     .pants-center-img { max-width: 400px; margin: 0 auto; border: var(--border-thick); box-shadow: var(--shadow-lg); border-radius: 20px; background: var(--c-white); padding: 30px; transform: rotate(-2deg); }
     
+    /* 修正：吹き出しの三角（しっぽ）を削除し、FVと同じデザインに統一 */
     .comic-pop {
-      position: absolute; background: var(--c-white); border: var(--border-thick); box-shadow: var(--shadow-md);
-      padding: 20px; border-radius: 15px; font-weight: 700; width: 260px; text-align: left; opacity: 0; 
+      position: absolute; background: var(--c-white); border: var(--border-thick); box-shadow: var(--shadow-lg);
+      padding: 25px 20px; border-radius: 20px; font-weight: 700; width: 260px; text-align: left; opacity: 0; 
     }
     .pop-1 { top: 10%; left: -120px; }
     .pop-2 { top: 40%; right: -120px; }
     .pop-3 { bottom: -40px; left: 50%; margin-left: -160px; width: 320px; }
     
-    .comic-pop h4 { color: var(--c-main-dark); font-size: 1.3rem; margin: 0 0 10px; font-weight: 900; border-bottom: 2px dashed #ccc; padding-bottom: 5px; }
+    .comic-pop h4 { color: var(--c-dark); font-size: 1.3rem; margin: 0 0 10px; font-weight: 900; border-bottom: 2px dashed #ccc; padding-bottom: 5px; }
 
     .pop-loop-1 { animation: popLoop1 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom right; }
     .pop-loop-2 { animation: popLoop2 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom left; }
@@ -322,13 +313,15 @@
     .expert-info p { font-size: 1.1rem; font-weight: 700; line-height: 1.6; }
 
     .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; }
-    .review-bubble { background: var(--c-white); border: var(--border-thick); border-radius: 20px; padding: 30px; box-shadow: var(--shadow-md); position: relative; transform: rotate(1deg); }
+    
+    /* 修正：吹き出しの三角を削除し、FVと同じデザインに統一 */
+    .review-bubble { background: var(--c-white); border: var(--border-thick); border-radius: 20px; padding: 30px; box-shadow: var(--shadow-lg); position: relative; transform: rotate(1deg); }
     .review-bubble:nth-child(2) { transform: rotate(-2deg); }
     .review-stars { color: var(--c-accent); font-size: 1.5rem; margin-bottom: 10px; letter-spacing: 2px; }
     .review-text { font-weight: 700; font-size: 1.05rem; line-height: 1.6; }
 
     /* ==========================================================================
-       スペック＆購入合体セクション（限界突破コンボ）
+       スペック＆購入合体セクション
        ========================================================================== */
     #size { background: var(--c-light-blue); background-image: repeating-linear-gradient(45deg, var(--c-main), var(--c-main) 40px, var(--c-main-dark) 40px, var(--c-main-dark) 80px); border-bottom: 8px solid var(--c-dark); padding: 150px 0; }
     
@@ -345,7 +338,6 @@
 
     .mo-spec-visual-flex { display: flex; gap: 40px; align-items: stretch; background: var(--c-light); padding: 40px; border-radius: 12px; border: var(--border-thick); box-shadow: var(--shadow-lg); position: relative; }
     
-    /* 左側：画像とレベルとカラー */
     .mo-spec-left { flex: 0 0 320px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
     .mo-spec-left img { height: 250px; object-fit: contain; margin-bottom: 25px; filter: drop-shadow(0 15px 30px rgba(30,58,95,0.15)); transition: all 0.3s ease; }
     
@@ -355,14 +347,12 @@
     .bg-black { background-color: #222; }
     .bg-blue { background-color: #235fac; }
 
-    /* 尿漏れゲージ（統一デザイン） */
     .gauge-wrap { width: 100%; border: 3px solid var(--c-dark); background: #fff; padding: 5px; position: relative; margin-top: auto; border-radius: 5px; }
     .gauge-title { position: absolute; top: -14px; left: 10px; background: var(--c-dark); color: #fff; font-size: 0.85rem; font-weight: 900; padding: 0 8px; border-radius: 3px;}
     .gauge-bar-container { display: flex; gap: 3px; height: 15px; margin-top: 10px; }
     .gauge-block { flex: 1; background: #ddd; border: 1px solid #111; }
     .gauge-block.active { background: var(--c-accent); } 
 
-    /* 右側：表とボタン */
     .mo-spec-right { flex: 1; display: flex; flex-direction: column; }
     .comic-table { width: 100%; border-collapse: collapse; border: var(--border-thick); background: var(--c-white); margin-bottom: 20px; }
     .comic-table th { background: var(--c-dark); color: var(--c-white); padding: 15px; font-weight: 900; border: 2px solid var(--c-dark); }
@@ -387,19 +377,22 @@
     .mo-faq-answer { padding: 30px 35px; background: #fafafa; color: #111; border-top: var(--border-thick); line-height: 1.8; font-weight: 700; font-size: 1rem; }
 
     /* ==========================================================================
-       フッター & 追従カートボタン
+       フッター
        ========================================================================== */
     .mo-footer { background: var(--c-dark); padding: 60px 0 150px; text-align: center; color: #fff; border-top: 8px solid var(--c-main); }
     .mo-footer-logo img { height: 35px; margin: 0 auto 20px; display: block; filter: brightness(0) invert(1); opacity: 0.9; transition: transform 0.4s; }
     .mo-footer-logo:hover img { transform: scale(1.05); opacity: 1; }
     .mo-footer-company { margin-bottom: 20px; }
     .mo-footer-info { margin-bottom: 30px; }
-    .mo-footer-link { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; letter-spacing: 0.05em; }
-    .mo-footer-link:hover { color: #fff; }
+    /* 修正：カイタックファミリー白文字化 */
+    .mo-footer-link { color: #fff; text-decoration: none; transition: color 0.3s; letter-spacing: 0.05em; font-weight: bold; }
+    .mo-footer-link:hover { color: var(--c-main); }
     .mo-footer-separator { margin: 0 15px; color: rgba(255,255,255,0.3); }
     .mo-copyright { color: rgba(255,255,255,0.4); font-size: 0.85em; letter-spacing: 0.05em; }
 
-    /* 追従カートボタン */
+    /* ==========================================================================
+       追従カートボタン (完全再設計)
+       ========================================================================== */
     .fixed-bottom-bar {
       position: fixed; bottom: -100px; left: 0; width: 100%; z-index: 9999;
       display: flex; justify-content: center;
@@ -409,7 +402,7 @@
     .fixed-bottom-bar.is-visible { bottom: 30px; }
 
     /* ==========================================================================
-       SP用 レスポンシブ (タイムループアニメーション等)
+       SP用 レスポンシブ
        ========================================================================== */
     @media (max-width: 768px) {
       .comic-title-wrap { padding: 10px 20px; margin-bottom: 40px; }
@@ -418,7 +411,8 @@
       .mo-menu-toggle { display: block; font-size: 2.5rem; font-weight: 900; color: var(--c-dark); cursor: pointer; transition: 0.3s; z-index: 10001; position: relative; }
       .mo-menu-toggle.is-active { transform: rotate(135deg); color: var(--c-accent); }
       
-      .mo-nav { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--c-yellow); background-image: var(--bg-halftone-dark); flex-direction: column; justify-content: center; align-items: center; z-index: 10000; }
+      /* 修正：メニュー背景のシミを削除し、真っ白に変更 */
+      .mo-nav { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--c-white); flex-direction: column; justify-content: center; align-items: center; z-index: 10000; }
       .mo-nav.is-open { display: flex; animation: menuBAM 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
       @keyframes menuBAM { 0% { transform: scale(0); border-radius: 50%; } 100% { transform: scale(1); border-radius: 0; } }
       .mo-nav a.nav-link { font-size: clamp(1.1rem, 4vw, 1.5rem); margin: 10px 0; color: var(--c-dark); background: var(--c-white); padding: 10px 20px; border: var(--border-thick); box-shadow: var(--shadow-sm); transform: rotate(-2deg); }
@@ -432,14 +426,14 @@
       .marquee-content { font-size: 0.8rem; }
       .marquee-pants { height: 1em; margin: 0 5px; }
 
-      /* HV スマホ */
       .hv-section { padding-top: 60px; height: 100vh; height: 100svh; align-items: flex-end; padding-bottom: 30px; }
       .hv-center-face { width: 150%; max-width: 150%; top: 40%; }
 
       .hv-content-wrap { padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: auto; }
 
-      .hv-catch-bubble { padding: 25px 20px; max-width: 90%; margin: 0 auto 20px; transform: rotate(0); }
-      .hv-catch { text-align: center; } 
+      .hv-catch-bubble { padding: 25px 20px; max-width: 95%; margin: 0 auto 20px; transform: rotate(0); }
+      /* SP改行対応 */
+      .hv-catch { font-size: clamp(1.3rem, 5vw, 2.5rem); text-align: center; } 
       
       .hv-product-card { max-width: 90%; margin: 0 auto; padding: 20px; transform: rotate(0); }
       .hv-product-img { width: 130px; margin-bottom: 10px; }
@@ -450,17 +444,16 @@
       .hv-badge span.small { font-size: 0.7rem; }
       .hv-badge span.big { font-size: 1.2rem; }
 
-      /* その他セクション SP */
       .mo-card-grid, .feature-comic-grid, .review-grid { grid-template-columns: 1fr; gap: 30px; }
       
       .structure-wrapper { padding-top: 30px; }
+      /* SPポップアップの統一 */
       .comic-pop { position: relative; top: auto; left: auto; right: auto; bottom: auto; width: 100%; margin-bottom: 20px; margin-left: 0; }
       
       .expert-card { flex-direction: column; padding: 30px 20px; gap: 20px; }
       .expert-card img { width: 150px; height: 150px; margin: 0 auto; }
       .expert-info h3 { font-size: 1.5rem; text-align: center; }
       
-      /* スペック SP */
       #size { padding: 100px 0; }
       .mo-spec-buy-container { padding: 40px 20px; border-width: 4px; box-shadow: 8px 8px 0 var(--c-yellow); }
       .mo-spec-visual-flex { flex-direction: column; padding: 25px 20px; gap: 30px; }
@@ -474,12 +467,10 @@
       .spec-list p { flex-direction: column; align-items: flex-start; gap: 5px; }
       .spec-list span.label { margin-right: 0; }
       
-      /* FAQ SP */
       #faq { padding: 100px 0; }
       .mo-faq-item summary { font-size: 1rem; padding: 20px; }
       .mo-faq-answer { font-size: 0.9rem; padding: 20px; }
       
-      /* 追従ボタン SP */
       .fixed-bottom-bar.is-visible { bottom: 20px; }
       .floating-btn { padding: 10px 20px 10px 15px; font-size: 1.2rem; border-width: 3px; }
       .floating-btn img { height: 35px; margin-right: 10px; }
@@ -520,9 +511,9 @@
 
     <section class="hv-section fade-in-trigger" id="js-hero-section">
       <div class="mo-hero-bg">
-        <div class="bg-slide" style="background-image: url('1-a.png');"></div>
-        <div class="bg-slide" style="background-image: url('1-b.png');"></div>
-        <div class="bg-slide" style="background-image: url('1-c.png');"></div>
+        <img src="1-a.png" alt="" class="bg-slide">
+        <img src="1-b.png" alt="" class="bg-slide">
+        <img src="1-c.png" alt="" class="bg-slide">
       </div>
       <div class="mo-hero-overlay"></div>
 
@@ -536,8 +527,8 @@
         
         <div class="hv-catch-bubble loop-bam-1">
           <h2 class="hv-catch">
-            <span class="typo-line">「あ、っ」と思った</span>
-            <span class="typo-line">その瞬間を、</span>
+            <span class="typo-line">「あ、っ」と</span>
+            <span class="typo-line">思ったその瞬間を、</span>
             <span class="typo-line"><span class="hl">無かった</span>ことに。</span>
           </h2>
         </div>
@@ -658,7 +649,7 @@
             </div>
             <div class="feature-text-box">
               <h4>03. 1秒吸水</h4>
-              <p>股間内側部分は、一般的なポリエステル生地に比べ、<span class="text-highlight" style="color:var(--c-accent); font-size:1.1rem;">約9倍の吸水スピード!!</span></p>
+              <p>股間内側部分は、一般的なポリエステル生地に比べ、<span class="text-highlight">約9倍の吸水スピード!!</span></p>
             </div>
           </div>
         </div>
@@ -741,10 +732,10 @@
                 </div>
                 
                 <div class="gauge-wrap">
-                  <div class="gauge-title" style="background:var(--c-dark);">尿漏れ対応レベル MAX!</div>
+                  <div class="gauge-title">尿漏れ対応レベル MAX!</div>
                   <div class="gauge-bar-container">
-                    <div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div>
-                    <div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div>
+                    <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div>
+                    <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div>
                   </div>
                   <p style="font-weight:900; margin:5px 0 0; font-size:0.9rem; text-align:center;">約10cc対応</p>
                 </div>
@@ -786,7 +777,7 @@
                 </div>
                 
                 <div class="gauge-wrap">
-                  <div class="gauge-title" style="background:var(--c-dark);">尿漏れ対応レベル 8</div>
+                  <div class="gauge-title">尿漏れ対応レベル 8</div>
                   <div class="gauge-bar-container">
                     <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div>
                     <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block"></div><div class="gauge-block"></div>
@@ -847,18 +838,17 @@
       </div>
     </section>
 
-    <footer class="mo-footer" style="background:var(--c-dark); padding: 60px 0 120px; text-align:center; color:#fff; border-top: 8px solid var(--c-main);">
-      <div class="mo-container">
-        <img src="logo.png" alt="MORESCUE" style="height:40px; filter:brightness(0) invert(1); margin:0 auto 20px;">
-        <p style="font-weight:900; font-size:1.2rem; margin-bottom:20px;">
-          <a href="https://www.caitac-family.com/" target="_blank" style="color:var(--c-yellow); text-decoration:none;">株式会社カイタックファミリー</a>
-        </p>
+    <footer class="mo-footer">
+      <div class="mo-container text-center">
+        <a href="https://www.caitac-family.com/" target="_blank" class="mo-footer-link" style="font-weight: 900; font-size: 1.2rem; display:block; margin-bottom:20px;">
+          株式会社カイタックファミリー
+        </a>
         <div style="margin-bottom:20px;">
-          <a href="#" style="color:#aaa; text-decoration:none; font-weight:700;">プライバシーポリシー</a>
-          <span style="margin:0 10px; color:#555;">|</span>
-          <a href="#" style="color:#aaa; text-decoration:none; font-weight:700;">お問い合わせ</a>
+          <a href="#" class="mo-footer-link" style="font-weight:700;">プライバシーポリシー</a>
+          <span class="mo-footer-separator">|</span>
+          <a href="#" class="mo-footer-link" style="font-weight:700;">お問い合わせ</a>
         </div>
-        <p style="color:#555; font-size:0.8rem; font-weight:700;">© CAITAC FAMILY CO.,LTD.</p>
+        <p class="mo-copyright">© CAITAC FAMILY CO.,LTD.</p>
       </div>
     </footer>
 
@@ -990,5 +980,68 @@
       }
     });
   </script>
+  
+  <style>
+    /* ==========================================================================
+       ループアニメーションのキーフレーム定義
+       ========================================================================== */
+    
+    /* ファーストビュー用タイムループ（PC・SP共通で12秒周期） */
+    .loop-bam-1 {
+      opacity: 0;
+      animation: loopBam1 12s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-origin: left bottom;
+    }
+    .loop-bam-2 {
+      opacity: 0;
+      animation: loopBam2 12s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-origin: right bottom;
+    }
+
+    @keyframes loopBam1 {
+      0%, 2% { opacity: 0; transform: scale(0.1) rotate(15deg) translateY(200px); }
+      6% { opacity: 1; transform: scale(1.1) rotate(-5deg) translateY(0); }
+      9% { transform: scale(1) rotate(-3deg); }
+      60% { opacity: 1; transform: scale(1) rotate(-3deg); }
+      63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
+      66%, 100% { opacity: 0; transform: scale(0.1) rotate(-15deg) translateY(200px); }
+    }
+    @keyframes loopBam2 {
+      0%, 15% { opacity: 0; transform: scale(0.1) rotate(-15deg) translateY(200px); } 
+      19% { opacity: 1; transform: scale(1.1) rotate(5deg) translateY(0); }
+      22% { transform: scale(1) rotate(2deg); }
+      60% { opacity: 1; transform: scale(1) rotate(2deg); }
+      63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
+      66%, 100% { opacity: 0; transform: scale(0.1) rotate(15deg) translateY(200px); }
+    }
+
+    /* 見えない安心ポップアップ用の時間差タイムループ (10秒周期) */
+    .comic-pop { opacity: 0; }
+    .pop-loop-1 { animation: popLoop1 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom right; }
+    .pop-loop-2 { animation: popLoop2 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom left; }
+    .pop-loop-3 { animation: popLoop3 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: top center; }
+
+    @keyframes popLoop1 {
+      0%, 2% { opacity: 0; transform: scale(0.1) rotate(-20deg) translateX(-50px); }
+      6% { opacity: 1; transform: scale(1.1) rotate(5deg) translateX(0); }
+      9% { transform: scale(1) rotate(-3deg); }
+      75% { opacity: 1; transform: scale(1) rotate(-3deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(-20deg) translateX(-50px); }
+    }
+    @keyframes popLoop2 {
+      0%, 18% { opacity: 0; transform: scale(0.1) rotate(20deg) translateX(50px); }
+      22% { opacity: 1; transform: scale(1.1) rotate(-5deg) translateX(0); }
+      25% { transform: scale(1) rotate(2deg); }
+      75% { opacity: 1; transform: scale(1) rotate(2deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(20deg) translateX(50px); }
+    }
+    @keyframes popLoop3 {
+      0%, 34% { opacity: 0; transform: scale(0.1) rotate(10deg) translateY(50px); }
+      38% { opacity: 1; transform: scale(1.1) rotate(-2deg) translateY(0); }
+      41% { transform: scale(1) rotate(-1deg); }
+      75% { opacity: 1; transform: scale(1) rotate(-1deg); }
+      78%, 100% { opacity: 0; transform: scale(0.1) rotate(10deg) translateY(50px); }
+    }
+  </style>
 </body>
 </html>
