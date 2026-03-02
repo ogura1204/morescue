@@ -6,7 +6,7 @@
   <title>MORESCUE - 究極のレスキューパンツ</title>
   <style>
     /* ==========================================================================
-       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (Perfect 100vh & Flat Text)
+       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (Ultimate Edition)
        ========================================================================== */
     @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700;900&family=Noto+Sans+JP:wght@700;900&display=swap');
 
@@ -29,7 +29,7 @@
       --c-yellow: #ffecb3;     
       --c-accent: #ff8a65;     /* 目立たせたい文字：オレンジ */
       --c-dark: #1e3a5f;       /* 基本文字・枠・影：紺色 */
-      --c-white: #ffffff;      
+      --c-white: #ffffff;      /* 背景：白 */
       
       --bg-halftone-blue: radial-gradient(var(--c-main-dark) 10%, transparent 11%), radial-gradient(var(--c-main-dark) 10%, transparent 11%);
       --bg-halftone-dark: radial-gradient(rgba(30, 58, 95, 0.08) 15%, transparent 16%), radial-gradient(rgba(30, 58, 95, 0.08) 15%, transparent 16%);
@@ -70,10 +70,8 @@
       border: var(--border-thick);
       box-shadow: var(--shadow-lg);
       padding: 15px 40px;
-      transform: skewX(-10deg); /* 斜めカードに統一 */
-      border-radius: 0;
+      transform: skewX(-10deg) rotate(-1deg);
     }
-    .section-title-box.bg-yellow { background: var(--c-yellow); }
     
     .section-title {
       font-size: clamp(1.6rem, 4vw, 2.5rem); 
@@ -81,7 +79,7 @@
       line-height: 1.4; margin: 0; text-align: center;
       letter-spacing: 0.05em;
       transform: skewX(10deg); 
-      text-shadow: none; /* 影なし徹底 */
+      text-shadow: none;
     }
     .section-title .hl { color: var(--c-accent); }
     
@@ -90,19 +88,22 @@
       .section-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
     }
 
-    /* ==========================================================================
-       強調ラベル（まとめ買い等カードデザイン）
-       ========================================================================== */
-    .notice-card {
-      display: inline-block; background: var(--c-yellow);
-      border: var(--border-thick); box-shadow: var(--shadow-sm);
-      padding: 15px 30px; transform: skewX(-5deg); border-radius: 0;
+    /* 強調ラベル（まとめ買い等） */
+    .highlight-label {
+      display: inline-block;
+      background: var(--c-yellow);
+      border: var(--border-thick);
+      box-shadow: var(--shadow-md);
+      padding: 12px 30px;
+      transform: skewX(-5deg);
       margin: 0 auto;
     }
-    .notice-card-text {
-      display: block; transform: skewX(5deg);
-      font-weight: 900; font-size: clamp(1.2rem, 3vw, 1.6rem);
-      color: var(--c-accent); text-shadow: none;
+    .highlight-label span {
+      display: block;
+      transform: skewX(5deg);
+      font-weight: 900;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      color: var(--c-accent);
     }
 
     /* ==========================================================================
@@ -155,7 +156,7 @@
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ==========================================================================
-       ファーストビュー（HV）- 100vh完全収納・完璧なレイヤー構造
+       ファーストビュー（HV）- 100vh完全収納・立体構造レイヤリング
        ========================================================================== */
     .hv-section {
       height: 100vh; min-height: 650px; max-height: 1080px;
@@ -165,7 +166,7 @@
       padding-top: 80px; /* ヘッダー分 */
     }
     
-    /* [第1層] 集中線（一番後ろ） - モデルの位置（右寄り）から放射 */
+    /* 1. 集中線（一番後ろ） - モデルの中央（右寄り）から放射 */
     .hv-flash {
       position: absolute; top: 50%; left: 75%; transform: translate(-50%, -50%);
       width: 250vw; height: 250vw;
@@ -173,9 +174,10 @@
       z-index: 1; animation: spinFlash 120s linear infinite; pointer-events: none;
     }
     @keyframes spinFlash { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
     .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-halftone-dark); background-size: 10px 10px; opacity: 0.15; z-index: 2; pointer-events: none; }
 
-    /* [第2層] コンテンツ配置コンテナ（モデルより奥） */
+    /* 2. コンテンツ配置コンテナ（モデルより奥） */
     .hv-content-wrap {
       position: absolute; top: 0; left: 50%; transform: translateX(-50%);
       width: 100%; max-width: 1200px; height: 100%; z-index: 5;
@@ -183,14 +185,15 @@
     }
     .hv-content-wrap > * { pointer-events: auto; }
 
-    /* [第3層] 背景画像（モデル）：テキストより手前、バッジより奥 */
+    /* 3. 背景画像（モデル）：テキストより手前、バッジより奥 */
     .mo-hero-bg { 
-      position: absolute; bottom: 0; right: 0; width: 60%; height: 100%; 
+      position: absolute; bottom: 0; right: 0; width: 55%; height: 100%; 
       z-index: 10; overflow: hidden; pointer-events: none;
     }
+    /* モデル画像は上基準に合わせ、下を見切れさせる(cover) */
     .bg-slide {
-      position: absolute; top: 10vh; right: 0; width: 100%; height: 90vh;
-      object-fit: contain; object-position: center bottom; 
+      position: absolute; top: 10vh; right: 0; width: 100%; height: 100vh;
+      object-fit: cover; object-position: center top; 
       opacity: 0; animation: slideCrossFade 15s infinite;
     }
     .bg-slide:nth-child(1) { animation-delay: 0s; }
@@ -203,11 +206,16 @@
     }
 
     /* ====================================
-       PC配置位置指定 & デザイン
+       PC配置位置指定
        ==================================== */
-    .hv-pos-catch { position: absolute; top: 22%; left: 5%; } /* 少し下へ */
-    .hv-pos-product { position: absolute; bottom: 12%; left: 5%; }
-    .hv-pos-badge { position: absolute; bottom: 15%; right: 10%; z-index: 20; } /* モデルより手前の右下 */
+    /* キャッチ：少し下へ */
+    .hv-pos-catch { position: absolute; top: 22%; left: 5%; }
+    
+    /* 商品カード：左下 */
+    .hv-pos-product { position: absolute; bottom: 10%; left: 5%; }
+    
+    /* 累計バッジ：右下（一番手前） */
+    .hv-pos-badge { position: absolute; bottom: 12%; right: 10%; z-index: 50; }
 
     /* アニメーション用クラス（一回ドォン！と出て表示しっぱなし） */
     .anim-drop-1 { opacity: 0; animation: dropIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.2s; }
@@ -219,7 +227,7 @@
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* キャッチコピー（影なし・サイズ最適化） */
+    /* キャッチコピー */
     .hv-catch-bubble {
       background: var(--c-white); border: var(--border-thick); border-radius: 0;
       padding: 25px 35px; box-shadow: var(--shadow-lg); 
@@ -232,18 +240,18 @@
     .typo-line { display: block; white-space: nowrap; }
     .hv-catch span.hl { color: var(--c-accent); }
 
-    /* 商品カード（左右配置・横並び） */
+    /* 商品カード（横並び2列） */
     .hv-product-card {
       background: var(--c-yellow); border: var(--border-thick); border-radius: 0; 
-      padding: 20px; box-shadow: var(--shadow-lg); 
+      padding: 15px 25px; box-shadow: var(--shadow-lg); 
       max-width: 500px; display: flex; flex-direction: row; align-items: center; justify-content: flex-start;
       transform: rotate(2deg);
     }
     .hv-product-img { width: 120px; margin-right: 20px; transform: rotate(-5deg); flex-shrink: 0; }
-    .hv-product-text { background: var(--c-white); border: 3px solid var(--c-dark); padding: 15px; font-size: 0.95rem; font-weight: 700; line-height: 1.5; text-align: left; color: var(--c-dark); }
+    .hv-product-text { font-size: 0.95rem; font-weight: 700; line-height: 1.5; text-align: left; color: var(--c-dark); }
     .hv-product-text strong { color: var(--c-accent); font-size: 1.15rem; display: block; margin-bottom: 8px; line-height: 1.3; text-shadow: none;}
 
-    /* 累計バッジ（一番手前） */
+    /* バッジ */
     .hv-badge {
       background: var(--c-white); color: var(--c-accent);
       width: 160px; height: 160px; border-radius: 50%; border: var(--border-thick);
@@ -309,7 +317,7 @@
     .feature-text-box { padding: 30px 20px; text-align: left; flex-grow: 1; color: var(--c-dark); }
     .feature-text-box h4 { font-size: 1.4rem; font-weight: 900; margin: 0 0 15px; color: var(--c-dark); text-shadow: none; }
     .feature-text-box p { font-size: 1rem; font-weight: 700; margin: 0; line-height: 1.6; color: var(--c-dark); }
-    .text-highlight { background: linear-gradient(transparent 60%, var(--c-yellow) 60%); padding: 0 5px; color: var(--c-accent); font-weight: 900; font-size: 1.1rem; }
+    .text-highlight { color: var(--c-accent); font-weight: 900; font-size: 1.1rem; }
 
     /* ==========================================================================
        専門家・レビュー
@@ -332,7 +340,7 @@
     /* ==========================================================================
        スペック＆購入合体セクション
        ========================================================================== */
-    #size { background: var(--c-main); border-bottom: 8px solid var(--c-dark); padding: 150px 0; }
+    #size { background: var(--c-main); background-image: repeating-linear-gradient(45deg, var(--c-main), var(--c-main) 40px, var(--c-main-dark) 40px, var(--c-main-dark) 80px); border-bottom: 8px solid var(--c-dark); padding: 150px 0; }
     
     .mo-spec-buy-container { background: var(--c-white); border: 8px solid var(--c-dark); box-shadow: 15px 15px 0 var(--c-yellow); padding: 60px; max-width: 1000px; margin: 0 auto; position: relative; border-radius: 0; }
     
@@ -374,9 +382,9 @@
     /* ==========================================================================
        FAQセクション
        ========================================================================== */
-    #faq { background: var(--c-white); border-bottom: 8px solid var(--c-dark); padding: 120px 0; }
+    #faq { background: var(--c-white); border-bottom: 8px solid var(--c-dark); padding: 150px 0 120px; }
     .mo-faq-wrap { margin-top: 40px; }
-    .mo-faq-item { margin-bottom: 18px; overflow: hidden; border: var(--border-thick); transition: all 0.3s; background: var(--c-white); box-shadow: var(--shadow-md);}
+    .mo-faq-item { margin-bottom: 18px; overflow: hidden; border: var(--border-thick); transition: all 0.3s; background: var(--c-white); }
     .mo-faq-item summary { padding: 20px 25px; font-weight: 900; background: #fff; cursor: pointer; position: relative; color: var(--c-dark); font-size: 1.1em; transition: 0.2s; }
     .mo-faq-item summary:hover { color: var(--c-accent); }
     .mo-faq-item[open] { border-color: var(--c-accent); }
@@ -390,6 +398,8 @@
     .mo-footer { background: var(--c-dark); padding: 60px 0 150px; text-align: center; color: #fff; border-top: 8px solid var(--c-main); }
     .mo-footer-logo img { height: 35px; margin: 0 auto 20px; display: block; filter: brightness(0) invert(1); opacity: 0.9; transition: transform 0.4s; }
     .mo-footer-logo:hover img { transform: scale(1.05); opacity: 1; }
+    .mo-footer-company { margin-bottom: 20px; }
+    .mo-footer-info { margin-bottom: 30px; }
     .mo-footer-link { color: #fff; text-decoration: none; transition: color 0.3s; letter-spacing: 0.05em; font-weight: bold; }
     .mo-footer-link:hover { color: var(--c-main); }
     .mo-footer-separator { margin: 0 15px; color: rgba(255,255,255,0.3); }
@@ -428,46 +438,43 @@
       .marquee-pants { height: 1em; margin: 0 5px; }
 
       /* =========================================================
-         HV スマホ（絶対はみ出ないFlexbox配置）
+         HV スマホ（絶対にはみ出ないFlexbox配置）
          ========================================================= */
       .hv-section { 
         height: 100vh; height: 100svh; min-height: auto; 
-        padding-top: 85px; padding-bottom: 15px; 
+        padding-top: 70px; padding-bottom: 15px; 
         display: flex; flex-direction: column; 
-        justify-content: space-between; align-items: center; 
+        justify-content: flex-start; align-items: center; 
       }
       
       /* SP背景画像 */
-      .mo-hero-bg { z-index: 10; pointer-events: none; width: 100%; height: 100%; }
-      .bg-slide { top: 10vh; left: 0; width: 100%; height: 90vh; object-position: center bottom; opacity: 0.9; }
+      .mo-hero-bg { z-index: 10; pointer-events: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0;}
+      .bg-slide { top: 15vh; left: 0; width: 100%; height: 85vh; object-position: center top; object-fit: cover; opacity: 0.9; }
 
-      /* コンテンツ用コンテナ（Flexboxで縦積み） */
+      /* コンテンツ用コンテナ（Flexboxで縦に並べる） */
       .hv-content-wrap { 
         position: relative; z-index: 30; width: 100%; height: 100%; 
-        padding: 0 10px; box-sizing: border-box;
-        display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+        padding: 10px; box-sizing: border-box;
+        display: flex; flex-direction: column; justify-content: space-between;
       }
 
-      /* SP各要素の配置（Flexboxのalign-selfとmarginで制御） */
-      .hv-pos-catch { align-self: flex-start; margin-top: 10px; width: 100%; max-width: 95%; }
-      .hv-pos-product { align-self: center; margin-bottom: 0; width: 100%; position: relative; }
-      .hv-pos-badge { position: absolute; top: -50px; right: -5px; z-index: 50; } /* 商品カードの右上に被せる */
+      /* SP各要素の配置 */
+      .hv-pos-catch { position: relative; top: auto; left: auto; align-self: flex-start; margin-top: 10px; width: fit-content; max-width: 95%; }
+      .hv-pos-badge { position: absolute; top: 10px; right: 10px; z-index: 50; }
+      .hv-pos-product { position: relative; bottom: auto; left: auto; width: 100%; margin-top: auto; margin-bottom: 10px; z-index: 30; }
 
       /* キャッチコピー */
-      .hv-catch-bubble { 
-        padding: 15px 20px; max-width: 100%; margin: 0; transform: rotate(-2deg); 
-        box-sizing: border-box; width: 100%; 
-      }
+      .hv-catch-bubble { padding: 15px; max-width: 100%; margin: 0; transform: rotate(-2deg); box-sizing: border-box; width: 100%; }
       .hv-catch { font-size: clamp(1.2rem, 5.5vw, 1.8rem); text-align: left; white-space: normal; } 
       .typo-line { display: inline; white-space: normal; }
       
       /* 商品カード（横並び・コンパクト） */
       .hv-product-card { 
-        max-width: 100%; width: 100%; margin: 0; padding: 12px; box-sizing: border-box;
+        max-width: 100%; width: 100%; margin: 0; padding: 10px; box-sizing: border-box;
         flex-direction: row; align-items: center; justify-content: flex-start;
       }
-      .hv-product-img { width: 75px; margin-bottom: 0; margin-right: 10px; transform: rotate(-5deg); flex-shrink: 0; }
-      .hv-product-text { flex: 1; padding: 5px; font-size: 0.8rem; }
+      .hv-product-img { width: 70px; margin-right: 10px; margin-bottom: 0; transform: rotate(-5deg); flex-shrink: 0; }
+      .hv-product-text { flex: 1; padding: 5px; font-size: 0.75rem; }
       .hv-product-text strong { font-size: 0.95rem; margin-bottom: 4px; display: block; }
       
       /* バッジ */
@@ -484,7 +491,7 @@
       .expert-info h3 { font-size: 1.5rem; text-align: center; }
       
       #size { padding: 80px 0; }
-      .mo-spec-buy-container { padding: 30px 15px; border-width: 4px; }
+      .mo-spec-buy-container { padding: 30px 15px; border-width: 4px; box-shadow: 8px 8px 0 var(--c-yellow); }
       .mo-spec-visual-flex { flex-direction: column; padding: 20px 15px; gap: 20px; }
       .mo-spec-left { flex: auto; width: 100%; }
       .mo-spec-left img { height: 160px; }
@@ -555,7 +562,7 @@
         </div>
         
         <div class="hv-pos-product anim-drop-2">
-          <div class="hv-pos-badge anim-drop-3">
+          <div class="hv-pos-badge anim-drop-3 sp-only">
             <div class="hv-badge">
               <span class="small">シリーズ累計</span>
               <span class="big">〇〇万枚</span>
@@ -577,6 +584,14 @@
         <img src="1-a.png" alt="" class="bg-slide">
         <img src="1-b.png" alt="" class="bg-slide">
         <img src="1-c.png" alt="" class="bg-slide">
+      </div>
+
+      <div class="hv-pos-badge anim-drop-3 pc-only" style="position: absolute; bottom: 10vh; right: 5%; z-index: 50;">
+        <div class="hv-badge">
+          <span class="small">シリーズ累計</span>
+          <span class="big">〇〇万枚</span>
+          <span class="small">突破!!</span>
+        </div>
       </div>
 
     </section>
@@ -630,16 +645,22 @@
           </div>
           
           <div class="comic-pop unified-card pop-1 fade-in-trigger">
-            <h4>立体構造 (特許取得済)</h4>
-            <p>股間を優しく包み込む独自の3Dパターン設計。究極のフィット感だ！</p>
+            <div class="comic-box-inner">
+              <h4>立体構造 (特許取得済)</h4>
+              <p>股間を優しく包み込む独自の3Dパターン設計。究極のフィット感だ！</p>
+            </div>
           </div>
           <div class="comic-pop unified-card pop-2 fade-in-trigger">
-            <h4>スマート設計 (意匠登録済)</h4>
-            <p>外見からは吸水機能があるとは一切気づかれないシルエット！</p>
+            <div class="comic-box-inner">
+              <h4>スマート設計 (意匠登録済)</h4>
+              <p>外見からは吸水機能があるとは一切気づかれないシルエット！</p>
+            </div>
           </div>
           <div class="comic-pop unified-card pop-3 fade-in-trigger">
-            <h4>吊り式吸水パッド構造</h4>
-            <p>内側の特殊パッドが尿漏れをしっかりキャッチ。体に密着しすぎず快適！</p>
+            <div class="comic-box-inner">
+              <h4>吊り式吸水パッド構造</h4>
+              <p>内側の特殊パッドが尿漏れをしっかりキャッチ。体に密着しすぎず快適！</p>
+            </div>
           </div>
         </div>
       </div>
@@ -657,32 +678,38 @@
         
         <div class="feature-comic-grid">
           <div class="feature-panel unified-card anim-slide-up" style="animation-delay: 0.2s;">
-            <div class="feature-img-box">
-              <img src="https://placehold.co/600x400/eeeeee/111111?text=Image" alt="抗菌防臭加工">
-            </div>
-            <div class="feature-text-box">
-              <h4>01. 抗菌防臭加工</h4>
-              <p>SEK認証の抗菌防臭加工。菌の増殖を抑え、ニオイを元から防ぐ！<span class="text-highlight">夕方まで清潔感キープ！</span></p>
+            <div class="comic-box-inner" style="height: 100%; display: flex; flex-direction: column;">
+              <div class="feature-img-box">
+                <img src="https://placehold.co/600x400/eeeeee/111111?text=Image" alt="抗菌防臭加工">
+              </div>
+              <div class="feature-text-box">
+                <h4>01. 抗菌防臭加工</h4>
+                <p>SEK認証の抗菌防臭加工。菌の増殖を抑え、ニオイを元から防ぐ！<span class="text-highlight">夕方まで清潔感キープ！</span></p>
+              </div>
             </div>
           </div>
           
           <div class="feature-panel unified-card anim-slide-up" style="animation-delay: 0.4s;">
-            <div class="feature-img-box">
-              <img src="https://placehold.co/600x400/eeeeee/111111?text=Image" alt="スピード速乾">
-            </div>
-            <div class="feature-text-box">
-              <h4>02. スピード速乾</h4>
-              <p>濡れてもサラサラ。洗濯後の乾きもスピーディ。<span class="text-highlight">一般的な生地の約1.6倍の速乾スピード！</span></p>
+            <div class="comic-box-inner" style="height: 100%; display: flex; flex-direction: column;">
+              <div class="feature-img-box">
+                <img src="https://placehold.co/600x400/eeeeee/111111?text=Image" alt="スピード速乾">
+              </div>
+              <div class="feature-text-box">
+                <h4>02. スピード速乾</h4>
+                <p>濡れてもサラサラ。洗濯後の乾きもスピーディ。<span class="text-highlight">一般的な生地の約1.6倍の速乾スピード！</span></p>
+              </div>
             </div>
           </div>
           
           <div class="feature-panel unified-card anim-slide-up" style="animation-delay: 0.6s;">
-            <div class="feature-img-box">
-              <img src="https://placehold.co/600x400/eeeeee/111111?text=Image" alt="1秒吸水">
-            </div>
-            <div class="feature-text-box">
-              <h4>03. 1秒吸水</h4>
-              <p>股間内側部分は、一般的なポリエステル生地に比べ、<span class="text-highlight">約9倍の吸水スピード!!</span></p>
+            <div class="comic-box-inner" style="height: 100%; display: flex; flex-direction: column;">
+              <div class="feature-img-box">
+                <img src="https://placehold.co/600x400/eeeeee/111111?text=Image" alt="1秒吸水">
+              </div>
+              <div class="feature-text-box">
+                <h4>03. 1秒吸水</h4>
+                <p>股間内側部分は、一般的なポリエステル生地に比べ、<span class="text-highlight">約9倍の吸水スピード!!</span></p>
+              </div>
             </div>
           </div>
         </div>
@@ -710,27 +737,33 @@
         
         <div class="review-grid">
           <div class="review-bubble unified-card anim-slide-up" style="animation-delay:0.2s;">
-            <div class="mo-review-header">
-              <img src="1-a.png" alt="お客様" class="mo-review-avatar">
-              <div class="review-stars">★★★★★</div>
+            <div class="comic-box-inner">
+              <div class="mo-review-header">
+                <img src="1-a.png" alt="お客様" class="mo-review-avatar">
+                <div class="review-stars">★★★★★</div>
+              </div>
+              <p class="review-text">「機能性が非常に良い。穿きやすく、見た目も普通のパンツなのでジムの着替えも安心です！」</p>
             </div>
-            <p class="review-text">「機能性が非常に良い。穿きやすく、見た目も普通のパンツなのでジムの着替えも安心です！」</p>
           </div>
           
           <div class="review-bubble unified-card anim-slide-up" style="animation-delay:0.4s;">
-            <div class="mo-review-header">
-              <img src="1-b.png" alt="お客様" class="mo-review-avatar">
-              <div class="review-stars">★★★★★</div>
+            <div class="comic-box-inner">
+              <div class="mo-review-header">
+                <img src="1-b.png" alt="お客様" class="mo-review-avatar">
+                <div class="review-stars">★★★★★</div>
+              </div>
+              <p class="review-text">「穿いているという安心感のおかげで、外出が心から楽しめるようになりました!!」</p>
             </div>
-            <p class="review-text">「穿いているという安心感のおかげで、外出が心から楽しめるようになりました!!」</p>
           </div>
           
           <div class="review-bubble unified-card anim-slide-up" style="animation-delay:0.6s;">
-            <div class="mo-review-header">
-              <img src="1-c.png" alt="お客様" class="mo-review-avatar">
-              <div class="review-stars">★★★★☆</div>
+            <div class="comic-box-inner">
+              <div class="mo-review-header">
+                <img src="1-c.png" alt="お客様" class="mo-review-avatar">
+                <div class="review-stars">★★★★☆</div>
+              </div>
+              <p class="review-text">「吸汗速乾のおかげで夏場でもベタつかず、洗濯してもすぐ乾くので助かります。」</p>
             </div>
-            <p class="review-text">「吸汗速乾のおかげで夏場でもベタつかず、洗濯してもすぐ乾くので助かります。」</p>
           </div>
         </div>
       </div>
@@ -754,102 +787,104 @@
         </div>
         
         <div class="mo-spec-buy-container unified-card anim-zoom-in">
-          
-          <div class="spec-tabs" id="js-spec-tabs">
-            <div class="spec-tab unified-card is-active" data-target="spec-boxer"><span>ボクサータイプ</span></div>
-            <div class="spec-tab unified-card" data-target="spec-trunks"><span>トランクスタイプ</span></div>
-          </div>
-
-          <div id="spec-boxer" class="spec-content is-active">
-            <div class="mo-spec-visual-flex">
-              
-              <div class="mo-spec-left">
-                <img src="2-bl.png" alt="ボクサータイプ" id="js-buy-img-boxer">
-                
-                <div class="color-select">
-                  <button class="color-dot bg-black active" data-target="js-buy-img-boxer" data-src="2-bl.png" aria-label="ブラック"></button>
-                  <button class="color-dot bg-blue" data-target="js-buy-img-boxer" data-src="1-gy.png" aria-label="ブルー"></button>
-                </div>
-                
-                <div class="gauge-wrap">
-                  <div class="gauge-title">尿漏れ対応レベル MAX!</div>
-                  <div class="gauge-bar-container">
-                    <div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div>
-                    <div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div>
-                  </div>
-                  <p style="font-weight:900; margin:5px 0 0; font-size:0.9rem; text-align:center;">約10cc対応</p>
-                </div>
-              </div>
-
-              <div class="mo-spec-right">
-                <table class="comic-table">
-                  <thead><tr><th>適応胴囲</th><th>ウエスト(平置き)</th></tr></thead>
-                  <tbody>
-                    <tr><td>M (76〜84cm)</td><td>33.0cm</td></tr>
-                    <tr><td>L (84〜94cm)</td><td>35.0cm</td></tr>
-                    <tr><td>XL (94〜104cm)</td><td>37.0cm</td></tr>
-                    <tr><td>2XL (98〜108cm)</td><td>39.0cm</td></tr>
-                  </tbody>
-                </table>
-                <div class="spec-list">
-                  <p><span class="label">素 材</span>身生地・サポーター：ポリエステル65%・綿35%</p>
-                  <p><span class="label">カラー</span>ブラック / ブルー</p>
-                </div>
-                
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="btn-sync main-buy-btn content-buy-btn">
-                  <img src="2-bl.png" alt="パンツ" class="btn-icon">
-                  <span class="btn-text">今すぐGET!!</span>
-                </a>
-              </div>
-              
+          <div class="comic-box-inner">
+            
+            <div class="spec-tabs" id="js-spec-tabs">
+              <div class="spec-tab unified-card is-active" data-target="spec-boxer"><span>ボクサータイプ</span></div>
+              <div class="spec-tab unified-card" data-target="spec-trunks"><span>トランクスタイプ</span></div>
             </div>
-          </div>
 
-          <div id="spec-trunks" class="spec-content">
-            <div class="mo-spec-visual-flex">
-              
-              <div class="mo-spec-left">
-                <img src="1-gy.png" alt="トランクスタイプ" id="js-buy-img-trunks">
+            <div id="spec-boxer" class="spec-content is-active">
+              <div class="mo-spec-visual-flex">
                 
-                <div class="color-select">
-                  <button class="color-dot bg-black active" data-target="js-buy-img-trunks" data-src="1-gy.png" aria-label="ブラック"></button>
-                  <button class="color-dot bg-blue" data-target="js-buy-img-trunks" data-src="2-bl.png" aria-label="ブルー"></button>
-                </div>
-                
-                <div class="gauge-wrap">
-                  <div class="gauge-title">尿漏れ対応レベル 8</div>
-                  <div class="gauge-bar-container">
-                    <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div>
-                    <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block"></div><div class="gauge-block"></div>
+                <div class="mo-spec-left">
+                  <img src="2-bl.png" alt="ボクサータイプ" id="js-buy-img-boxer">
+                  
+                  <div class="color-select">
+                    <button class="color-dot bg-black active" data-target="js-buy-img-boxer" data-src="2-bl.png" aria-label="ブラック"></button>
+                    <button class="color-dot bg-blue" data-target="js-buy-img-boxer" data-src="1-gy.png" aria-label="ブルー"></button>
                   </div>
-                  <p style="font-weight:900; margin:5px 0 0; font-size:0.9rem; text-align:center;">軽度対応</p>
+                  
+                  <div class="gauge-wrap unified-card" style="box-shadow: var(--shadow-sm); transform: none; padding: 8px;">
+                    <div class="gauge-title">尿漏れ対応レベル MAX!</div>
+                    <div class="gauge-bar-container" style="margin-top: 15px;">
+                      <div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div>
+                      <div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div>
+                    </div>
+                    <p style="font-weight:900; margin:5px 0 0; font-size:0.9rem; text-align:center; color: var(--c-dark);">約10cc対応</p>
+                  </div>
                 </div>
-              </div>
 
-              <div class="mo-spec-right">
-                <table class="comic-table">
-                  <thead><tr><th>適応胴囲</th><th>ウエスト(平置き)</th></tr></thead>
-                  <tbody>
-                    <tr><td>M (76〜84cm)</td><td>35.0cm</td></tr>
-                    <tr><td>L (84〜94cm)</td><td>37.0cm</td></tr>
-                    <tr><td>XL (94〜104cm)</td><td>39.0cm</td></tr>
-                    <tr><td>2XL (98〜108cm)</td><td>41.0cm</td></tr>
-                  </tbody>
-                </table>
-                <div class="spec-list">
-                  <p><span class="label">素 材</span>身生地：ポリエステル100%</p>
-                  <p><span class="label">カラー</span>ブラック / ブルー</p>
+                <div class="mo-spec-right">
+                  <table class="comic-table">
+                    <thead><tr><th>適応胴囲</th><th>ウエスト(平置き)</th></tr></thead>
+                    <tbody>
+                      <tr><td>M (76〜84cm)</td><td>33.0cm</td></tr>
+                      <tr><td>L (84〜94cm)</td><td>35.0cm</td></tr>
+                      <tr><td>XL (94〜104cm)</td><td>37.0cm</td></tr>
+                      <tr><td>2XL (98〜108cm)</td><td>39.0cm</td></tr>
+                    </tbody>
+                  </table>
+                  <div class="spec-list">
+                    <p><span class="label">素 材</span>身生地・サポーター：ポリエステル65%・綿35%</p>
+                    <p><span class="label">カラー</span>ブラック / ブルー</p>
+                  </div>
+                  
+                  <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="btn-sync main-buy-btn content-buy-btn">
+                    <img src="2-bl.png" alt="パンツ" class="btn-icon">
+                    <span class="btn-text">今すぐGET!!</span>
+                  </a>
                 </div>
                 
-                <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="btn-sync main-buy-btn content-buy-btn">
-                  <img src="2-bl.png" alt="パンツ" class="btn-icon">
-                  <span class="btn-text">今すぐGET!!</span>
-                </a>
               </div>
-              
             </div>
+
+            <div id="spec-trunks" class="spec-content">
+              <div class="mo-spec-visual-flex">
+                
+                <div class="mo-spec-left">
+                  <img src="1-gy.png" alt="トランクスタイプ" id="js-buy-img-trunks">
+                  
+                  <div class="color-select">
+                    <button class="color-dot bg-black active" data-target="js-buy-img-trunks" data-src="1-gy.png" aria-label="ブラック"></button>
+                    <button class="color-dot bg-blue" data-target="js-buy-img-trunks" data-src="2-bl.png" aria-label="ブルー"></button>
+                  </div>
+                  
+                  <div class="gauge-wrap unified-card" style="box-shadow: var(--shadow-sm); transform: none; padding: 8px;">
+                    <div class="gauge-title">尿漏れ対応レベル 8</div>
+                    <div class="gauge-bar-container" style="margin-top: 15px;">
+                      <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div>
+                      <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block"></div><div class="gauge-block"></div>
+                    </div>
+                    <p style="font-weight:900; margin:5px 0 0; font-size:0.9rem; text-align:center; color: var(--c-dark);">軽度対応</p>
+                  </div>
+                </div>
+
+                <div class="mo-spec-right">
+                  <table class="comic-table">
+                    <thead><tr><th>適応胴囲</th><th>ウエスト(平置き)</th></tr></thead>
+                    <tbody>
+                      <tr><td>M (76〜84cm)</td><td>35.0cm</td></tr>
+                      <tr><td>L (84〜94cm)</td><td>37.0cm</td></tr>
+                      <tr><td>XL (94〜104cm)</td><td>39.0cm</td></tr>
+                      <tr><td>2XL (98〜108cm)</td><td>41.0cm</td></tr>
+                    </tbody>
+                  </table>
+                  <div class="spec-list">
+                    <p><span class="label">素 材</span>身生地：ポリエステル100%</p>
+                    <p><span class="label">カラー</span>ブラック / ブルー</p>
+                  </div>
+                  
+                  <a href="https://search.rakuten.co.jp/search/mall/MORESCUE/?sid=303621" target="_blank" class="btn-sync main-buy-btn content-buy-btn">
+                    <img src="2-bl.png" alt="パンツ" class="btn-icon">
+                    <span class="btn-text">今すぐGET!!</span>
+                  </a>
+                </div>
+                
+              </div>
+            </div>
+            
           </div>
-          
         </div>
         
         <div class="text-center anim-slide-up" style="margin-top:50px;">
@@ -872,7 +907,7 @@
             </div>
           </div>
         </div>
-        <div class="mo-faq-wrap unified-card anim-slide-up" style="max-width:800px; margin:0 auto; animation-delay: 0.3s; transform: rotate(0);">
+        <div class="mo-faq-wrap anim-slide-up" style="max-width:800px; margin:0 auto; animation-delay: 0.3s;">
           <details class="mo-faq-item"><summary>見た目でバレませんか？</summary><p class="mo-faq-answer">普通のニットトランクスと同じデザインで気づかれません。</p></details>
           <details class="mo-faq-item"><summary>どこで買えますか？</summary><p class="mo-faq-answer">楽天市場のほか、お近くの量販店にてお求めいただけます。</p></details>
           <details class="mo-faq-item"><summary>ニオイは漏れませんか？</summary><p class="mo-faq-answer">強力な抗菌防臭加工により、心配はほとんどありません。</p></details>
@@ -914,7 +949,7 @@
           hero.style.minHeight = window.innerHeight + 'px';
         } else if (hero) {
           hero.style.height = '';
-          hero.style.minHeight = '600px';
+          hero.style.minHeight = '650px';
         }
       };
       setHeroHeight();
