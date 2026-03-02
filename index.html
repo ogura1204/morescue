@@ -6,7 +6,7 @@
   <title>MORESCUE - 究極のレスキューパンツ</title>
   <style>
     /* ==========================================================================
-       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V9 - Layout & Title Perfection)
+       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V10 - 3D Overlap Edition)
        ========================================================================== */
     @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700;900&family=Noto+Sans+JP:wght@700;900&display=swap');
 
@@ -32,7 +32,6 @@
       --c-dark: #1e3a5f;       /* 紺色（通常文字色） */
       --c-white: #ffffff;
       
-      --bg-halftone-blue: radial-gradient(var(--c-main-dark) 10%, transparent 11%), radial-gradient(var(--c-main-dark) 10%, transparent 11%);
       --bg-halftone-dark: radial-gradient(rgba(30, 58, 95, 0.08) 15%, transparent 16%), radial-gradient(rgba(30, 58, 95, 0.08) 15%, transparent 16%);
       
       --shadow-sm: 4px 4px 0px var(--c-dark);
@@ -48,40 +47,43 @@
     img { max-width: 100%; height: auto; }
 
     /* ==========================================================================
-       カードの完全統一スタイルクラス
+       カードの完全統一スタイル
        ========================================================================== */
     .unified-card {
       background: var(--c-white);
       border: var(--border-thick);
-      border-radius: 0; /* コミック風に角丸をなくす */
+      border-radius: 0;
       box-shadow: var(--shadow-lg);
       color: var(--c-dark);
     }
 
     /* ==========================================================================
-       共通見出し（角丸撤廃・斜めカードに完全統一）
+       共通見出し（斜めカード・白背景統一）
        ========================================================================== */
     .section-title-card { 
       display: inline-flex; align-items: center; justify-content: center;
-      margin-bottom: 60px; 
+      position: relative; margin-bottom: 60px; transform: rotate(-2deg); 
       background: var(--c-white); border: var(--border-thick); 
-      padding: 15px 40px; box-shadow: var(--shadow-lg); 
+      padding: 20px 40px; box-shadow: var(--shadow-lg); 
       max-width: 95%; box-sizing: border-box;
-      transform: skewX(-10deg) rotate(-2deg); /* 角丸をなくし、全体を斜めに */
       border-radius: 0;
     }
-    /* 文字は傾きを戻して真っ直ぐ読みやすくする */
+    .comic-title-bg {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+      background: var(--c-white);
+      z-index: -1; border: var(--border-thick); transform: skewX(-10deg);
+      box-shadow: var(--shadow-md);
+    }
     .section-title {
       font-size: clamp(1.6rem, 4vw, 3rem); 
       font-weight: 900; color: var(--c-dark); 
       line-height: 1.4; margin: 0; text-align: center;
       letter-spacing: 0.05em;
-      transform: skewX(10deg); 
     }
     .section-title .hl { color: var(--c-accent); }
     
     @media (max-width: 768px) {
-      .section-title-card { padding: 10px 25px; margin-bottom: 40px; }
+      .section-title-card { padding: 15px 20px; margin-bottom: 40px; border-radius: 16px; }
       .section-title { font-size: clamp(1.4rem, 5vw, 2.2rem); }
     }
 
@@ -138,7 +140,7 @@
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ==========================================================================
-       ファーストビュー（HV）- 完全配置・タイムループアニメーション
+       ファーストビュー（HV）- 3Dオーバーラップ仕様（テキスト小・横並び）
        ========================================================================== */
     .hv-section {
       height: 100vh; min-height: 850px;
@@ -147,7 +149,7 @@
       background-color: var(--c-main);
     }
     
-    /* 集中線を背面に */
+    /* 集中線（一番後ろ） */
     .hv-flash {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 200vw; height: 200vw;
@@ -156,14 +158,76 @@
     }
     @keyframes spinFlash { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-    /* 背景画像：上部に大きく余白を取り、モデルの顔が見えるように縮小・配置 */
+    /* 網点オーバーレイ */
+    .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-halftone-dark); background-size: 10px 10px; opacity: 0.15; z-index: 2; pointer-events: none; }
+
+    /* PC用 コンテンツ配置コンテナ（画像より後ろの階層：z-index:5） */
+    .hv-content-wrap {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 1200px; height: 100%; z-index: 5;
+      pointer-events: none;
+    }
+    .hv-content-wrap > * { pointer-events: auto; }
+
+    /* PC配置位置指定 */
+    .hv-pos-catch { position: absolute; top: 15%; left: 5%; }
+    .hv-pos-badge { position: absolute; top: 30%; right: 5%; }
+    .hv-pos-product { position: absolute; bottom: 10%; left: 5%; }
+
+    /* アニメーション用クラス */
+    .loop-bam-1 { animation: loopBam1 12s infinite; transform-origin: center; opacity: 0; }
+    .loop-bam-2 { animation: loopBam2 12s infinite; transform-origin: center; opacity: 0; }
+    .loop-bam-3 { animation: loopBam3 12s infinite; transform-origin: center; opacity: 0; }
+
+    /* キャッチコピー（サイズ縮小） */
+    .hv-catch-bubble {
+      background: var(--c-white); border: var(--border-thick); border-radius: 0;
+      padding: 30px 25px; box-shadow: var(--shadow-lg); 
+      width: fit-content; transform: rotate(-2deg);
+    }
+    .hv-catch { 
+      font-size: clamp(1.4rem, 3.5vw, 2.5rem); /* 縮小 */
+      font-weight: 900; line-height: 1.3; color: var(--c-dark); margin: 0; 
+    }
+    .typo-line { display: block; white-space: nowrap; }
+    .hv-catch span.hl { color: var(--c-accent); }
+
+    /* バッジ */
+    .hv-badge {
+      background: var(--c-accent); color: var(--c-white);
+      width: 150px; height: 150px; border-radius: 50%; border: var(--border-thick);
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      box-shadow: var(--shadow-md); transform: rotate(15deg); line-height: 1.1;
+    }
+    .hv-badge span.small { font-size: 1rem; font-weight: 900; }
+    .hv-badge span.big { font-size: 2rem; font-weight: 900; color: var(--c-yellow); }
+
+    /* 商品カード（左右配置・横並びに変更、テキスト縮小） */
+    .hv-product-card {
+      background: var(--c-yellow); border: var(--border-thick); border-radius: 0; 
+      padding: 20px; box-shadow: var(--shadow-lg); 
+      max-width: 550px; display: flex; flex-direction: row; /* 横並び */
+      align-items: center; justify-content: flex-start;
+      transform: rotate(2deg);
+    }
+    .hv-product-img { width: 140px; margin-bottom: 0; margin-right: 20px; filter: drop-shadow(0 10px 10px rgba(30,58,95,0.3)); transform: rotate(-5deg); flex-shrink: 0; }
+    .hv-product-text { background: var(--c-white); border: 3px solid var(--c-dark); padding: 15px; font-size: 0.9rem; font-weight: 700; line-height: 1.6; text-align: left; color: var(--c-dark); }
+    .hv-product-text strong { color: var(--c-accent); font-size: 1.15rem; display: block; margin-bottom: 8px; line-height: 1.3; }
+
+    /* 背景画像：一番手前（z-index: 20）にしてテキストに被せる、右寄りに配置 */
     .mo-hero-bg { 
       position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; 
-      z-index: 2; overflow: hidden; pointer-events: none;
+      z-index: 20; overflow: hidden; pointer-events: none;
     }
     .bg-slide {
-      position: absolute; top: 10vh; left: 0; width: 100%; height: 90vh;
-      object-fit: cover; object-position: center top; 
+      position: absolute; 
+      top: 10vh; /* 上部余白確保 */
+      right: -5%; /* 右寄りへ移動 */
+      left: auto;
+      width: 75%; /* 大きめに表示 */
+      height: 90vh;
+      object-fit: contain; 
+      object-position: right top; 
       opacity: 0; animation: slideCrossFade 15s infinite;
     }
     .bg-slide:nth-child(1) { animation-delay: 0s; }
@@ -176,69 +240,12 @@
       43%, 100% { opacity: 0; transform: scale(1.05); }
     }
 
-    /* 網点オーバーレイ */
-    .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-halftone-dark); background-size: 10px 10px; opacity: 0.15; z-index: 3; pointer-events: none; }
-
-    /* ====================================
-       PC ファーストビュー：絶対配置用コンテナ
-       ==================================== */
-    .hv-content-wrap {
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 100%; max-width: 1200px; height: 100%; z-index: 5;
-      pointer-events: none;
-    }
-    .hv-content-wrap > * { pointer-events: auto; }
-
-    /* PC配置位置指定 */
-    .hv-pos-catch { position: absolute; top: 18%; left: 5%; }
-    .hv-pos-badge { position: absolute; top: 25%; right: 5%; }
-    .hv-pos-product { position: absolute; bottom: 10%; left: 5%; }
-
-    /* アニメーション用クラス（コンテナに干渉しないように内部要素に適用） */
-    .loop-bam-1 { animation: loopBam1 12s infinite; transform-origin: center; opacity: 0; }
-    .loop-bam-2 { animation: loopBam2 12s infinite; transform-origin: center; opacity: 0; }
-    .loop-bam-3 { animation: loopBam3 12s infinite; transform-origin: center; opacity: 0; }
-
-    /* キャッチコピー */
-    .hv-catch-bubble {
-      background: var(--c-white); border: var(--border-thick); border-radius: 0; /* 角丸なし */
-      padding: 30px 40px; box-shadow: var(--shadow-lg); 
-      width: fit-content; transform: rotate(-2deg);
-    }
-    .hv-catch { 
-      font-size: clamp(1.6rem, 4vw, 3rem); 
-      font-weight: 900; line-height: 1.3; color: var(--c-dark); margin: 0; 
-    }
-    .typo-line { display: block; white-space: nowrap; }
-    .hv-catch span.hl { color: var(--c-accent); }
-
-    /* バッジ */
-    .hv-badge {
-      background: var(--c-accent); color: var(--c-white);
-      width: 160px; height: 160px; border-radius: 50%; border: var(--border-thick);
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      box-shadow: var(--shadow-md); transform: rotate(15deg); line-height: 1.1;
-    }
-    .hv-badge span.small { font-size: 1.1rem; font-weight: 900; }
-    .hv-badge span.big { font-size: 2.2rem; font-weight: 900; color: var(--c-yellow); }
-
-    /* 商品カード */
-    .hv-product-card {
-      background: var(--c-yellow); border: var(--border-thick); border-radius: 0; /* 角丸なし */
-      padding: 30px; box-shadow: var(--shadow-lg); 
-      max-width: 420px; display: flex; flex-direction: column; align-items: center;
-      transform: rotate(2deg);
-    }
-    .hv-product-img { width: 180px; margin-bottom: 20px; filter: drop-shadow(0 10px 10px rgba(30,58,95,0.3)); transform: rotate(-5deg); }
-    .hv-product-text { background: var(--c-white); border: 3px solid var(--c-dark); padding: 15px; font-size: 1rem; font-weight: 700; line-height: 1.6; text-align: left; color: var(--c-dark); }
-    .hv-product-text strong { color: var(--c-accent); font-size: 1.3rem; display: block; margin-bottom: 8px; line-height: 1.3; }
-
     /* アニメーションキーフレーム（PC/SP共通・超緩急） */
     @keyframes loopBam1 {
       0%, 2% { opacity: 0; transform: translateY(-400px) scale(0.5) rotate(15deg); }
       5% { opacity: 1; transform: translateY(20px) scale(1.05) rotate(-4deg); }
       7% { transform: translateY(-10px) scale(0.98) rotate(1deg); }
-      9% { transform: translateY(0) scale(1) rotate(-2deg); } /* 定位置へ */
+      9% { transform: translateY(0) scale(1) rotate(-2deg); }
       88% { opacity: 1; transform: translateY(0) scale(1) rotate(-2deg); }
       92% { opacity: 1; transform: translateY(-20px) scale(1.05) rotate(2deg); }
       95%, 100% { opacity: 0; transform: translateY(400px) scale(0.5) rotate(15deg); }
@@ -247,7 +254,7 @@
       0%, 10% { opacity: 0; transform: translateY(-400px) scale(0.5) rotate(-15deg); } 
       13% { opacity: 1; transform: translateY(20px) scale(1.05) rotate(4deg); }
       15% { transform: translateY(-10px) scale(0.98) rotate(-1deg); }
-      17% { transform: translateY(0) scale(1) rotate(2deg); } /* 定位置へ */
+      17% { transform: translateY(0) scale(1) rotate(2deg); }
       88% { opacity: 1; transform: translateY(0) scale(1) rotate(2deg); }
       92% { opacity: 1; transform: translateY(-20px) scale(1.05) rotate(-2deg); }
       95%, 100% { opacity: 0; transform: translateY(400px) scale(0.5) rotate(-15deg); }
@@ -256,7 +263,7 @@
       0%, 18% { opacity: 0; transform: translateY(-400px) scale(0.5) rotate(45deg); } 
       21% { opacity: 1; transform: translateY(20px) scale(1.1) rotate(5deg); }
       23% { transform: translateY(-10px) scale(0.95) rotate(20deg); }
-      25% { transform: translateY(0) scale(1) rotate(15deg); } /* 定位置へ */
+      25% { transform: translateY(0) scale(1) rotate(15deg); }
       88% { opacity: 1; transform: translateY(0) scale(1) rotate(15deg); }
       92% { opacity: 1; transform: translateY(-20px) scale(1.1) rotate(5deg); }
       95%, 100% { opacity: 0; transform: translateY(400px) scale(0.5) rotate(45deg); }
@@ -303,26 +310,26 @@
     .pop-loop-3 { animation: popLoop3 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: center; }
 
     @keyframes popLoop1 {
-      0%, 2% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(-20deg); }
-      6% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(5deg); }
-      9% { transform: translateY(0) scale(1) rotate(-2deg); }
-      85% { opacity: 1; transform: translateY(0) scale(1) rotate(-2deg); }
+      0% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(-20deg); }
+      5% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(5deg); }
+      8% { transform: translateY(0) scale(1) rotate(-1deg); }
+      85% { opacity: 1; transform: translateY(0) scale(1) rotate(-1deg); }
       88% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(5deg); }
       92%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(-20deg); }
     }
     @keyframes popLoop2 {
       0%, 10% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(20deg); }
-      14% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(-5deg); }
-      17% { transform: translateY(0) scale(1) rotate(2deg); }
-      85% { opacity: 1; transform: translateY(0) scale(1) rotate(2deg); }
+      15% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(-5deg); }
+      18% { transform: translateY(0) scale(1) rotate(1deg); }
+      85% { opacity: 1; transform: translateY(0) scale(1) rotate(1deg); }
       88% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(-5deg); }
       92%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(20deg); }
     }
     @keyframes popLoop3 {
-      0%, 18% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(0deg); }
-      22% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(0deg); }
-      25% { transform: translateY(0) scale(1) rotate(-1deg); }
-      85% { opacity: 1; transform: translateY(0) scale(1) rotate(-1deg); }
+      0%, 20% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(0deg); }
+      25% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(0deg); }
+      28% { transform: translateY(0) scale(1) rotate(0deg); }
+      85% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
       88% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(0deg); }
       92%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(0deg); }
     }
@@ -405,6 +412,8 @@
     .spec-list p { margin: 5px 0; padding: 10px; background: var(--c-white); border: 2px solid var(--c-dark); display: flex; align-items: center; border-radius: 0;}
     .spec-list span.label { background: var(--c-yellow); padding: 2px 10px; border: 2px solid var(--c-dark); margin-right: 15px; display: inline-block; width: 80px; text-align: center; border-radius: 0;}
 
+    .mo-buy-action-btn { width: 100%; margin-top: auto; }
+
     /* ==========================================================================
        FAQセクション
        ========================================================================== */
@@ -447,6 +456,8 @@
        SP用 レスポンシブ
        ========================================================================== */
     @media (max-width: 768px) {
+      .section-title-card { padding: 15px 20px; margin-bottom: 40px; }
+      
       .mo-logo img { height: 30px; }
       .mo-menu-toggle { display: block; font-size: 2.5rem; font-weight: 900; color: var(--c-dark); cursor: pointer; transition: 0.3s; z-index: 10001; position: relative; }
       .mo-menu-toggle.is-active { transform: rotate(135deg); color: var(--c-accent); }
@@ -456,7 +467,6 @@
       @keyframes menuBAM { 0% { transform: scale(0); border-radius: 50%; } 100% { transform: scale(1); border-radius: 0; } }
       .mo-nav a.nav-link { font-size: clamp(1.1rem, 4vw, 1.5rem); margin: 10px 0; color: var(--c-dark); background: var(--c-white); padding: 10px 20px; border: var(--border-thick); box-shadow: var(--shadow-sm); transform: rotate(-2deg); }
       
-      /* 修正：SPメニュー購入ボタン */
       .header-buy-btn { padding: 10px 25px 10px 15px; margin-top: 20px; border-width: 4px; }
       .header-buy-btn .btn-icon { height: 30px; margin-right: 10px; }
       .header-buy-btn .btn-text { font-size: 1.2rem; }
@@ -466,32 +476,32 @@
       .marquee-pants { height: 1em; margin: 0 5px; }
 
       /* HV スマホ */
-      .hv-section { padding-top: 60px; height: 100vh; height: 100svh; display: block; padding-bottom: 0; }
+      .hv-section { padding-top: 60px; height: 100vh; height: 100svh; align-items: flex-end; padding-bottom: 30px; display: block; }
       
-      /* SP背景画像 */
-      .bg-slide { top: 10vh; left: 0; width: 100%; height: 90vh; }
+      /* 修正：SP背景画像を右寄りで表示 */
+      .bg-slide { top: 15vh; right: -10%; left: auto; width: 110%; height: 85vh; object-position: right top; }
 
-      /* SPコンテンツコンテナを画面いっぱいに */
-      .hv-content-wrap { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 0; }
+      /* コンテナを画面いっぱい＆絶対配置リセット */
+      .hv-content-wrap { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 0; display: block; }
 
-      /* SP配置：キャッチ左上、バッジ右上、商品下部 */
-      .hv-pos-catch { position: absolute; top: 90px; left: 10px; z-index: 10; width: 85%; }
-      .hv-pos-badge { position: absolute; top: 90px; right: 10px; z-index: 10; }
-      .hv-pos-product { position: absolute; bottom: 40px; left: 2.5%; z-index: 10; width: 95%; }
+      /* SP専用の絶対配置 */
+      .hv-pos-catch { position: absolute; top: 90px; left: 5px; width: 90%; z-index: 10; }
+      .hv-pos-badge { position: absolute; top: 75px; right: 10px; z-index: 30; }
+      .hv-pos-product { position: absolute; bottom: 30px; left: 5%; width: 90%; z-index: 10; }
 
-      .hv-catch-bubble { padding: 15px 20px; max-width: 100%; margin: 0; transform-origin: left top; }
-      .hv-catch { font-size: clamp(1.4rem, 6vw, 2.5rem); text-align: left; } 
+      .hv-catch-bubble { padding: 15px 20px; max-width: 95%; margin: 0; transform-origin: left top; }
+      .hv-catch { font-size: clamp(1.2rem, 5vw, 2rem); text-align: left; } 
       
-      /* 商品カード：SPは2列表示 */
+      /* SP商品カード：横並び（2列）を維持 */
       .hv-product-card { 
-        max-width: 100%; margin: 0; padding: 15px; 
+        max-width: 95%; margin: 0; padding: 15px; 
         flex-direction: row; align-items: center; justify-content: flex-start;
       }
       .hv-product-img { width: 90px; margin-bottom: 0; margin-right: 15px; transform: rotate(-5deg); }
       .hv-product-text { flex: 1; padding: 10px; font-size: 0.8rem; }
-      .hv-product-text strong { font-size: 1rem; }
+      .hv-product-text strong { font-size: 1rem; margin-bottom: 4px; display: block; }
       
-      .hv-badge { width: 90px; height: 90px; top: 0; right: 0; position: relative; }
+      .hv-badge { width: 90px; height: 90px; top: 0; right: 0; position: relative; border-width: 3px; padding: 0; }
       .hv-badge span.small { font-size: 0.65rem; }
       .hv-badge span.big { font-size: 1.2rem; }
 
@@ -516,6 +526,7 @@
       .comic-table th, .comic-table td { padding: 10px 5px; font-size: 0.85rem; }
       .spec-list p { flex-direction: column; align-items: flex-start; gap: 5px; }
       .spec-list span.label { margin-right: 0; }
+      .mo-buy-action-btn { padding: 15px 0; font-size: 1.4rem; }
       
       #faq { padding: 100px 0; }
       .mo-faq-item summary { font-size: 1rem; padding: 20px; }
@@ -639,7 +650,7 @@
         <div class="section-title-card bg-white anim-slide-up">
           <div class="comic-title-bg"></div>
           <h2 class="section-title">
-            日常を救う<span class="hl">MORESCUE</span><br>特殊構造が叶える<span class="hl-yellow">見えない安心</span>
+            日常を救う<span class="hl">MORESCUE</span><br>特殊構造が叶える<span class="hl">見えない安心</span>
           </h2>
         </div>
 
@@ -709,7 +720,7 @@
 
     <section id="review" class="mo-section fade-in-trigger">
       <div class="mo-container">
-        <div class="expert-card unified-card anim-slide-right" style="border-radius: 20px; padding: 50px; display: flex; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto; transform: rotate(-1deg);">
+        <div class="expert-card unified-card anim-slide-right" style="border-radius: 0; padding: 50px; display: flex; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto; transform: rotate(-1deg);">
           <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80" alt="専門家">
           <div class="expert-info">
             <h3>QOLを向上させる賢い選択！</h3>
