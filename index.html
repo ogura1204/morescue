@@ -49,7 +49,7 @@
 
     /* ==========================================================================
        カードの完全統一スタイル（背景白・枠紺・影紺・角丸なし）
-       ========================================================================= */
+       ========================================================================== */
     .unified-card {
       background: var(--c-white);
       border: var(--border-thick);
@@ -159,11 +159,10 @@
        ========================================================================== */
     .hv-section {
       height: 100vh; min-height: 650px; max-height: 1080px;
-      position: relative; overflow: hidden; 
+      position: relative; overflow: hidden; /* 枠外への飛び出しを完全に防止 */
       border-bottom: 8px solid var(--c-dark);
       background-color: var(--c-main);
-      padding-top: 100px; /* ヘッダー分を考慮 */
-      box-sizing: border-box; /* 100vhに枠線を含めてキッチリ収める */
+      padding-top: 80px; 
     }
     
     /* 集中線（一番後ろ） - モデルの位置から放射 */
@@ -178,19 +177,19 @@
 
     /* コンテンツ配置コンテナ（モデルより奥） */
     .hv-content-wrap {
-      position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
-      width: 100%; max-width: 1200px; height: calc(100% - 100px); z-index: 5;
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 1200px; height: 100%; z-index: 5;
       pointer-events: none;
     }
     .hv-content-wrap > * { pointer-events: auto; }
 
     /* 背景画像（モデル）：確実に1枚ずつ表示・下部に揃える・飛び出さない */
     .mo-hero-bg { 
-      position: absolute; top: 100px; right: 0; width: 60%; height: calc(100% - 100px); 
+      position: absolute; bottom: 0; right: 0; width: 60%; height: 100%; 
       z-index: 10; pointer-events: none;
     }
     .bg-slide {
-      position: absolute; top: 0; bottom: 0; right: 0; width: 100%; height: 100%;
+      position: absolute; top: 10vh; right: 0; width: 100%; height: 90vh;
       object-fit: contain; object-position: center bottom; /* 下側に揃える */
       opacity: 0; 
       animation: fadeSlide 15s infinite;
@@ -207,8 +206,8 @@
 
     /* バッジ配置コンテナ（一番手前） */
     .hv-badge-wrap {
-      position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
-      width: 100%; max-width: 1200px; height: calc(100% - 100px); z-index: 20;
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 1200px; height: 100%; z-index: 20;
       pointer-events: none;
     }
     .hv-badge-wrap > * { pointer-events: auto; }
@@ -216,9 +215,9 @@
     /* ====================================
        PC配置位置指定
        ==================================== */
-    .hv-pos-catch { position: absolute; top: 20%; left: 5%; } 
+    .hv-pos-catch { position: absolute; top: 25%; left: 5%; } 
     .hv-pos-product { position: absolute; bottom: 10%; left: 5%; }
-    .hv-pos-badge { position: absolute; bottom: 10%; right: 10%; z-index: 50; } 
+    .hv-pos-badge { position: absolute; bottom: 12%; right: 10%; z-index: 50; } 
 
     /* アニメーション用クラス（一回だけ落ちてくる） */
     .anim-drop-1 { opacity: 0; animation: dropIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.2s; }
@@ -459,14 +458,14 @@
       
       /* 修正：SP後光の位置調整 */
       .hv-flash {
-        top: 65%; /* 上下中央より少し下 */
+        top: 60%; /* 上下中央より少し下 */
         left: 50%; /* 左右中央 */
       }
 
       /* 修正：SP背景画像（上に比率を維持したまま大きく、下固定） */
-      .mo-hero-bg { z-index: 10; pointer-events: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0;}
-      /* スクロール変動を防ぐため高さを%で指定、大きさは120%ベース */
-      .bg-slide { top: auto; bottom: 0; left: -10%; width: 120%; height: 85%; object-position: center bottom; object-fit: contain; opacity: 0; animation: fadeSlide 15s infinite; }
+      .mo-hero-bg { z-index: 10; pointer-events: none; width: 115%; height: 115%; position: absolute; top: 0; left: 0;}
+      /* ユーザー指示によりさらに拡大 */
+      .bg-slide { top: auto; bottom: 0; left: -10%; width: 120%; height: 85vh; object-position: center bottom; object-fit: contain; opacity: 0; animation: fadeSlide 15s infinite; }
 
       /* コンテンツ用コンテナ（Flexboxで縦積み） */
       .hv-content-wrap { 
@@ -475,12 +474,12 @@
         display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
       }
 
-      /* SP各要素の配置 */
-      .hv-pos-catch { position: relative; top: auto; left: auto; align-self: flex-start; margin-top: 5vh; width: fit-content; max-width: 95%; }
-      .hv-pos-product { position: relative; bottom: auto; left: auto; width: 100%; margin-top: auto; margin-bottom: 10px; z-index: 30; }
+      /* 修正：SP各要素の配置（全体をさらに上に上げる） */
+      .hv-pos-catch { position: relative; top: auto; left: auto; align-self: flex-start; margin-top: 2vh; width: fit-content; max-width: 95%; }
+      .hv-pos-product { position: relative; bottom: auto; left: auto; width: 100%; margin-top: auto; margin-bottom: 8vh; z-index: 30; }
       
-      /* バッジをキャッチコピーの右下に配置 */
-      .hv-pos-badge { position: absolute; bottom: -50px; right: -10px; z-index: 50; }
+      /* 修正：バッジをキャッチコピーの右下に配置し、20px下へ下げる */
+      .hv-pos-badge { position: absolute; bottom: -70px; right: -10px; z-index: 50; }
 
       /* キャッチコピー */
       .hv-catch-bubble { padding: 15px 20px; max-width: 100%; margin: 0; transform: rotate(-2deg); box-sizing: border-box; width: 100%; position: relative;}
