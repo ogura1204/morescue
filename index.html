@@ -6,7 +6,7 @@
   <title>MORESCUE - 究極のレスキューパンツ</title>
   <style>
     /* ==========================================================================
-       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V6 - Final Refinement)
+       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V7 - Ultimate Loop & Unified)
        ========================================================================== */
     @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700;900&family=Noto+Sans+JP:wght@700;900&display=swap');
 
@@ -23,23 +23,21 @@
     @media (min-width: 769px) { .sp-only { display: none !important; } }
     @media (max-width: 768px) { .sp-only { display: block !important; } .pc-only { display: none !important; } }
 
-    /* 限界突破カラーパレット（水色基調） */
+    /* カラーパレット */
     :root {
       --c-main: #81cbf0;       
       --c-main-dark: #5eb5e3;  
       --c-yellow: #ffecb3;     
-      --c-accent: #ff8a65;     /* コーラルオレンジ（赤系） */
-      --c-dark: #1e3a5f;       /* 濃いネイビー */
+      --c-accent: #ff8a65;     
+      --c-dark: #1e3a5f;       
       --c-white: #ffffff;
       
-      /* ハーフトーン背景 */
       --bg-halftone-blue: radial-gradient(var(--c-main-dark) 10%, transparent 11%), radial-gradient(var(--c-main-dark) 10%, transparent 11%);
       --bg-halftone-dark: radial-gradient(rgba(30, 58, 95, 0.08) 15%, transparent 16%), radial-gradient(rgba(30, 58, 95, 0.08) 15%, transparent 16%);
       
-      /* 漫画風の濃い影 */
       --shadow-sm: 4px 4px 0px var(--c-dark);
       --shadow-md: 8px 8px 0px var(--c-dark);
-      --shadow-lg: 12px 12px 0px var(--c-dark); /* 吹き出しデザイン統一用 */
+      --shadow-lg: 12px 12px 0px var(--c-dark);
       
       --border-thick: 4px solid var(--c-dark);
     }
@@ -50,39 +48,44 @@
     img { max-width: 100%; height: auto; }
 
     /* ==========================================================================
-       ボタンデザイン統一（ヘッダー ＆ スペック ＆ 追従）
+       カード（元吹き出し）の完全統一スタイルクラス
+       ========================================================================== */
+    .unified-card {
+      background: var(--c-white);
+      border: var(--border-thick);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      color: var(--c-dark);
+    }
+
+    /* ==========================================================================
+       ボタンデザイン統一
        ========================================================================== */
     .btn-sync {
       background: var(--c-accent); color: #fff !important;
       display: inline-flex; align-items: center; justify-content: center;
       border-radius: 50px; text-decoration: none; font-weight: 900;
-      border: 4px solid var(--c-white);
-      box-shadow: 0 10px 20px rgba(30,58,95,0.4);
+      border: 4px solid var(--c-white); box-shadow: 0 10px 20px rgba(30,58,95,0.4);
       transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       cursor: pointer; box-sizing: border-box; letter-spacing: 0.05em;
     }
     .btn-sync:hover {
       transform: scale(1.05) translateY(-3px); 
-      box-shadow: 0 15px 25px rgba(30,58,95,0.5);
-      background: #ff7043;
+      box-shadow: 0 15px 25px rgba(30,58,95,0.5); background: #ff7043;
     }
     .btn-sync .btn-icon { filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2)); }
     
-    /* ヘッダー用サイズ */
     .header-buy-btn { padding: 6px 16px 6px 12px; border-width: 3px; }
     .header-buy-btn .btn-icon { height: 22px; margin-right: 6px; }
     .header-buy-btn .btn-text { font-size: 1rem; }
 
-    /* 追従・コンテンツ用サイズ */
     .main-buy-btn { padding: 12px 30px 12px 20px; }
     .main-buy-btn .btn-icon { height: 40px; margin-right: 12px; }
     .main-buy-btn .btn-text { font-size: 1.3rem; }
-
-    /* コンテンツ内ボタンは幅100%に */
     .content-buy-btn { width: 100%; margin-top: 20px; }
 
     /* ==========================================================================
-       共通見出し（コミック風ド派手・完全中央配置）
+       共通見出し
        ========================================================================== */
     .comic-title-wrap { 
       display: inline-flex; align-items: center; justify-content: center;
@@ -107,7 +110,6 @@
     .comic-title .hl-accent { color: var(--c-accent); }
     .comic-title .hl-dark { color: var(--c-dark); }
 
-    /* スクロールアニメーション */
     .anim-slide-up { opacity: 0; transform: translateY(50px); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .is-visible .anim-slide-up { opacity: 1; transform: translateY(0); }
     .anim-zoom-in { opacity: 0; transform: scale(0.5) rotate(-5deg); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -134,18 +136,17 @@
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ==========================================================================
-       ファーストビュー（HV）- 確実に表示されるimgタグ構造
+       ファーストビュー（HV）
        ========================================================================== */
     .hv-section {
       height: 100vh; min-height: 800px;
-      display: flex; align-items: flex-end; 
+      display: flex; align-items: flex-end; /* コンテンツを下側に寄せる */
       justify-content: center;
       position: relative; overflow: hidden;
       border-bottom: 8px solid var(--c-dark);
       padding-bottom: 60px;
     }
     
-    /* 修正：CSSの背景画像ではなく、imgタグで確実にスライドショーを実行する構造 */
     .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: var(--c-main); overflow: hidden; }
     .bg-slide {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -164,35 +165,31 @@
 
     .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-halftone-dark); background-size: 10px 10px; opacity: 0.2; z-index: 2; pointer-events: none; }
     .hv-flash { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200vw; height: 200vw; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.1) 0deg 10deg, transparent 10deg 20deg); z-index: 3; animation: spinFlash 120s linear infinite; pointer-events: none; }
-    .hv-center-face { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 100%; max-width: 700px; text-align: center; pointer-events: none; }
-    .hv-center-face img { width: 100%; height: auto; filter: drop-shadow(0 20px 40px rgba(30,58,95,0.5)); }
 
+    /* 修正：ダミー顔画像の削除により、コンテンツ群のz-indexと配置のみ残す */
     .hv-content-wrap { position: relative; z-index: 5; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: flex-end; pointer-events: none; }
     .hv-content-wrap > * { pointer-events: auto; }
 
-    /* キャッチコピー（デザイン統一） */
+    /* ====================================
+       上からバンッ！と降ってくるループアニメーション
+       ==================================== */
     .hv-catch-bubble {
-      background: var(--c-white); border: var(--border-thick); border-radius: 20px;
-      padding: 40px 35px; box-shadow: var(--shadow-lg); 
-      max-width: 95%; width: fit-content; position: relative;
-      opacity: 0; animation: hvLoop1 12s infinite; transform-origin: left bottom;
+      padding: 40px 35px; max-width: 95%; width: fit-content; position: relative;
+      opacity: 0; animation: loopBam1 12s infinite; transform-origin: center;
     }
     .hv-catch { 
       font-size: clamp(1.6rem, 4vw, 3rem); 
-      font-weight: 900; line-height: 1.3; color: var(--c-dark); margin: 0; 
+      font-weight: 900; line-height: 1.3; margin: 0; 
     }
     .typo-line { display: block; white-space: nowrap; width: 100%; text-align: left; }
     .hv-catch span.hl { color: var(--c-accent); }
 
-    /* パンツ＋説明＋バッジ（デザイン統一） */
     .hv-product-card {
-      background: var(--c-yellow); border: var(--border-thick); border-radius: 20px;
-      padding: 30px; box-shadow: var(--shadow-lg); 
-      max-width: 420px; position: relative; display: flex; flex-direction: column; align-items: center;
-      opacity: 0; animation: hvLoop2 12s infinite; transform-origin: right bottom;
+      padding: 30px; max-width: 420px; position: relative; display: flex; flex-direction: column; align-items: center;
+      opacity: 0; animation: loopBam2 12s infinite; transform-origin: center;
     }
     .hv-product-img { width: 180px; margin-bottom: 20px; filter: drop-shadow(0 10px 10px rgba(30,58,95,0.3)); transform: rotate(-5deg); }
-    .hv-product-text { background: var(--c-white); border: 3px solid var(--c-dark); padding: 15px; border-radius: 10px; font-size: 1rem; font-weight: 700; line-height: 1.6; text-align: left; }
+    .hv-product-text { border: 2px solid var(--c-dark); background: #f9f9f9; padding: 15px; border-radius: 10px; font-size: 1rem; font-weight: 700; line-height: 1.6; text-align: left; }
     .hv-product-text strong { color: var(--c-accent); font-size: 1.3rem; display: block; margin-bottom: 8px; line-height: 1.3; }
 
     .hv-badge {
@@ -205,21 +202,24 @@
     .hv-badge span.small { font-size: 1rem; font-weight: 900; }
     .hv-badge span.big { font-size: 2rem; font-weight: 900; color: var(--c-yellow); }
 
-    @keyframes hvLoop1 {
-      0%, 2% { opacity: 0; transform: scale(0.1) rotate(15deg) translateY(200px); }
-      6% { opacity: 1; transform: scale(1.05) rotate(-3deg) translateY(0); }
-      9% { transform: scale(1) rotate(-1deg); }
-      60% { opacity: 1; transform: scale(1) rotate(-1deg); }
-      63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
-      66%, 100% { opacity: 0; transform: scale(0.1) rotate(-15deg) translateY(200px); }
+    /* 修正：上から落ちてきて、短時間で消える緩急ループ */
+    @keyframes loopBam1 {
+      0% { opacity: 0; transform: translateY(-300px) scale(0.5) rotate(15deg); }
+      4% { opacity: 1; transform: translateY(20px) scale(1.05) rotate(-3deg); }
+      6% { transform: translateY(-10px) scale(0.98) rotate(1deg); }
+      8% { transform: translateY(0) scale(1) rotate(0); }
+      85% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+      88% { opacity: 1; transform: translateY(-20px) scale(1.05) rotate(-3deg); }
+      92%, 100% { opacity: 0; transform: translateY(300px) scale(0.5) rotate(15deg); }
     }
-    @keyframes hvLoop2 {
-      0%, 15% { opacity: 0; transform: scale(0.1) rotate(-15deg) translateY(200px); } 
-      19% { opacity: 1; transform: scale(1.05) rotate(3deg) translateY(0); }
-      22% { transform: scale(1) rotate(1deg); }
-      60% { opacity: 1; transform: scale(1) rotate(1deg); }
-      63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
-      66%, 100% { opacity: 0; transform: scale(0.1) rotate(15deg) translateY(200px); }
+    @keyframes loopBam2 {
+      0%, 8% { opacity: 0; transform: translateY(-300px) scale(0.5) rotate(-15deg); }
+      12% { opacity: 1; transform: translateY(20px) scale(1.05) rotate(3deg); }
+      14% { transform: translateY(-10px) scale(0.98) rotate(-1deg); }
+      16% { transform: translateY(0) scale(1) rotate(0); }
+      85% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+      88% { opacity: 1; transform: translateY(-20px) scale(1.05) rotate(3deg); }
+      92%, 100% { opacity: 0; transform: translateY(300px) scale(0.5) rotate(-15deg); }
     }
 
     /* ==========================================================================
@@ -241,47 +241,49 @@
     .comic-card p { font-size: 1.05rem; font-weight: 700; line-height: 1.6; margin: 0; }
 
     /* ==========================================================================
-       特許構造セクション (ポップアップループ化、デザイン統一)
+       特許構造セクション (上から降ってくるループ＆統一デザイン)
        ========================================================================== */
     #structure { background: var(--c-yellow); border-bottom: 8px solid var(--c-dark); }
     .structure-wrapper { position: relative; max-width: 800px; margin: 0 auto; text-align: center; }
     .pants-center-img { max-width: 400px; margin: 0 auto; border: var(--border-thick); box-shadow: var(--shadow-lg); border-radius: 20px; background: var(--c-white); padding: 30px; transform: rotate(-2deg); }
     
-    /* 修正：吹き出しの三角（しっぽ）を削除し、FVと同じデザインに統一 */
     .comic-pop {
-      position: absolute; background: var(--c-white); border: var(--border-thick); box-shadow: var(--shadow-lg);
-      padding: 25px 20px; border-radius: 20px; font-weight: 700; width: 260px; text-align: left; opacity: 0; 
+      position: absolute; padding: 20px; font-weight: 700; width: 260px; text-align: left; opacity: 0; 
     }
     .pop-1 { top: 10%; left: -120px; }
     .pop-2 { top: 40%; right: -120px; }
     .pop-3 { bottom: -40px; left: 50%; margin-left: -160px; width: 320px; }
     
-    .comic-pop h4 { color: var(--c-dark); font-size: 1.3rem; margin: 0 0 10px; font-weight: 900; border-bottom: 2px dashed #ccc; padding-bottom: 5px; }
+    .comic-pop h4 { font-size: 1.3rem; margin: 0 0 10px; font-weight: 900; border-bottom: 2px dashed var(--c-dark); padding-bottom: 5px; }
 
-    .pop-loop-1 { animation: popLoop1 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom right; }
-    .pop-loop-2 { animation: popLoop2 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom left; }
-    .pop-loop-3 { animation: popLoop3 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: top center; }
+    .pop-loop-1 { animation: popLoop1 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: center; }
+    .pop-loop-2 { animation: popLoop2 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: center; }
+    .pop-loop-3 { animation: popLoop3 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: center; }
 
+    /* 修正：特許構造も上からバンッと落ちてくる */
     @keyframes popLoop1 {
-      0%, 2% { opacity: 0; transform: scale(0.1) rotate(-20deg) translateX(-50px); }
-      6% { opacity: 1; transform: scale(1.05) rotate(2deg) translateX(0); }
-      9% { transform: scale(1) rotate(-1deg); }
-      75% { opacity: 1; transform: scale(1) rotate(-1deg); }
-      78%, 100% { opacity: 0; transform: scale(0.1) rotate(-20deg); }
+      0% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(-20deg); }
+      5% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(5deg); }
+      8% { transform: translateY(0) scale(1) rotate(-1deg); }
+      85% { opacity: 1; transform: translateY(0) scale(1) rotate(-1deg); }
+      88% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(5deg); }
+      92%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(-20deg); }
     }
     @keyframes popLoop2 {
-      0%, 18% { opacity: 0; transform: scale(0.1) rotate(20deg) translateX(50px); }
-      22% { opacity: 1; transform: scale(1.05) rotate(-2deg) translateX(0); }
-      25% { transform: scale(1) rotate(1deg); }
-      75% { opacity: 1; transform: scale(1) rotate(1deg); }
-      78%, 100% { opacity: 0; transform: scale(0.1) rotate(20deg); }
+      0%, 10% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(20deg); }
+      15% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(-5deg); }
+      18% { transform: translateY(0) scale(1) rotate(1deg); }
+      85% { opacity: 1; transform: translateY(0) scale(1) rotate(1deg); }
+      88% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(-5deg); }
+      92%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(20deg); }
     }
     @keyframes popLoop3 {
-      0%, 34% { opacity: 0; transform: scale(0.1) rotate(10deg) translateY(50px); }
-      38% { opacity: 1; transform: scale(1.05) rotate(-1deg) translateY(0); }
-      41% { transform: scale(1) rotate(0deg); }
-      75% { opacity: 1; transform: scale(1) rotate(0deg); }
-      78%, 100% { opacity: 0; transform: scale(0.1) rotate(10deg); }
+      0%, 20% { opacity: 0; transform: translateY(-200px) scale(0.5) rotate(0deg); }
+      25% { opacity: 1; transform: translateY(10px) scale(1.05) rotate(0deg); }
+      28% { transform: translateY(0) scale(1) rotate(0deg); }
+      85% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+      88% { opacity: 1; transform: translateY(-10px) scale(1.05) rotate(0deg); }
+      92%, 100% { opacity: 0; transform: translateY(200px) scale(0.5) rotate(0deg); }
     }
 
     /* ==========================================================================
@@ -297,8 +299,8 @@
     
     .feature-img-box { height: 200px; border-bottom: var(--border-thick); background: #eee; position: relative; overflow: hidden; }
     .feature-img-box img { width: 100%; height: 100%; object-fit: cover; }
-    .feature-text-box { padding: 30px 20px; text-align: left; flex-grow: 1; }
-    .feature-text-box h4 { font-size: 1.5rem; font-weight: 900; margin: 0 0 15px; color: var(--c-dark); }
+    .feature-text-box { padding: 30px 20px; text-align: left; flex-grow: 1; color: var(--c-dark); }
+    .feature-text-box h4 { font-size: 1.5rem; font-weight: 900; margin: 0 0 15px; }
     .feature-text-box p { font-size: 1.05rem; font-weight: 700; margin: 0; line-height: 1.6; }
     .text-highlight { background: linear-gradient(transparent 60%, var(--c-yellow) 60%); padding: 0 5px; color: var(--c-accent); font-weight: 900; font-size: 1.1rem; }
 
@@ -307,18 +309,19 @@
        ========================================================================== */
     #review { background: var(--c-white); background-image: var(--bg-halftone-blue); background-size: 14px 14px; background-position: 0 0, 7px 7px; border-bottom: 8px solid var(--c-dark); }
     
-    .expert-card { background: var(--c-white); border: var(--border-thick); box-shadow: var(--shadow-lg); padding: 50px; border-radius: 20px; display: flex; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto; transform: rotate(-1deg); }
+    .expert-card { background: var(--c-white); border: var(--border-thick); box-shadow: var(--shadow-lg); padding: 50px; border-radius: 20px; display: flex; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto; transform: rotate(-1deg); color: var(--c-dark); }
     .expert-card img { width: 200px; height: 200px; border-radius: 50%; border: var(--border-thick); object-fit: cover; }
     .expert-info h3 { font-size: 2rem; font-weight: 900; margin: 0 0 20px; color: var(--c-accent); }
     .expert-info p { font-size: 1.1rem; font-weight: 700; line-height: 1.6; }
 
     .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; }
-    
-    /* 修正：吹き出しの三角を削除し、FVと同じデザインに統一 */
-    .review-bubble { background: var(--c-white); border: var(--border-thick); border-radius: 20px; padding: 30px; box-shadow: var(--shadow-lg); position: relative; transform: rotate(1deg); }
+    /* 修正：レビューも統一デザインの unified-card クラスを使用 */
+    .review-bubble { padding: 30px; position: relative; transform: rotate(1deg); }
     .review-bubble:nth-child(2) { transform: rotate(-2deg); }
     .review-stars { color: var(--c-accent); font-size: 1.5rem; margin-bottom: 10px; letter-spacing: 2px; }
     .review-text { font-weight: 700; font-size: 1.05rem; line-height: 1.6; }
+    .mo-review-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .mo-review-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; background: rgba(255,255,255,0.1); border: 2px solid var(--c-dark); }
 
     /* ==========================================================================
        スペック＆購入合体セクション
@@ -356,9 +359,9 @@
     .mo-spec-right { flex: 1; display: flex; flex-direction: column; }
     .comic-table { width: 100%; border-collapse: collapse; border: var(--border-thick); background: var(--c-white); margin-bottom: 20px; }
     .comic-table th { background: var(--c-dark); color: var(--c-white); padding: 15px; font-weight: 900; border: 2px solid var(--c-dark); }
-    .comic-table td { padding: 15px; font-weight: 700; border: 2px solid var(--c-dark); text-align: center; }
+    .comic-table td { padding: 15px; font-weight: 700; border: 2px solid var(--c-dark); text-align: center; color: var(--c-dark); }
     
-    .spec-list { font-weight: 700; font-size: 1.1rem; margin-bottom: 30px; }
+    .spec-list { font-weight: 700; font-size: 1.1rem; margin-bottom: 30px; color: var(--c-dark); }
     .spec-list p { margin: 5px 0; padding: 10px; background: var(--c-white); border: 2px solid var(--c-dark); display: flex; align-items: center; border-radius: 5px;}
     .spec-list span.label { background: var(--c-yellow); padding: 2px 10px; border: 2px solid var(--c-dark); margin-right: 15px; display: inline-block; width: 80px; text-align: center; border-radius: 3px;}
 
@@ -374,7 +377,7 @@
     .mo-faq-item[open] { border-color: var(--c-accent); transform: rotate(0); }
     .mo-faq-item summary::after { content: '+'; position: absolute; right: 30px; top: 50%; transform: translateY(-50%); font-size: 2rem; color: var(--c-accent); font-weight: 900; transition: 0.3s; }
     .mo-faq-item[open] summary::after { transform: translateY(-50%) rotate(135deg); }
-    .mo-faq-answer { padding: 30px 35px; background: #fafafa; color: #111; border-top: var(--border-thick); line-height: 1.8; font-weight: 700; font-size: 1rem; }
+    .mo-faq-answer { padding: 30px 35px; background: #fafafa; color: var(--c-dark); border-top: var(--border-thick); line-height: 1.8; font-weight: 700; font-size: 1rem; }
 
     /* ==========================================================================
        フッター
@@ -384,15 +387,12 @@
     .mo-footer-logo:hover img { transform: scale(1.05); opacity: 1; }
     .mo-footer-company { margin-bottom: 20px; }
     .mo-footer-info { margin-bottom: 30px; }
-    /* 修正：カイタックファミリー白文字化 */
     .mo-footer-link { color: #fff; text-decoration: none; transition: color 0.3s; letter-spacing: 0.05em; font-weight: bold; }
     .mo-footer-link:hover { color: var(--c-main); }
     .mo-footer-separator { margin: 0 15px; color: rgba(255,255,255,0.3); }
     .mo-copyright { color: rgba(255,255,255,0.4); font-size: 0.85em; letter-spacing: 0.05em; }
 
-    /* ==========================================================================
-       追従カートボタン (完全再設計)
-       ========================================================================== */
+    /* 追従カートボタン */
     .fixed-bottom-bar {
       position: fixed; bottom: -100px; left: 0; width: 100%; z-index: 9999;
       display: flex; justify-content: center;
@@ -411,7 +411,6 @@
       .mo-menu-toggle { display: block; font-size: 2.5rem; font-weight: 900; color: var(--c-dark); cursor: pointer; transition: 0.3s; z-index: 10001; position: relative; }
       .mo-menu-toggle.is-active { transform: rotate(135deg); color: var(--c-accent); }
       
-      /* 修正：メニュー背景のシミを削除し、真っ白に変更 */
       .mo-nav { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--c-white); flex-direction: column; justify-content: center; align-items: center; z-index: 10000; }
       .mo-nav.is-open { display: flex; animation: menuBAM 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
       @keyframes menuBAM { 0% { transform: scale(0); border-radius: 50%; } 100% { transform: scale(1); border-radius: 0; } }
@@ -432,8 +431,7 @@
       .hv-content-wrap { padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: auto; }
 
       .hv-catch-bubble { padding: 25px 20px; max-width: 95%; margin: 0 auto 20px; transform: rotate(0); }
-      /* SP改行対応 */
-      .hv-catch { font-size: clamp(1.3rem, 5vw, 2.5rem); text-align: center; } 
+      .hv-catch { text-align: center; } 
       
       .hv-product-card { max-width: 90%; margin: 0 auto; padding: 20px; transform: rotate(0); }
       .hv-product-img { width: 130px; margin-bottom: 10px; }
@@ -447,7 +445,6 @@
       .mo-card-grid, .feature-comic-grid, .review-grid { grid-template-columns: 1fr; gap: 30px; }
       
       .structure-wrapper { padding-top: 30px; }
-      /* SPポップアップの統一 */
       .comic-pop { position: relative; top: auto; left: auto; right: auto; bottom: auto; width: 100%; margin-bottom: 20px; margin-left: 0; }
       
       .expert-card { flex-direction: column; padding: 30px 20px; gap: 20px; }
@@ -471,6 +468,7 @@
       .mo-faq-item summary { font-size: 1rem; padding: 20px; }
       .mo-faq-answer { font-size: 0.9rem; padding: 20px; }
       
+      /* 追従ボタン SP */
       .fixed-bottom-bar.is-visible { bottom: 20px; }
       .floating-btn { padding: 10px 20px 10px 15px; font-size: 1.2rem; border-width: 3px; }
       .floating-btn img { height: 35px; margin-right: 10px; }
@@ -516,7 +514,6 @@
         <img src="1-c.png" alt="" class="bg-slide">
       </div>
       <div class="mo-hero-overlay"></div>
-
       <div class="hv-flash"></div>
       
       <div class="hv-center-face">
@@ -525,10 +522,10 @@
       
       <div class="hv-content-wrap">
         
-        <div class="hv-catch-bubble loop-bam-1">
+        <div class="hv-catch-bubble unified-card loop-bam-1">
           <h2 class="hv-catch">
-            <span class="typo-line">「あ、っ」と</span>
-            <span class="typo-line">思ったその瞬間を、</span>
+            <span class="typo-line">「あ、っ」と思った</span>
+            <span class="typo-line">その瞬間を、</span>
             <span class="typo-line"><span class="hl">無かった</span>ことに。</span>
           </h2>
         </div>
@@ -597,15 +594,15 @@
             <img src="2-bl.png" alt="MORESCUE パンツ構造">
           </div>
           
-          <div class="comic-pop pop-loop-1 pop-1">
+          <div class="comic-pop unified-card pop-loop-1 pop-1">
             <h4>立体構造 (特許取得済)</h4>
             <p>股間を優しく包み込む独自の3Dパターン設計。究極のフィット感だ！</p>
           </div>
-          <div class="comic-pop pop-loop-2 pop-2">
+          <div class="comic-pop unified-card pop-loop-2 pop-2">
             <h4>スマート設計 (意匠登録済)</h4>
             <p>外見からは吸水機能があるとは一切気づかれないシルエット！</p>
           </div>
-          <div class="comic-pop pop-loop-3 pop-3">
+          <div class="comic-pop unified-card pop-loop-3 pop-3">
             <h4>吊り式吸水パッド構造</h4>
             <p>内側の特殊パッドが尿漏れをしっかりキャッチ。体に密着しすぎず快適！</p>
           </div>
@@ -675,25 +672,25 @@
         </div>
         
         <div class="review-grid">
-          <div class="review-bubble anim-slide-up" style="animation-delay:0.2s;">
+          <div class="review-bubble unified-card anim-slide-up" style="animation-delay:0.2s;">
             <div class="mo-review-header">
-              <img src="https://api.dicebear.com/9.x/micah/svg?seed=Jack&mouth=smile&backgroundColor=transparent" alt="お客様" class="mo-review-avatar">
+              <img src="1-a.png" alt="お客様" class="mo-review-avatar">
               <div class="review-stars">★★★★★</div>
             </div>
             <p class="review-text">「機能性が非常に良い。穿きやすく、見た目も普通のパンツなのでジムの着替えも安心です！」</p>
           </div>
           
-          <div class="review-bubble anim-slide-up" style="animation-delay:0.4s;">
+          <div class="review-bubble unified-card anim-slide-up" style="animation-delay:0.4s;">
             <div class="mo-review-header">
-              <img src="https://api.dicebear.com/9.x/micah/svg?seed=Leo&mouth=smile&backgroundColor=transparent" alt="お客様" class="mo-review-avatar">
+              <img src="1-b.png" alt="お客様" class="mo-review-avatar">
               <div class="review-stars">★★★★★</div>
             </div>
             <p class="review-text">「穿いているという安心感のおかげで、外出が心から楽しめるようになりました!!」</p>
           </div>
           
-          <div class="review-bubble anim-slide-up" style="animation-delay:0.6s;">
+          <div class="review-bubble unified-card anim-slide-up" style="animation-delay:0.6s;">
             <div class="mo-review-header">
-              <img src="https://api.dicebear.com/9.x/micah/svg?seed=Sam&mouth=smile&backgroundColor=transparent" alt="お客様" class="mo-review-avatar">
+              <img src="1-c.png" alt="お客様" class="mo-review-avatar">
               <div class="review-stars">★★★★☆</div>
             </div>
             <p class="review-text">「吸汗速乾のおかげで夏場でもベタつかず、洗濯してもすぐ乾くので助かります。」</p>
@@ -864,7 +861,6 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       
-      // SP表示時のスクロールによるファーストビュー画像ガタつき・サイズ変動防止
       const setHeroHeight = () => {
         const hero = document.getElementById('js-hero-section');
         if (hero && window.innerWidth <= 768) {
@@ -884,7 +880,6 @@
         }
       });
 
-      // SPメニュー制御
       const menuToggle = document.getElementById('js-menu-toggle');
       const nav = document.getElementById('js-nav');
 
@@ -895,7 +890,6 @@
           document.body.style.overflow = nav.classList.contains('is-open') ? 'hidden' : '';
           document.body.classList.toggle('is-menu-open');
           
-          // メニューが開いたら追従ボタンを強制非表示にする
           const bottomBar = document.getElementById('js-bottom-bar');
           if (nav.classList.contains('is-open')) {
             bottomBar.classList.remove('is-visible');
@@ -913,7 +907,6 @@
         });
       }
 
-      // フェードインアニメーション監視
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -923,7 +916,6 @@
       }, { threshold: 0.15 });
       document.querySelectorAll('.fade-in-trigger').forEach(el => observer.observe(el));
 
-      // スペックタブ切り替え処理
       const specTabs = document.querySelectorAll('.spec-tab');
       const specContents = document.querySelectorAll('.spec-content');
       specTabs.forEach(tab => {
@@ -935,7 +927,6 @@
         });
       });
 
-      // 購入セクションのカラーチップ画像切り替えロジック
       const colorChips = document.querySelectorAll('.color-dot');
       colorChips.forEach(chip => {
         chip.addEventListener('click', function() {
@@ -958,14 +949,12 @@
         });
       });
 
-      // 追従カートボタンの確実な表示ロジック（Intersection Observer使用）
       const bottomBar = document.getElementById('js-bottom-bar');
       const heroSection = document.getElementById('js-hero-section');
       
       if (bottomBar && heroSection) {
         const btnObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
-            // ファーストビューが見えなくなったら（下にスクロールしたら）表示
             if (!entry.isIntersecting) {
               if (!document.body.classList.contains('is-menu-open')) {
                 bottomBar.classList.add('is-visible');
@@ -974,74 +963,11 @@
               bottomBar.classList.remove('is-visible');
             }
           });
-        }, { threshold: 0.1 }); // 10%見えていたらFVにいると判定
+        }, { threshold: 0.1 }); 
         
         btnObserver.observe(heroSection);
       }
     });
   </script>
-  
-  <style>
-    /* ==========================================================================
-       ループアニメーションのキーフレーム定義
-       ========================================================================== */
-    
-    /* ファーストビュー用タイムループ（PC・SP共通で12秒周期） */
-    .loop-bam-1 {
-      opacity: 0;
-      animation: loopBam1 12s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transform-origin: left bottom;
-    }
-    .loop-bam-2 {
-      opacity: 0;
-      animation: loopBam2 12s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transform-origin: right bottom;
-    }
-
-    @keyframes loopBam1 {
-      0%, 2% { opacity: 0; transform: scale(0.1) rotate(15deg) translateY(200px); }
-      6% { opacity: 1; transform: scale(1.1) rotate(-5deg) translateY(0); }
-      9% { transform: scale(1) rotate(-3deg); }
-      60% { opacity: 1; transform: scale(1) rotate(-3deg); }
-      63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
-      66%, 100% { opacity: 0; transform: scale(0.1) rotate(-15deg) translateY(200px); }
-    }
-    @keyframes loopBam2 {
-      0%, 15% { opacity: 0; transform: scale(0.1) rotate(-15deg) translateY(200px); } 
-      19% { opacity: 1; transform: scale(1.1) rotate(5deg) translateY(0); }
-      22% { transform: scale(1) rotate(2deg); }
-      60% { opacity: 1; transform: scale(1) rotate(2deg); }
-      63% { opacity: 1; transform: scale(1.1) rotate(0deg); }
-      66%, 100% { opacity: 0; transform: scale(0.1) rotate(15deg) translateY(200px); }
-    }
-
-    /* 見えない安心ポップアップ用の時間差タイムループ (10秒周期) */
-    .comic-pop { opacity: 0; }
-    .pop-loop-1 { animation: popLoop1 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom right; }
-    .pop-loop-2 { animation: popLoop2 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom left; }
-    .pop-loop-3 { animation: popLoop3 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: top center; }
-
-    @keyframes popLoop1 {
-      0%, 2% { opacity: 0; transform: scale(0.1) rotate(-20deg) translateX(-50px); }
-      6% { opacity: 1; transform: scale(1.1) rotate(5deg) translateX(0); }
-      9% { transform: scale(1) rotate(-3deg); }
-      75% { opacity: 1; transform: scale(1) rotate(-3deg); }
-      78%, 100% { opacity: 0; transform: scale(0.1) rotate(-20deg) translateX(-50px); }
-    }
-    @keyframes popLoop2 {
-      0%, 18% { opacity: 0; transform: scale(0.1) rotate(20deg) translateX(50px); }
-      22% { opacity: 1; transform: scale(1.1) rotate(-5deg) translateX(0); }
-      25% { transform: scale(1) rotate(2deg); }
-      75% { opacity: 1; transform: scale(1) rotate(2deg); }
-      78%, 100% { opacity: 0; transform: scale(0.1) rotate(20deg) translateX(50px); }
-    }
-    @keyframes popLoop3 {
-      0%, 34% { opacity: 0; transform: scale(0.1) rotate(10deg) translateY(50px); }
-      38% { opacity: 1; transform: scale(1.1) rotate(-2deg) translateY(0); }
-      41% { transform: scale(1) rotate(-1deg); }
-      75% { opacity: 1; transform: scale(1) rotate(-1deg); }
-      78%, 100% { opacity: 0; transform: scale(0.1) rotate(10deg) translateY(50px); }
-    }
-  </style>
 </body>
 </html>
