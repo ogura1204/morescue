@@ -155,15 +155,14 @@
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ==========================================================================
-       ファーストビュー（HV）- 100vh完全収納・下揃え
+       ファーストビュー（HV）- 飛び出し防止＆完全レイヤー構造
        ========================================================================== */
     .hv-section {
       height: 100vh; min-height: 650px; max-height: 1080px;
-      position: relative; overflow: hidden; 
+      position: relative; overflow: hidden; /* 枠外への飛び出しを完全に防止 */
       border-bottom: 8px solid var(--c-dark);
       background-color: var(--c-main);
       padding-top: 80px; 
-      box-sizing: border-box; /* 100vhに枠線を含めてキッチリ収める */
     }
     
     /* 集中線（一番後ろ） - モデルの位置から放射 */
@@ -190,8 +189,8 @@
       z-index: 10; pointer-events: none;
     }
     .bg-slide {
-      position: absolute; bottom: 0; right: 0; width: 100%; height: 90vh; /* 下に揃える */
-      object-fit: contain; object-position: center bottom; /* 枠線にピッタリ合わせる */
+      position: absolute; top: 10vh; right: 0; width: 100%; height: 90vh;
+      object-fit: contain; object-position: center bottom; /* 下側に揃える */
       opacity: 0; 
       animation: fadeSlide 15s infinite;
     }
@@ -216,7 +215,7 @@
     /* ====================================
        PC配置位置指定
        ==================================== */
-    .hv-pos-catch { position: absolute; top: 25%; left: 5%; } /* 少し下へ */
+    .hv-pos-catch { position: absolute; top: 25%; left: 5%; } 
     .hv-pos-product { position: absolute; bottom: 10%; left: 5%; }
     .hv-pos-badge { position: absolute; bottom: 12%; right: 10%; z-index: 50; } 
 
@@ -232,7 +231,9 @@
 
     /* キャッチコピー */
     .hv-catch-bubble {
-      padding: 25px 35px; width: fit-content; transform: rotate(-2deg);
+      background: var(--c-white); border: var(--border-thick); border-radius: 0;
+      padding: 25px 35px; box-shadow: var(--shadow-lg); 
+      width: fit-content; transform: rotate(-2deg);
     }
     .hv-catch { 
       font-size: clamp(1.4rem, 3vw, 2.4rem); 
@@ -243,8 +244,10 @@
 
     /* 商品カード（横並び2列・配色統一） */
     .hv-product-card {
-      padding: 15px 25px; max-width: 500px; transform: rotate(1deg);
-      display: flex; flex-direction: row; align-items: center; justify-content: flex-start;
+      background: var(--c-white); border: var(--border-thick); border-radius: 0; 
+      padding: 15px 25px; box-shadow: var(--shadow-lg); 
+      max-width: 500px; display: flex; flex-direction: row; align-items: center; justify-content: flex-start;
+      transform: rotate(2deg);
     }
     .hv-product-img { width: 120px; margin-right: 20px; transform: rotate(-5deg); flex-shrink: 0; }
     .hv-product-text { font-size: 0.95rem; font-weight: 700; line-height: 1.5; text-align: left; color: var(--c-dark); padding: 0; }
@@ -385,8 +388,6 @@
        ========================================================================== */
     #faq { background: var(--c-white); border-bottom: 8px solid var(--c-dark); padding: 150px 0 120px; }
     .mo-faq-wrap { margin-top: 40px; }
-    
-    /* 修正：各質問事項の枠の影を完全に削除 */
     .mo-faq-item { margin-bottom: 18px; overflow: hidden; border: var(--border-thick); transition: all 0.3s; background: var(--c-white); box-shadow: none !important; }
     .mo-faq-item summary { padding: 20px 25px; font-weight: 900; background: #fff; cursor: pointer; position: relative; color: var(--c-dark); font-size: 1.1em; transition: 0.2s; }
     .mo-faq-item summary:hover { color: var(--c-accent); }
@@ -455,9 +456,15 @@
         box-sizing: border-box;
       }
       
-      /* 修正：SP背景画像（上に大きく・下揃え） */
+      /* 修正：SP後光の位置調整 */
+      .hv-flash {
+        top: 65%; /* 上下中央より少し下 */
+        left: 50%; /* 左右中央 */
+      }
+
+      /* 修正：SP背景画像（上に比率を維持したまま大きく、下固定） */
       .mo-hero-bg { z-index: 10; pointer-events: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0;}
-      .bg-slide { top: auto; bottom: 0; left: 0; width: 100%; height: 75vh; object-position: center bottom; object-fit: contain; opacity: 0; animation: fadeSlide 15s infinite; }
+      .bg-slide { top: auto; bottom: 0; left: -10%; width: 120%; height: 85vh; object-position: center bottom; object-fit: contain; opacity: 0; animation: fadeSlide 15s infinite; }
 
       /* コンテンツ用コンテナ（Flexboxで縦積み） */
       .hv-content-wrap { 
@@ -467,11 +474,11 @@
       }
 
       /* SP各要素の配置 */
-      .hv-pos-catch { position: relative; top: auto; left: auto; align-self: flex-start; margin-top: 10px; width: fit-content; max-width: 95%; }
+      .hv-pos-catch { position: relative; top: auto; left: auto; align-self: flex-start; margin-top: 5vh; width: fit-content; max-width: 95%; }
       .hv-pos-product { position: relative; bottom: auto; left: auto; width: 100%; margin-top: auto; margin-bottom: 10px; z-index: 30; }
       
-      /* 修正：バッジをキャッチコピー(1つ目)の右下に配置、20px下へ */
-      .hv-pos-badge { position: absolute; bottom: -60px; right: -10px; z-index: 50; }
+      /* 修正：バッジをキャッチコピーの右下に配置 */
+      .hv-pos-badge { position: absolute; bottom: -50px; right: -10px; z-index: 50; }
 
       /* キャッチコピー */
       .hv-catch-bubble { padding: 15px 20px; max-width: 100%; margin: 0; transform: rotate(-2deg); box-sizing: border-box; width: 100%; position: relative;}
@@ -480,10 +487,10 @@
       
       /* 商品カード（横並び・コンパクト） */
       .hv-product-card { 
-        max-width: 100%; width: 100%; margin: 0; padding: 10px; box-sizing: border-box;
+        max-width: 100%; width: 100%; margin: 0; padding: 12px 15px; box-sizing: border-box;
         flex-direction: row; align-items: center; justify-content: flex-start;
       }
-      .hv-product-img { width: 70px; margin-bottom: 0; margin-right: 10px; transform: rotate(-5deg); flex-shrink: 0; }
+      .hv-product-img { width: 75px; margin-bottom: 0; margin-right: 10px; transform: rotate(-5deg); flex-shrink: 0; }
       .hv-product-text { flex: 1; padding: 5px; font-size: 0.8rem; }
       .hv-product-text strong { font-size: 0.95rem; margin-bottom: 4px; display: block; }
       
@@ -501,7 +508,7 @@
       .expert-info h3 { font-size: 1.5rem; text-align: center; }
       
       #size { padding: 80px 0; }
-      .mo-spec-buy-container { padding: 30px 15px; border-width: 4px; }
+      .mo-spec-buy-container { padding: 30px 15px; border-width: 4px; box-shadow: 8px 8px 0 var(--c-dark); }
       .mo-spec-visual-flex { flex-direction: column; padding: 20px 15px; gap: 20px; }
       .mo-spec-left { flex: auto; width: 100%; }
       .mo-spec-left img { height: 160px; }
@@ -646,7 +653,7 @@
         <div class="section-title-wrap anim-slide-up">
           <div class="section-title-box">
             <h2 class="section-title">
-              日常を救う<span class="hl">MORESCUE</span><br>特殊構造が叶える<span class="hl">見えない安心</span>
+              日常を救う<span class="hl">MORESCUE</span><br>特殊構造が叶える<span class="hl" style="color:var(--c-yellow);">見えない安心</span>
             </h2>
           </div>
         </div>
@@ -675,7 +682,7 @@
     <section id="features" class="mo-section fade-in-trigger text-center">
       <div class="mo-container">
         <div class="section-title-wrap anim-slide-up">
-          <div class="section-title-box">
+          <div class="section-title-box bg-yellow">
             <h2 class="section-title">
               快適さと清潔さを守る<br><span class="hl">3つのこだわり!!</span>
             </h2>
@@ -718,8 +725,8 @@
 
     <section id="review" class="mo-section fade-in-trigger">
       <div class="mo-container">
-        <div class="expert-card unified-card anim-slide-right" style="padding: 50px; display: flex; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto; transform: rotate(-1deg);">
-          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80" alt="専門家" style="border-radius: 50%;">
+        <div class="expert-card unified-card anim-slide-right" style="padding: 50px; display: flex; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto; transform: rotate(-1deg); color: var(--c-dark);">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80" alt="専門家">
           <div class="expert-info">
             <h3>QOLを向上させる賢い選択！</h3>
             <p>「尿漏れは隠す悩みではなく、適切なアイテムで対処すべきエチケット。MORESCUEの特許構造は驚くほど快適です。」</p>
@@ -768,7 +775,7 @@
         
         <div class="text-center" style="margin-bottom: 20px;">
           <div class="section-title-wrap anim-slide-up">
-            <div class="section-title-box">
+            <div class="section-title-box bg-yellow">
               <h2 class="section-title">大人のエチケットを、<br><span class="hl">今すぐ手に入れろ!!</span></h2>
             </div>
           </div>
