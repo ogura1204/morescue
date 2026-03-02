@@ -6,7 +6,7 @@
   <title>MORESCUE - 究極のレスキューパンツ</title>
   <style>
     /* ==========================================================================
-       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V8 - Perfect Unified)
+       MORESCUE - LIMIT BREAK COMIC DYNAMIC THEME (V9 - Perfect Colors & Margin)
        ========================================================================== */
     @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700;900&family=Noto+Sans+JP:wght@700;900&display=swap');
 
@@ -28,8 +28,8 @@
       --c-main: #81cbf0;       
       --c-main-dark: #5eb5e3;  
       --c-yellow: #ffecb3;     
-      --c-accent: #ff8a65;     
-      --c-dark: #1e3a5f;       
+      --c-accent: #ff8a65;     /* オレンジ（強調色） */
+      --c-dark: #1e3a5f;       /* 紺色（通常文字色） */
       --c-white: #ffffff;
       
       --bg-halftone-blue: radial-gradient(var(--c-main-dark) 10%, transparent 11%), radial-gradient(var(--c-main-dark) 10%, transparent 11%);
@@ -48,7 +48,7 @@
     img { max-width: 100%; height: auto; }
 
     /* ==========================================================================
-       カード（元吹き出し）の完全統一スタイルクラス
+       カードの完全統一スタイルクラス
        ========================================================================== */
     .unified-card {
       background: var(--c-white);
@@ -59,7 +59,7 @@
     }
 
     /* ==========================================================================
-       共通見出し（FVの「あ、っと思った」デザインに完全統一）
+       共通見出し（FVの「あ、っと思った」配色に完全統一）
        ========================================================================== */
     .section-title-card { 
       display: inline-flex; align-items: center; justify-content: center;
@@ -68,12 +68,16 @@
       padding: 20px 40px; box-shadow: var(--shadow-lg); 
       max-width: 95%; box-sizing: border-box;
     }
+    /* 背景色バリエーション */
+    .section-title-card.bg-yellow { background: var(--c-yellow); }
+
     .section-title {
       font-size: clamp(1.6rem, 4vw, 3rem); 
-      font-weight: 900; color: var(--c-dark); line-height: 1.4; margin: 0; text-align: center;
+      font-weight: 900; color: var(--c-dark); /* 通常の文章は紺色 */
+      line-height: 1.4; margin: 0; text-align: center;
       letter-spacing: 0.05em;
     }
-    .section-title .hl { color: var(--c-accent); }
+    .section-title .hl { color: var(--c-accent); /* 目立つ色はオレンジ */ }
     
     @media (max-width: 768px) {
       .section-title-card { padding: 15px 20px; margin-bottom: 40px; border-radius: 16px; }
@@ -133,22 +137,28 @@
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* ==========================================================================
-       ファーストビュー（HV）
+       ファーストビュー（HV）- 背景画像縮小＆上部余白拡大
        ========================================================================== */
     .hv-section {
       height: 100vh; min-height: 850px;
-      display: flex; align-items: flex-end; /* コンテンツを下側に寄せる */
+      display: flex; align-items: flex-end; 
       justify-content: center;
       position: relative; overflow: hidden;
       border-bottom: 8px solid var(--c-dark);
-      padding-bottom: 40px; /* 下部余白 */
-      padding-top: 100px;   /* 修正：モデルの顔が見えるように上部にしっかり余白を確保 */
+      padding-bottom: 40px; 
     }
     
     .mo-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: var(--c-main); overflow: hidden; }
+    
+    /* 修正：画像を小さくし、上部に大きな余白（25vh）を設ける */
     .bg-slide {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      object-fit: cover; object-position: center top; /* 修正：モデルの顔（上部）が切れないように基準をTopに */
+      position: absolute; 
+      top: 25vh; /* PCは上部余白を大きくとる */
+      left: 5%; 
+      width: 90%; 
+      height: 75vh;
+      object-fit: contain; /* 全体が見えるように縮小 */
+      object-position: center top; 
       opacity: 0; animation: slideCrossFade 15s infinite;
     }
     .bg-slide:nth-child(1) { animation-delay: 0s; }
@@ -164,8 +174,6 @@
     .mo-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-halftone-dark); background-size: 10px 10px; opacity: 0.2; z-index: 2; pointer-events: none; }
     .hv-flash { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200vw; height: 200vw; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.1) 0deg 10deg, transparent 10deg 20deg); z-index: 3; animation: spinFlash 120s linear infinite; pointer-events: none; }
 
-    /* 修正：ダミー顔画像 (hv-center-face) は完全に削除しました */
-
     .hv-content-wrap { position: relative; z-index: 5; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: flex-end; pointer-events: none; }
     .hv-content-wrap > * { pointer-events: auto; }
 
@@ -178,7 +186,7 @@
     }
     .hv-catch { 
       font-size: clamp(1.6rem, 4vw, 3rem); 
-      font-weight: 900; line-height: 1.3; margin: 0; 
+      font-weight: 900; line-height: 1.3; color: var(--c-dark); margin: 0; 
     }
     .typo-line { display: block; white-space: nowrap; width: 100%; text-align: left; }
     .hv-catch span.hl { color: var(--c-accent); }
@@ -201,7 +209,6 @@
     .hv-badge span.small { font-size: 1rem; font-weight: 900; }
     .hv-badge span.big { font-size: 2rem; font-weight: 900; color: var(--c-yellow); }
 
-    /* 修正：空白時間を一瞬に短縮したループアニメーション */
     @keyframes loopBam1 {
       0% { opacity: 0; transform: translateY(-300px) scale(0.5) rotate(15deg); }
       4% { opacity: 1; transform: translateY(20px) scale(1.05) rotate(-3deg); }
@@ -237,10 +244,10 @@
     
     .card-num { position: absolute; top: -20px; left: -20px; background: var(--c-dark); color: var(--c-white); font-size: 2rem; font-weight: 900; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border: var(--border-thick); box-shadow: var(--shadow-sm); transform: rotate(-10deg); border-radius: 10px;}
     .comic-card h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; border-bottom: 3px solid var(--c-dark); padding-bottom: 10px; color: var(--c-accent); }
-    .comic-card p { font-size: 1.05rem; font-weight: 700; line-height: 1.6; margin: 0; }
+    .comic-card p { font-size: 1.05rem; font-weight: 700; line-height: 1.6; margin: 0; color: var(--c-dark); }
 
     /* ==========================================================================
-       特許構造セクション (上から降ってくるループ＆完全統一デザイン)
+       特許構造セクション (ポップアップループ化)
        ========================================================================== */
     #structure { background: var(--c-yellow); border-bottom: 8px solid var(--c-dark); }
     .structure-wrapper { position: relative; max-width: 800px; margin: 0 auto; text-align: center; }
@@ -376,7 +383,7 @@
     .mo-faq-item[open] { border-color: var(--c-accent); transform: rotate(0); }
     .mo-faq-item summary::after { content: '+'; position: absolute; right: 30px; top: 50%; transform: translateY(-50%); font-size: 2rem; color: var(--c-accent); font-weight: 900; transition: 0.3s; }
     .mo-faq-item[open] summary::after { transform: translateY(-50%) rotate(135deg); }
-    .mo-faq-answer { padding: 30px 35px; background: #fafafa; color: #111; border-top: var(--border-thick); line-height: 1.8; font-weight: 700; font-size: 1rem; }
+    .mo-faq-answer { padding: 30px 35px; background: #fafafa; color: var(--c-dark); border-top: var(--border-thick); line-height: 1.8; font-weight: 700; font-size: 1rem; }
 
     /* ==========================================================================
        フッター
@@ -406,7 +413,7 @@
        SP用 レスポンシブ
        ========================================================================== */
     @media (max-width: 768px) {
-      .comic-title-wrap { padding: 10px 20px; margin-bottom: 40px; }
+      .section-title-card { padding: 15px 20px; margin-bottom: 40px; }
       
       .mo-logo img { height: 30px; }
       .mo-menu-toggle { display: block; font-size: 2.5rem; font-weight: 900; color: var(--c-dark); cursor: pointer; transition: 0.3s; z-index: 10001; position: relative; }
@@ -417,7 +424,7 @@
       @keyframes menuBAM { 0% { transform: scale(0); border-radius: 50%; } 100% { transform: scale(1); border-radius: 0; } }
       .mo-nav a.nav-link { font-size: clamp(1.1rem, 4vw, 1.5rem); margin: 10px 0; color: var(--c-dark); background: var(--c-white); padding: 10px 20px; border: var(--border-thick); box-shadow: var(--shadow-sm); transform: rotate(-2deg); }
       
-      .header-buy-btn { padding: 10px 25px 10px 15px; margin-top: 20px; }
+      .header-buy-btn { padding: 10px 25px 10px 15px; margin-top: 20px; border-width: 4px; }
       .header-buy-btn .btn-icon { height: 30px; margin-right: 10px; }
       .header-buy-btn .btn-text { font-size: 1.2rem; }
 
@@ -425,8 +432,12 @@
       .marquee-content { font-size: 0.8rem; }
       .marquee-pants { height: 1em; margin: 0 5px; }
 
+      /* HV スマホ */
       .hv-section { padding-top: 60px; height: 100vh; height: 100svh; align-items: flex-end; padding-bottom: 30px; }
       
+      /* SPは少し画像を大きく表示する */
+      .bg-slide { top: 15vh; left: 0; width: 100%; height: 85vh; }
+
       .hv-content-wrap { padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: auto; }
 
       .hv-catch-bubble { padding: 25px 20px; max-width: 95%; margin: 0 auto 20px; transform: rotate(0); }
@@ -450,6 +461,7 @@
       .expert-card img { width: 150px; height: 150px; margin: 0 auto; }
       .expert-info h3 { font-size: 1.5rem; text-align: center; }
       
+      /* スペック SP */
       #size { padding: 100px 0; }
       .mo-spec-buy-container { padding: 40px 20px; border-width: 4px; box-shadow: 8px 8px 0 var(--c-yellow); }
       .mo-spec-visual-flex { flex-direction: column; padding: 25px 20px; gap: 30px; }
@@ -462,11 +474,14 @@
       .comic-table th, .comic-table td { padding: 10px 5px; font-size: 0.85rem; }
       .spec-list p { flex-direction: column; align-items: flex-start; gap: 5px; }
       .spec-list span.label { margin-right: 0; }
+      .mo-buy-action-btn { padding: 15px 0; font-size: 1.4rem; }
       
+      /* FAQ SP */
       #faq { padding: 100px 0; }
       .mo-faq-item summary { font-size: 1rem; padding: 20px; }
       .mo-faq-answer { font-size: 0.9rem; padding: 20px; }
       
+      /* 追従ボタン SP */
       .fixed-bottom-bar.is-visible { bottom: 20px; }
       .floating-btn { padding: 10px 20px 10px 15px; font-size: 1.2rem; border-width: 3px; }
       .floating-btn img { height: 35px; margin-right: 10px; }
@@ -546,6 +561,7 @@
       <div class="mo-container">
         <div class="text-center">
           <div class="section-title-card bg-white anim-slide-up">
+            <div class="section-title-bg"></div>
             <h2 class="section-title">
               誰にも言えない<br class="sp-only"><span class="hl">「あ、っ」</span>の瞬間、<br>ありませんか？
             </h2>
@@ -576,6 +592,7 @@
     <section id="structure" class="mo-section fade-in-trigger">
       <div class="mo-container text-center">
         <div class="section-title-card bg-white anim-slide-up">
+          <div class="section-title-bg"></div>
           <h2 class="section-title">
             日常を救う<span class="hl">MORESCUE</span><br>特殊構造が叶える<span class="hl">見えない安心</span>
           </h2>
@@ -605,6 +622,7 @@
     <section id="features" class="mo-section fade-in-trigger text-center">
       <div class="mo-container">
         <div class="section-title-card bg-yellow anim-slide-up">
+          <div class="section-title-bg"></div>
           <h2 class="section-title">
             快適さと清潔さを守る<br><span class="hl">3つのこだわり!!</span>
           </h2>
@@ -656,7 +674,8 @@
         </div>
 
         <div class="text-center" style="margin-top: 80px;">
-          <div class="section-title-card bg-accent anim-slide-up">
+          <div class="section-title-card bg-white anim-slide-up">
+            <div class="section-title-bg"></div>
             <h2 class="section-title">愛用者の声が<span class="hl">続々到着!!</span></h2>
           </div>
         </div>
@@ -693,7 +712,8 @@
       <div class="mo-container">
         
         <div class="text-center" style="margin-bottom: 20px;">
-          <div class="section-title-card bg-accent anim-slide-up">
+          <div class="section-title-card bg-yellow anim-slide-up">
+            <div class="section-title-bg"></div>
             <h2 class="section-title">大人のエチケットを、<br><span class="hl">今すぐ手に入れろ!!</span></h2>
           </div>
         </div>
@@ -720,8 +740,8 @@
                 <div class="gauge-wrap">
                   <div class="gauge-title">尿漏れ対応レベル MAX!</div>
                   <div class="gauge-bar-container">
-                    <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div>
-                    <div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div><div class="gauge-block active"></div>
+                    <div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div>
+                    <div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div><div class="gauge-block active danger"></div>
                   </div>
                   <p style="font-weight:900; margin:5px 0 0; font-size:0.9rem; text-align:center;">約10cc対応</p>
                 </div>
@@ -809,6 +829,7 @@
       <div class="mo-container">
         <div class="text-center">
           <div class="section-title-card bg-white anim-slide-up">
+            <div class="section-title-bg"></div>
             <h2 class="section-title">
               よくある質問<span class="hl">!!</span>
             </h2>
